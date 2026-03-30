@@ -1,0 +1,46 @@
+name: Daily Infrastructure Update
+
+on:
+  schedule:
+    - cron: '0 4 * * *'  # Midnight EDT = 4am UTC
+  workflow_dispatch:       # Also run on demand
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch recent commits from all repos
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Get list of repos updated in the last 7 days
+          gh repo list karlmarx --limit 30 --json name,updatedAt \
+            | jq -r '.[] | select((.updatedAt | fromdateiso8601) > (now - 604800)) | .name' \
+            > repos.txt
+
+          # For each recently active repo, get last 5 commits
+          > recent_commits.md
+          while read -r repo; do
+            commits=$(gh api "repos/karlmarx/$repo/commits?per_page=5" \
+              -q '.[] | "- \(.commit.message | split("\n")[0]) (\(.commit.author.date[:10]))"' 2>/dev/null || true)
+            if [ -n "$commits" ]; then
+              echo "### $repo" >> recent_commits.md
+              echo "$commits" >> recent_commits.md
+              echo "" >> recent_commits.md
+            fi
+          done < repos.txt
+
+      - name: Update README with recent changes
+        run: python3 scripts/update_readme.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --staged --quiet || git commit -m "chore: daily update $(date -u +%Y-%m-%d)"
+          git push

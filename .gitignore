@@ -1,0 +1,21 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Generated at build time
+recent_commits.md
+repos.txt
+
+# Python
+__pycache__/
+*.pyc

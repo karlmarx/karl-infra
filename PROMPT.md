@@ -1,0 +1,209 @@
+Build the initial version of karlmarx/karl-infra — a master architecture reference repo that auto-updates daily.
+
+## Your task
+
+1. **Audit all repos** by running: gh repo list karlmarx --limit 50 --json name,description,url,updatedAt,isPrivate
+2. **Read recent commits** from each active repo to understand current state
+3. **Build the repo structure** as described below
+4. **Create a GitHub Actions workflow** for daily auto-updates
+
+## Repos to audit (known list, but also check gh repo list for anything new)
+
+**Apps (deployed):**
+- karlmarx/TrickAdvisor — gay leather/kink rating app, React + Node/Express + Supabase
+- karlmarx/nwb-plan — femur fracture fitness PWA (nwbfit.vercel.app, nfit.93.fyi)
+- karlmarx/nwb-yoga — NWB yoga companion PWA (nyoga.93.fyi)
+
+**Automation:**
+- karlmarx/find-hub-tracker — Google Find Hub device tracker, polls location/battery, Discord alerts
+- karlmarx/claude-pipeline — file watcher: Claude.ai .md ? Nextcloud ? OpenClaw sub-agent
+- karlmarx/amex-claims-automator — (check if exists) Amex purchase protection claims automation
+
+**Infrastructure:**
+- All apps deployed on Vercel (free tier)
+- Domain: 93.fyi (Dynadot registrar, Cloudflare DNS)
+  - nfit.93.fyi ? nwb-plan
+  - nyoga.93.fyi ? nwb-yoga  
+  - ta.93.fyi ? TrickAdvisor
+  - 93.fyi ? nwb-plan (temporary)
+  - k@93.fyi ? email routing ? karlmarx9193@gmail.com
+- ultra.cc seedbox: planned deployment target for find-hub-tracker
+- Windows 11 workstation: OpenClaw, claude-pipeline running locally
+- GitHub Actions: available for automation
+
+## Repo structure to create
+
+```
+karl-infra/
++-- README.md              # Master index with everything
++-- ARCHITECTURE.md        # Full architecture deep-dive
++-- FUTURE.md              # Roadmap and planned work
++-- diagrams/
+¦   +-- overview.md        # ASCII art system overview
+¦   +-- domains.md         # DNS/domain map
+¦   +-- data-flows.md      # Data flow diagrams per service
++-- services/
+¦   +-- trickadvisor.md    # Per-service docs
+¦   +-- nwb-plan.md
+¦   +-- nwb-yoga.md
+¦   +-- find-hub-tracker.md
+¦   +-- claude-pipeline.md
++-- infra/
+¦   +-- vercel.md          # Vercel projects + domains
+¦   +-- domain-93fyi.md    # DNS records, email routing
+¦   +-- local-windows.md  # What runs on the workstation
++-- .github/
+    +-- workflows/
+        +-- daily-update.yml   # Runs at midnight, updates everything
+```
+
+## README.md structure
+
+```markdown
+# Karl's Infrastructure
+
+> Auto-updated daily from GitHub commits. Last update: {date}
+
+## ??? Overview
+
+[ASCII diagram showing all services and how they connect]
+
+## ?? Live Services
+
+| Service | URL | Status | Repo |
+|---------|-----|--------|------|
+| TrickAdvisor | ta.93.fyi | ?? Live | karlmarx/TrickAdvisor |
+| NWB Fitness | nfit.93.fyi | ?? Live | karlmarx/nwb-plan |
+| NWB Yoga | nyoga.93.fyi | ?? Live | karlmarx/nwb-yoga |
+
+## ?? Automation
+
+| Service | Runs On | Status | Repo |
+|---------|---------|--------|------|
+| Find Hub Tracker | (planned: ultra.cc) | ?? Building | karlmarx/find-hub-tracker |
+| Claude Pipeline | Windows workstation | ?? Running | karlmarx/claude-pipeline |
+
+## ?? Domain: 93.fyi
+
+[Table of all DNS records and what they point to]
+
+## ?? Recent Changes
+
+[Last 7 days of commits across all repos, auto-generated]
+
+## ?? Future Plans
+
+[Link to FUTURE.md]
+```
+
+## GitHub Actions workflow (daily-update.yml)
+
+```yaml
+name: Daily Infrastructure Update
+
+on:
+  schedule:
+    - cron: '0 4 * * *'  # Midnight EDT = 4am UTC
+  workflow_dispatch:       # Also run on demand
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Fetch recent commits from all repos
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Use gh CLI to get recent commits from all repos
+          gh repo list karlmarx --limit 20 --json name,updatedAt | jq -r '.[] | .name' > repos.txt
+          
+          # For each repo, get last 5 commits
+          while read repo; do
+            echo "## $repo" >> recent_commits.md
+            gh api repos/karlmarx/$repo/commits --paginate -q '.[0:5] | .[] | "- \(.commit.message | split("\n")[0]) (\(.commit.author.date[:10]))"' >> recent_commits.md 2>/dev/null || true
+            echo "" >> recent_commits.md
+          done < repos.txt
+      
+      - name: Update README with recent changes
+        run: |
+          python3 scripts/update_readme.py
+      
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --staged --quiet || git commit -m "chore: daily update $(date -u +%Y-%m-%d)"
+          git push
+```
+
+## scripts/update_readme.py
+
+Write a Python script that:
+1. Reads `recent_commits.md` generated by the workflow
+2. Updates the "Recent Changes" section in README.md
+3. Updates the "Last update" date
+4. Preserves all other content
+
+## FUTURE.md content
+
+Based on the GitHub issues across repos, document the roadmap:
+
+**Short term (active):**
+- find-hub-tracker: deploy to ultra.cc, set up Healthchecks.io
+- claude-pipeline: test end-to-end with real prompt
+- TrickAdvisor: profile editing (#7), fix rating subcategory 500s
+
+**Medium term:**
+- MacBook home server: evaluate 2018 MacBook (#1 in find-hub-tracker)
+- Centralized Postgres: shared DB for automation services
+- WSL migration: move periodic tasks to ultra.cc
+
+**Long term:**
+- amex-claims-automator: automate Amex purchase protection
+- Home Assistant integration
+- Multi-service automation platform
+
+## ASCII architecture diagram (for diagrams/overview.md)
+
+```
++-----------------------------------------------------------------+
+¦                        Karl's Infrastructure                     ¦
++-----------------------------------------------------------------¦
+¦                                                                  ¦
+¦  APPS (Vercel)           AUTOMATION (Local/ultra.cc)            ¦
+¦  --------------          -------------------------              ¦
+¦  nfit.93.fyi             Windows 11 Workstation                 ¦
+¦  ¦ nwb-plan ---------   +-- OpenClaw (AI assistant)            ¦
+¦  ¦                  ¦   +-- claude-pipeline (watcher)           ¦
+¦  nyoga.93.fyi       ¦   ¦   +-- watches Nextcloud/inbox/        ¦
+¦  ¦ nwb-yoga -----  ¦   ¦                                        ¦
+¦  ¦              ¦  ¦   ultra.cc seedbox (planned)               ¦
+¦  ta.93.fyi      ¦  ¦   +-- find-hub-tracker                     ¦
+¦  ¦ TrickAdvisor ¦  ¦       +-- polls Google Find Hub            ¦
+¦                 ¦  ¦           +-- Discord alerts               ¦
+¦  Supabase (DB)--+  ¦                                            ¦
+¦                    ¦   INFRA                                     ¦
+¦  93.fyi -----------+   -----                                    ¦
+¦  (Cloudflare DNS)      Dynadot (.fyi registrar)                 ¦
+¦  k@93.fyi ? Gmail     Cloudflare (DNS + email routing)         ¦
+¦                        GitHub (all repos + Actions)             ¦
+¦                        Vercel (all deployments)                 ¦
++-----------------------------------------------------------------+
+```
+
+## Git workflow
+
+1. .gitignore first (no .env, no secrets)
+2. Build all files
+3. gh repo create already done — just push
+4. Commit: "feat: initial infrastructure documentation"
+5. Push to main
+
+## When done
+
+Run: openclaw system event --text "Done: karl-infra repo built and pushed" --mode now

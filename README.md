@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-03-30
+> Auto-updated daily from GitHub commits. Last update: 2026-03-31
 
 ## Overview
 
@@ -76,34 +76,44 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
-### TrickAdvisor
-- feat: LoadRating component with splat icons (2026-03-29)
-- Load rating icon assets: SVG + PNG variants (2026-03-28)
-- Add CLAUDE.md for AI context (2026-03-28)
+### find-hub-tracker
+- feat: initial scaffold — Google Find Hub tracker with Discord integration (2026-03-30)
+- chore: add .gitignore before any other files (2026-03-30)
 
-### TrickAdvisor-API
-- Add CLAUDE.md for AI context (2026-03-28)
-- Fire-and-forget admin photo email to avoid timeout (2026-03-27)
-- Email user when photo is approved or rejected (2026-03-27)
+### karl-infra
+- feat: initial infrastructure documentation (2026-03-30)
 
 ### nwb-plan
+- Merge pull request #32 from karlmarx/claude/add-core-arm-balance-exercises-Iok8O (2026-03-30)
 - feat: lotus flower SVG icon (synced from nwb-yoga) (2026-03-29)
 - feat: responsive desktop scaling for readability (2026-03-29)
 - feat: wire up animated SVG diagrams for all 17 new core exercises (2026-03-29)
+- Bump service worker cache to v5 — force reload of PR #28 changes (2026-03-28)
 
 ### nwb-yoga
 - feat: lotus flower SVG icon with warm terracotta and dark green mono version (2026-03-29)
+- Merge pull request #1 from karlmarx/docs/readme (2026-03-28)
+- Add comprehensive README (2026-03-28)
 - improve: self-contained descriptions, better animations (2026-03-26)
+- rename: back to NWB Yoga — shorter and cleaner (2026-03-25)
 
-### find-hub-tracker
-- feat: initial scaffold — Google Find Hub tracker with Discord integration (2026-03-30)
-
-### claude-pipeline
-- feat: initial claude-pipeline implementation (2026-03-30)
+### foodr
+- Merge pull request #1 from karlmarx/docs/readme (2026-03-28)
+- Add comprehensive README (2026-03-28)
+- Build Foodr: fast food rating app with chain-specific scales (2026-03-26)
 
 ### openclaw-watchdog
 - fix: swap AI order — Gemini first, DeepSeek fallback (2026-03-25)
 - feat: Playwright JS rendering, DeepSeek scoring, Discord webhook notifications (2026-03-25)
+- fix: absolute paths everywhere, semicolon as separate token, claude.exe direct call (2026-03-25)
+- fix: use WT Preview exe path, fix stale PID singleton via tasklist check (2026-03-25)
+- feat: add Claude Linux (WSL) profile, fix tab emoji via tabTitle+suppressApplicationTitle (2026-03-25)
+
+### todo-dashboard
+- Initial commit: TODO Dashboard system (2026-03-17)
+
+### dev-setup
+- Initial setup: Tailscale SSH + Claude Code MCPs + phone access guides (2026-03-17)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-03-31
+> Auto-updated daily from GitHub commits. Last update: 2026-04-01
 
 ## Overview
 
@@ -76,19 +76,23 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### nwb-plan
+- docs: add How to Use section with gym workflow walkthrough (2026-04-01)
+- docs: update README and CLAUDE.md with architectural diagrams (2026-04-01)
+- feat: port all animated SVG exercise diagrams to Next.js (2026-04-01)
+- refactor: unify equipment variant systems, add desktop scaling (2026-03-31)
+- fix: rebalance Pull A, prevent duplicate swaps, remove disclaimer (2026-03-31)
+
 ### find-hub-tracker
+- Merge pull request #5 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-03-31)
+- feat: add ultra.cc deploy script and fix systemd user service (2026-03-31)
+- docs: add healthchecks.io config vars to .env.example (2026-03-30)
 - feat: initial scaffold — Google Find Hub tracker with Discord integration (2026-03-30)
 - chore: add .gitignore before any other files (2026-03-30)
 
 ### karl-infra
+- chore: daily update 2026-03-31 (2026-03-31)
 - feat: initial infrastructure documentation (2026-03-30)
-
-### nwb-plan
-- Merge pull request #32 from karlmarx/claude/add-core-arm-balance-exercises-Iok8O (2026-03-30)
-- feat: lotus flower SVG icon (synced from nwb-yoga) (2026-03-29)
-- feat: responsive desktop scaling for readability (2026-03-29)
-- feat: wire up animated SVG diagrams for all 17 new core exercises (2026-03-29)
-- Bump service worker cache to v5 — force reload of PR #28 changes (2026-03-28)
 
 ### nwb-yoga
 - feat: lotus flower SVG icon with warm terracotta and dark green mono version (2026-03-29)

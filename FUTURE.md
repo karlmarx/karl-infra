@@ -3,9 +3,9 @@
 ## Short Term (Active)
 
 ### find-hub-tracker
-- [ ] Deploy to ultra.cc seedbox
-- [ ] Set up Healthchecks.io dead man's switch ([#4](https://github.com/karlmarx/find-hub-tracker/issues/4))
-- [ ] Test end-to-end: Google Find Hub API -> Discord alerts
+- [ ] Deploy to ultra.cc seedbox (deploy script + systemd service ready)
+- [x] Set up Healthchecks.io dead man's switch ([#4](https://github.com/karlmarx/find-hub-tracker/issues/4)) — PR #5 merged
+- [x] Build end-to-end: Google Find Hub API -> PostgreSQL -> Discord alerts
 
 ### claude-pipeline
 - [ ] Test end-to-end with real prompt file
@@ -20,6 +20,10 @@
 - [ ] Add mock/seed test data ([#5](https://github.com/karlmarx/TrickAdvisor/issues/5))
 
 ### nwb-plan
+- [x] Migrate from single-file HTML to Next.js 16 + React 19 + TypeScript ([#21](https://github.com/karlmarx/nwb-plan/issues/21))
+- [x] Claude API integration for AI exercise suggestions
+- [x] Equipment-aware superset system with nearby picker
+- [x] Expand to 67+ exercises with 35+ animated SVG diagrams
 - [ ] About modal with disclaimer ([#34](https://github.com/karlmarx/nwb-plan/issues/34))
 - [ ] Visual regression testing in deployment pipeline ([#31](https://github.com/karlmarx/nwb-plan/issues/31))
 

@@ -12,8 +12,9 @@ All web applications deploy to Vercel with custom domains via Cloudflare DNS.
 
 | Project | Framework | Database | Domain |
 |---------|-----------|----------|--------|
-| nwb-plan | Single-file HTML PWA | None (client-side) | nfit.93.fyi, 93.fyi |
-| nwb-yoga | Single-file HTML PWA | None (client-side) | nyoga.93.fyi |
+| nwb-plan | Next.js 16 + React 19 + TypeScript + Claude API | None (client-side, localStorage) | nfit.93.fyi, 93.fyi |
+| nwb-yoga | React 18 + Vite + Canvas animations | None (client-side) | nyoga.93.fyi |
+| foodr | Next.js 16 + React 19 + TypeScript | None (localStorage) | foodr-app.vercel.app |
 | TrickAdvisor | React (Vite) | Supabase (Postgres + Auth + Storage) | ta.93.fyi |
 | TrickAdvisor-API | Node/Express on Vercel Functions | Supabase | (serverless, called by TA frontend) |
 | blazing-paddles-react | React (Vite) | None | blazingpaddles.org |
@@ -58,10 +59,11 @@ Used exclusively by TrickAdvisor (frontend + API):
 
 ### Client-Side Only
 
-nwb-plan and nwb-yoga are single-file HTML PWAs with no backend:
-- Exercise data embedded in HTML
-- Service worker for offline access
-- localStorage for user preferences
+nwb-plan, nwb-yoga, and foodr have no backend:
+- **nwb-plan**: Next.js 16 PWA with 67+ exercises, Claude API for AI suggestions, equipment-aware superset system
+- **nwb-yoga**: React 18 + Vite with Canvas 2D pose animations, Web Audio API bell cues
+- **foodr**: Next.js 16 PWA with chain-relative ratings for 12 fast food chains
+- All use service workers for offline access and localStorage for user preferences
 
 ## Domain & DNS Architecture
 
@@ -85,8 +87,9 @@ Dynadot (registrar)
 
 | Layer | Technology |
 |-------|-----------|
-| Frontend | React (Vite), single-file HTML PWAs |
+| Frontend | Next.js 16, React 19, React 18 + Vite, Canvas 2D |
 | Backend | Node/Express (Vercel Functions), Python scripts |
+| AI | Anthropic Claude API (nwb-plan exercise suggestions) |
 | Database | Supabase (Postgres + Auth + Storage) |
 | Hosting | Vercel (free tier) |
 | DNS | Cloudflare (free tier) |
@@ -104,12 +107,20 @@ TrickAdvisor (frontend)
         └── Supabase (database + auth + storage)
 
 nwb-plan ←──sync──→ nwb-yoga  (shared lotus SVG icon)
+nwb-plan ──calls──→ Anthropic Claude API (exercise suggestions)
 
 openclaw-watchdog ──monitors──→ OpenClaw gateway
+                  ──triggers──→ property-scout (daily 8am ET)
+
+property-scout ──reads──→ Gmail IMAP (listing emails)
+               ──scrapes──→ Matrix MLS portal
+               ──sends──→ Gmail SMTP (HTML report)
 
 claude-pipeline ──watches──→ Nextcloud/inbox/
                  ──routes──→ OpenClaw sub-agent
 
-find-hub-tracker ──polls──→ Google Find Hub API
+find-hub-tracker ──polls──→ Google Find Hub Nova API
+                 ──stores──→ PostgreSQL / SQLite
                  ──alerts──→ Discord webhook
+                 ──pings──→ Healthchecks.io
 ```

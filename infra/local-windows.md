@@ -11,6 +11,7 @@ Windows 11 Pro workstation serving as the primary development machine and host f
 | OpenClaw | Claude Code (Node.js) | — | AI assistant gateway |
 | openclaw-watchdog | Python (Rich + Playwright) | [karlmarx/openclaw-watchdog](https://github.com/karlmarx/openclaw-watchdog) | Monitors OpenClaw, prevents sleep, Discord alerts |
 | claude-pipeline | Python (watchdog) | [karlmarx/claude-pipeline](https://github.com/karlmarx/claude-pipeline) | File watcher for Nextcloud -> OpenClaw routing |
+| property-scout | Python (31KB, scheduled) | (in openclaw-watchdog) | Daily 8am ET South Florida MLS property alerts via email |
 
 ## On-Demand Tools
 

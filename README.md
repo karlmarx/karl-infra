@@ -13,20 +13,25 @@
 |  ---------------            ----------------------------          |
 |  nfit.93.fyi                Windows 11 Workstation                |
 |  +- nwb-plan ----------+   +- OpenClaw (AI assistant)            |
-|  |                      |   +- claude-pipeline (watcher)          |
-|  nyoga.93.fyi           |   |  +- watches Nextcloud/inbox/       |
+|  |  (Next.js + Claude   |   +- claude-pipeline (watcher)          |
+|  |   API suggestions)   |   |  +- watches Nextcloud/inbox/       |
+|  |                      |   +- property-scout (daily 8am)         |
+|  nyoga.93.fyi           |   |  +- MLS scrape -> email report     |
 |  +- nwb-yoga ------+   |   |                                     |
-|  |                  |   |   ultra.cc seedbox (planned)            |
-|  ta.93.fyi          |   |   +- find-hub-tracker                  |
-|  +- TrickAdvisor    |   |      +- polls Google Find Hub          |
-|     + TA-API        |   |         +- Discord alerts              |
-|                     |   |                                         |
-|  Supabase (DB) -----+   |   INFRA                                |
-|                         |   ------                                |
-|  93.fyi ----------------+   Dynadot (.fyi registrar)              |
-|  (Cloudflare DNS)           Cloudflare (DNS + email routing)      |
-|  k@93.fyi -> Gmail          GitHub (all repos + Actions)          |
-|                             Vercel (all deployments)              |
+|  |  (Canvas anims)  |   |   ultra.cc seedbox                     |
+|  |                  |   |   +- find-hub-tracker                  |
+|  foodr-app.vercel   |   |      +- Google Find Hub -> Postgres    |
+|  +- foodr           |   |         +- Discord alerts              |
+|  |                  |   |         +- healthchecks.io              |
+|  ta.93.fyi          |   |                                         |
+|  +- TrickAdvisor    |   |   INFRA                                |
+|     + TA-API        |   |   ------                                |
+|                     |   |   Dynadot (.fyi registrar)              |
+|  Supabase (DB) -----+   |   Cloudflare (DNS + email routing)      |
+|                         |   GitHub (all repos + Actions)          |
+|  93.fyi ----------------+   Vercel (all deployments)              |
+|  (Cloudflare DNS)           Anthropic (Claude API)                |
+|  k@93.fyi -> Gmail                                                |
 +-------------------------------------------------------------------+
 ```
 
@@ -36,8 +41,9 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the full deep-dive.
 
 | Service | URL | Stack | Repo |
 |---------|-----|-------|------|
-| NWB Fitness | [nfit.93.fyi](https://nfit.93.fyi) | Single-file HTML PWA | [karlmarx/nwb-plan](https://github.com/karlmarx/nwb-plan) |
-| NWB Yoga | [nyoga.93.fyi](https://nyoga.93.fyi) | Single-file HTML PWA | [karlmarx/nwb-yoga](https://github.com/karlmarx/nwb-yoga) |
+| NWB Fitness | [nfit.93.fyi](https://nfit.93.fyi) | Next.js 16 + React 19 + Claude API | [karlmarx/nwb-plan](https://github.com/karlmarx/nwb-plan) |
+| NWB Yoga | [nyoga.93.fyi](https://nyoga.93.fyi) | React 18 + Vite + Canvas | [karlmarx/nwb-yoga](https://github.com/karlmarx/nwb-yoga) |
+| foodr | [foodr-app.vercel.app](https://foodr-app.vercel.app) | Next.js 16 + React 19 | [karlmarx/foodr](https://github.com/karlmarx/foodr) |
 | TrickAdvisor | [ta.93.fyi](https://ta.93.fyi) | React + Supabase | [karlmarx/TrickAdvisor](https://github.com/karlmarx/TrickAdvisor) |
 | TrickAdvisor API | (serverless) | Node/Express + Vercel Functions | [karlmarx/TrickAdvisor-API](https://github.com/karlmarx/TrickAdvisor-API) |
 | Blazing Paddles | [blazingpaddles.org](https://blazingpaddles.org) | React (Vite) | [karlmarx/blazing-paddles-react](https://github.com/karlmarx/blazing-paddles-react) |
@@ -46,7 +52,8 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the full deep-dive.
 
 | Service | Runs On | Status | Repo |
 |---------|---------|--------|------|
-| Find Hub Tracker | planned: ultra.cc | Building | [karlmarx/find-hub-tracker](https://github.com/karlmarx/find-hub-tracker) |
+| Find Hub Tracker | ultra.cc (systemd) | Deploying | [karlmarx/find-hub-tracker](https://github.com/karlmarx/find-hub-tracker) |
+| Property Scout | Windows workstation (daily 8am ET) | Running | (in openclaw-watchdog) |
 | Claude Pipeline | Windows workstation | Building | [karlmarx/claude-pipeline](https://github.com/karlmarx/claude-pipeline) |
 | OpenClaw Watchdog | Windows workstation | Running | [karlmarx/openclaw-watchdog](https://github.com/karlmarx/openclaw-watchdog) |
 | Gemini Auto | Windows workstation | Running | [karlmarx/gemini-auto](https://github.com/karlmarx/gemini-auto) |

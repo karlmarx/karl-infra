@@ -1,6 +1,6 @@
 # NWB Fitness (nwb-plan)
 
-> Femur fracture fitness PWA — exercise guide for non-weight-bearing recovery
+> AI-powered femur fracture fitness PWA — exercise guide for non-weight-bearing recovery
 
 ## Overview
 
@@ -8,25 +8,31 @@
 |-------|-------|
 | **Repo** | [karlmarx/nwb-plan](https://github.com/karlmarx/nwb-plan) |
 | **URLs** | [nfit.93.fyi](https://nfit.93.fyi), [93.fyi](https://93.fyi) (temp) |
-| **Stack** | Single-file HTML PWA |
+| **Stack** | Next.js 16 + React 19 + TypeScript 6 + Tailwind CSS v4 |
 | **Hosting** | Vercel (free tier) |
-| **Database** | None (fully client-side) |
+| **Database** | None (fully client-side, localStorage for preferences) |
+| **AI** | Anthropic Claude API (`@anthropic-ai/sdk`) for exercise suggestions |
+| **Auth** | NextAuth v5 (beta) |
 
 ## Architecture
 
-- **Single HTML file** with all exercises, SVG diagrams, and styling embedded
-- **Service Worker** for offline PWA support (cache versioned, currently v5)
-- **No backend** — all data is static, embedded in HTML
-- Animated SVG exercise diagrams (17+ core exercises)
-- Responsive desktop scaling for readability
+- **Next.js 16 App Router** with Turbopack dev server (migrated from single-file HTML PWA)
+- **67+ exercises** with safety constraints (zero active left hip flexor recruitment)
+- **35+ animated SVG exercise diagrams** with inline animations
+- **Claude API integration** for AI exercise suggestions (feature-flagged)
+- **Equipment-aware superset system** — machine picker + nearby equipment detection
+- **Service Worker** for offline PWA support
+- **6-day PPL split** (Push/Pull/Legs) with A/B variants across 3 progression phases (Foundation / Build / Peak)
 - Shared lotus flower SVG icon with nwb-yoga
 
 ## Recent Activity
 
-- Added 17 core/arm/balance exercises with animated SVG diagrams
-- Responsive desktop scaling
-- Lotus flower SVG icon synced from nwb-yoga
-- Service worker cache bumps for new content
+- Migrated from single-file HTML to full Next.js 16 + React 19 + TypeScript stack
+- Integrated Anthropic Claude API for AI exercise suggestions
+- Built equipment-aware superset system with nearby picker
+- Expanded from 17 to 67+ exercises with animated SVG diagrams
+- Equipment picker logic fixes (PR #45)
+- Wording improvements across codebase (PR #44)
 
 ## Open Issues
 

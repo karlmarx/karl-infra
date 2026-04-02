@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-01
+> Auto-updated daily from GitHub commits. Last update: 2026-04-02
 
 ## Overview
 
@@ -77,11 +77,23 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### nwb-plan
-- docs: add How to Use section with gym workflow walkthrough (2026-04-01)
-- docs: update README and CLAUDE.md with architectural diagrams (2026-04-01)
-- feat: port all animated SVG exercise diagrams to Next.js (2026-04-01)
-- refactor: unify equipment variant systems, add desktop scaling (2026-03-31)
-- fix: rebalance Pull A, prevent duplicate swaps, remove disclaimer (2026-03-31)
+- fix: replace generic yoga icon with lotus silhouette in bottom nav (2026-04-02)
+- Merge pull request #45 from karlmarx/claude/fix-equipment-picker-logic-7fiFp (2026-04-01)
+- fix: equipment picker logic — machine type drives instructions, superset fixes (2026-04-01)
+- Merge pull request #44 from karlmarx/claude/improve-wording-bN8xi (2026-04-01)
+- Replace "non-negotiable" wording across codebase (2026-04-01)
+
+### nwb-yoga
+- fix: add PNG icon variants for favicon and PWA install support (2026-04-01)
+- feat: lotus flower SVG icon with warm terracotta and dark green mono version (2026-03-29)
+- Merge pull request #1 from karlmarx/docs/readme (2026-03-28)
+- Add comprehensive README (2026-03-28)
+- improve: self-contained descriptions, better animations (2026-03-26)
+
+### karl-infra
+- chore: daily update 2026-04-01 (2026-04-01)
+- chore: daily update 2026-03-31 (2026-03-31)
+- feat: initial infrastructure documentation (2026-03-30)
 
 ### find-hub-tracker
 - Merge pull request #5 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-03-31)
@@ -89,17 +101,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - docs: add healthchecks.io config vars to .env.example (2026-03-30)
 - feat: initial scaffold — Google Find Hub tracker with Discord integration (2026-03-30)
 - chore: add .gitignore before any other files (2026-03-30)
-
-### karl-infra
-- chore: daily update 2026-03-31 (2026-03-31)
-- feat: initial infrastructure documentation (2026-03-30)
-
-### nwb-yoga
-- feat: lotus flower SVG icon with warm terracotta and dark green mono version (2026-03-29)
-- Merge pull request #1 from karlmarx/docs/readme (2026-03-28)
-- Add comprehensive README (2026-03-28)
-- improve: self-contained descriptions, better animations (2026-03-26)
-- rename: back to NWB Yoga — shorter and cleaner (2026-03-25)
 
 ### foodr
 - Merge pull request #1 from karlmarx/docs/readme (2026-03-28)

@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-02
+> Auto-updated daily from GitHub commits. Last update: 2026-04-03
 
 ## Overview
 
@@ -83,12 +83,37 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### 93-fyi
+- feat: add nfit + nyoga subdomain redirects to middleware (2026-04-02)
+- init: 93.fyi Next.js router + landing page (2026-04-02)
+- Initial commit from Create Next App (2026-04-02)
+
 ### nwb-plan
-- fix: replace generic yoga icon with lotus silhouette in bottom nav (2026-04-02)
-- Merge pull request #45 from karlmarx/claude/fix-equipment-picker-logic-7fiFp (2026-04-01)
-- fix: equipment picker logic — machine type drives instructions, superset fixes (2026-04-01)
-- Merge pull request #44 from karlmarx/claude/improve-wording-bN8xi (2026-04-01)
-- Replace "non-negotiable" wording across codebase (2026-04-01)
+- Merge pull request #46 from karlmarx/diagram-gallery (2026-04-02)
+- merge: resolve lotus icon conflict with main (take main's single-path version) (2026-04-02)
+- chore: remove stale branch trigger from CI, document test setup in CLAUDE.md (2026-04-02)
+- fix: broaden console error filter — catch 500 and unknown script errors (2026-04-02)
+- fix: filter NextAuth 500 console error in CI (no NEXTAUTH_SECRET set) (2026-04-02)
+
+### tui-dashboard
+- fix: %-d strftime not supported on Windows (2026-04-02)
+- refactor: strip to placeholder skeleton — get it running first (2026-04-02)
+- feat: initial Textual dashboard — projects, lights, seedbox, agent, clock (2026-04-02)
+- init: dashboard vision, panels, and ideas from session history (2026-04-02)
+
+### karl-infra
+- feat: update infra docs with current project state (2026-04-02)
+- chore: daily update 2026-04-02 (2026-04-02)
+- chore: daily update 2026-04-01 (2026-04-01)
+- chore: daily update 2026-03-31 (2026-03-31)
+- feat: initial infrastructure documentation (2026-03-30)
+
+### find-hub-tracker
+- Add selenium, undetected-chromedriver, setuptools deps for auth flow (2026-04-02)
+- Merge pull request #6 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-04-02)
+- fix: handle empty DEVICES_TO_TRACK in .env without JSON parse error (2026-03-31)
+- Merge pull request #5 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-03-31)
+- feat: add ultra.cc deploy script and fix systemd user service (2026-03-31)
 
 ### nwb-yoga
 - fix: add PNG icon variants for favicon and PWA install support (2026-04-01)
@@ -96,18 +121,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - Merge pull request #1 from karlmarx/docs/readme (2026-03-28)
 - Add comprehensive README (2026-03-28)
 - improve: self-contained descriptions, better animations (2026-03-26)
-
-### karl-infra
-- chore: daily update 2026-04-01 (2026-04-01)
-- chore: daily update 2026-03-31 (2026-03-31)
-- feat: initial infrastructure documentation (2026-03-30)
-
-### find-hub-tracker
-- Merge pull request #5 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-03-31)
-- feat: add ultra.cc deploy script and fix systemd user service (2026-03-31)
-- docs: add healthchecks.io config vars to .env.example (2026-03-30)
-- feat: initial scaffold — Google Find Hub tracker with Discord integration (2026-03-30)
-- chore: add .gitignore before any other files (2026-03-30)
 
 ### foodr
 - Merge pull request #1 from karlmarx/docs/readme (2026-03-28)

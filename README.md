@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-03
+> Auto-updated daily from GitHub commits. Last update: 2026-04-04
 
 ## Overview
 
@@ -83,30 +83,46 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### now-93fyi
+- copy: cut yoga line (2026-04-03)
+- copy: cut humidity line (2026-04-03)
+- copy: tighter voice, less explaining (2026-04-03)
+- copy: grounded building section — real backstory, less manifesto (2026-04-03)
+- copy: remove 'The light is good' (2026-04-03)
+
 ### 93-fyi
-- feat: add nfit + nyoga subdomain redirects to middleware (2026-04-02)
-- init: 93.fyi Next.js router + landing page (2026-04-02)
-- Initial commit from Create Next App (2026-04-02)
+- fix: correct SSO cookie name, add sign in link for logged-out state (2026-04-03)
+- feat: new favicon from gemini (2026-04-03)
+- redesign: calm minimal homepage with serif/mono typography (2026-04-03)
+- fix: move TrickAdvisor to private (auth-gated), remove footer quote (2026-04-03)
+- redesign: sleek link hub with SVG icons, auth-gated private links (2026-04-03)
+
+### status-93fyi
+- docs: add deploy result (2026-04-03)
+- init: status.93.fyi uptime page (2026-04-03)
+- feat: add main status page with polling and components (2026-04-03)
+- feat: add root layout with dark theme and Inter font (2026-04-03)
+- feat: add IncidentHistory component (2026-04-03)
 
 ### nwb-plan
+- fix: move superset cards to top of expanded exercise via supplementSlot prop (#48) (2026-04-03)
+- fix: superset system — exercise name mismatches, render order, equipment awareness (#48) (2026-04-03)
+- fix: show superset badges in both collapsed and expanded exercise tiles (2026-04-03)
 - Merge pull request #46 from karlmarx/diagram-gallery (2026-04-02)
 - merge: resolve lotus icon conflict with main (take main's single-path version) (2026-04-02)
-- chore: remove stale branch trigger from CI, document test setup in CLAUDE.md (2026-04-02)
-- fix: broaden console error filter — catch 500 and unknown script errors (2026-04-02)
-- fix: filter NextAuth 500 console error in CI (no NEXTAUTH_SECRET set) (2026-04-02)
+
+### karl-infra
+- chore: daily update 2026-04-03 (2026-04-03)
+- feat: update infra docs with current project state (2026-04-02)
+- chore: daily update 2026-04-02 (2026-04-02)
+- chore: daily update 2026-04-01 (2026-04-01)
+- chore: daily update 2026-03-31 (2026-03-31)
 
 ### tui-dashboard
 - fix: %-d strftime not supported on Windows (2026-04-02)
 - refactor: strip to placeholder skeleton — get it running first (2026-04-02)
 - feat: initial Textual dashboard — projects, lights, seedbox, agent, clock (2026-04-02)
 - init: dashboard vision, panels, and ideas from session history (2026-04-02)
-
-### karl-infra
-- feat: update infra docs with current project state (2026-04-02)
-- chore: daily update 2026-04-02 (2026-04-02)
-- chore: daily update 2026-04-01 (2026-04-01)
-- chore: daily update 2026-03-31 (2026-03-31)
-- feat: initial infrastructure documentation (2026-03-30)
 
 ### find-hub-tracker
 - Add selenium, undetected-chromedriver, setuptools deps for auth flow (2026-04-02)

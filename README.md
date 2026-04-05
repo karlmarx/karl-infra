@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-04
+> Auto-updated daily from GitHub commits. Last update: 2026-04-05
 
 ## Overview
 
@@ -83,6 +83,44 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### nwb-plan
+- ui-v2: compact SVG progress ring in header (2026-04-04)
+- ui-v2: sliding tab pill indicator (2026-04-04)
+- feat: rest day override — move recovery to any day of the week (2026-04-04)
+- ui-v2: features #4 and #5 — gradient today card + gradient gallery CTA (2026-04-04)
+- Merge branch 'ui-v2' into dev (2026-04-04)
+
+### migration-tools
+- feat: add secret scanner and GitHub activity digest (2026-04-04)
+- feat: add 5 new automation tools — security, financial, and monitoring (2026-04-04)
+- feat: initial commit — migration scripts and personal automation toolkit (2026-04-04)
+
+### finflow
+- feat: migrate from Plaid to Teller for zero-cost bank data access (2026-04-04)
+- chore: remove uv-generated main.py (2026-04-04)
+- init: finflow — Plaid-powered personal finance aggregator (2026-04-04)
+
+### nwb-yoga
+- chore: deprecate vercel.app URLs, all references now point to nfit.93.fyi (2026-04-04)
+- design: polish UI with CSS animations, improved tier cards, better typography and spacing, proper CTA button, micro-interactions, reduced-motion support (2026-04-04)
+- fix: add PNG icon variants for favicon and PWA install support (2026-04-01)
+- feat: lotus flower SVG icon with warm terracotta and dark green mono version (2026-03-29)
+- Merge pull request #1 from karlmarx/docs/readme (2026-03-28)
+
+### 93-fyi
+- chore: remove vercel.app relay from middleware, nfit/nyoga served directly (2026-04-04)
+- design: richer hover states, section labels, footer, improved spacing and micro-interactions (2026-04-04)
+- feat: use Gemini-generated 93 icon as favicon + apple touch icon (2026-04-04)
+- feat: add branded SVG favicon (dark bg, neon pink 93) (2026-04-04)
+- fix: correct SSO cookie name, add sign in link for logged-out state (2026-04-03)
+
+### karl-infra
+- chore: daily update 2026-04-04 (2026-04-04)
+- chore: daily update 2026-04-03 (2026-04-03)
+- feat: update infra docs with current project state (2026-04-02)
+- chore: daily update 2026-04-02 (2026-04-02)
+- chore: daily update 2026-04-01 (2026-04-01)
+
 ### now-93fyi
 - copy: cut yoga line (2026-04-03)
 - copy: cut humidity line (2026-04-03)
@@ -90,33 +128,12 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - copy: grounded building section — real backstory, less manifesto (2026-04-03)
 - copy: remove 'The light is good' (2026-04-03)
 
-### 93-fyi
-- fix: correct SSO cookie name, add sign in link for logged-out state (2026-04-03)
-- feat: new favicon from gemini (2026-04-03)
-- redesign: calm minimal homepage with serif/mono typography (2026-04-03)
-- fix: move TrickAdvisor to private (auth-gated), remove footer quote (2026-04-03)
-- redesign: sleek link hub with SVG icons, auth-gated private links (2026-04-03)
-
 ### status-93fyi
 - docs: add deploy result (2026-04-03)
 - init: status.93.fyi uptime page (2026-04-03)
 - feat: add main status page with polling and components (2026-04-03)
 - feat: add root layout with dark theme and Inter font (2026-04-03)
 - feat: add IncidentHistory component (2026-04-03)
-
-### nwb-plan
-- fix: move superset cards to top of expanded exercise via supplementSlot prop (#48) (2026-04-03)
-- fix: superset system — exercise name mismatches, render order, equipment awareness (#48) (2026-04-03)
-- fix: show superset badges in both collapsed and expanded exercise tiles (2026-04-03)
-- Merge pull request #46 from karlmarx/diagram-gallery (2026-04-02)
-- merge: resolve lotus icon conflict with main (take main's single-path version) (2026-04-02)
-
-### karl-infra
-- chore: daily update 2026-04-03 (2026-04-03)
-- feat: update infra docs with current project state (2026-04-02)
-- chore: daily update 2026-04-02 (2026-04-02)
-- chore: daily update 2026-04-01 (2026-04-01)
-- chore: daily update 2026-03-31 (2026-03-31)
 
 ### tui-dashboard
 - fix: %-d strftime not supported on Windows (2026-04-02)
@@ -130,13 +147,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - fix: handle empty DEVICES_TO_TRACK in .env without JSON parse error (2026-03-31)
 - Merge pull request #5 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-03-31)
 - feat: add ultra.cc deploy script and fix systemd user service (2026-03-31)
-
-### nwb-yoga
-- fix: add PNG icon variants for favicon and PWA install support (2026-04-01)
-- feat: lotus flower SVG icon with warm terracotta and dark green mono version (2026-03-29)
-- Merge pull request #1 from karlmarx/docs/readme (2026-03-28)
-- Add comprehensive README (2026-03-28)
-- improve: self-contained descriptions, better animations (2026-03-26)
 
 ### foodr
 - Merge pull request #1 from karlmarx/docs/readme (2026-03-28)

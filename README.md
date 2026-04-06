@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-05
+> Auto-updated daily from GitHub commits. Last update: 2026-04-06
 
 ## Overview
 
@@ -83,12 +83,33 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### house-tracker
+- feat: add kitchen renovation concept renders for 3497 NE 20th Ave (2026-04-06)
+- feat: add Gemini-generated pool concept renders (2026-04-06)
+- fix: improve site plan readability on mobile (2026-04-05)
+- feat: add interactive pool site plans and deeper analysis sections (2026-04-05)
+- feat: house-tracker — South Florida property comparison dashboard (2026-04-05)
+
 ### nwb-plan
-- ui-v2: compact SVG progress ring in header (2026-04-04)
-- ui-v2: sliding tab pill indicator (2026-04-04)
-- feat: rest day override — move recovery to any day of the week (2026-04-04)
-- ui-v2: features #4 and #5 — gradient today card + gradient gallery CTA (2026-04-04)
-- Merge branch 'ui-v2' into dev (2026-04-04)
+- feat: fullscreen exercise focus mode (2026-04-05)
+- feat: edit/do mode toggle for workout view (2026-04-05)
+- feat: add machine shoulder press, cable lateral raise, DB kickback (2026-04-05)
+- feat: unify MachineSelector into EquipmentSwapPanel (2026-04-05)
+- feat: superset completion tracking + TRX nearby supersets (2026-04-05)
+
+### 93-fyi
+- fix: add NWB Yoga to public links (2026-04-05)
+- fix: sign-in redirects to me.93.fyi after CF Access login (2026-04-05)
+- remove debug endpoint (2026-04-05)
+- add debug endpoint (2026-04-05)
+- server component with personalized links via X-User-Email header (2026-04-05)
+
+### karl-infra
+- chore: daily update 2026-04-05 (2026-04-05)
+- chore: daily update 2026-04-04 (2026-04-04)
+- chore: daily update 2026-04-03 (2026-04-03)
+- feat: update infra docs with current project state (2026-04-02)
+- chore: daily update 2026-04-02 (2026-04-02)
 
 ### migration-tools
 - feat: add secret scanner and GitHub activity digest (2026-04-04)
@@ -106,20 +127,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - fix: add PNG icon variants for favicon and PWA install support (2026-04-01)
 - feat: lotus flower SVG icon with warm terracotta and dark green mono version (2026-03-29)
 - Merge pull request #1 from karlmarx/docs/readme (2026-03-28)
-
-### 93-fyi
-- chore: remove vercel.app relay from middleware, nfit/nyoga served directly (2026-04-04)
-- design: richer hover states, section labels, footer, improved spacing and micro-interactions (2026-04-04)
-- feat: use Gemini-generated 93 icon as favicon + apple touch icon (2026-04-04)
-- feat: add branded SVG favicon (dark bg, neon pink 93) (2026-04-04)
-- fix: correct SSO cookie name, add sign in link for logged-out state (2026-04-03)
-
-### karl-infra
-- chore: daily update 2026-04-04 (2026-04-04)
-- chore: daily update 2026-04-03 (2026-04-03)
-- feat: update infra docs with current project state (2026-04-02)
-- chore: daily update 2026-04-02 (2026-04-02)
-- chore: daily update 2026-04-01 (2026-04-01)
 
 ### now-93fyi
 - copy: cut yoga line (2026-04-03)

@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-06
+> Auto-updated daily from GitHub commits. Last update: 2026-04-07
 
 ## Overview
 
@@ -83,6 +83,20 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### nwb-plan
+- Merge pull request #59 from karlmarx/feat/issue-54-nwb-diagrams (2026-04-07)
+- feat(diagrams): add 12 high-priority NWB exercise diagrams (#54) (2026-04-07)
+- Merge pull request #58 from karlmarx/dev (2026-04-06)
+- Fix invisible movement diagram modal (2026-04-06)
+- feat: admin-only Hevy sync behind Google auth (#53) (2026-04-06)
+
+### karl-infra
+- chore: daily update 2026-04-06 (2026-04-06)
+- chore: daily update 2026-04-05 (2026-04-05)
+- chore: daily update 2026-04-04 (2026-04-04)
+- chore: daily update 2026-04-03 (2026-04-03)
+- feat: update infra docs with current project state (2026-04-02)
+
 ### house-tracker
 - feat: add kitchen renovation concept renders for 3497 NE 20th Ave (2026-04-06)
 - feat: add Gemini-generated pool concept renders (2026-04-06)
@@ -90,26 +104,12 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - feat: add interactive pool site plans and deeper analysis sections (2026-04-05)
 - feat: house-tracker — South Florida property comparison dashboard (2026-04-05)
 
-### nwb-plan
-- feat: fullscreen exercise focus mode (2026-04-05)
-- feat: edit/do mode toggle for workout view (2026-04-05)
-- feat: add machine shoulder press, cable lateral raise, DB kickback (2026-04-05)
-- feat: unify MachineSelector into EquipmentSwapPanel (2026-04-05)
-- feat: superset completion tracking + TRX nearby supersets (2026-04-05)
-
 ### 93-fyi
 - fix: add NWB Yoga to public links (2026-04-05)
 - fix: sign-in redirects to me.93.fyi after CF Access login (2026-04-05)
 - remove debug endpoint (2026-04-05)
 - add debug endpoint (2026-04-05)
 - server component with personalized links via X-User-Email header (2026-04-05)
-
-### karl-infra
-- chore: daily update 2026-04-05 (2026-04-05)
-- chore: daily update 2026-04-04 (2026-04-04)
-- chore: daily update 2026-04-03 (2026-04-03)
-- feat: update infra docs with current project state (2026-04-02)
-- chore: daily update 2026-04-02 (2026-04-02)
 
 ### migration-tools
 - feat: add secret scanner and GitHub activity digest (2026-04-04)
@@ -154,24 +154,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - fix: handle empty DEVICES_TO_TRACK in .env without JSON parse error (2026-03-31)
 - Merge pull request #5 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-03-31)
 - feat: add ultra.cc deploy script and fix systemd user service (2026-03-31)
-
-### foodr
-- Merge pull request #1 from karlmarx/docs/readme (2026-03-28)
-- Add comprehensive README (2026-03-28)
-- Build Foodr: fast food rating app with chain-specific scales (2026-03-26)
-
-### openclaw-watchdog
-- fix: swap AI order — Gemini first, DeepSeek fallback (2026-03-25)
-- feat: Playwright JS rendering, DeepSeek scoring, Discord webhook notifications (2026-03-25)
-- fix: absolute paths everywhere, semicolon as separate token, claude.exe direct call (2026-03-25)
-- fix: use WT Preview exe path, fix stale PID singleton via tasklist check (2026-03-25)
-- feat: add Claude Linux (WSL) profile, fix tab emoji via tabTitle+suppressApplicationTitle (2026-03-25)
-
-### todo-dashboard
-- Initial commit: TODO Dashboard system (2026-03-17)
-
-### dev-setup
-- Initial setup: Tailscale SSH + Claude Code MCPs + phone access guides (2026-03-17)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

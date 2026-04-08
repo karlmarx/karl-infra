@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-07
+> Auto-updated daily from GitHub commits. Last update: 2026-04-08
 
 ## Overview
 
@@ -84,18 +84,18 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### nwb-plan
-- Merge pull request #59 from karlmarx/feat/issue-54-nwb-diagrams (2026-04-07)
-- feat(diagrams): add 12 high-priority NWB exercise diagrams (#54) (2026-04-07)
-- Merge pull request #58 from karlmarx/dev (2026-04-06)
-- Fix invisible movement diagram modal (2026-04-06)
-- feat: admin-only Hevy sync behind Google auth (#53) (2026-04-06)
+- Merge branch 'main' into dev (2026-04-07)
+- feat(ui-v2): enable new UI by default (2026-04-07)
+- Merge pull request #61 from karlmarx/dev (2026-04-07)
+- test(ui-v2): use anchored role+name selector for the All filter pill (2026-04-07)
+- Merge pull request #60 from karlmarx/feat/diagram-gallery-ppl (2026-04-07)
 
 ### karl-infra
+- chore: daily update 2026-04-07 (2026-04-07)
 - chore: daily update 2026-04-06 (2026-04-06)
 - chore: daily update 2026-04-05 (2026-04-05)
 - chore: daily update 2026-04-04 (2026-04-04)
 - chore: daily update 2026-04-03 (2026-04-03)
-- feat: update infra docs with current project state (2026-04-02)
 
 ### house-tracker
 - feat: add kitchen renovation concept renders for 3497 NE 20th Ave (2026-04-06)

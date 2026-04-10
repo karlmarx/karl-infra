@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-09
+> Auto-updated daily from GitHub commits. Last update: 2026-04-10
 
 ## Overview
 
@@ -91,11 +91,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - test(ui-v2): use anchored role+name selector for the All filter pill (2026-04-07)
 
 ### karl-infra
+- chore: daily update 2026-04-09 (2026-04-09)
 - chore: daily update 2026-04-08 (2026-04-08)
 - chore: daily update 2026-04-07 (2026-04-07)
 - chore: daily update 2026-04-06 (2026-04-06)
 - chore: daily update 2026-04-05 (2026-04-05)
-- chore: daily update 2026-04-04 (2026-04-04)
 
 ### house-tracker
 - feat: add kitchen renovation concept renders for 3497 NE 20th Ave (2026-04-06)
@@ -141,19 +141,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - feat: add main status page with polling and components (2026-04-03)
 - feat: add root layout with dark theme and Inter font (2026-04-03)
 - feat: add IncidentHistory component (2026-04-03)
-
-### tui-dashboard
-- fix: %-d strftime not supported on Windows (2026-04-02)
-- refactor: strip to placeholder skeleton — get it running first (2026-04-02)
-- feat: initial Textual dashboard — projects, lights, seedbox, agent, clock (2026-04-02)
-- init: dashboard vision, panels, and ideas from session history (2026-04-02)
-
-### find-hub-tracker
-- Add selenium, undetected-chromedriver, setuptools deps for auth flow (2026-04-02)
-- Merge pull request #6 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-04-02)
-- fix: handle empty DEVICES_TO_TRACK in .env without JSON parse error (2026-03-31)
-- Merge pull request #5 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-03-31)
-- feat: add ultra.cc deploy script and fix systemd user service (2026-03-31)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

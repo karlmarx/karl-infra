@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-10
+> Auto-updated daily from GitHub commits. Last update: 2026-04-11
 
 ## Overview
 
@@ -84,18 +84,18 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### nwb-plan
+- Merge pull request #64 from karlmarx/claude/add-supersets-focus-mode-NWm83 (2026-04-10)
+- feat: add supersets and supplements to Focus Mode overlay (2026-04-10)
 - fix: replace yoga lotus favicon with NWB dumbbell mark (2026-04-08)
 - Merge branch 'main' into dev (2026-04-07)
 - feat(ui-v2): enable new UI by default (2026-04-07)
-- Merge pull request #61 from karlmarx/dev (2026-04-07)
-- test(ui-v2): use anchored role+name selector for the All filter pill (2026-04-07)
 
 ### karl-infra
+- chore: daily update 2026-04-10 (2026-04-10)
 - chore: daily update 2026-04-09 (2026-04-09)
 - chore: daily update 2026-04-08 (2026-04-08)
 - chore: daily update 2026-04-07 (2026-04-07)
 - chore: daily update 2026-04-06 (2026-04-06)
-- chore: daily update 2026-04-05 (2026-04-05)
 
 ### house-tracker
 - feat: add kitchen renovation concept renders for 3497 NE 20th Ave (2026-04-06)
@@ -127,20 +127,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - fix: add PNG icon variants for favicon and PWA install support (2026-04-01)
 - feat: lotus flower SVG icon with warm terracotta and dark green mono version (2026-03-29)
 - Merge pull request #1 from karlmarx/docs/readme (2026-03-28)
-
-### now-93fyi
-- copy: cut yoga line (2026-04-03)
-- copy: cut humidity line (2026-04-03)
-- copy: tighter voice, less explaining (2026-04-03)
-- copy: grounded building section — real backstory, less manifesto (2026-04-03)
-- copy: remove 'The light is good' (2026-04-03)
-
-### status-93fyi
-- docs: add deploy result (2026-04-03)
-- init: status.93.fyi uptime page (2026-04-03)
-- feat: add main status page with polling and components (2026-04-03)
-- feat: add root layout with dark theme and Inter font (2026-04-03)
-- feat: add IncidentHistory component (2026-04-03)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

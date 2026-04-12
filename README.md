@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-11
+> Auto-updated daily from GitHub commits. Last update: 2026-04-12
 
 ## Overview
 
@@ -83,6 +83,13 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### blazing-paddles-react
+- chore: clean up DatePicker.tsx — remove dead code, fix types (#16) (2026-04-11)
+- chore: test deploy after removing duplicate Vercel project (2026-03-17)
+- Merge pull request #9 from karlmarx/add-claude-github-actions-1773782965672 (2026-03-17)
+- "Claude Code Review workflow" (2026-03-17)
+- "Claude PR Assistant workflow" (2026-03-17)
+
 ### nwb-plan
 - Merge pull request #64 from karlmarx/claude/add-supersets-focus-mode-NWm83 (2026-04-10)
 - feat: add supersets and supplements to Focus Mode overlay (2026-04-10)
@@ -91,11 +98,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - feat(ui-v2): enable new UI by default (2026-04-07)
 
 ### karl-infra
+- chore: daily update 2026-04-11 (2026-04-11)
 - chore: daily update 2026-04-10 (2026-04-10)
 - chore: daily update 2026-04-09 (2026-04-09)
 - chore: daily update 2026-04-08 (2026-04-08)
 - chore: daily update 2026-04-07 (2026-04-07)
-- chore: daily update 2026-04-06 (2026-04-06)
 
 ### house-tracker
 - feat: add kitchen renovation concept renders for 3497 NE 20th Ave (2026-04-06)
@@ -110,23 +117,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - remove debug endpoint (2026-04-05)
 - add debug endpoint (2026-04-05)
 - server component with personalized links via X-User-Email header (2026-04-05)
-
-### migration-tools
-- feat: add secret scanner and GitHub activity digest (2026-04-04)
-- feat: add 5 new automation tools — security, financial, and monitoring (2026-04-04)
-- feat: initial commit — migration scripts and personal automation toolkit (2026-04-04)
-
-### finflow
-- feat: migrate from Plaid to Teller for zero-cost bank data access (2026-04-04)
-- chore: remove uv-generated main.py (2026-04-04)
-- init: finflow — Plaid-powered personal finance aggregator (2026-04-04)
-
-### nwb-yoga
-- chore: deprecate vercel.app URLs, all references now point to nfit.93.fyi (2026-04-04)
-- design: polish UI with CSS animations, improved tier cards, better typography and spacing, proper CTA button, micro-interactions, reduced-motion support (2026-04-04)
-- fix: add PNG icon variants for favicon and PWA install support (2026-04-01)
-- feat: lotus flower SVG icon with warm terracotta and dark green mono version (2026-03-29)
-- Merge pull request #1 from karlmarx/docs/readme (2026-03-28)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-12
+> Auto-updated daily from GitHub commits. Last update: 2026-04-13
 
 ## Overview
 
@@ -83,40 +83,33 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### find-hub-tracker
+- feat: add all GoogleFindMyTools runtime deps and fix auth flow (2026-04-13)
+- Add selenium, undetected-chromedriver, setuptools deps for auth flow (2026-04-02)
+- Merge pull request #6 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-04-02)
+- fix: handle empty DEVICES_TO_TRACK in .env without JSON parse error (2026-03-31)
+- Merge pull request #5 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-03-31)
+
+### nwb-plan
+- Merge pull request #66 from karlmarx/claude/redesign-workout-ui-8zbf1 (2026-04-12)
+- feat(ui): unified tap-to-expand workout view with opt-in complements (2026-04-11)
+- Merge pull request #64 from karlmarx/claude/add-supersets-focus-mode-NWm83 (2026-04-10)
+- feat: add supersets and supplements to Focus Mode overlay (2026-04-10)
+- fix: replace yoga lotus favicon with NWB dumbbell mark (2026-04-08)
+
+### karl-infra
+- chore: daily update 2026-04-12 (2026-04-12)
+- chore: daily update 2026-04-11 (2026-04-11)
+- chore: daily update 2026-04-10 (2026-04-10)
+- chore: daily update 2026-04-09 (2026-04-09)
+- chore: daily update 2026-04-08 (2026-04-08)
+
 ### blazing-paddles-react
 - chore: clean up DatePicker.tsx — remove dead code, fix types (#16) (2026-04-11)
 - chore: test deploy after removing duplicate Vercel project (2026-03-17)
 - Merge pull request #9 from karlmarx/add-claude-github-actions-1773782965672 (2026-03-17)
 - "Claude Code Review workflow" (2026-03-17)
 - "Claude PR Assistant workflow" (2026-03-17)
-
-### nwb-plan
-- Merge pull request #64 from karlmarx/claude/add-supersets-focus-mode-NWm83 (2026-04-10)
-- feat: add supersets and supplements to Focus Mode overlay (2026-04-10)
-- fix: replace yoga lotus favicon with NWB dumbbell mark (2026-04-08)
-- Merge branch 'main' into dev (2026-04-07)
-- feat(ui-v2): enable new UI by default (2026-04-07)
-
-### karl-infra
-- chore: daily update 2026-04-11 (2026-04-11)
-- chore: daily update 2026-04-10 (2026-04-10)
-- chore: daily update 2026-04-09 (2026-04-09)
-- chore: daily update 2026-04-08 (2026-04-08)
-- chore: daily update 2026-04-07 (2026-04-07)
-
-### house-tracker
-- feat: add kitchen renovation concept renders for 3497 NE 20th Ave (2026-04-06)
-- feat: add Gemini-generated pool concept renders (2026-04-06)
-- fix: improve site plan readability on mobile (2026-04-05)
-- feat: add interactive pool site plans and deeper analysis sections (2026-04-05)
-- feat: house-tracker — South Florida property comparison dashboard (2026-04-05)
-
-### 93-fyi
-- fix: add NWB Yoga to public links (2026-04-05)
-- fix: sign-in redirects to me.93.fyi after CF Access login (2026-04-05)
-- remove debug endpoint (2026-04-05)
-- add debug endpoint (2026-04-05)
-- server component with personalized links via X-User-Email header (2026-04-05)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

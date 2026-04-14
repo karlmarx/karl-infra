@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-13
+> Auto-updated daily from GitHub commits. Last update: 2026-04-14
 
 ## Overview
 
@@ -83,26 +83,26 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### nwb-plan
+- Merge pull request #72 from karlmarx/claude/add-prone-core-exercises-eMehx (2026-04-13)
+- feat: add 6 prone ham curl machine core exercises with diagrams and supersets (2026-04-13)
+- Merge pull request #66 from karlmarx/claude/redesign-workout-ui-8zbf1 (2026-04-12)
+- feat(ui): unified tap-to-expand workout view with opt-in complements (2026-04-11)
+- Merge pull request #64 from karlmarx/claude/add-supersets-focus-mode-NWm83 (2026-04-10)
+
+### karl-infra
+- chore: daily update 2026-04-13 (2026-04-13)
+- chore: daily update 2026-04-12 (2026-04-12)
+- chore: daily update 2026-04-11 (2026-04-11)
+- chore: daily update 2026-04-10 (2026-04-10)
+- chore: daily update 2026-04-09 (2026-04-09)
+
 ### find-hub-tracker
 - feat: add all GoogleFindMyTools runtime deps and fix auth flow (2026-04-13)
 - Add selenium, undetected-chromedriver, setuptools deps for auth flow (2026-04-02)
 - Merge pull request #6 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-04-02)
 - fix: handle empty DEVICES_TO_TRACK in .env without JSON parse error (2026-03-31)
 - Merge pull request #5 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-03-31)
-
-### nwb-plan
-- Merge pull request #66 from karlmarx/claude/redesign-workout-ui-8zbf1 (2026-04-12)
-- feat(ui): unified tap-to-expand workout view with opt-in complements (2026-04-11)
-- Merge pull request #64 from karlmarx/claude/add-supersets-focus-mode-NWm83 (2026-04-10)
-- feat: add supersets and supplements to Focus Mode overlay (2026-04-10)
-- fix: replace yoga lotus favicon with NWB dumbbell mark (2026-04-08)
-
-### karl-infra
-- chore: daily update 2026-04-12 (2026-04-12)
-- chore: daily update 2026-04-11 (2026-04-11)
-- chore: daily update 2026-04-10 (2026-04-10)
-- chore: daily update 2026-04-09 (2026-04-09)
-- chore: daily update 2026-04-08 (2026-04-08)
 
 ### blazing-paddles-react
 - chore: clean up DatePicker.tsx — remove dead code, fix types (#16) (2026-04-11)

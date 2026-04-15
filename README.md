@@ -9,29 +9,32 @@
 |                      Karl's Infrastructure                        |
 +-------------------------------------------------------------------+
 |                                                                   |
-|  APPS (Vercel)              AUTOMATION (Local / ultra.cc)         |
+|  APPS (Vercel)              AUTOMATION (Local / ultra.cc / CI)    |
 |  ---------------            ----------------------------          |
 |  nfit.93.fyi                Windows 11 Workstation                |
-|  +- nwb-plan ----------+   +- OpenClaw (AI assistant)            |
+|  +- nwb-plan ----------+   +- OpenClaw (AI assistant)             |
 |  |  (Next.js + Claude   |   +- claude-pipeline (watcher)          |
-|  |   API suggestions)   |   |  +- watches Nextcloud/inbox/       |
+|  |   API suggestions)   |   |  +- watches Nextcloud/inbox/        |
 |  |                      |   +- property-scout (daily 8am)         |
-|  nyoga.93.fyi           |   |  +- MLS scrape -> email report     |
-|  +- nwb-yoga ------+   |   |                                     |
-|  |  (Canvas anims)  |   |   ultra.cc seedbox                     |
-|  |                  |   |   +- find-hub-tracker                  |
-|  foodr-app.vercel   |   |      +- Google Find Hub -> Postgres    |
-|  +- foodr           |   |         +- Discord alerts              |
-|  |                  |   |         +- healthchecks.io              |
+|  nyoga.93.fyi           |   |  +- MLS scrape -> email report      |
+|  +- nwb-yoga ------+   |   |                                      |
+|  |  (Canvas anims)  |   |   ultra.cc seedbox                      |
+|  |                  |   |   +- find-hub-tracker                   |
+|  foodr-app.vercel   |   |   |  +- Google Find Hub -> Postgres     |
+|  +- foodr           |   |   |  +- Discord alerts                  |
+|  |                  |   |   +- Nextcloud (WebDAV + file mirror)   |
 |  ta.93.fyi          |   |                                         |
-|  +- TrickAdvisor    |   |   INFRA                                |
-|     + TA-API        |   |   ------                                |
-|                     |   |   Dynadot (.fyi registrar)              |
-|  Supabase (DB) -----+   |   Cloudflare (DNS + email routing)      |
-|                         |   GitHub (all repos + Actions)          |
-|  93.fyi ----------------+   Vercel (all deployments)              |
-|  (Cloudflare DNS)           Anthropic (Claude API)                |
-|  k@93.fyi -> Gmail                                                |
+|  +- TrickAdvisor    |   |   GitHub Actions                        |
+|     + TA-API        |   |   +- karl-todo (todo.md ->              |
+|                     |   |                 Todoist + Nextcloud)    |
+|  Supabase (DB) -----+   |                                         |
+|                         |   INFRA                                 |
+|  93.fyi ----------------+   ------                                |
+|  (Cloudflare DNS)           Dynadot (.fyi registrar)              |
+|  k@93.fyi -> Gmail          Cloudflare (DNS + email routing)      |
+|                             GitHub (all repos + Actions)          |
+|                             Vercel (all deployments)              |
+|                             Anthropic (Claude API)                |
 +-------------------------------------------------------------------+
 ```
 
@@ -58,6 +61,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the full deep-dive.
 | OpenClaw Watchdog | Windows workstation | Running | [karlmarx/openclaw-watchdog](https://github.com/karlmarx/openclaw-watchdog) |
 | Gemini Auto | Windows workstation | Running | [karlmarx/gemini-auto](https://github.com/karlmarx/gemini-auto) |
 | Amex Claims Automator | TBD | Scaffolded | [karlmarx/amex-claims-automator](https://github.com/karlmarx/amex-claims-automator) |
+| karl-todo sync | GitHub Actions (on push to main) | Running | [karlmarx/karl-todo](https://github.com/karlmarx/karl-todo) |
 
 ## Tooling & Docs
 

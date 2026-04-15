@@ -46,7 +46,18 @@ The primary development machine runs several always-on or on-demand automation s
 A remote Linux server for running automation that needs to be always-on without depending on the workstation:
 
 - **find-hub-tracker**: Polls Google Find Hub API for device location/battery, sends Discord alerts
+- **Nextcloud** (`https://karlmarx.tofino.usbx.me/nextcloud`): Personal Nextcloud 27 on Ultra.cc's managed hosting, subpath install. Mobile app syncs `~/Nextcloud/` to the macOS desktop client. Receives `todo.md` uploads from karl-todo CI.
 - Future: other periodic automation tasks currently running on Windows
+
+### GitHub Actions (CI-driven automation)
+
+Automation where the runner itself does the work — no always-on host required. Triggered by push to `main` or scheduled cron.
+
+| Service | Trigger | Purpose |
+|---------|---------|---------|
+| karl-todo sync | `push` to `main` of `todo.md`/scripts | Mirrors canonical `todo.md` to Todoist (Sync API, batched diff) and Nextcloud (WebDAV `PUT`). Both sinks are read-only; `todo.md` in the repo is source of truth. |
+
+Repo: [karlmarx/karl-todo](https://github.com/karlmarx/karl-todo). Secrets (`TODOIST_API_TOKEN`, `NEXTCLOUD_URL`, `NEXTCLOUD_USER`, `NEXTCLOUD_APP_PASSWORD`) live in Actions Secrets. The workflow has two parallel sink jobs with `continue-on-error: true` and a gating `report` job that fails only if both sinks fail — so a Nextcloud outage doesn't block Todoist syncs.
 
 ## Data Stores
 

@@ -55,9 +55,9 @@ Automation where the runner itself does the work — no always-on host required.
 
 | Service | Trigger | Purpose |
 |---------|---------|---------|
-| karl-todo sync | `push` to `main` of `todo.md`/scripts | Mirrors canonical `todo.md` to Todoist (Sync API, batched diff) and Nextcloud (WebDAV `PUT`). Both sinks are read-only; `todo.md` in the repo is source of truth. |
+| karl-todo sync | `*/15 * * * *` + `push` to `main` | **Todoist is source of truth.** Cron pulls `karl-todo` project → regenerates `todo.md` → commits with `[skip ci]` → mirrors to Nextcloud. Push path additionally runs a forward sync (`todo.md` → Todoist) before the pull, as an escape hatch for bulk markdown edits. |
 
-Repo: [karlmarx/karl-todo](https://github.com/karlmarx/karl-todo). Secrets (`TODOIST_API_TOKEN`, `NEXTCLOUD_URL`, `NEXTCLOUD_USER`, `NEXTCLOUD_APP_PASSWORD`) live in Actions Secrets. The workflow has two parallel sink jobs with `continue-on-error: true` and a gating `report` job that fails only if both sinks fail — so a Nextcloud outage doesn't block Todoist syncs.
+Repo: [karlmarx/karl-todo](https://github.com/karlmarx/karl-todo). Secrets (`TODOIST_API_TOKEN`, `NEXTCLOUD_URL`, `NEXTCLOUD_USER`, `NEXTCLOUD_APP_PASSWORD`) live in Actions Secrets. The workflow has a `forward` job (skipped on schedule), a `pull-and-mirror` job that always runs, and a gating `report` job that fails only if the pull leg failed — a Nextcloud outage doesn't block the Todoist → git leg.
 
 ## Data Stores
 

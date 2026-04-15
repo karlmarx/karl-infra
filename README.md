@@ -25,8 +25,8 @@
 |  |                  |   |   +- Nextcloud (WebDAV + file mirror)   |
 |  ta.93.fyi          |   |                                         |
 |  +- TrickAdvisor    |   |   GitHub Actions                        |
-|     + TA-API        |   |   +- karl-todo (todo.md ->              |
-|                     |   |                 Todoist + Nextcloud)    |
+|     + TA-API        |   |   +- karl-todo (Todoist ->              |
+|                     |   |                 todo.md + Nextcloud)    |
 |  Supabase (DB) -----+   |                                         |
 |                         |   INFRA                                 |
 |  93.fyi ----------------+   ------                                |

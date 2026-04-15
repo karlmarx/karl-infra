@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-14
+> Auto-updated daily from GitHub commits. Last update: 2026-04-15
 
 ## Overview
 
@@ -84,18 +84,18 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### nwb-plan
+- Merge pull request #69 from karlmarx/claude/pixel-watch-workout-app-5jo1k (2026-04-14)
+- Merge pull request #68 from karlmarx/claude/redesign-workout-ui-8zbf1 (2026-04-14)
+- fix(ci): remove obsolete v2-supp-chip tests, add AUTH_TRUST_HOST (2026-04-14)
 - Merge pull request #72 from karlmarx/claude/add-prone-core-exercises-eMehx (2026-04-13)
 - feat: add 6 prone ham curl machine core exercises with diagrams and supersets (2026-04-13)
-- Merge pull request #66 from karlmarx/claude/redesign-workout-ui-8zbf1 (2026-04-12)
-- feat(ui): unified tap-to-expand workout view with opt-in complements (2026-04-11)
-- Merge pull request #64 from karlmarx/claude/add-supersets-focus-mode-NWm83 (2026-04-10)
 
 ### karl-infra
+- chore: daily update 2026-04-14 (2026-04-14)
 - chore: daily update 2026-04-13 (2026-04-13)
 - chore: daily update 2026-04-12 (2026-04-12)
 - chore: daily update 2026-04-11 (2026-04-11)
 - chore: daily update 2026-04-10 (2026-04-10)
-- chore: daily update 2026-04-09 (2026-04-09)
 
 ### find-hub-tracker
 - feat: add all GoogleFindMyTools runtime deps and fix auth flow (2026-04-13)

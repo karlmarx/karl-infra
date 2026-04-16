@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-15
+> Auto-updated daily from GitHub commits. Last update: 2026-04-16
 
 ## Overview
 
@@ -88,18 +88,25 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### nwb-plan
-- Merge pull request #69 from karlmarx/claude/pixel-watch-workout-app-5jo1k (2026-04-14)
-- Merge pull request #68 from karlmarx/claude/redesign-workout-ui-8zbf1 (2026-04-14)
-- fix(ci): remove obsolete v2-supp-chip tests, add AUTH_TRUST_HOST (2026-04-14)
-- Merge pull request #72 from karlmarx/claude/add-prone-core-exercises-eMehx (2026-04-13)
-- feat: add 6 prone ham curl machine core exercises with diagrams and supersets (2026-04-13)
+- Merge pull request #74 from karlmarx/claude/investigate-merge-conflicts-0m0Jy (2026-04-15)
+- Merge pull request #73 from karlmarx/claude/merge-main-into-dev-BLrFW (2026-04-15)
+- fix: equipment chips reflect active variant's requires (2026-04-15)
+- feat(exercises): variant-aware availability check (2026-04-15)
+- fix: phase pill auto-syncs to current calendar week (2026-04-15)
 
 ### karl-infra
+- docs: flip karl-todo to Todoist as source of truth (2026-04-15)
+- docs: add karl-todo to inventory (2026-04-15)
+- chore: daily update 2026-04-15 (2026-04-15)
 - chore: daily update 2026-04-14 (2026-04-14)
 - chore: daily update 2026-04-13 (2026-04-13)
-- chore: daily update 2026-04-12 (2026-04-12)
-- chore: daily update 2026-04-11 (2026-04-11)
-- chore: daily update 2026-04-10 (2026-04-10)
+
+### now-93fyi
+- copy: strip page to under construction (2026-04-15)
+- copy: cut yoga line (2026-04-03)
+- copy: cut humidity line (2026-04-03)
+- copy: tighter voice, less explaining (2026-04-03)
+- copy: grounded building section — real backstory, less manifesto (2026-04-03)
 
 ### find-hub-tracker
 - feat: add all GoogleFindMyTools runtime deps and fix auth flow (2026-04-13)

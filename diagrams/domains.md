@@ -14,6 +14,7 @@
 |   +-- nfit.93.fyi     CNAME -> cname.vercel-dns.com  (nwb-plan)
 |   +-- nyoga.93.fyi    CNAME -> cname.vercel-dns.com  (nwb-yoga)
 |   +-- ta.93.fyi       CNAME -> cname.vercel-dns.com  (TrickAdvisor)
+|   +-- auto.93.fyi     CNAME -> cname.vercel-dns.com  (auto-dashboard)
 |
 +-- Email Routing (Cloudflare)
     |
@@ -28,6 +29,7 @@
 | `nfit.93.fyi` | nwb-plan | karlmarx/nwb-plan | Primary domain for NWB Fitness |
 | `nyoga.93.fyi` | nwb-yoga | karlmarx/nwb-yoga | NWB Yoga companion |
 | `ta.93.fyi` | TrickAdvisor | karlmarx/TrickAdvisor | TrickAdvisor frontend |
+| `auto.93.fyi` | auto-dashboard | karlmarx/karl-infra (subdir: `auto-dashboard/`) | Interactive automation map |
 
 ## Email
 

@@ -1,0 +1,132 @@
+@import 'tailwindcss';
+@import '@xyflow/react/dist/style.css';
+
+@theme {
+  --color-bg: #0b0d12;
+  --color-bg-2: #121520;
+  --color-bg-3: #1a1f2e;
+  --color-border: #2a3142;
+  --color-border-strong: #3a4358;
+  --color-text: #cbd5e1;
+  --color-text-dim: #8592a6;
+  --color-text-strong: #f1f5f9;
+
+  /* Category palette */
+  --color-cat-vercel: #3b82f6;
+  --color-cat-local: #22c55e;
+  --color-cat-seedbox: #f97316;
+  --color-cat-gha: #a855f7;
+  --color-cat-infra: #6b7280;
+  --color-cat-windows: #06b6d4;
+  --color-cat-self: #ec4899;
+}
+
+:root {
+  color-scheme: dark;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background:
+    radial-gradient(
+      ellipse at 20% 0%,
+      rgba(59, 130, 246, 0.06),
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 80% 100%,
+      rgba(168, 85, 247, 0.05),
+      transparent 50%
+    ),
+    var(--color-bg);
+}
+
+/* React Flow dark theme overrides */
+.react-flow {
+  --xy-background-color: transparent;
+  --xy-background-pattern-color: #1e2636;
+  --xy-edge-stroke: #4a5468;
+  --xy-edge-stroke-selected: #a855f7;
+  --xy-edge-label-background: #0b0d12;
+  --xy-edge-label-color: #cbd5e1;
+  --xy-attribution-background-color: transparent;
+  --xy-controls-button-background-color: #1a1f2e;
+  --xy-controls-button-background-color-hover: #2a3142;
+  --xy-controls-button-color: #cbd5e1;
+  --xy-controls-button-color-hover: #f1f5f9;
+  --xy-controls-button-border-color: #2a3142;
+  --xy-minimap-background-color: rgba(11, 13, 18, 0.85);
+  --xy-minimap-mask-background-color: rgba(168, 85, 247, 0.1);
+}
+
+.react-flow__edge-path {
+  stroke-width: 1.5;
+}
+
+.react-flow__edge.selected .react-flow__edge-path,
+.react-flow__edge:focus .react-flow__edge-path {
+  stroke-width: 2.5;
+}
+
+.react-flow__edge-text {
+  font-size: 11px;
+  fill: var(--color-text);
+}
+
+.react-flow__edge-textbg {
+  fill: #0b0d12;
+}
+
+.react-flow__handle {
+  width: 8px;
+  height: 8px;
+  background: #4a5468;
+  border: 1px solid #0b0d12;
+}
+
+.react-flow__attribution {
+  color: var(--color-text-dim);
+  font-size: 10px;
+}
+
+.react-flow__attribution a {
+  color: var(--color-text-dim);
+}
+
+/* Custom scrollbar */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #2a3142;
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #3a4358;
+}

@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-16
+> Auto-updated daily from GitHub commits. Last update: 2026-04-17
 
 ## Overview
 
@@ -87,6 +87,13 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### 93-fyi
+- fix: point sign-in link to me.93.fyi/login directly (2026-04-16)
+- UI polish, a11y, and Next.js 16 housekeeping (#1) (2026-04-16)
+- fix: add NWB Yoga to public links (2026-04-05)
+- fix: sign-in redirects to me.93.fyi after CF Access login (2026-04-05)
+- remove debug endpoint (2026-04-05)
+
 ### nwb-plan
 - Merge pull request #74 from karlmarx/claude/investigate-merge-conflicts-0m0Jy (2026-04-15)
 - Merge pull request #73 from karlmarx/claude/merge-main-into-dev-BLrFW (2026-04-15)
@@ -94,12 +101,19 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - feat(exercises): variant-aware availability check (2026-04-15)
 - fix: phase pill auto-syncs to current calendar week (2026-04-15)
 
+### status-93fyi
+- UX, a11y, and polling polish for status page (#1) (2026-04-16)
+- docs: add deploy result (2026-04-03)
+- init: status.93.fyi uptime page (2026-04-03)
+- feat: add main status page with polling and components (2026-04-03)
+- feat: add root layout with dark theme and Inter font (2026-04-03)
+
 ### karl-infra
+- chore: daily update 2026-04-16 (2026-04-16)
 - docs: flip karl-todo to Todoist as source of truth (2026-04-15)
 - docs: add karl-todo to inventory (2026-04-15)
 - chore: daily update 2026-04-15 (2026-04-15)
 - chore: daily update 2026-04-14 (2026-04-14)
-- chore: daily update 2026-04-13 (2026-04-13)
 
 ### now-93fyi
 - copy: strip page to under construction (2026-04-15)

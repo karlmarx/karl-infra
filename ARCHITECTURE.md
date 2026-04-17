@@ -15,7 +15,7 @@ All web applications deploy to Vercel with custom domains via Cloudflare DNS.
 | nwb-plan | Next.js 16 + React 19 + TypeScript + Claude API | None (client-side, localStorage) | nfit.93.fyi, 93.fyi |
 | nwb-yoga | React 18 + Vite + Canvas animations | None (client-side) | nyoga.93.fyi |
 | foodr | Next.js 16 + React 19 + TypeScript | None (localStorage) | foodr-app.vercel.app |
-| TrickAdvisor | React (Vite) | Supabase (Postgres + Auth + Storage) | ta.93.fyi |
+| TrickAdvisor | React 19 + Vite + TypeScript | Supabase (Postgres + Auth + Storage) | trickadvisor.cc |
 | TrickAdvisor-API | Node/Express on Vercel Functions | Supabase | (serverless, called by TA frontend) |
 | blazing-paddles-react | React (Vite) | None | blazingpaddles.org |
 | auto-dashboard | React 19 + Vite + TypeScript + @xyflow/react | None (static) | auto.93.fyi |
@@ -84,7 +84,7 @@ Dynadot (registrar)
   93.fyi ──> Cloudflare (nameservers)
                ├── nfit.93.fyi  CNAME ──> cname.vercel-dns.com (nwb-plan)
                ├── nyoga.93.fyi CNAME ──> cname.vercel-dns.com (nwb-yoga)
-               ├── ta.93.fyi    CNAME ──> cname.vercel-dns.com (TrickAdvisor)
+               ├── (legacy) ta.93.fyi    CNAME ──> cname.vercel-dns.com (deprecated)
                ├── 93.fyi       CNAME ──> cname.vercel-dns.com (nwb-plan, temp)
                └── Email routing: k@93.fyi ──> karlmarx9193@gmail.com
 ```

@@ -355,14 +355,16 @@ export const nodes: AutomationNode[] = [
   },
   {
     id: 'v-ta',
-    label: 'ta.93.fyi',
-    sublabel: 'TrickAdvisor · React + Supabase',
+    label: 'trickadvisor.cc',
+    sublabel: 'TrickAdvisor · React 19 + Supabase',
     category: 'vercel',
     group: 'vercel',
     description:
-      'TrickAdvisor skateboarding app. Supabase-backed (Postgres + Auth + Storage). TrickAdvisor-API runs as Vercel Functions alongside.',
-    url: 'https://ta.93.fyi',
-    stack: 'React (Vite), Supabase',
+      'TrickAdvisor skateboarding app. Supabase-backed (Postgres + Auth + Storage). TrickAdvisor-API runs as Vercel Functions alongside. Primary domain is trickadvisor.cc; legacy ta.93.fyi redirects here.',
+    url: 'https://trickadvisor.cc',
+    repo: 'karlmarx/TrickAdvisor',
+    stack: 'React 19 + Vite + TypeScript, Supabase',
+    notes: ['Frontend: React SPA on Vercel', 'Backend: Express API (separate repo)', 'Auth + DB via Supabase'],
     position: { x: 1140, y: 580 },
   },
   {

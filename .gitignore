@@ -19,3 +19,4 @@ repos.txt
 # Python
 __pycache__/
 *.pyc
+.vercel

@@ -11,9 +11,10 @@
 |---------------|------|-----------|-----------|
 | nwb-plan | karlmarx/nwb-plan | Other (static HTML) | nfit.93.fyi, 93.fyi |
 | nwb-yoga | karlmarx/nwb-yoga | Other (static HTML) | nyoga.93.fyi |
-| TrickAdvisor | karlmarx/TrickAdvisor | Vite | ta.93.fyi |
+| TrickAdvisor | karlmarx/TrickAdvisor | React 19 + Vite | trickadvisor.cc (primary), ta.93.fyi (legacy) |
 | TrickAdvisor-API | karlmarx/TrickAdvisor-API | Other (Express) | (auto-assigned .vercel.app) |
 | blazing-paddles-react | karlmarx/blazing-paddles-react | Vite | blazingpaddles.org |
+| auto-dashboard | karlmarx/karl-infra (subdir) | React 19 + Vite | auto.93.fyi |
 
 ## Domain Configuration
 

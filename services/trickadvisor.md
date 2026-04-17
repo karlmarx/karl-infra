@@ -7,18 +7,34 @@
 | Field | Value |
 |-------|-------|
 | **Repos** | [karlmarx/TrickAdvisor](https://github.com/karlmarx/TrickAdvisor) (frontend), [karlmarx/TrickAdvisor-API](https://github.com/karlmarx/TrickAdvisor-API) (backend) |
-| **URL** | [ta.93.fyi](https://ta.93.fyi) |
-| **Stack** | React (Vite) + Node/Express + Supabase |
+| **URL** | [trickadvisor.cc](https://trickadvisor.cc) |
+| **Stack** | React 19 (Vite) + Node/Express + Supabase |
 | **Hosting** | Vercel (free tier) |
 | **Database** | Supabase (Postgres + Auth + Storage) |
+| **Domain** | trickadvisor.cc (primary), ta.93.fyi (legacy, deprecated) |
 
 ## Architecture
 
-- **Frontend**: React SPA built with Vite, deployed to Vercel
-- **Backend**: Express API deployed as Vercel Serverless Functions (separate repo)
-- **Auth**: Supabase Auth (email/password)
-- **Storage**: Supabase Storage for user photos with admin moderation
-- **Email**: Notifications on photo approval/rejection (fire-and-forget to avoid function timeout)
+### Frontend
+- React 19 SPA built with Vite + TypeScript
+- Deployed to Vercel with auto-deploy from `main`
+- Custom domain: trickadvisor.cc (Cloudflare DNS → Vercel CNAME)
+
+### Backend
+- Express.js API deployed as Vercel Serverless Functions (separate repo: `karlmarx/TrickAdvisor-API`)
+- CRUD for encounters, ratings, user profiles, and photos
+- Supabase integration: Auth, Postgres, and Storage APIs
+
+### Data & Auth
+- **Supabase Auth**: Email/password registration, session management
+- **Supabase Postgres**: users, profiles, encounters (rating logs), ratings (with photo/timestamp)
+- **Supabase Storage**: User-uploaded photos (JPG/PNG) with private ACL; admin review pipeline
+- **Email**: Fire-and-forget notifications on photo approval/rejection (avoids function timeout; uses Supabase SMTP or SendGrid)
+
+### Deployment
+- Frontend: `vercel --prod` (auto-triggered on `main` push to karlmarx/TrickAdvisor)
+- Backend: Vercel Functions (auto-triggered on `main` push to karlmarx/TrickAdvisor-API)
+- Preview deploys enabled on PRs for both repos
 
 ## Key Features
 

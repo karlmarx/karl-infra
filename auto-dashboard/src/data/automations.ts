@@ -189,6 +189,24 @@ export const nodes: AutomationNode[] = [
     position: { x: 320, y: 240 },
   },
   {
+    id: 'return-receipt-scan',
+    label: 'Return Receipt Tracker',
+    sublabel: 'launchd · every 6 hours',
+    category: 'local',
+    group: 'mac-studio',
+    description:
+      'Scans Nextcloud for return receipts (PDFs) and tracks return deadlines by store. Maintains JSON catalog with deadline warnings (7-day look-ahead).',
+    schedule: 'every 6 hours',
+    script: '~/bin/return-receipt-scanner.sh',
+    notes: [
+      'Scans: Documents/Pending Returns/, Gmail (via rclone sync to local)',
+      'Output: ~/Nextcloud/Documents/returns-tracking.json',
+      'Patterns: return, rma, refund, shipping.?label, *.pdf',
+      '7-day deadline alerts logged to stdout',
+    ],
+    position: { x: 200, y: 360 },
+  },
+  {
     id: 'x9',
     label: 'X9 SSD Archive',
     sublabel: '/Volumes/Crucial X9 · 1.1 TB · 196K files',

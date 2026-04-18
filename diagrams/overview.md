@@ -19,10 +19,15 @@
 |                     |   |                                         |
 |  Supabase (DB) -----+   |   INFRA                                |
 |                         |   ------                                |
-|  93.fyi ----------------+   Dynadot (.fyi registrar)              |
-|  (Cloudflare DNS)           Cloudflare (DNS + email routing)      |
-|  k@93.fyi -> Gmail          GitHub (all repos + Actions)          |
-|                             Vercel (all deployments)              |
+|  progress.93.fyi -------+   Dynadot (.fyi registrar)              |
+|  +- Progress Dashboard     Cloudflare (DNS + email routing)      |
+|     (status monitor)       GitHub (all repos + Actions)          |
+|     + local system polling | Vercel (all deployments)            |
+|     + email notifications  |                                     |
+|                            | Nextcloud (Takeout, TODO, logs)     |
+|  93.fyi ----------------+  |                                     |
+|  (Cloudflare DNS)           |                                     |
+|  k@93.fyi -> Gmail          |                                     |
 +-------------------------------------------------------------------+
 ```
 

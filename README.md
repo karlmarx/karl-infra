@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-17
+> Auto-updated daily from GitHub commits. Last update: 2026-04-18
 
 ## Overview
 
@@ -87,6 +87,13 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### karl-infra
+- docs: add STATUS.md + return receipt tracker automation (2026-04-17)
+- feat: migrate TrickAdvisor from ta.93.fyi to trickadvisor.cc (2026-04-17)
+- feat: add auto-dashboard for auto.93.fyi (2026-04-17)
+- chore: daily update 2026-04-17 (2026-04-17)
+- chore: daily update 2026-04-16 (2026-04-16)
+
 ### 93-fyi
 - fix: point sign-in link to me.93.fyi/login directly (2026-04-16)
 - UI polish, a11y, and Next.js 16 housekeeping (#1) (2026-04-16)
@@ -107,13 +114,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - init: status.93.fyi uptime page (2026-04-03)
 - feat: add main status page with polling and components (2026-04-03)
 - feat: add root layout with dark theme and Inter font (2026-04-03)
-
-### karl-infra
-- chore: daily update 2026-04-16 (2026-04-16)
-- docs: flip karl-todo to Todoist as source of truth (2026-04-15)
-- docs: add karl-todo to inventory (2026-04-15)
-- chore: daily update 2026-04-15 (2026-04-15)
-- chore: daily update 2026-04-14 (2026-04-14)
 
 ### now-93fyi
 - copy: strip page to under construction (2026-04-15)

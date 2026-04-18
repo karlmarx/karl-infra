@@ -37,6 +37,7 @@ The primary development machine runs several always-on or on-demand automation s
 | openclaw-watchdog | Python (Rich + Playwright) | Keeps OpenClaw alive, screen awake |
 | claude-pipeline | Python | Watches Nextcloud/inbox/ for .md files, routes to OpenClaw |
 | gemini-auto | Playwright (JS) | Gemini UI automation for image generation via CDP |
+| process-monitor-dashboard | Python 3 | Real-time terminal UI: processes, Ollama models, Claude sessions |
 
 **Key paths:**
 - OpenClaw workspace: `~/.openclaw/workspace/`

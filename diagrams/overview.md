@@ -56,24 +56,36 @@ nfit.93.fyi nyoga.    ta.93   Serverless
 ## Local Services
 
 ```
-  Windows 11 Workstation
-  +----------------------------------------------------+
-  |                                                    |
-  |  OpenClaw (Claude Code gateway)                    |
-  |    ^                                               |
-  |    | monitors                                      |
-  |  openclaw-watchdog (Python/Rich)                   |
-  |    +- keeps gateway alive                          |
-  |    +- screen awake                                 |
-  |    +- Discord notifications                        |
-  |                                                    |
-  |  claude-pipeline (Python)                          |
-  |    +- watches ~/Nextcloud/Documents/inbox/         |
-  |    +- routes .md files to OpenClaw sub-agent       |
-  |                                                    |
-  |  gemini-auto (Playwright)                          |
-  |    +- CDP connection to Chrome:9222                |
-  |    +- Gemini UI automation for image gen           |
-  |                                                    |
-  +----------------------------------------------------+
+  Mac Studio M4 Max (36 GB unified memory)
+  +--------------------------------------------------------+
+  |                                                        |
+  |  OpenClaw (Claude Code gateway)                        |
+  |    ^                                                   |
+  |    | monitors                                          |
+  |  openclaw-watchdog (Python/Rich)                       |
+  |    +- keeps gateway alive                              |
+  |    +- screen awake                                     |
+  |    +- Discord notifications                            |
+  |                                                        |
+  |  claude-pipeline (Python)                              |
+  |    +- watches ~/Nextcloud/Documents/inbox/             |
+  |    +- routes .md files to OpenClaw sub-agent           |
+  |                                                        |
+  |  gemini-auto (Playwright)                              |
+  |    +- CDP connection to Chrome:9222                    |
+  |    +- Gemini UI automation for image gen               |
+  |                                                        |
+  |  process-monitor-dashboard (Python 3)                  |
+  |    +- real-time terminal UI (3 columns)                |
+  |    +- monitors background processes                    |
+  |    +- tracks Ollama models & VRAM usage                |
+  |    +- displays recent Claude sessions                  |
+  |    +- refreshes every 5 seconds                        |
+  |                                                        |
+  |  Ollama (local LLM inference)                          |
+  |    +- gemma4:26b (17 GB)                               |
+  |    +- gemma4:latest (9.6 GB)                           |
+  |    +- llama3.2:1b (1.3 GB)                             |
+  |                                                        |
+  +--------------------------------------------------------+
 ```

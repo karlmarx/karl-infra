@@ -46,7 +46,32 @@ launchctl setenv OLLAMA_MAX_LOADED_MODELS 1
 
 ## 🟡 HIGH — Next 1-2 Weeks
 
-### 4. TrickAdvisor Domain Migration
+### 4. Nextcloud Android Photo Sync Pipeline
+**Status**: ✅ READY FOR ACTIVATION  
+**Setup Complete**:
+- ✅ Ultra.cc seedbox verified (Nextcloud 27)
+- ✅ Python sync script created (`~/karl-infra/services/nextcloud-android-sync.py`)
+- ✅ LaunchAgent configured (`~/Library/LaunchAgents/com.karlmarx.nextcloud-sync.plist`)
+- ✅ Documentation in CLAUDE.md
+
+**Remaining Setup** (manual — requires web UI access):
+1. Log in to https://karlmarx.tofino.usbx.me/nextcloud
+2. Generate API token: Settings → Personal Settings → Security → App password
+3. Update plist with API token: `nano ~/Library/LaunchAgents/com.karlmarx.nextcloud-sync.plist`
+4. Load LaunchAgent: `launchctl load ~/Library/LaunchAgents/com.karlmarx.nextcloud-sync.plist`
+5. Install Nextcloud app on Android phone
+6. Enable auto-upload to `/Photos/Android/` folder
+
+**Behavior**:
+- Hourly sync: Android photos → Nextcloud → `/Volumes/Crucial X9/photos/incoming/` → delete from NC
+- On-demand: `python3 ~/karl-infra/services/nextcloud-android-sync.py`
+- Logs: `~/.local/share/nextcloud-sync/sync.log`
+
+**Infra Details**: Tofino region, IP 169.150.251.162, SSH port 22
+
+---
+
+### 5. TrickAdvisor Domain Migration
 **Status**: DONE (just migrated ta.93.fyi → trickadvisor.cc)  
 **Remaining**:
 - [ ] Update Vercel project domain (`vercel domains add trickadvisor.cc`)

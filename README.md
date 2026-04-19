@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-18
+> Auto-updated daily from GitHub commits. Last update: 2026-04-19
 
 ## Overview
 
@@ -87,19 +87,12 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
-### karl-infra
-- docs: add STATUS.md + return receipt tracker automation (2026-04-17)
-- feat: migrate TrickAdvisor from ta.93.fyi to trickadvisor.cc (2026-04-17)
-- feat: add auto-dashboard for auto.93.fyi (2026-04-17)
-- chore: daily update 2026-04-17 (2026-04-17)
-- chore: daily update 2026-04-16 (2026-04-16)
-
-### 93-fyi
-- fix: point sign-in link to me.93.fyi/login directly (2026-04-16)
-- UI polish, a11y, and Next.js 16 housekeeping (#1) (2026-04-16)
-- fix: add NWB Yoga to public links (2026-04-05)
-- fix: sign-in redirects to me.93.fyi after CF Access login (2026-04-05)
-- remove debug endpoint (2026-04-05)
+### progress-dashboard
+- feat: add status aggregation library (2026-04-18)
+- fix: correct NextAuth v5 exports and route handler imports (2026-04-18)
+- fix: add route protection middleware and session type safety (2026-04-18)
+- fix: update NextAuth v5 API to use NextAuthConfig and handlers destructuring (2026-04-18)
+- feat: add GitHub OAuth with NextAuth (2026-04-18)
 
 ### nwb-plan
 - Merge pull request #74 from karlmarx/claude/investigate-merge-conflicts-0m0Jy (2026-04-15)
@@ -107,6 +100,20 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - fix: equipment chips reflect active variant's requires (2026-04-15)
 - feat(exercises): variant-aware availability check (2026-04-15)
 - fix: phase pill auto-syncs to current calendar week (2026-04-15)
+
+### karl-infra
+- chore: daily update 2026-04-18 (2026-04-18)
+- docs: add STATUS.md + return receipt tracker automation (2026-04-17)
+- feat: migrate TrickAdvisor from ta.93.fyi to trickadvisor.cc (2026-04-17)
+- feat: add auto-dashboard for auto.93.fyi (2026-04-17)
+- chore: daily update 2026-04-17 (2026-04-17)
+
+### 93-fyi
+- fix: point sign-in link to me.93.fyi/login directly (2026-04-16)
+- UI polish, a11y, and Next.js 16 housekeeping (#1) (2026-04-16)
+- fix: add NWB Yoga to public links (2026-04-05)
+- fix: sign-in redirects to me.93.fyi after CF Access login (2026-04-05)
+- remove debug endpoint (2026-04-05)
 
 ### status-93fyi
 - UX, a11y, and polling polish for status page (#1) (2026-04-16)
@@ -128,13 +135,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - Merge pull request #6 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-04-02)
 - fix: handle empty DEVICES_TO_TRACK in .env without JSON parse error (2026-03-31)
 - Merge pull request #5 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-03-31)
-
-### blazing-paddles-react
-- chore: clean up DatePicker.tsx — remove dead code, fix types (#16) (2026-04-11)
-- chore: test deploy after removing duplicate Vercel project (2026-03-17)
-- Merge pull request #9 from karlmarx/add-claude-github-actions-1773782965672 (2026-03-17)
-- "Claude Code Review workflow" (2026-03-17)
-- "Claude PR Assistant workflow" (2026-03-17)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

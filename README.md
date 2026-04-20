@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-19
+> Auto-updated daily from GitHub commits. Last update: 2026-04-20
 
 ## Overview
 
@@ -88,11 +88,18 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### progress-dashboard
-- feat: add status aggregation library (2026-04-18)
-- fix: correct NextAuth v5 exports and route handler imports (2026-04-18)
-- fix: add route protection middleware and session type safety (2026-04-18)
-- fix: update NextAuth v5 API to use NextAuthConfig and handlers destructuring (2026-04-18)
-- feat: add GitHub OAuth with NextAuth (2026-04-18)
+- progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
+- progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
+- progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
+- progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
+- progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
+
+### karl-infra
+- chore: daily update 2026-04-19 (2026-04-19)
+- chore: daily update 2026-04-18 (2026-04-18)
+- docs: add STATUS.md + return receipt tracker automation (2026-04-17)
+- feat: migrate TrickAdvisor from ta.93.fyi to trickadvisor.cc (2026-04-17)
+- feat: add auto-dashboard for auto.93.fyi (2026-04-17)
 
 ### nwb-plan
 - Merge pull request #74 from karlmarx/claude/investigate-merge-conflicts-0m0Jy (2026-04-15)
@@ -100,13 +107,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - fix: equipment chips reflect active variant's requires (2026-04-15)
 - feat(exercises): variant-aware availability check (2026-04-15)
 - fix: phase pill auto-syncs to current calendar week (2026-04-15)
-
-### karl-infra
-- chore: daily update 2026-04-18 (2026-04-18)
-- docs: add STATUS.md + return receipt tracker automation (2026-04-17)
-- feat: migrate TrickAdvisor from ta.93.fyi to trickadvisor.cc (2026-04-17)
-- feat: add auto-dashboard for auto.93.fyi (2026-04-17)
-- chore: daily update 2026-04-17 (2026-04-17)
 
 ### 93-fyi
 - fix: point sign-in link to me.93.fyi/login directly (2026-04-16)
@@ -128,13 +128,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - copy: cut humidity line (2026-04-03)
 - copy: tighter voice, less explaining (2026-04-03)
 - copy: grounded building section — real backstory, less manifesto (2026-04-03)
-
-### find-hub-tracker
-- feat: add all GoogleFindMyTools runtime deps and fix auth flow (2026-04-13)
-- Add selenium, undetected-chromedriver, setuptools deps for auth flow (2026-04-02)
-- Merge pull request #6 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-04-02)
-- fix: handle empty DEVICES_TO_TRACK in .env without JSON parse error (2026-03-31)
-- Merge pull request #5 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-03-31)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

@@ -13,17 +13,22 @@
 |  nyoga.93.fyi           |   |  +- watches Nextcloud/inbox/       |
 |  +- nwb-yoga ------+   |   |                                     |
 |  |                  |   |   ultra.cc seedbox (planned)            |
-|  ta.93.fyi          |   |   +- find-hub-tracker                  |
-|  +- TrickAdvisor    |   |      +- polls Google Find Hub          |
-|     + TA-API        |   |         +- Discord alerts              |
+|  id.93.fyi          |   |   +- find-hub-tracker                  |
+|  +- Social ID       |   |      +- polls Google Find Hub          |
+|     + SIV-API       |   |         +- Discord alerts              |
 |                     |   |                                         |
-|  Supabase (DB) -----+   |   INFRA                                |
-|                         |   ------                                |
-|  progress.93.fyi -------+   Dynadot (.fyi registrar)              |
-|  +- Progress Dashboard     Cloudflare (DNS + email routing)      |
-|     (status monitor)       GitHub (all repos + Actions)          |
-|     + local system polling | Vercel (all deployments)            |
-|     + email notifications  |                                     |
+|  contact.93.fyi ----+   |   INFRA                                |
+|  +- Contact Form        |   ------                                |
+|     + Turnstile CAPTCHA |   Dynadot (.fyi registrar)              |
+|     + Resend email      |   Cloudflare (DNS + email routing)      |
+|                         |   GitHub (all repos + Actions)          |
+|  Supabase (DB) -----+   |   Vercel (all deployments)            |
+|                         |                                         |
+|  progress.93.fyi -------+   Nextcloud (Takeout, TODO, logs)       |
+|  +- Progress Dashboard  |                                         |
+|     (status monitor)    |                                         |
+|     + local system polling                                       |
+|     + email notifications
 |                            | Nextcloud (Takeout, TODO, logs)     |
 |  93.fyi ----------------+  |                                     |
 |  (Cloudflare DNS)           |                                     |
@@ -46,10 +51,10 @@
               |
     +---------+---------+---------+
     |         |         |         |
- nwb-plan  nwb-yoga   TA      TA-API
+ nwb-plan  nwb-yoga   SIV     SIV-API
     |         |         |         |
     v         v         v         v
-nfit.93.fyi nyoga.    ta.93   Serverless
+nfit.93.fyi nyoga.    id.93   Serverless
             93.fyi    .fyi    Functions
 ```
 

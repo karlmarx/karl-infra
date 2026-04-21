@@ -15,8 +15,9 @@ All web applications deploy to Vercel with custom domains via Cloudflare DNS.
 | nwb-plan | Next.js 16 + React 19 + TypeScript + Claude API | None (client-side, localStorage) | nfit.93.fyi, 93.fyi |
 | nwb-yoga | React 18 + Vite + Canvas animations | None (client-side) | nyoga.93.fyi |
 | foodr | Next.js 16 + React 19 + TypeScript | None (localStorage) | foodr-app.vercel.app |
-| TrickAdvisor | React 19 + Vite + TypeScript | Supabase (Postgres + Auth + Storage) | trickadvisor.cc |
-| TrickAdvisor-API | Node/Express on Vercel Functions | Supabase | (serverless, called by TA frontend) |
+| Identity Verification | React 19 + Vite + TypeScript | Supabase (Postgres + Auth + Storage) | id.93.fyi |
+| ID API | Node/Express on Vercel Functions | Supabase | (serverless, called by ID frontend) |
+| Contact Form | Next.js 16 + React 19 + TypeScript + Turnstile | Supabase (Postgres + rate limits) | contact.93.fyi |
 | blazing-paddles-react | React (Vite) | None | blazingpaddles.org |
 | auto-dashboard | React 19 + Vite + TypeScript + @xyflow/react | None (static) | auto.93.fyi |
 | progress-dashboard | Next.js 16 + React 19 + TypeScript + NextAuth | SQLite (milestone tracking) | progress.93.fyi |
@@ -64,9 +65,9 @@ Repo: [karlmarx/karl-todo](https://github.com/karlmarx/karl-todo). Secrets (`TOD
 
 ## Data Stores
 
-### Supabase (TrickAdvisor)
+### Supabase (Identity Verification)
 
-Used exclusively by TrickAdvisor (frontend + API):
+Used exclusively by Identity Verification (frontend + API):
 - **Postgres**: users, profiles, encounters, ratings, photos
 - **Auth**: email/password registration, session management
 - **Storage**: user profile photos with admin moderation pipeline
@@ -79,15 +80,25 @@ nwb-plan, nwb-yoga, and foodr have no backend:
 - **foodr**: Next.js 16 PWA with chain-relative ratings for 12 fast food chains
 - All use service workers for offline access and localStorage for user preferences
 
+### Contact Form (contact.93.fyi)
+
+Contact form with bot protection and rate limiting:
+- **Database**: Supabase Postgres (contact_submissions, rate_limit_log tables)
+- **CAPTCHA**: Cloudflare Turnstile (free tier)
+- **Email**: Resend transactional email (confirmation + admin notification)
+- **Features**: 5 submissions/hour per IP rate limit, form validation, IP tracking
+- **Docs**: [services/contact.md](services/contact.md)
+
 ## Domain & DNS Architecture
 
 ```
 Dynadot (registrar)
   93.fyi ──> Cloudflare (nameservers)
-               ├── nfit.93.fyi  CNAME ──> cname.vercel-dns.com (nwb-plan)
-               ├── nyoga.93.fyi CNAME ──> cname.vercel-dns.com (nwb-yoga)
-               ├── (legacy) ta.93.fyi    CNAME ──> cname.vercel-dns.com (deprecated)
-               ├── 93.fyi       CNAME ──> cname.vercel-dns.com (nwb-plan, temp)
+               ├── nfit.93.fyi     CNAME ──> cname.vercel-dns.com (nwb-plan)
+               ├── nyoga.93.fyi    CNAME ──> cname.vercel-dns.com (nwb-yoga)
+               ├── id.93.fyi       CNAME ──> cname.vercel-dns.com (Identity Verification)
+               ├── contact.93.fyi  CNAME ──> cname.vercel-dns.com (Contact Form)
+               ├── 93.fyi          CNAME ──> cname.vercel-dns.com (nwb-plan, temp)
                └── Email routing: k@93.fyi ──> karlmarx9193@gmail.com
 ```
 

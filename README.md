@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-20
+> Auto-updated daily from GitHub commits. Last update: 2026-04-21
 
 ## Overview
 
@@ -87,6 +87,16 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### login-93fyi
+- feat: branded login landing page (2026-04-20)
+
+### nwb-plan
+- Merge pull request #78 from karlmarx/claude/add-prone-hip-extension-2K4jK (2026-04-20)
+- Add-exercise picker: pull any catalog exercise into a workout (2026-04-18)
+- Exercise card gear icon + render supersets as sibling cards (2026-04-18)
+- Progress clock: tap to open detail panel with phases + timeline (2026-04-18)
+- Simpler tab icons: barbell, up/down arrows, abs outline (2026-04-18)
+
 ### progress-dashboard
 - progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
 - progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
@@ -95,18 +105,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
 
 ### karl-infra
+- chore: daily update 2026-04-20 (2026-04-20)
 - chore: daily update 2026-04-19 (2026-04-19)
 - chore: daily update 2026-04-18 (2026-04-18)
 - docs: add STATUS.md + return receipt tracker automation (2026-04-17)
 - feat: migrate TrickAdvisor from ta.93.fyi to trickadvisor.cc (2026-04-17)
-- feat: add auto-dashboard for auto.93.fyi (2026-04-17)
-
-### nwb-plan
-- Merge pull request #74 from karlmarx/claude/investigate-merge-conflicts-0m0Jy (2026-04-15)
-- Merge pull request #73 from karlmarx/claude/merge-main-into-dev-BLrFW (2026-04-15)
-- fix: equipment chips reflect active variant's requires (2026-04-15)
-- feat(exercises): variant-aware availability check (2026-04-15)
-- fix: phase pill auto-syncs to current calendar week (2026-04-15)
 
 ### 93-fyi
 - fix: point sign-in link to me.93.fyi/login directly (2026-04-16)

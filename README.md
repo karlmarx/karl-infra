@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-21
+> Auto-updated daily from GitHub commits. Last update: 2026-04-22
 
 ## Overview
 
@@ -87,6 +87,20 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### 93-fyi
+- fix: add middleware to route hot.93.fyi subdomain to /hot gallery (2026-04-21)
+- feat: add hot.93.fyi aesthetic fitness gallery + private link (2026-04-21)
+- fix: point sign-in link to me.93.fyi/login directly (2026-04-16)
+- UI polish, a11y, and Next.js 16 housekeeping (#1) (2026-04-16)
+- fix: add NWB Yoga to public links (2026-04-05)
+
+### karl-infra
+- chore: daily update 2026-04-21 (2026-04-21)
+- chore: daily update 2026-04-20 (2026-04-20)
+- chore: daily update 2026-04-19 (2026-04-19)
+- chore: daily update 2026-04-18 (2026-04-18)
+- docs: add STATUS.md + return receipt tracker automation (2026-04-17)
+
 ### login-93fyi
 - feat: branded login landing page (2026-04-20)
 
@@ -103,20 +117,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
 - progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
 - progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
-
-### karl-infra
-- chore: daily update 2026-04-20 (2026-04-20)
-- chore: daily update 2026-04-19 (2026-04-19)
-- chore: daily update 2026-04-18 (2026-04-18)
-- docs: add STATUS.md + return receipt tracker automation (2026-04-17)
-- feat: migrate TrickAdvisor from ta.93.fyi to trickadvisor.cc (2026-04-17)
-
-### 93-fyi
-- fix: point sign-in link to me.93.fyi/login directly (2026-04-16)
-- UI polish, a11y, and Next.js 16 housekeeping (#1) (2026-04-16)
-- fix: add NWB Yoga to public links (2026-04-05)
-- fix: sign-in redirects to me.93.fyi after CF Access login (2026-04-05)
-- remove debug endpoint (2026-04-05)
 
 ### status-93fyi
 - UX, a11y, and polling polish for status page (#1) (2026-04-16)

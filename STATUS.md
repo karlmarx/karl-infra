@@ -71,13 +71,13 @@ launchctl setenv OLLAMA_MAX_LOADED_MODELS 1
 
 ---
 
-### 5. TrickAdvisor Domain Migration
-**Status**: DONE (just migrated ta.93.fyi → trickadvisor.cc)  
+### 5. Social Identity Verification (SIV) Domain Migration
+**Status**: DONE (just migrated id.93.fyi → public domain)  
 **Remaining**:
-- [ ] Update Vercel project domain (`vercel domains add trickadvisor.cc`)
-- [ ] Create Cloudflare DNS record for trickadvisor.cc (or verify already exists)
+- [ ] Update Vercel project domain configuration
+- [ ] Create Cloudflare DNS records
 - [ ] Verify SSL cert provisioning (may take 10-30s)
-- [ ] Optionally: 301 redirect ta.93.fyi → trickadvisor.cc
+- [ ] Optionally: 301 redirect id.93.fyi → primary domain
 
 **GitHub Issues** (9 open):
 - #7: Profile editing (bio, display name, preferences) — HIGH
@@ -121,7 +121,7 @@ uv pip install mlx-vlm
 
 ---
 
-### 8. TrickAdvisor-API & Frontend Issues
+### 8. Social Identity Verification — Frontend & API Issues
 **Status**: Mostly feature backlog, low-priority UX  
 **Open Issues**:
 - #7: Profile editing
@@ -155,7 +155,7 @@ uv pip install mlx-vlm
 - ✅ Return label scanner: scanning every 60 min
 - ✅ Auto-dashboard: deployed to auto.93.fyi with full automation map
 - ✅ Shipping-93fyi-app skill: documented deployment pattern
-- ✅ TrickAdvisor domain migration: ta.93.fyi → trickadvisor.cc (docs updated)
+- ✅ Social ID Verification domain migration: id.93.fyi → primary domain (docs updated)
 - ✅ Return receipt tracker: new automation every 6 hours
 
 ---
@@ -167,7 +167,7 @@ uv pip install mlx-vlm
 | Vercel (6 projects) | ✅ All green | auto-deploy working |
 | GitHub (karlmarx org) | ✅ Healthy | karl-todo CI running |
 | Cloudflare DNS | ✅ Healthy | 93.fyi resolving |
-| Supabase (TrickAdvisor) | ✅ Healthy | auth + DB responding |
+| Supabase (SIV) | ✅ Healthy | auth + DB responding |
 | Nextcloud (seedbox) | ✅ Healthy | mobile sync working |
 | Ollama (Mac) | ✅ Running | gemma4:26b warm |
 | Launchd agents | ✅ 8 running | All scheduled |
@@ -178,6 +178,6 @@ uv pip install mlx-vlm
 
 1. **Download VLM Takeout** (expires 2026-04-21) — P0
 2. **Gmail App Password for Property Scout** — P0
-3. **Vercel domain + DNS for trickadvisor.cc** — P1
+3. **Vercel domain + DNS for SIV public domain** — P1
 4. **Phase 1 of VLM pipeline** — P1 (workout video proof-of-concept)
 5. **Gmail return receipt integration** — P2

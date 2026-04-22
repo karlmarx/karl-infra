@@ -17,7 +17,7 @@ from datetime import datetime
 NEXTCLOUD_URL = "https://karlmarx.tofino.usbx.me/nextcloud"
 NEXTCLOUD_USER = os.getenv("NEXTCLOUD_USER", "karlmarx")
 NEXTCLOUD_PASSWORD = os.getenv("NEXTCLOUD_PASSWORD")
-ANDROID_PHOTOS_PATH = "/Photos/Android/"  # Folder in Nextcloud where Android photos go
+ANDROID_PHOTOS_PATH = "/InstantUpload/Camera/"  # Folder in Nextcloud where Android photos go
 EXTERNAL_DRIVE = Path("/Volumes/Crucial X9/photos/incoming")
 LOG_FILE = Path.home() / ".local/share/nextcloud-sync/sync.log"
 
@@ -69,7 +69,7 @@ def download_photos():
         hrefs = re.findall(r'<d:href>([^<]+)</d:href>', list_result.stdout)
 
         if not hrefs:
-            log("No photos found in /Photos/Android/ folder")
+            log("No photos found in /InstantUpload/Camera/ folder")
             return True  # Not an error, just nothing to sync
 
         # Filter out the directory itself

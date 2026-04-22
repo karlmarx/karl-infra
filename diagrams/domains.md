@@ -13,7 +13,7 @@
 |   +-- 93.fyi          CNAME -> cname.vercel-dns.com  (nwb-plan, temporary)
 |   +-- nfit.93.fyi     CNAME -> cname.vercel-dns.com  (nwb-plan)
 |   +-- nyoga.93.fyi    CNAME -> cname.vercel-dns.com  (nwb-yoga)
-|   +-- ta.93.fyi       CNAME -> cname.vercel-dns.com  (DEPRECATED — use trickadvisor.cc)
+|   +-- id.93.fyi       CNAME -> cname.vercel-dns.com  (Social Identity Verification)
 |   +-- auto.93.fyi     CNAME -> cname.vercel-dns.com  (auto-dashboard)
 |
 +-- Email Routing (Cloudflare)
@@ -28,8 +28,8 @@
 | `93.fyi` (apex) | nwb-plan | karlmarx/nwb-plan | Temporary — may change |
 | `nfit.93.fyi` | nwb-plan | karlmarx/nwb-plan | Primary domain for NWB Fitness |
 | `nyoga.93.fyi` | nwb-yoga | karlmarx/nwb-yoga | NWB Yoga companion |
-| `trickadvisor.cc` | TrickAdvisor | karlmarx/TrickAdvisor | Primary domain for TrickAdvisor frontend |
-| `ta.93.fyi` | TrickAdvisor | karlmarx/TrickAdvisor | Legacy — deprecated, redirect to trickadvisor.cc |
+| `id.93.fyi` | Social ID Verification | karlmarx/identity-verification | Frontend for Social Identity Verification |
+| (public domain) | Social ID Verification | karlmarx/identity-verification | Primary domain (WIP) |
 | `auto.93.fyi` | auto-dashboard | karlmarx/karl-infra (subdir: `auto-dashboard/`) | Interactive automation map |
 
 ## Email

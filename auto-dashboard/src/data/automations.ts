@@ -372,17 +372,15 @@ export const nodes: AutomationNode[] = [
     position: { x: 1140, y: 490 },
   },
   {
-    id: 'v-ta',
-    label: 'trickadvisor.cc',
-    sublabel: 'TrickAdvisor · React 19 + Supabase',
+    id: 'v-wip-siv',
+    label: 'WIP Social ID Verification',
+    sublabel: 'Private project · in development',
     category: 'vercel',
     group: 'vercel',
     description:
-      'TrickAdvisor skateboarding app. Supabase-backed (Postgres + Auth + Storage). TrickAdvisor-API runs as Vercel Functions alongside. Primary domain is trickadvisor.cc; legacy ta.93.fyi redirects here.',
-    url: 'https://trickadvisor.cc',
-    repo: 'karlmarx/TrickAdvisor',
+      'Private project in active development. Supabase-backed (Postgres + Auth + Storage). For info: contact via the contact form.',
     stack: 'React 19 + Vite + TypeScript, Supabase',
-    notes: ['Frontend: React SPA on Vercel', 'Backend: Express API (separate repo)', 'Auth + DB via Supabase'],
+    notes: ['Project is under NDA', 'Contact via /contact for inquiries'],
     position: { x: 1140, y: 580 },
   },
   {
@@ -460,7 +458,7 @@ export const nodes: AutomationNode[] = [
     sublabel: 'Postgres + Auth + Storage',
     category: 'infra',
     group: 'infra',
-    description: 'Backend for TrickAdvisor — Postgres DB, Auth, and Storage.',
+    description: 'Backend for WIP Social ID Verification — Postgres DB, Auth, and Storage.',
     position: { x: 690, y: 760 },
   },
   {
@@ -537,8 +535,8 @@ export const edges: AutomationEdge[] = [
   { id: 'e21', source: 'dynadot', target: 'cloudflare', label: 'delegate NS' },
   { id: 'e22', source: 'cloudflare', target: 'vercel-platform', label: 'CNAMEs' },
 
-  // TrickAdvisor → Supabase
-  { id: 'e23', source: 'v-ta', target: 'supabase', label: 'DB + Auth' },
+  // WIP Social ID Verification → Supabase
+  { id: 'e23', source: 'v-wip-siv', target: 'supabase', label: 'DB + Auth' },
 
   // Seedbox → find-hub → Discord
   { id: 'e24', source: 'find-hub', target: 'discord', label: 'alerts' },

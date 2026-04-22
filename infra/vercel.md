@@ -11,8 +11,8 @@
 |---------------|------|-----------|-----------|
 | nwb-plan | karlmarx/nwb-plan | Other (static HTML) | nfit.93.fyi, 93.fyi |
 | nwb-yoga | karlmarx/nwb-yoga | Other (static HTML) | nyoga.93.fyi |
-| TrickAdvisor | karlmarx/TrickAdvisor | React 19 + Vite | trickadvisor.cc (primary), ta.93.fyi (legacy) |
-| TrickAdvisor-API | karlmarx/TrickAdvisor-API | Other (Express) | (auto-assigned .vercel.app) |
+| Identity Verification | karlmarx/identity-verification | React 19 + Vite | id.93.fyi |
+| ID API | karlmarx/id-api | Other (Express) | (auto-assigned .vercel.app) |
 | blazing-paddles-react | karlmarx/blazing-paddles-react | Vite | blazingpaddles.org |
 | auto-dashboard | karlmarx/karl-infra (subdir) | React 19 + Vite | auto.93.fyi |
 
@@ -22,7 +22,7 @@ All custom domains use Cloudflare DNS pointing to Vercel via CNAME records to `c
 
 ## Serverless Functions
 
-- **TrickAdvisor-API**: Express app running as Vercel Serverless Functions
+- **ID API**: Express app running as Vercel Serverless Functions
   - Email notifications (fire-and-forget pattern to avoid timeout)
   - Photo moderation endpoints
   - All CRUD operations for encounters/ratings
@@ -33,8 +33,8 @@ All custom domains use Cloudflare DNS pointing to Vercel via CNAME records to `c
 |---------|--------------|--------|
 | nwb-plan | (none — static) | `./` |
 | nwb-yoga | (none — static) | `./` |
-| TrickAdvisor | `npm run build` | `dist/` |
-| TrickAdvisor-API | (auto-detected) | `api/` |
+| Identity Verification | `npm run build` | `dist/` |
+| ID API | (auto-detected) | `api/` |
 | blazing-paddles-react | `npm run build` | `dist/` |
 
 ## Notes

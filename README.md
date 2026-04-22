@@ -23,9 +23,9 @@
 |  foodr-app.vercel   |   |   |  +- Google Find Hub -> Postgres     |
 |  +- foodr           |   |   |  +- Discord alerts                  |
 |  |                  |   |   +- Nextcloud (WebDAV + file mirror)   |
-|  ta.93.fyi          |   |                                         |
-|  +- TrickAdvisor    |   |   GitHub Actions                        |
-|     + TA-API        |   |   +- karl-todo (Todoist ->              |
+|  id.93.fyi          |   |                                         |
+|  +- Identity Verif  |   |   GitHub Actions                        |
+|     + ID-API        |   |   +- karl-todo (Todoist ->              |
 |                     |   |                 todo.md + Nextcloud)    |
 |  Supabase (DB) -----+   |                                         |
 |                         |   INFRA                                 |
@@ -47,8 +47,8 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the full deep-dive.
 | NWB Fitness | [nfit.93.fyi](https://nfit.93.fyi) | Next.js 16 + React 19 + Claude API | [karlmarx/nwb-plan](https://github.com/karlmarx/nwb-plan) |
 | NWB Yoga | [nyoga.93.fyi](https://nyoga.93.fyi) | React 18 + Vite + Canvas | [karlmarx/nwb-yoga](https://github.com/karlmarx/nwb-yoga) |
 | foodr | [foodr-app.vercel.app](https://foodr-app.vercel.app) | Next.js 16 + React 19 | [karlmarx/foodr](https://github.com/karlmarx/foodr) |
-| TrickAdvisor | [trickadvisor.cc](https://trickadvisor.cc) | React 19 + Supabase | [karlmarx/TrickAdvisor](https://github.com/karlmarx/TrickAdvisor) |
-| TrickAdvisor API | (serverless) | Node/Express + Vercel Functions | [karlmarx/TrickAdvisor-API](https://github.com/karlmarx/TrickAdvisor-API) |
+| Identity Verification | [id.93.fyi](https://id.93.fyi) | React 19 + Supabase | [karlmarx/identity-verification](https://github.com/karlmarx/TrickAdvisor) |
+| ID Verification API | (serverless) | Node/Express + Vercel Functions | [karlmarx/id-api](https://github.com/karlmarx/TrickAdvisor-API) |
 | Blazing Paddles | [blazingpaddles.org](https://blazingpaddles.org) | React (Vite) | [karlmarx/blazing-paddles-react](https://github.com/karlmarx/blazing-paddles-react) |
 
 ## Automation
@@ -79,7 +79,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the full deep-dive.
 | `93.fyi` | CNAME | nwb-plan (Vercel) — temporary |
 | `nfit.93.fyi` | CNAME | nwb-plan (Vercel) |
 | `nyoga.93.fyi` | CNAME | nwb-yoga (Vercel) |
-| `ta.93.fyi` | CNAME | TrickAdvisor (deprecated, use trickadvisor.cc) |
+| `id.93.fyi` | CNAME | Identity Verification API (primary) |
 | `k@93.fyi` | Email routing | karlmarx9193@gmail.com (Cloudflare) |
 
 See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.

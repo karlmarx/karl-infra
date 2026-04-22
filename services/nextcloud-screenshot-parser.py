@@ -19,7 +19,7 @@ import shutil
 NEXTCLOUD_URL = "https://karlmarx.tofino.usbx.me/nextcloud"
 NEXTCLOUD_USER = os.getenv("NEXTCLOUD_USER", "karlmarx")
 NEXTCLOUD_PASSWORD = os.getenv("NEXTCLOUD_PASSWORD")
-SCREENSHOTS_PATH = "/Screenshots/"  # Folder where Android InstantUpload saves screenshots
+SCREENSHOTS_PATH = "/InstantUpload/Screenshots/"  # Folder where Android InstantUpload saves screenshots
 EXTERNAL_DRIVE = Path("/Volumes/Crucial X9/photos/incoming/screenshots")
 DOCUMENTS_DIR = Path("/Volumes/Crucial X9/documents")
 LOG_FILE = Path.home() / ".local/share/nextcloud-sync/screenshot-parser.log"
@@ -195,7 +195,7 @@ def process_screenshots():
     file_urls = list_screenshots()
 
     if not file_urls:
-        log("No screenshots found in InstantUploads/Screenshots/")
+        log("No screenshots found in /InstantUpload/Screenshots/")
         return True
 
     log(f"Found {len(file_urls)} screenshots to process")

@@ -1,13 +1,5 @@
 #!/bin/bash
-# Launch Process Monitor dashboard in iTerm2
+# Launch Process Monitor dashboard
 
-if command -v open &> /dev/null; then
-    # macOS - use iTerm2
-    open -a iTerm ~/karl-infra/services/process-monitor-dashboard.py
-elif command -v iterm &> /dev/null; then
-    # Fallback
-    iterm ~/karl-infra/services/process-monitor-dashboard.py
-else
-    # Fallback - just run in current terminal
-    uv run ~/karl-infra/services/process-monitor-dashboard.py
-fi
+cd /Users/kmx/karl-infra
+exec uv run services/process-monitor-dashboard.py

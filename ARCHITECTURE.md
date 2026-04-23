@@ -65,6 +65,34 @@ The primary development machine runs several always-on or on-demand automation s
 - Nextcloud sync: `~/Nextcloud/Documents/`
 - TODO dashboard: `~/Nextcloud/Documents/todo_dashboard.html`
 
+### Mac Studio M4 Max (Local AI + Automation)
+
+Apple Silicon-native machine (36 GB unified memory) running compute-intensive automation:
+
+| Service | Schedule | Purpose |
+|---------|----------|---------|
+| MLX-VLM server | Always-on | Vision model inference on Apple Silicon (gemma-4-26b) |
+| workout_watcher | Every 15 min | Watch Nextcloud for new workout videos, process with Gemma, extract frames & analysis |
+| workout_digest | Daily 07:00 | Synthesize workout form feedback via Claude API, email digest |
+| Nextcloud photo sync | Every 1 hour | Poll Nextcloud `/Photos/Android/`, download to external SSD |
+| Nextcloud video ingest | Every 30 min | Move phone videos from Nextcloud to X9 SSD via rclone |
+| process-monitor-dashboard | On-demand | Terminal UI: background process status, RAM usage, MLX model load |
+
+**Key characteristics:**
+- All background processes use LaunchAgents (`~/Library/LaunchAgents/*.plist`)
+- Heavy compute (VLM inference) uses MLX framework for native Apple Silicon performance (no GPU copy overhead)
+- RAM coordination across up to 9 concurrent Claude Code sessions via `~/.claude/coordination.md`
+- SQLite state tracking for video pipeline at `~/.local/share/workout-pipeline/state.db`
+- External SSD: `/Volumes/Crucial X9/photos/incoming/` for video storage and derivatives
+
+**Key paths:**
+- Infra services: `~/karl-infra/services/`
+- Local VLM analysis: `/Users/kmx/projects/local-vlm-analysis/`
+- Photos/video staging: `/Volumes/Crucial X9/photos/incoming/`
+- Nextcloud desktop sync: `~/Nextcloud/`
+
+**Docs**: [infra/workout-pipeline.md](infra/workout-pipeline.md), [infra/local-ai.md](infra/local-ai.md)
+
 ### ultra.cc Seedbox (Planned)
 
 A remote Linux server for running automation that needs to be always-on without depending on the workstation:

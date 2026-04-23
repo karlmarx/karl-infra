@@ -102,5 +102,25 @@ nfit.93.fyi nyoga.    id.93   Serverless
   |    +- gemma4:latest (9.6 GB)                           |
   |    +- llama3.2:1b (1.3 GB)                             |
   |                                                        |
+  |  MLX-VLM Server (Vision Language Model, always-on)     |
+  |    +- gemma-4-26b-a4b-it-8bit (26 GB)                  |
+  |    +- listens on http://localhost:8080                 |
+  |                                                        |
+  |  Nextcloud Photo Sync (every 1 hour)                   |
+  |    +- polls Nextcloud /Photos/Android/                 |
+  |    +- downloads to /Volumes/Crucial X9/photos/         |
+  |                                                        |
+  |  workout_watcher (every 15 min)                        |
+  |    +- watches X9 SSD for new .mp4 videos               |
+  |    +- runs Gemma pipeline: extract frames → analyze    |
+  |    +- outputs data/videos/<sha>.json                   |
+  |    +- updates state.db with gemma_done_at              |
+  |                                                        |
+  |  workout_digest (daily at 07:00 UTC)                   |
+  |    +- reads Gemma outputs from state.db                |
+  |    +- calls Claude API for synthesis & safety review   |
+  |    +- sends HTML email digest                          |
+  |    +- alerts on form/safety concerns                   |
+  |                                                        |
   +--------------------------------------------------------+
 ```

@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-22
+> Auto-updated daily from GitHub commits. Last update: 2026-04-23
 
 ## Overview
 
@@ -87,6 +87,20 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### nwb-plan
+- Merge pull request #78 from karlmarx/claude/add-prone-hip-extension-2K4jK (2026-04-20)
+- Add-exercise picker: pull any catalog exercise into a workout (2026-04-18)
+- Exercise card gear icon + render supersets as sibling cards (2026-04-18)
+- Progress clock: tap to open detail panel with phases + timeline (2026-04-18)
+- Simpler tab icons: barbell, up/down arrows, abs outline (2026-04-18)
+
+### karl-infra
+- chore: daily update 2026-04-22 (2026-04-22)
+- chore: daily update 2026-04-21 (2026-04-21)
+- chore: daily update 2026-04-20 (2026-04-20)
+- chore: daily update 2026-04-19 (2026-04-19)
+- chore: daily update 2026-04-18 (2026-04-18)
+
 ### 93-fyi
 - fix: add middleware to route hot.93.fyi subdomain to /hot gallery (2026-04-21)
 - feat: add hot.93.fyi aesthetic fitness gallery + private link (2026-04-21)
@@ -94,22 +108,8 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - UI polish, a11y, and Next.js 16 housekeeping (#1) (2026-04-16)
 - fix: add NWB Yoga to public links (2026-04-05)
 
-### karl-infra
-- chore: daily update 2026-04-21 (2026-04-21)
-- chore: daily update 2026-04-20 (2026-04-20)
-- chore: daily update 2026-04-19 (2026-04-19)
-- chore: daily update 2026-04-18 (2026-04-18)
-- docs: add STATUS.md + return receipt tracker automation (2026-04-17)
-
 ### login-93fyi
 - feat: branded login landing page (2026-04-20)
-
-### nwb-plan
-- Merge pull request #78 from karlmarx/claude/add-prone-hip-extension-2K4jK (2026-04-20)
-- Add-exercise picker: pull any catalog exercise into a workout (2026-04-18)
-- Exercise card gear icon + render supersets as sibling cards (2026-04-18)
-- Progress clock: tap to open detail panel with phases + timeline (2026-04-18)
-- Simpler tab icons: barbell, up/down arrows, abs outline (2026-04-18)
 
 ### progress-dashboard
 - progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
@@ -124,13 +124,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - init: status.93.fyi uptime page (2026-04-03)
 - feat: add main status page with polling and components (2026-04-03)
 - feat: add root layout with dark theme and Inter font (2026-04-03)
-
-### now-93fyi
-- copy: strip page to under construction (2026-04-15)
-- copy: cut yoga line (2026-04-03)
-- copy: cut humidity line (2026-04-03)
-- copy: tighter voice, less explaining (2026-04-03)
-- copy: grounded building section — real backstory, less manifesto (2026-04-03)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

@@ -27,6 +27,11 @@
 |     Confidence          |                                         |
 |     + Mobile reassurance |                                         |
 |                         |                                         |
+|  mom.93.fyi             |                                         |
+|  +- Mom's Reassurance   |                                         |
+|     Hub (letter-style)  |                                         |
+|     + framer-motion     |                                         |
+|                         |                                         |
 |  Supabase (DB) -----+   |                                         |
 |                         |                                         |
 |  progress.93.fyi -------+   Nextcloud (Takeout, TODO, logs)       |

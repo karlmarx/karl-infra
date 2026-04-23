@@ -19,6 +19,7 @@ All web applications deploy to Vercel with custom domains via Cloudflare DNS.
 | ID API | Node/Express on Vercel Functions | Supabase | (serverless, called by ID frontend) |
 | Contact Form | Next.js 16 + React 19 + TypeScript + Turnstile | Supabase (Postgres + rate limits) | contact.93.fyi |
 | Flight Connection Confidence | Next.js 16 + React 19 + TypeScript | None (client-side analysis) | layover.93.fyi |
+| Mom's Reassurance Hub | Next.js 16 + React 19 + TypeScript + framer-motion | None (static content) | mom.93.fyi |
 | blazing-paddles-react | React (Vite) | None | blazingpaddles.org |
 | auto-dashboard | React 19 + Vite + TypeScript + @xyflow/react | None (static) | auto.93.fyi |
 | progress-dashboard | Next.js 16 + React 19 + TypeScript + NextAuth | SQLite (milestone tracking) | progress.93.fyi |
@@ -37,6 +38,13 @@ All web applications deploy to Vercel with custom domains via Cloudflare DNS.
 - **Features**: Connection success probability calculator, expandable detail cards, pre-trip checklist, research references
 - **Audience**: Non-technical, mobile-first, light mode with large fonts
 - **Docs**: [services/layover.md](services/layover.md)
+
+### Mom's Reassurance Hub (mom.93.fyi)
+- **Purpose**: Personal, handwritten-letter-style answers to the everyday things Mom worries about (phone hacks, car AC, stove, scam texts, etc.)
+- **Tech**: Next.js 16 + React 19 + TypeScript, Tailwind v4, framer-motion
+- **Design**: "Letter from your son" aesthetic — Caveat/Lora/Newsreader fonts, paper/ink/rose/sage palette
+- **Audience**: Mom specifically; written in son's voice, expandable cards, tel: links to call him
+- **Docs**: [services/mom.md](services/mom.md)
 
 ## Deployment Targets (continued)
 
@@ -111,6 +119,7 @@ Dynadot (registrar)
                ├── id.93.fyi       CNAME ──> cname.vercel-dns.com (Identity Verification)
                ├── contact.93.fyi  CNAME ──> cname.vercel-dns.com (Contact Form)
                ├── layover.93.fyi  CNAME ──> cname.vercel-dns.com (Flight Connection Confidence)
+               ├── mom.93.fyi      CNAME ──> cname.vercel-dns.com (Mom's Reassurance Hub)
                ├── 93.fyi          CNAME ──> cname.vercel-dns.com (nwb-plan, temp)
                └── Email routing: k@93.fyi ──> karlmarx9193@gmail.com
 ```

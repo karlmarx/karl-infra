@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Daily workout video analysis with Claude + email digest."""
+"""Daily workout video analysis with local Ollama + email digest."""
 
 # /// script
 # requires-python = ">=3.14"
-# dependencies = ["anthropic", "psutil"]
+# dependencies = ["openai", "psutil"]
 # ///
 
 import argparse
@@ -20,7 +20,7 @@ import logging
 import smtplib
 
 import psutil
-from anthropic import Anthropic
+from openai import OpenAI
 
 
 def setup_logging(log_path: Path) -> logging.Logger:
@@ -48,6 +48,18 @@ def ram_state() -> str:
         return "caution"
     else:
         return "ok"
+
+
+def ollama_is_up(model: str, logger: logging.Logger) -> bool:
+    """Check if Ollama is running and model is available."""
+    try:
+        client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")
+        client.models.list()
+        logger.info(f"✓ Ollama is up, using model {model}")
+        return True
+    except Exception as e:
+        logger.error(f"Ollama not available at http://localhost:11434/v1: {e}")
+        return False
 
 
 def db_connect(db_path: Path) -> sqlite3.Connection:
@@ -140,20 +152,20 @@ If you identify ANY safety concerns (injury risk, dangerous form, improper techn
 Provide actionable feedback in a supportive tone."""
 
 
-def call_claude(prompt: str, api_key: str, logger: logging.Logger) -> str | None:
-    """Call Claude Sonnet 4.5 for the digest synthesis."""
+def call_ollama(prompt: str, model: str, logger: logging.Logger) -> str | None:
+    """Call local Ollama model for the digest synthesis."""
     try:
-        client = Anthropic(api_key=api_key)
-        response = client.messages.create(
-            model="claude-sonnet-4-5-20250514",
+        client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")
+        response = client.chat.completions.create(
+            model=model,
             max_tokens=2048,
             messages=[
                 {"role": "user", "content": prompt}
             ]
         )
-        return response.content[0].text
+        return response.choices[0].message.content
     except Exception as e:
-        logger.error(f"Claude API call failed: {e}")
+        logger.error(f"Ollama API call failed: {e}")
         return None
 
 
@@ -249,7 +261,7 @@ def main():
     args = parser.parse_args()
 
     data_root = Path(os.getenv("WORKOUT_DATA_ROOT", "/Users/kmx/projects/local-vlm-analysis"))
-    api_key = os.getenv("ANTHROPIC_API_KEY", "")
+    ollama_model = os.getenv("OLLAMA_MODEL", "gemma4:26b")
     gmail_user = os.getenv("GMAIL_USER", "")
     gmail_app_pwd = os.getenv("GMAIL_APP_PASSWORD", "")
     digest_to = os.getenv("DIGEST_TO", "")
@@ -257,14 +269,18 @@ def main():
     db_path = Path.home() / ".local/share/workout-pipeline/state.db"
 
     logger = setup_logging(log_path)
-    logger.info("Starting daily digest")
+    logger.info(f"Starting daily digest (using Ollama {ollama_model})")
 
     if ram_state() in ["tight", "critical"]:
         logger.warning(f"RAM state {ram_state()}, skipping digest")
         return 0
 
-    if not api_key or not gmail_user or not gmail_app_pwd or not digest_to:
-        logger.error("Missing env vars: ANTHROPIC_API_KEY, GMAIL_USER, GMAIL_APP_PASSWORD, DIGEST_TO")
+    if not ollama_is_up(ollama_model, logger):
+        logger.error("Ollama is not running. Start with: ollama serve")
+        return 1
+
+    if not gmail_user or not gmail_app_pwd or not digest_to:
+        logger.error("Missing env vars: GMAIL_USER, GMAIL_APP_PASSWORD, DIGEST_TO")
         return 1
 
     db = db_connect(db_path)
@@ -297,12 +313,12 @@ def main():
         db.close()
         return 1
 
-    logger.info(f"Built prompt for {len(summaries)} workout videos, calling Claude...")
+    logger.info(f"Built prompt for {len(summaries)} workout videos, calling Ollama {ollama_model}...")
 
-    # Call Claude
-    claude_response = call_claude(prompt, api_key, logger)
+    # Call Ollama
+    claude_response = call_ollama(prompt, ollama_model, logger)
     if not claude_response:
-        logger.error("Claude API failed")
+        logger.error("Ollama call failed")
         db.close()
         return 1
 

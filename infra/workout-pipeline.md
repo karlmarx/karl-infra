@@ -2,9 +2,9 @@
 
 ## Purpose
 
-Continuous background pipeline that watches for new workout videos uploaded from Karl's phone, processes each video with local Gemma (MLX-VLM, Apple Silicon native) to extract frames and generate per-frame analysis, then periodically sends the Gemma-generated observations to Claude API for safety and form feedback. Claude synthesizes the data into a daily digest email.
+Continuous background pipeline that watches for new workout videos uploaded from Karl's phone, processes each video with local Gemma (MLX-VLM, Apple Silicon native) to extract frames and generate per-frame analysis, then periodically sends the Gemma-generated observations to a local Ollama model for safety and form feedback synthesis. The system creates a daily digest email with no API costs.
 
-**Why this architecture?** Token economics: Gemma is free and runs locally on unified memory (no CPU↔GPU copy overhead). Claude only reads the *results* (frame descriptions) rather than raw video data, saving 95%+ of API costs while still getting nuanced form analysis.
+**Why this architecture?** Cost efficiency: both Gemma and Ollama run locally on unified memory (no CPU↔GPU copy overhead). Ollama runs locally instead of using cloud APIs, saving 100% on inference costs while still getting nuanced form analysis.
 
 ## Components
 
@@ -30,7 +30,7 @@ Continuous background pipeline that watches for new workout videos uploaded from
 - **Dependencies**: `psutil` (added to `local-vlm-analysis/pyproject.toml`)
 - **Error handling**: retries up to 3 times on failure, logs error to state DB, continues with next video
 
-### 2. **workout_digest.py** — Claude Analysis + Email Service
+### 2. **workout_digest.py** — Local Ollama Analysis + Email Service
 
 - **Location**: `~/karl-infra/services/workout_digest.py`
 - **Schedule**: LaunchAgent `com.kmx.workout-digest` fires daily at 07:00 UTC (`StartCalendarInterval: {Hour: 7, Minute: 0}`)
@@ -40,10 +40,11 @@ Continuous background pipeline that watches for new workout videos uploaded from
   - Extract `workout_summary` dict (exercises, equipment, body focus, intensity, environment)
   - Collect up to 5 unique `form_notes` from individual frames
   - Only include videos where `is_workout == true` (filters out rest frames, non-workouts)
-- **Claude call**:
-  - Model: `claude-sonnet-4-5-20250514` (cost/quality balance for synthesis task)
+- **Ollama call**:
+  - Model: `gemma4:26b` (configurable via `OLLAMA_MODEL` env var, default to `:latest` if 26b unavailable)
   - Prompt: comprehensive daily digest request with all videos in one call
   - Max tokens: 2048 (accommodates ~10-50 videos per digest, typical for daily)
+  - **Requirement**: Ollama must be running (e.g., `ollama serve` in background)
 - **Alert detection**: Scans Claude response for keywords (`injury risk`, `dangerous`, `avoid`, `pain`, `strain`, `hyperextend`, `improper form`)
   - If found: email subject becomes `[ALERT] Workout Form Digest — {date}`
   - Red warning banner in HTML email
@@ -112,8 +113,8 @@ Current state: 144 `.mp4` files exist in Nextcloud but have not yet been moved t
 [workout_digest.py]
     │─ load pending videos from state.db
     │─ build_video_summary(): extract workout_summary + form_notes
-    │─ build_claude_prompt(): compose digest prompt
-    │─ call Claude: one batched call for all videos
+    │─ build_ollama_prompt(): compose digest prompt
+    │─ call Ollama: one batched call for all videos
     │─ detect alerts: scan response for injury keywords
     │─ render_html_email(): create multipart message
     │─ send via Gmail SMTP
@@ -135,7 +136,7 @@ The watcher checks at startup and exits cleanly if MLX-VLM is down (LaunchAgent 
 
 ## Credentials
 
-Two LaunchAgent plists contain placeholders that must be filled in before the services run:
+One LaunchAgent plist contains a placeholder that must be filled in before the service runs:
 
 ### `com.kmx.workout-ingest.plist`
 - No credentials needed (reads from X9 SSD only)
@@ -143,16 +144,13 @@ Two LaunchAgent plists contain placeholders that must be filled in before the se
 ### `com.kmx.workout-digest.plist`
 Must fill in before first run:
 ```xml
-<key>ANTHROPIC_API_KEY</key>
-<string>sk-ant-v7-...FILL_IN_FROM_KEEPASS...</string>
-
 <key>GMAIL_APP_PASSWORD</key>
 <string>xxxx xxxx xxxx xxxx (16 chars, from KeePass Gmail SMTP entry)</string>
 ```
 
 **Gmail App Password**: Retrieve from KeePass → Search for "Gmail" → Look for "SMTP" or "App Password" entry. Standard Google account setting, different from account password.
 
-**Anthropic API Key**: Retrieve from KeePass → Search for "Anthropic" or `~/.claude/` config directory.
+**Ollama Dependency**: Ollama must be running before the digest launches (e.g., `ollama serve` in another terminal or as a LaunchAgent). The script checks for availability at startup and exits cleanly if Ollama is down.
 
 ## RAM Management
 
@@ -201,12 +199,13 @@ Expected output: logs of discovered `.mp4` files with SHAs and sizes.
 
 ### Test digest (dry run, no email send)
 ```bash
+# Make sure Ollama is running first in another terminal: ollama serve
 WORKOUT_DATA_ROOT=/Users/kmx/projects/local-vlm-analysis \
-  ANTHROPIC_API_KEY=$(cat ~/.claude/anthropic.key) \
+  OLLAMA_MODEL=gemma4:26b \
   uv run ~/karl-infra/services/workout_digest.py --dry-run
 ```
 
-Expected output: HTML email body printed to stdout (Claude-synthesized form feedback).
+Expected output: HTML email body printed to stdout (Ollama-synthesized form feedback).
 
 ### Manually trigger digest
 ```bash
@@ -221,24 +220,27 @@ sqlite3 ~/.local/share/workout-pipeline/state.db "SELECT file_name, gemma_done_a
 ## Known Limitations & Future Work
 
 1. **No video file cleanup**: Processed videos remain on X9 SSD. Manual cleanup or a separate retention policy needed.
-2. **No retries on transient failures**: If Claude API or Gmail SMTP is temporarily down, the digest skips that day (no retry queue). Consider Vercel Queues or similar for durable delivery.
-3. **Claude model drift**: Using `claude-sonnet-4-5-20250514` hardcoded. Keep updated if newer models become preferred.
-4. **Form feedback specificity**: Claude receives frame-level observations but no video playback or slow-motion analysis. May miss subtle form issues.
+2. **No retries on transient failures**: If Ollama or Gmail SMTP is temporarily down, the digest skips that day (no retry queue). Consider Vercel Queues or similar for durable delivery.
+3. **Ollama model drift**: Using `gemma4:26b` by default. If Ollama models are updated/removed, the plist `OLLAMA_MODEL` env var can be changed to fallback (e.g., `gemma4:latest`).
+4. **Form feedback specificity**: Ollama receives frame-level observations but no video playback or slow-motion analysis. May miss subtle form issues.
 5. **No form archive**: Digests are emailed but not permanently stored in a queryable database. Consider archiving digests to SQLite or email archive.
+6. **Ollama memory impact**: Running both Gemma (MLX-VLM) and Ollama simultaneously on 36 GB requires coordination. Monitor RAM via process-monitor-dashboard.
 
 ## Operational Runbook
 
 ### First-time setup
 
-1. Fill in credentials in both plist files (Anthropic API key, Gmail App Password)
-2. Load LaunchAgents:
+1. Ensure Ollama is available and can run the gemma4:26b model (or pull it: `ollama pull gemma4:26b`)
+2. Fill in credentials in digest plist (Gmail App Password only)
+3. Start Ollama in a background terminal or LaunchAgent: `ollama serve` (or create a LaunchAgent for it)
+4. Load LaunchAgents:
    ```bash
    launchctl load ~/Library/LaunchAgents/com.kmx.workout-ingest.plist
    launchctl load ~/Library/LaunchAgents/com.kmx.workout-digest.plist
    ```
-3. Verify with `launchctl list | grep workout` — should show both agents loaded
-4. Monitor logs: `tail -f ~/.local/share/workout-pipeline/*.log`
-5. Expect first digest email after 07:00 UTC the next morning
+5. Verify with `launchctl list | grep workout` — should show both agents loaded
+6. Monitor logs: `tail -f ~/.local/share/workout-pipeline/*.log`
+7. Expect first digest email after 07:00 UTC the next morning (if videos are pending)
 
 ### Troubleshooting
 
@@ -251,6 +253,12 @@ sqlite3 ~/.local/share/workout-pipeline/state.db "SELECT file_name, gemma_done_a
 - Check MLX-VLM is running: `curl http://localhost:8080/v1/models`
 - Check logs for error: `tail -20 ~/.local/share/workout-pipeline/ingest-stdout.log`
 - Check RAM: `top -l1 | grep PhysMem`
+
+**Ollama not available:**
+- Check Ollama is running: `curl http://localhost:11434/v1/models`
+- Start Ollama: `ollama serve` (or as LaunchAgent)
+- Check model is available: `ollama list | grep gemma`
+- Check digest logs: `tail -20 ~/.local/share/workout-pipeline/digest-stdout.log`
 
 **Email not sending:**
 - Check credentials in plist are filled in (not `FILL_IN_*`)

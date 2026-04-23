@@ -18,6 +18,7 @@ All web applications deploy to Vercel with custom domains via Cloudflare DNS.
 | Identity Verification | React 19 + Vite + TypeScript | Supabase (Postgres + Auth + Storage) | id.93.fyi |
 | ID API | Node/Express on Vercel Functions | Supabase | (serverless, called by ID frontend) |
 | Contact Form | Next.js 16 + React 19 + TypeScript + Turnstile | Supabase (Postgres + rate limits) | contact.93.fyi |
+| Flight Connection Confidence | Next.js 16 + React 19 + TypeScript | None (client-side analysis) | layover.93.fyi |
 | blazing-paddles-react | React (Vite) | None | blazingpaddles.org |
 | auto-dashboard | React 19 + Vite + TypeScript + @xyflow/react | None (static) | auto.93.fyi |
 | progress-dashboard | Next.js 16 + React 19 + TypeScript + NextAuth | SQLite (milestone tracking) | progress.93.fyi |
@@ -27,6 +28,17 @@ All web applications deploy to Vercel with custom domains via Cloudflare DNS.
 - Automatic deploys from `main` branch
 - Preview deploys on PRs
 - No custom build infrastructure needed (static HTML or Vite builds)
+
+## Services
+
+### Flight Connection Confidence (layover.93.fyi)
+- **Purpose**: Data-backed reassurance for elderly travelers anxious about tight flight connections
+- **Tech**: Next.js 16 + React 19 + TypeScript, Tailwind CSS light mode, no database
+- **Features**: Connection success probability calculator, expandable detail cards, pre-trip checklist, research references
+- **Audience**: Non-technical, mobile-first, light mode with large fonts
+- **Docs**: [services/layover.md](services/layover.md)
+
+## Deployment Targets (continued)
 
 ### Windows 11 Workstation
 
@@ -98,6 +110,7 @@ Dynadot (registrar)
                ├── nyoga.93.fyi    CNAME ──> cname.vercel-dns.com (nwb-yoga)
                ├── id.93.fyi       CNAME ──> cname.vercel-dns.com (Identity Verification)
                ├── contact.93.fyi  CNAME ──> cname.vercel-dns.com (Contact Form)
+               ├── layover.93.fyi  CNAME ──> cname.vercel-dns.com (Flight Connection Confidence)
                ├── 93.fyi          CNAME ──> cname.vercel-dns.com (nwb-plan, temp)
                └── Email routing: k@93.fyi ──> karlmarx9193@gmail.com
 ```

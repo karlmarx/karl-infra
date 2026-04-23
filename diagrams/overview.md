@@ -22,7 +22,12 @@
 |     + Turnstile CAPTCHA |   Dynadot (.fyi registrar)              |
 |     + Resend email      |   Cloudflare (DNS + email routing)      |
 |                         |   GitHub (all repos + Actions)          |
-|  Supabase (DB) -----+   |   Vercel (all deployments)            |
+|  layover.93.fyi         |   Vercel (all deployments)            |
+|  +- Flight Connection   |                                         |
+|     Confidence          |                                         |
+|     + Mobile reassurance |                                         |
+|                         |                                         |
+|  Supabase (DB) -----+   |                                         |
 |                         |                                         |
 |  progress.93.fyi -------+   Nextcloud (Takeout, TODO, logs)       |
 |  +- Progress Dashboard  |                                         |

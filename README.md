@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-23
+> Auto-updated daily from GitHub commits. Last update: 2026-04-24
 
 ## Overview
 
@@ -87,6 +87,10 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### mom-93fyi
+- refactor: trim sentimental framing, sign as Ben, reframe ID4 as Ben's car, add Google search (2026-04-23)
+- feat: initial mom.93.fyi with handwritten letter aesthetic and 10 worry cards (2026-04-23)
+
 ### nwb-plan
 - Merge pull request #78 from karlmarx/claude/add-prone-hip-extension-2K4jK (2026-04-20)
 - Add-exercise picker: pull any catalog exercise into a workout (2026-04-18)
@@ -94,12 +98,19 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - Progress clock: tap to open detail panel with phases + timeline (2026-04-18)
 - Simpler tab icons: barbell, up/down arrows, abs outline (2026-04-18)
 
+### layover-93fyi
+- feat: editorial redesign with vintage travel magazine aesthetic (2026-04-23)
+- style: add colorful interactive diagrams (probability viz, delay chart, timeline, airport map) with richer color palette (2026-04-23)
+- style: improve visual design with colored cards, better spacing, and enhanced typography for elderly audience (2026-04-23)
+- feat: replace task checklist with reassuring what-if scenarios (2026-04-23)
+- deploy: add Vercel configuration for production deployment (2026-04-23)
+
 ### karl-infra
+- chore: daily update 2026-04-23 (2026-04-23)
 - chore: daily update 2026-04-22 (2026-04-22)
 - chore: daily update 2026-04-21 (2026-04-21)
 - chore: daily update 2026-04-20 (2026-04-20)
 - chore: daily update 2026-04-19 (2026-04-19)
-- chore: daily update 2026-04-18 (2026-04-18)
 
 ### 93-fyi
 - fix: add middleware to route hot.93.fyi subdomain to /hot gallery (2026-04-21)
@@ -117,13 +128,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
 - progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
 - progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
-
-### status-93fyi
-- UX, a11y, and polling polish for status page (#1) (2026-04-16)
-- docs: add deploy result (2026-04-03)
-- init: status.93.fyi uptime page (2026-04-03)
-- feat: add main status page with polling and components (2026-04-03)
-- feat: add root layout with dark theme and Inter font (2026-04-03)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

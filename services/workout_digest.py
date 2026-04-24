@@ -50,15 +50,15 @@ def ram_state() -> str:
         return "ok"
 
 
-def ollama_is_up(model: str, logger: logging.Logger) -> bool:
-    """Check if Ollama is running and model is available."""
+def mlx_vlm_is_up(logger: logging.Logger) -> bool:
+    """Check if MLX-VLM server is running."""
     try:
-        client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")
+        client = OpenAI(base_url="http://localhost:8080/v1", api_key="mlx-vlm")
         client.models.list()
-        logger.info(f"✓ Ollama is up, using model {model}")
+        logger.info("✓ MLX-VLM is up")
         return True
     except Exception as e:
-        logger.error(f"Ollama not available at http://localhost:11434/v1: {e}")
+        logger.error(f"MLX-VLM not available at http://localhost:8080/v1: {e}")
         return False
 
 
@@ -152,12 +152,12 @@ If you identify ANY safety concerns (injury risk, dangerous form, improper techn
 Provide actionable feedback in a supportive tone."""
 
 
-def call_ollama(prompt: str, model: str, logger: logging.Logger) -> str | None:
-    """Call local Ollama model for the digest synthesis."""
+def call_mlx_vlm(prompt: str, logger: logging.Logger) -> str | None:
+    """Call local MLX-VLM Gemma model for the digest synthesis."""
     try:
-        client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")
+        client = OpenAI(base_url="http://localhost:8080/v1", api_key="mlx-vlm")
         response = client.chat.completions.create(
-            model=model,
+            model="mlx-community/gemma-4-26b-a4b-it-8bit",
             max_tokens=2048,
             messages=[
                 {"role": "user", "content": prompt}
@@ -165,7 +165,7 @@ def call_ollama(prompt: str, model: str, logger: logging.Logger) -> str | None:
         )
         return response.choices[0].message.content
     except Exception as e:
-        logger.error(f"Ollama API call failed: {e}")
+        logger.error(f"MLX-VLM call failed: {e}")
         return None
 
 
@@ -261,7 +261,6 @@ def main():
     args = parser.parse_args()
 
     data_root = Path(os.getenv("WORKOUT_DATA_ROOT", "/Users/kmx/projects/local-vlm-analysis"))
-    ollama_model = os.getenv("OLLAMA_MODEL", "gemma4:26b")
     gmail_user = os.getenv("GMAIL_USER", "")
     gmail_app_pwd = os.getenv("GMAIL_APP_PASSWORD", "")
     digest_to = os.getenv("DIGEST_TO", "")
@@ -269,14 +268,14 @@ def main():
     db_path = Path.home() / ".local/share/workout-pipeline/state.db"
 
     logger = setup_logging(log_path)
-    logger.info(f"Starting daily digest (using Ollama {ollama_model})")
+    logger.info("Starting daily digest (using MLX-VLM Gemma)")
 
     if ram_state() in ["tight", "critical"]:
         logger.warning(f"RAM state {ram_state()}, skipping digest")
         return 0
 
-    if not ollama_is_up(ollama_model, logger):
-        logger.error("Ollama is not running. Start with: ollama serve")
+    if not mlx_vlm_is_up(logger):
+        logger.error("MLX-VLM not running at http://localhost:8080. Start with: mlx_vlm.server --model mlx-community/gemma-4-26b-a4b-it-8bit --host 127.0.0.1 --port 8080")
         return 1
 
     if not gmail_user or not gmail_app_pwd or not digest_to:
@@ -313,12 +312,12 @@ def main():
         db.close()
         return 1
 
-    logger.info(f"Built prompt for {len(summaries)} workout videos, calling Ollama {ollama_model}...")
+    logger.info(f"Built prompt for {len(summaries)} workout videos, calling MLX-VLM...")
 
-    # Call Ollama
-    claude_response = call_ollama(prompt, ollama_model, logger)
+    # Call MLX-VLM
+    claude_response = call_mlx_vlm(prompt, logger)
     if not claude_response:
-        logger.error("Ollama call failed")
+        logger.error("MLX-VLM call failed")
         db.close()
         return 1
 

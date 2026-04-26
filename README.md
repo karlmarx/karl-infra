@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-25
+> Auto-updated daily from GitHub commits. Last update: 2026-04-26
 
 ## Overview
 
@@ -87,23 +87,30 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### nwb-plan
+- docs: add PWB Phase 4 exercise list draft for PT review (#97) (2026-04-26)
+- chore: redeploy after dev DB env split (2026-04-25)
+- chore: remove personal medical info; expand to 8 weeks; drop Hevy CTA (2026-04-25)
+- chore: redeploy after Neon Postgres provisioning (2026-04-25)
+- feat(mcp): expose exercise library to Claude via MCP server (#92) (2026-04-25)
+
+### 93-fyi
+- feat(workoutgifs): add 5 new clips and PUSH/PULL/CARDIO sections (2026-04-25)
+- fix: migrate subdomain rewrite to Next 16 proxy.ts (drop dead middleware.ts) (2026-04-25)
+- fix: remove dead @site_url secret reference from vercel.json (2026-04-25)
+- feat: add /workoutgifs route and workoutgifs.93.fyi subdomain rewrite (2026-04-25)
+- revert: remove misplaced equipment-gifs directory (2026-04-22)
+
 ### karl-infra
+- chore: daily update 2026-04-25 (2026-04-25)
 - chore: daily update 2026-04-24 (2026-04-24)
 - chore: daily update 2026-04-23 (2026-04-23)
 - chore: daily update 2026-04-22 (2026-04-22)
 - chore: daily update 2026-04-21 (2026-04-21)
-- chore: daily update 2026-04-20 (2026-04-20)
 
 ### mom-93fyi
 - refactor: trim sentimental framing, sign as Ben, reframe ID4 as Ben's car, add Google search (2026-04-23)
 - feat: initial mom.93.fyi with handwritten letter aesthetic and 10 worry cards (2026-04-23)
-
-### nwb-plan
-- Merge pull request #78 from karlmarx/claude/add-prone-hip-extension-2K4jK (2026-04-20)
-- Add-exercise picker: pull any catalog exercise into a workout (2026-04-18)
-- Exercise card gear icon + render supersets as sibling cards (2026-04-18)
-- Progress clock: tap to open detail panel with phases + timeline (2026-04-18)
-- Simpler tab icons: barbell, up/down arrows, abs outline (2026-04-18)
 
 ### layover-93fyi
 - feat: editorial redesign with vintage travel magazine aesthetic (2026-04-23)
@@ -111,13 +118,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - style: improve visual design with colored cards, better spacing, and enhanced typography for elderly audience (2026-04-23)
 - feat: replace task checklist with reassuring what-if scenarios (2026-04-23)
 - deploy: add Vercel configuration for production deployment (2026-04-23)
-
-### 93-fyi
-- fix: add middleware to route hot.93.fyi subdomain to /hot gallery (2026-04-21)
-- feat: add hot.93.fyi aesthetic fitness gallery + private link (2026-04-21)
-- fix: point sign-in link to me.93.fyi/login directly (2026-04-16)
-- UI polish, a11y, and Next.js 16 housekeeping (#1) (2026-04-16)
-- fix: add NWB Yoga to public links (2026-04-05)
 
 ### login-93fyi
 - feat: branded login landing page (2026-04-20)

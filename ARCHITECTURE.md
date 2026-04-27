@@ -22,7 +22,10 @@ All web applications deploy to Vercel with custom domains via Cloudflare DNS.
 | Mom's Reassurance Hub | Next.js 16 + React 19 + TypeScript + framer-motion | None (static content) | mom.93.fyi |
 | blazing-paddles-react | React (Vite) | None | blazingpaddles.org |
 | auto-dashboard | React 19 + Vite + TypeScript + @xyflow/react | None (static) | auto.93.fyi |
+| orthoappt | Next.js 16 + React 19 + TypeScript + Tailwind 4 + PWA | None (localStorage; build-time MD parse) | ortho.93.fyi |
 | progress-dashboard | Next.js 16 + React 19 + TypeScript + NextAuth | SQLite (milestone tracking) | progress.93.fyi |
+| karl-command-center | Next.js 16 + React 19 + Tailwind 4 + framer-motion + better-sqlite3 | SQLite (local) + Mac Studio FastAPI agent | command.93.fyi (Cloudflare Access gated) |
+| house-tracker | React 19 + Vite 8 + react-router 7 + Tailwind 4 | None (static JS export) | (no custom domain — `*.vercel.app`) |
 
 **Vercel configuration:**
 - All projects on free tier
@@ -57,7 +60,7 @@ The primary development machine runs several always-on or on-demand automation s
 | OpenClaw | Claude Code (Node.js) | AI assistant gateway |
 | openclaw-watchdog | Python (Rich + Playwright) | Keeps OpenClaw alive, screen awake |
 | claude-pipeline | Python | Watches Nextcloud/inbox/ for .md files, routes to OpenClaw |
-| gemini-auto | Playwright (JS) | Gemini UI automation for image generation via CDP |
+| gemini-auto | Playwright (Python) | **Ported to Mac** — see Mac Studio section. May still run on Windows historically. |
 | process-monitor-dashboard | Python 3 | Real-time terminal UI: processes, Ollama models, Claude sessions |
 
 **Key paths:**
@@ -71,12 +74,19 @@ Apple Silicon-native machine (36 GB unified memory) running compute-intensive au
 
 | Service | Schedule | Purpose |
 |---------|----------|---------|
-| MLX-VLM server | Always-on | Vision model inference on Apple Silicon (gemma-4-26b) |
-| workout_watcher | Every 15 min | Watch Nextcloud for new workout videos, process with Gemma, extract frames & analysis |
-| workout_digest | Daily 07:00 | Synthesize workout form feedback via Claude API, email digest |
-| Nextcloud photo sync | Every 1 hour | Poll Nextcloud `/Photos/Android/`, download to external SSD |
+| MLX-VLM `:8080` (analysis) | Always-on (watched) | Heavy vision/text. Watchdog config = `gemma-4-26b-a4b-it-4bit`; live process as of 2026-04-26 = `Qwen3.5-27B-4bit` (verify which is intended) |
+| MLX-VLM `:8081` (fast) | Always-on (NOT watched) | Default chat — `Qwen3.5-9B-MLX-4bit`, 32k ctx |
+| MLX-VLM `:8082` (long-ctx) | Always-on (NOT watched) | Reasoning — `Qwen3.5-9B-MLX-4bit`, 262k ctx (currently DOWN per 2026-04-26 audit) |
+| workout_watcher | Every 15 min | Watch Nextcloud for new workout videos, process via MLX-VLM, extract frames & analysis |
+| workout_digest | Daily 07:00 | Synthesize workout form feedback via MLX-VLM, email digest (migrated off Claude API) |
+| Nextcloud photo sync | Every 1 hour | Poll Nextcloud `/InstantUpload/Camera/`, download to external SSD. **Currently dead — see [infra/nextcloud-android-sync.md](infra/nextcloud-android-sync.md)** |
+| Nextcloud screenshot parser | Every 1 hour | Poll `/InstantUpload/Screenshots/`, MLX-VLM classify, file by category, append Todoist tasks. **Currently dead — same plist bugs** |
 | Nextcloud video ingest | Every 30 min | Move phone videos from Nextcloud to X9 SSD via rclone |
 | process-monitor-dashboard | On-demand | Terminal UI: background process status, RAM usage, MLX model load |
+| command-agent (FastAPI) | Always-on | Exposes `/stats`, `/pipelines`, `/voices`, etc. as JSON for command.93.fyi via Cloudflare tunnel |
+| openclaw gateway/node | Always-on (4 LaunchAgents) | Local model gateway/router; `:18789` loopback; routes to MLX/Ollama/Google. See [infra/openclaw.md](infra/openclaw.md) |
+| gemini CLI | Interactive | Secondary AI assistant. OAuth `karlmarx9193@gmail.com`. 5 MCP extensions. See [infra/gemini-cli.md](infra/gemini-cli.md) |
+| gemini-auto | On-demand | Playwright/CDP image-gen via Gemini UI, 3-account rotation. Originally Windows; ported to Mac (hardcoded paths still in source). See [infra/gemini-auto.md](infra/gemini-auto.md) |
 
 **Key characteristics:**
 - All background processes use LaunchAgents (`~/Library/LaunchAgents/*.plist`)
@@ -91,15 +101,27 @@ Apple Silicon-native machine (36 GB unified memory) running compute-intensive au
 - Photos/video staging: `/Volumes/Crucial X9/photos/incoming/`
 - Nextcloud desktop sync: `~/Nextcloud/`
 
-**Docs**: [infra/workout-pipeline.md](infra/workout-pipeline.md), [infra/local-ai.md](infra/local-ai.md)
+**Docs**: [infra/workout-pipeline.md](infra/workout-pipeline.md), [infra/local-ai.md](infra/local-ai.md), [infra/local-vlm-analysis.md](infra/local-vlm-analysis.md), [infra/openclaw.md](infra/openclaw.md), [infra/gemini-cli.md](infra/gemini-cli.md), [infra/gemini-auto.md](infra/gemini-auto.md), [infra/nextcloud-android-sync.md](infra/nextcloud-android-sync.md), [infra/nextcloud-screenshot-parser.md](infra/nextcloud-screenshot-parser.md)
 
 ### ultra.cc Seedbox (Planned)
 
 A remote Linux server for running automation that needs to be always-on without depending on the workstation:
 
-- **find-hub-tracker**: Polls Google Find Hub API for device location/battery, sends Discord alerts
+- **find-hub-tracker**: Polls Google Find Hub API for device location/battery, sends Discord alerts. See [infra/find-hub-tracker.md](infra/find-hub-tracker.md)
 - **Nextcloud** (`https://karlmarx.tofino.usbx.me/nextcloud`): Personal Nextcloud 27 on Ultra.cc's managed hosting, subpath install. Mobile app syncs `~/Nextcloud/` to the macOS desktop client. Receives `todo.md` uploads from karl-todo CI.
 - Future: other periodic automation tasks currently running on Windows
+
+### Local repos (manual / WIP)
+
+Standalone repos that aren't yet wired into LaunchAgents, GHA crons, or Vercel custom domains. Documented separately from running services.
+
+| Repo | Purpose | Status | Doc |
+|------|---------|--------|-----|
+| photo-memory | Local VLM pipeline over Google Takeout (1.1 TB → searchable catalog, future `photos.93.fyi`) | Phase 1 in progress | [infra/photo-memory.md](infra/photo-memory.md) |
+| finflow | Personal finance aggregator (Teller + DuckDB + Polars + FastAPI) | Working alpha, manual run | [infra/finflow.md](infra/finflow.md) |
+| amex-claims-automator | Playwright bot for Amex Return/Loss Protection claims | Phase 1 reconnaissance | [infra/amex-claims-automator.md](infra/amex-claims-automator.md) |
+| tui-dashboard | Textual TUI for global status (vs. process-monitor-dashboard which is local-only) | Skeleton — only clock works | [infra/tui-dashboard.md](infra/tui-dashboard.md) |
+| house-tracker | South Florida property comparison + Gemini renders | Active personal use, no domain | [infra/house-tracker.md](infra/house-tracker.md) |
 
 ### GitHub Actions (CI-driven automation)
 
@@ -148,6 +170,10 @@ Dynadot (registrar)
                ├── contact.93.fyi  CNAME ──> cname.vercel-dns.com (Contact Form)
                ├── layover.93.fyi  CNAME ──> cname.vercel-dns.com (Flight Connection Confidence)
                ├── mom.93.fyi      CNAME ──> cname.vercel-dns.com (Mom's Reassurance Hub)
+               ├── auto.93.fyi     CNAME ──> cname.vercel-dns.com (auto-dashboard)
+               ├── ortho.93.fyi    CNAME ──> cname.vercel-dns.com (orthoappt)
+               ├── command.93.fyi  CNAME ──> cname.vercel-dns.com (command-center, gated by Cloudflare Access)
+               ├── progress.93.fyi CNAME ──> cname.vercel-dns.com (progress-dashboard)
                ├── 93.fyi          CNAME ──> cname.vercel-dns.com (nwb-plan, temp)
                └── Email routing: k@93.fyi ──> karlmarx9193@gmail.com
 ```
@@ -198,4 +224,20 @@ find-hub-tracker ──polls──→ Google Find Hub Nova API
                  ──stores──→ PostgreSQL / SQLite
                  ──alerts──→ Discord webhook
                  ──pings──→ Healthchecks.io
+
+photo-memory ──reads──→ /Volumes/Crucial X9/google-takeout-2026-04-16/
+             ──calls──→ MLX-VLM :8080 (Gemma/Qwen/PaliGemma) + MLX-Whisper
+             ──writes─→ /Volumes/Crucial X9/photo-memory/catalog.db (planned)
+             ──future─→ Cloudflare Worker @ photos.93.fyi (D1 + R2 + GitHub OAuth)
+
+finflow ──mTLS──→ Teller API (api.teller.io)
+        ──writes─→ ~/finflow/finflow.duckdb
+
+amex-claims-automator ──drives──→ Chromium (Playwright, headed)
+                       ──submits─→ claims-center.americanexpress.com
+
+house-tracker ──static──→ properties.js + public/photos/ → Vercel
+
+local-vlm-analysis ──called by──→ workout_watcher, photo-memory
+                   ──routes to──→ MLX-VLM :8080
 ```

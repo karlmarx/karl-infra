@@ -15,6 +15,7 @@
 |   +-- nyoga.93.fyi    CNAME -> cname.vercel-dns.com  (nwb-yoga)
 |   +-- id.93.fyi       CNAME -> cname.vercel-dns.com  (Social Identity Verification)
 |   +-- auto.93.fyi     CNAME -> cname.vercel-dns.com  (auto-dashboard)
+|   +-- ortho.93.fyi    CNAME -> cname.vercel-dns.com  (orthoappt)
 |
 +-- Email Routing (Cloudflare)
     |
@@ -31,6 +32,7 @@
 | `id.93.fyi` | Social ID Verification | karlmarx/identity-verification | Frontend for Social Identity Verification |
 | (public domain) | Social ID Verification | karlmarx/identity-verification | Primary domain (WIP) |
 | `auto.93.fyi` | auto-dashboard | karlmarx/karl-infra (subdir: `auto-dashboard/`) | Interactive automation map |
+| `ortho.93.fyi` | orthoappt | karlmarx/karl-infra (subdir: `orthoappt/`) | Appointment companion (Dr. Almodovar follow-up, NWB protocol) |
 
 ## Email
 

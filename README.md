@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-26
+> Auto-updated daily from GitHub commits. Last update: 2026-04-27
 
 ## Overview
 
@@ -94,19 +94,44 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - chore: redeploy after Neon Postgres provisioning (2026-04-25)
 - feat(mcp): expose exercise library to Claude via MCP server (#92) (2026-04-25)
 
+### tui-dashboard
+- fix: %-d strftime not supported on Windows (2026-04-02)
+- refactor: strip to placeholder skeleton — get it running first (2026-04-02)
+- feat: initial Textual dashboard — projects, lights, seedbox, agent, clock (2026-04-02)
+- init: dashboard vision, panels, and ideas from session history (2026-04-02)
+
+### karl-command-center
+- Dynamic infra updates: Cloudflare/GitHub/Vercel integration (2026-04-26)
+- Implement API routes and components (2026-04-25)
+- Initial commit from Create Next App (2026-04-25)
+
+### foodr
+- Merge pull request #2 from karlmarx/claude/foodr-app-backend-security-iE0LQ (2026-04-26)
+- Add Rust ratings backend and overhaul frontend visuals (2026-04-26)
+- Merge pull request #1 from karlmarx/docs/readme (2026-03-28)
+- Add comprehensive README (2026-03-28)
+- Build Foodr: fast food rating app with chain-specific scales (2026-03-26)
+
+### progress-dashboard
+- Merge pull request #1 from karlmarx/refactor/shared-auth-migration (2026-04-26)
+- progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
+- progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
+- progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
+- progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
+
+### karl-infra
+- chore: daily update 2026-04-26 (2026-04-26)
+- chore: daily update 2026-04-25 (2026-04-25)
+- chore: daily update 2026-04-24 (2026-04-24)
+- chore: daily update 2026-04-23 (2026-04-23)
+- chore: daily update 2026-04-22 (2026-04-22)
+
 ### 93-fyi
 - feat(workoutgifs): add 5 new clips and PUSH/PULL/CARDIO sections (2026-04-25)
 - fix: migrate subdomain rewrite to Next 16 proxy.ts (drop dead middleware.ts) (2026-04-25)
 - fix: remove dead @site_url secret reference from vercel.json (2026-04-25)
 - feat: add /workoutgifs route and workoutgifs.93.fyi subdomain rewrite (2026-04-25)
 - revert: remove misplaced equipment-gifs directory (2026-04-22)
-
-### karl-infra
-- chore: daily update 2026-04-25 (2026-04-25)
-- chore: daily update 2026-04-24 (2026-04-24)
-- chore: daily update 2026-04-23 (2026-04-23)
-- chore: daily update 2026-04-22 (2026-04-22)
-- chore: daily update 2026-04-21 (2026-04-21)
 
 ### mom-93fyi
 - refactor: trim sentimental framing, sign as Ben, reframe ID4 as Ben's car, add Google search (2026-04-23)
@@ -121,13 +146,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 ### login-93fyi
 - feat: branded login landing page (2026-04-20)
-
-### progress-dashboard
-- progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
-- progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
-- progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
-- progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
-- progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

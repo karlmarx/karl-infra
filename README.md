@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-27
+> Auto-updated daily from GitHub commits. Last update: 2026-04-28
 
 ## Overview
 
@@ -94,6 +94,13 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - chore: redeploy after Neon Postgres provisioning (2026-04-25)
 - feat(mcp): expose exercise library to Claude via MCP server (#92) (2026-04-25)
 
+### karl-infra
+- feat: add orthoappt for ortho.93.fyi (Dr. Almodovar follow-up companion) (2026-04-27)
+- infra: switch workout digest to MLX-VLM (reuse watcher server) (2026-04-24)
+- infra: switch workout digest to local Ollama (no API costs) (2026-04-23)
+- infra: add workout video analysis pipeline (2026-04-23)
+- docs: add mom.93.fyi service documentation (2026-04-23)
+
 ### tui-dashboard
 - fix: %-d strftime not supported on Windows (2026-04-02)
 - refactor: strip to placeholder skeleton — get it running first (2026-04-02)
@@ -119,13 +126,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
 - progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
 
-### karl-infra
-- chore: daily update 2026-04-26 (2026-04-26)
-- chore: daily update 2026-04-25 (2026-04-25)
-- chore: daily update 2026-04-24 (2026-04-24)
-- chore: daily update 2026-04-23 (2026-04-23)
-- chore: daily update 2026-04-22 (2026-04-22)
-
 ### 93-fyi
 - feat(workoutgifs): add 5 new clips and PUSH/PULL/CARDIO sections (2026-04-25)
 - fix: migrate subdomain rewrite to Next 16 proxy.ts (drop dead middleware.ts) (2026-04-25)
@@ -143,9 +143,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - style: improve visual design with colored cards, better spacing, and enhanced typography for elderly audience (2026-04-23)
 - feat: replace task checklist with reassuring what-if scenarios (2026-04-23)
 - deploy: add Vercel configuration for production deployment (2026-04-23)
-
-### login-93fyi
-- feat: branded login landing page (2026-04-20)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

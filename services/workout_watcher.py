@@ -75,11 +75,11 @@ def db_connect(db_path: Path) -> sqlite3.Connection:
             file_name TEXT NOT NULL,
             size_bytes INTEGER NOT NULL,
             discovered_at TEXT DEFAULT (datetime('now')),
-            gemma_done_at TEXT,
-            gemma_json_path TEXT,
-            claude_done_at TEXT,
+            vlm_done_at TEXT,
+            vlm_json_path TEXT,
+            digest_done_at TEXT,
             emailed_at TEXT,
-            gemma_error TEXT,
+            vlm_error TEXT,
             retry_count INTEGER DEFAULT 0
         )
     """)
@@ -190,7 +190,7 @@ def process_one(
 
         if json_path.exists():
             db.execute(
-                "INSERT OR REPLACE INTO videos (sha, source_path, file_name, size_bytes, gemma_done_at, gemma_json_path, retry_count) "
+                "INSERT OR REPLACE INTO videos (sha, source_path, file_name, size_bytes, vlm_done_at, vlm_json_path, retry_count) "
                 "VALUES (?, ?, ?, ?, datetime('now'), ?, 0)",
                 (sha, str(video_path), video_path.name, video_path.stat().st_size, str(json_path))
             )

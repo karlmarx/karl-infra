@@ -23,7 +23,7 @@ Continuous background pipeline that watches for new workout videos uploaded from
   - Frames are extracted via ffmpeg (scene-change detection + uniform sampling)
   - Per-frame analysis: triage → universal → workout (3-layer Gemma pipeline via `http://localhost:8080`)
   - Output: `data/videos/<sha>.json` with full frame-by-frame metadata
-- **State tracking**: Updates SQLite `~/.local/share/workout-pipeline/state.db` with `gemma_done_at` timestamp
+- **State tracking**: Updates SQLite `~/.local/share/workout-pipeline/state.db` with `vlm_done_at` timestamp
 - **Limits**:
   - Process max 5 videos per run (configurable via `MAX_PER_RUN` env var) to prevent OOM
   - RAM guard: exits cleanly if available RAM < 200 MB (LaunchAgent retries in 15 min)
@@ -34,7 +34,7 @@ Continuous background pipeline that watches for new workout videos uploaded from
 
 - **Location**: `~/karl-infra/services/workout_digest.py`
 - **Schedule**: LaunchAgent `com.kmx.workout-digest` fires daily at 07:00 UTC (`StartCalendarInterval: {Hour: 7, Minute: 0}`)
-- **Input**: All rows in state DB WHERE `gemma_done_at IS NOT NULL AND claude_done_at IS NULL`
+- **Input**: All rows in state DB WHERE `vlm_done_at IS NOT NULL AND digest_done_at IS NULL`
 - **Processing**:
   - Load each video's `data/videos/<sha>.json`
   - Extract `workout_summary` dict (exercises, equipment, body focus, intensity, environment)
@@ -45,7 +45,7 @@ Continuous background pipeline that watches for new workout videos uploaded from
   - Endpoint: `http://localhost:8080/v1` (OpenAI-compatible)
   - Prompt: comprehensive daily digest request with all videos in one call
   - Max tokens: 2048 (accommodates ~10-50 videos per digest, typical for daily)
-- **Alert detection**: Scans Claude response for keywords (`injury risk`, `dangerous`, `avoid`, `pain`, `strain`, `hyperextend`, `improper form`)
+- **Alert detection**: Scans the MLX-VLM response for keywords (`injury risk`, `dangerous`, `avoid`, `pain`, `strain`, `hyperextend`, `improper form`, `safety alert`)
   - If found: email subject becomes `[ALERT] Workout Form Digest — {date}`
   - Red warning banner in HTML email
 - **Email delivery**:
@@ -53,7 +53,7 @@ Continuous background pipeline that watches for new workout videos uploaded from
   - To: `karlmarx9193@gmail.com` (configurable via env var)
   - HTML + plain-text multipart message
   - App Password required (not account password; see credentials section)
-- **State tracking**: Updates DB with `claude_done_at` and `emailed_at` timestamps
+- **State tracking**: Updates DB with `digest_done_at` and `emailed_at` timestamps
 - **Skip conditions**:
   - No pending videos → exit 0 (no email)
   - RAM state `tight` or `critical` → exit 0 (no email, retry next day)
@@ -81,15 +81,15 @@ Current state: 144 `.mp4` files exist in Nextcloud but have not yet been moved t
       file_name TEXT NOT NULL,
       size_bytes INTEGER NOT NULL,
       discovered_at TEXT DEFAULT (datetime('now')),
-      gemma_done_at TEXT,
-      gemma_json_path TEXT,
-      claude_done_at TEXT,
+      vlm_done_at TEXT,
+      vlm_json_path TEXT,
+      digest_done_at TEXT,
       emailed_at TEXT,
-      gemma_error TEXT,
+      vlm_error TEXT,
       retry_count INTEGER DEFAULT 0
   );
   ```
-- **Flow**: watcher populates `discovered_at`, writes `gemma_done_at`. Digest reads and writes `claude_done_at`, `emailed_at`.
+- **Flow**: watcher populates `discovered_at`, writes `vlm_done_at`. Digest reads and writes `digest_done_at`, `emailed_at`.
 
 ## Data Flow
 
@@ -106,7 +106,7 @@ Current state: 144 `.mp4` files exist in Nextcloud but have not yet been moved t
     │     ├─ extract frames via ffmpeg
     │     ├─ per-frame Gemma (triage→universal→workout)
     │     └─ write data/videos/<sha>.json
-    │─ update state.db: gemma_done_at
+    │─ update state.db: vlm_done_at
     │
 [data/videos/<sha>.json] (immutable Gemma output)
     ↓ (com.kmx.workout-digest daily at 07:00)
@@ -118,7 +118,7 @@ Current state: 144 `.mp4` files exist in Nextcloud but have not yet been moved t
     │─ detect alerts: scan response for injury keywords
     │─ render_html_email(): create multipart message
     │─ send via Gmail SMTP
-    │─ update state.db: claude_done_at, emailed_at
+    │─ update state.db: digest_done_at, emailed_at
     │
 [Email: [Workout] Daily Form Digest — {date}] → karlmarx9193@gmail.com
 ```
@@ -165,9 +165,11 @@ Both scripts integrate RAM guards per `~/karl-infra/infra/local-ai.md`:
 - **Mid-run**: Stop processing videos if RAM hits critical threshold mid-run
 - **Max per run**: 5 videos (configurable via `MAX_PER_RUN` env var)
 
-### workout_digest.py (Claude API)
-- **Startup**: Skip if RAM is tight or critical (no email, retry next day)
-- **Runtime**: Pure API call + SMTP, no local inference, minimal RAM overhead
+### workout_digest.py (MLX-VLM)
+- **Startup**: Skip if RAM is tight or critical (no email, retry next day). Verifies MLX-VLM at `http://localhost:8080/v1/models` before doing anything.
+- **Runtime**: One MLX-VLM chat completion (Gemma 4 26B 8-bit) + SMTP. No external API calls, no API key, no per-request cost. Reuses the same `:8080` server as the watcher, so no extra RAM beyond what's already loaded.
+
+> **Note (2026-04):** `workout_digest.py` was previously documented as a Claude API consumer. It now calls MLX-VLM Gemma directly via the OpenAI-compatible `:8080` endpoint — same model the watcher uses — for zero API cost. As of 2026-04-26 the DB column names were renamed from the provider-specific `claude_done_at` / `gemma_done_at` to provider-neutral `digest_done_at` / `vlm_done_at`. The DB was empty at the time so no migration was required; if you ever need to migrate a populated DB, use `ALTER TABLE videos RENAME COLUMN claude_done_at TO digest_done_at` (and similarly for `gemma_*`).
 
 ## Logs
 
@@ -213,7 +215,7 @@ launchctl start com.kmx.workout-digest
 
 ### Manual list state DB
 ```bash
-sqlite3 ~/.local/share/workout-pipeline/state.db "SELECT file_name, gemma_done_at, claude_done_at, emailed_at FROM videos;"
+sqlite3 ~/.local/share/workout-pipeline/state.db "SELECT file_name, vlm_done_at, digest_done_at, emailed_at FROM videos;"
 ```
 
 ## Known Limitations & Future Work

@@ -70,9 +70,9 @@ def db_connect(db_path: Path) -> sqlite3.Connection:
 
 
 def load_pending_videos(db: sqlite3.Connection, data_root: Path, logger: logging.Logger) -> list[dict]:
-    """Load all videos that have been Gemma-analyzed but not yet Claude-analyzed."""
+    """Load all videos that have been VLM-analyzed but not yet digested."""
     cursor = db.execute(
-        "SELECT sha, gemma_json_path FROM videos WHERE gemma_done_at IS NOT NULL AND claude_done_at IS NULL ORDER BY discovered_at DESC"
+        "SELECT sha, vlm_json_path FROM videos WHERE vlm_done_at IS NOT NULL AND digest_done_at IS NULL ORDER BY discovered_at DESC"
     )
     pending = []
     for sha, json_path in cursor.fetchall():
@@ -239,12 +239,12 @@ def mark_done(
     had_alerts: bool,
     logger: logging.Logger
 ):
-    """Mark videos as Claude-analyzed and emailed."""
+    """Mark videos as digested and emailed."""
     try:
         now = datetime.now().isoformat()
         for sha in shas:
             db.execute(
-                "UPDATE videos SET claude_done_at = ?, emailed_at = ? WHERE sha = ?",
+                "UPDATE videos SET digest_done_at = ?, emailed_at = ? WHERE sha = ?",
                 (now if digest_sent else None, now if digest_sent else None, sha)
             )
         db.commit()

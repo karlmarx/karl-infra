@@ -4,7 +4,7 @@ Process Monitor Dashboard - Modern TUI with enhanced UX
 
 Sleek terminal dashboard for monitoring:
 - Background processes (Nextcloud, screenshot parser, etc.) with next-run predictions
-- Local LLM stats (Ollama models, VRAM usage, activity)
+- Local MLX-VLM server stats (ports :8080/:8081/:8082, /v1/models probe)
 - Claude session activity with temperature indicators
 - Real-time data with smart grouping, filtering, sorting, and drill-down
 
@@ -13,6 +13,7 @@ Uses Textual framework with modern design, keyboard shortcuts, and mouse support
 
 import subprocess
 import json
+import urllib.request
 from pathlib import Path
 from datetime import datetime, timedelta
 from dataclasses import dataclass
@@ -57,16 +58,14 @@ class ProcessInfo:
 
 
 @dataclass
-class OllamaModel:
-    """Information about a loaded Ollama model."""
-    name: str
-    size_mb: float
-    loaded: bool
-    last_used: Optional[datetime] = None
-
-    @property
-    def vram_mb(self) -> float:
-        return self.size_mb * 0.80 if self.loaded else 0.0
+class MlxServer:
+    """Information about an MLX-VLM server (probed via /v1/models)."""
+    port: int
+    role: str  # "analysis", "fast", "long-ctx"
+    model: str  # "—" if unreachable
+    healthy: bool
+    watched: bool  # mac-watchdog.sh only restarts :8080
+    last_seen: Optional[datetime] = None
 
 
 @dataclass
@@ -84,7 +83,7 @@ class ProcessMonitor:
 
     def __init__(self):
         self.processes: List[ProcessInfo] = []
-        self.ollama_models: List[OllamaModel] = []
+        self.mlx_servers: List[MlxServer] = []
         self.claude_sessions: List[ClaudeSession] = []
         self.load_processes()
 
@@ -165,39 +164,31 @@ class ProcessMonitor:
             proc.status = "error"
             proc.last_error = str(e)
 
-    def get_ollama_stats(self) -> List[OllamaModel]:
-        """Get Ollama running models and available models."""
-        models = []
-        running_models = set()
-
-        try:
-            result = subprocess.run(["ollama", "ps"], capture_output=True, text=True, timeout=5)
-            if result.stdout and "NAME" in result.stdout:
-                for line in result.stdout.strip().split("\n")[1:]:
-                    if line.strip():
-                        parts = line.split()
-                        if parts:
-                            running_models.add(parts[0])
-        except:
-            pass
-
-        try:
-            result = subprocess.run(["ollama", "list"], capture_output=True, text=True, timeout=5)
-            if result.stdout and "NAME" in result.stdout:
-                for line in result.stdout.strip().split("\n")[1:]:
-                    if line.strip():
-                        parts = line.split()
-                        if len(parts) >= 4:
-                            name = parts[0]
-                            size_str = f"{parts[2]} {parts[3]}"
-                            size_mb = self._parse_size(size_str)
-                            loaded = name in running_models
-                            models.append(OllamaModel(name=name, size_mb=size_mb, loaded=loaded))
-        except:
-            pass
-
-        models.sort(key=lambda m: (-m.loaded, -m.size_mb))
-        return models
+    def get_mlx_stats(self) -> List[MlxServer]:
+        """Probe MLX-VLM servers on :8080/:8081/:8082 via /v1/models."""
+        PORTS = [
+            (8080, "analysis", True),
+            (8081, "fast",     False),
+            (8082, "long-ctx", False),
+        ]
+        servers = []
+        for port, role, watched in PORTS:
+            model = "—"
+            healthy = False
+            try:
+                req = urllib.request.Request(f"http://127.0.0.1:{port}/v1/models")
+                with urllib.request.urlopen(req, timeout=2) as r:
+                    data = json.loads(r.read())
+                    if data.get("data"):
+                        model = data["data"][0].get("id", "—")
+                        healthy = True
+            except Exception:
+                pass
+            servers.append(MlxServer(
+                port=port, role=role, model=model, healthy=healthy, watched=watched,
+                last_seen=datetime.now() if healthy else None,
+            ))
+        return servers
 
     def _parse_size(self, size_str: str) -> float:
         """Parse size string like '17 GB' or '9.6 GB' to MB."""
@@ -343,8 +334,8 @@ class HelpScreen(ModalScreen):
         with Container():
             yield Static("[bold cyan]⌨  Keyboard Shortcuts[/]", id="help-title")
             yield Static(
-                "[cyan]Ctrl+1/2/3[/]  Switch tabs (Processes/Ollama/Claude)\n"
-                "[cyan]Alt+P/O/C[/]    Alternative tab switching\n"
+                "[cyan]Ctrl+1/2/3[/]  Switch tabs (Processes/MLX/Claude)\n"
+                "[cyan]Alt+P/M/C[/]    Alternative tab switching\n"
                 "[cyan]↑↓[/]           Navigate rows\n"
                 "[cyan]D[/]            Drill-down details for selected row\n"
                 "[cyan]E[/]            View logs for selected process\n"
@@ -395,10 +386,10 @@ class ProcessMonitorApp(App):
 
     BINDINGS = [
         Binding("ctrl+1", "switch_tab(0)", "Processes", show=False),
-        Binding("ctrl+2", "switch_tab(1)", "Ollama", show=False),
+        Binding("ctrl+2", "switch_tab(1)", "MLX", show=False),
         Binding("ctrl+3", "switch_tab(2)", "Claude", show=False),
         Binding("alt+p", "switch_tab(0)", "Processes", show=False),
-        Binding("alt+o", "switch_tab(1)", "Ollama", show=False),
+        Binding("alt+m", "switch_tab(1)", "MLX", show=False),
         Binding("alt+c", "switch_tab(2)", "Claude", show=False),
         Binding("d", "show_details", "Details", show=True),
         Binding("e", "view_logs", "Logs", show=True),
@@ -478,8 +469,8 @@ class ProcessMonitorApp(App):
     def __init__(self):
         super().__init__()
         self.monitor = ProcessMonitor()
-        self.current_sort = {"processes": "status", "ollama": "size", "claude": "modified"}
-        self.filter_text = {"processes": "", "ollama": "", "claude": ""}
+        self.current_sort = {"processes": "status", "mlx": "port", "claude": "modified"}
+        self.filter_text = {"processes": "", "mlx": "", "claude": ""}
         self.filter_mode = False
         self.next_update_in = 5
         self._prev_snapshot: Dict[str, int] = {}
@@ -499,8 +490,8 @@ class ProcessMonitorApp(App):
                 with Tabs(id="main-tabs"):
                     with TabPane("⬡ Processes", id="processes"):
                         yield DataTable(id="processes-table")
-                    with TabPane("⬡ Ollama", id="ollama"):
-                        yield DataTable(id="ollama-table")
+                    with TabPane("⬡ MLX", id="mlx"):
+                        yield DataTable(id="mlx-table")
                     with TabPane("⬡ Claude", id="claude"):
                         yield DataTable(id="claude-table")
 
@@ -519,10 +510,10 @@ class ProcessMonitorApp(App):
         pt.cursor_type = "row"
         pt.add_columns("Process", "Last Run", "Next Run", "Interval", "Errors")
 
-        # Ollama table
-        ot = self.query_one("#ollama-table", DataTable)
-        ot.cursor_type = "row"
-        ot.add_columns("Model", "Size", "VRAM", "Status", "Last Used")
+        # MLX table
+        mt = self.query_one("#mlx-table", DataTable)
+        mt.cursor_type = "row"
+        mt.add_columns("Port", "Role", "Model", "Status", "Watched", "Last Seen")
 
         # Claude table
         ct = self.query_one("#claude-table", DataTable)
@@ -543,14 +534,14 @@ class ProcessMonitorApp(App):
     async def _update_all_data(self) -> None:
         """Refresh all data sources."""
         self.monitor.load_processes()
-        self.monitor.ollama_models = self.monitor.get_ollama_stats()
+        self.monitor.mlx_servers = self.monitor.get_mlx_stats()
         self.monitor.claude_sessions = self.monitor.get_claude_sessions()
         self._render_tables()
 
     def _render_tables(self):
         """Render all three tables with sorted/filtered data."""
         self._render_processes()
-        self._render_ollama()
+        self._render_mlx()
         self._render_claude()
 
     def _render_processes(self):
@@ -597,44 +588,35 @@ class ProcessMonitorApp(App):
         else:
             return f"🟡 {rel}"  # WARNING
 
-    def _render_ollama(self):
-        """Render Ollama models table."""
-        ot = self.query_one("#ollama-table", DataTable)
-        ot.clear()
+    def _render_mlx(self):
+        """Render MLX-VLM servers table (probes :8080/:8081/:8082)."""
+        mt = self.query_one("#mlx-table", DataTable)
+        mt.clear()
 
-        # Group: loaded first
-        loaded = [m for m in self.monitor.ollama_models if m.loaded]
-        idle = [m for m in self.monitor.ollama_models if not m.loaded]
-
-        for model in loaded + idle:
-            icon = "▶" if model.loaded else "◌"
-            size_gb = f"{model.size_mb / 1024:.1f} GB"
-            vram = self._format_vram(model)
-            status = "✓ LOADED" if model.loaded else "idle"
-            last_used = self.monitor.format_relative_time(model.last_used) if model.last_used else "—"
+        for s in self.monitor.mlx_servers:
+            icon = "▶" if s.healthy else "✖"
+            status = "✓ HEALTHY" if s.healthy else "DOWN"
+            watched_label = "watched" if s.watched else "silent"
+            last_seen = self.monitor.format_relative_time(s.last_seen) if s.last_seen else "—"
 
             row = (
-                f"{icon} {model.name}",
-                size_gb,
-                vram,
+                f"{icon} :{s.port}",
+                s.role,
+                s.model,
                 status,
-                last_used
+                watched_label,
+                last_seen,
             )
 
-            color = "green" if model.loaded else "white"
-            ot.add_row(*row, label=color)
-
-    def _format_vram(self, model: OllamaModel) -> str:
-        """Format VRAM as progress bar."""
-        if not model.loaded:
-            return "—"
-
-        # Assume ~36GB total VRAM on the Mac Studio
-        total_vram = 36 * 1024
-        vram = model.vram_mb
-        percent = int((vram / total_vram) * 100)
-        bars = int(percent / 12.5)
-        return f"{'█' * bars}{'░' * (8 - bars)} {percent}%"
+            # green = healthy; red = down on watched port (the bad case);
+            # yellow = down on silent port (expected silent failure mode)
+            if s.healthy:
+                color = "green"
+            elif s.watched:
+                color = "red"
+            else:
+                color = "yellow"
+            mt.add_row(*row, label=color)
 
     def _render_claude(self):
         """Render Claude sessions table."""
@@ -675,23 +657,24 @@ class ProcessMonitorApp(App):
         # Process stats
         running_count = sum(1 for p in self.monitor.processes if p.status == "running")
         error_count = sum(1 for p in self.monitor.processes if p.status == "error")
-        total_size = sum(m.size_mb for m in self.monitor.ollama_models) / 1024
 
-        # Ollama stats
-        loaded_count = sum(1 for m in self.monitor.ollama_models if m.loaded)
-        vram_in_use = sum(m.vram_mb for m in self.monitor.ollama_models) / 1024
+        # MLX stats
+        mlx_healthy = sum(1 for s in self.monitor.mlx_servers if s.healthy)
+        mlx_total = len(self.monitor.mlx_servers) or 3
+        # Watched-port-down is the alarming state — surface it
+        mlx_watched_down = sum(1 for s in self.monitor.mlx_servers if s.watched and not s.healthy)
 
         # Claude stats
         total_tokens = sum(s.token_estimate for s in self.monitor.claude_sessions)
+
+        mlx_alert = "  ⚠ :8080 DOWN" if mlx_watched_down else ""
 
         stats_text = (
             f"[cyan]Processes[/]\n"
             f"▶ {running_count} running\n"
             f"✖ {error_count} errors\n"
-            f"\n[cyan]Ollama[/]\n"
-            f"▶ {loaded_count} loaded\n"
-            f"💾 {total_size:.1f} GB\n"
-            f"🧠 {vram_in_use:.1f} GB RAM\n"
+            f"\n[cyan]MLX[/]\n"
+            f"▶ {mlx_healthy}/{mlx_total} healthy{mlx_alert}\n"
             f"\n[cyan]Claude[/]\n"
             f"📊 {len(self.monitor.claude_sessions)} sessions\n"
             f"🔤 {total_tokens:,} tokens"
@@ -732,18 +715,19 @@ class ProcessMonitorApp(App):
                 }
                 self.app.push_screen(DetailScreen(f"📋 {proc.name}", details))
 
-        elif active_tab.id == "ollama":
-            table = self.query_one("#ollama-table", DataTable)
+        elif active_tab.id == "mlx":
+            table = self.query_one("#mlx-table", DataTable)
             if table.cursor_row is not None:
-                model = self.monitor.ollama_models[table.cursor_row]
+                server = self.monitor.mlx_servers[table.cursor_row]
                 details = {
-                    "Name": model.name,
-                    "Size": f"{model.size_mb / 1024:.1f} GB",
-                    "Status": "Loaded" if model.loaded else "Idle",
-                    "VRAM": f"{model.vram_mb / 1024:.1f} GB" if model.loaded else "—",
-                    "Last Used": self.monitor.format_relative_time(model.last_used) if model.last_used else "—",
+                    "Port": str(server.port),
+                    "Role": server.role,
+                    "Model": server.model,
+                    "Status": "Healthy" if server.healthy else "Down",
+                    "Watched": "Yes (mac-watchdog.sh)" if server.watched else "No (silent failure mode)",
+                    "Last Seen": self.monitor.format_relative_time(server.last_seen) if server.last_seen else "—",
                 }
-                self.app.push_screen(DetailScreen(f"⚙ {model.name}", details))
+                self.app.push_screen(DetailScreen(f"⚙ MLX :{server.port}", details))
 
         elif active_tab.id == "claude":
             table = self.query_one("#claude-table", DataTable)

@@ -1,5 +1,7 @@
 # Local Windows Workstation
 
+> **Note (2026-04):** OpenClaw now runs on **both** the Windows workstation and the Mac Studio. This doc covers only the Windows side. The Mac instance — `~/.openclaw/`, four LaunchAgents, the `mac-watchdog.sh` loop, MLX-VLM/Ollama/Gemini routing, `:8080` model lifecycle — is documented in detail at [openclaw.md](openclaw.md). Don't duplicate openclaw content here; treat the two instances as peers, each documented in its own file.
+
 ## Overview
 
 Windows 11 Pro workstation serving as the primary development machine and host for local automation services.

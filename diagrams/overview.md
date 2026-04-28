@@ -38,7 +38,22 @@
 |  +- Progress Dashboard  |                                         |
 |     (status monitor)    |                                         |
 |     + local system polling                                       |
-|     + email notifications
+|     + email notifications                                         |
+|                         |                                         |
+|  command.93.fyi --------+   Cloudflare Access (zero-trust)        |
+|  +- Karl Command Center |   +- gates command.93.fyi               |
+|     (Next.js 16)        |                                         |
+|     /        Today + Status (read-only)                           |
+|     /control Buttons + toggles (typed-confirm modal)              |
+|     /explore Photos · voices · memory · activity timeline         |
+|     + Mac Studio FastAPI agent for local data                     |
+|                         |                                         |
+|  auto.93.fyi -----------+                                         |
+|  +- Automation Map      |                                         |
+|     (xyflow graph)      |                                         |
+|                         |                                         |
+|  (no subdomain yet)     |                                         |
+|  +- house-tracker (S. FL property tracker, *.vercel.app)          |
 |                            | Nextcloud (Takeout, TODO, logs)     |
 |  93.fyi ----------------+  |                                     |
 |  (Cloudflare DNS)           |                                     |
@@ -102,13 +117,43 @@ nfit.93.fyi nyoga.    id.93   Serverless
   |    +- gemma4:latest (9.6 GB)                           |
   |    +- llama3.2:1b (1.3 GB)                             |
   |                                                        |
-  |  MLX-VLM Server (Vision Language Model, always-on)     |
-  |    +- gemma-4-26b-a4b-it-8bit (26 GB)                  |
-  |    +- listens on http://localhost:8080                 |
+  |  MLX-VLM Servers (always-on, loopback only)            |
+  |    +- :8080 watchdog=gemma-4-26b-4bit / live=Qwen3.5-27B
+  |       (only :8080 is restarted by mac-watchdog.sh)     |
+  |    +- :8081 Qwen3.5-9B-MLX-4bit (fast chat, primary)   |
+  |    +- :8082 Qwen3.5-9B-MLX-4bit (262k reasoning, DOWN) |
   |                                                        |
-  |  Nextcloud Photo Sync (every 1 hour)                   |
-  |    +- polls Nextcloud /Photos/Android/                 |
+  |  Nextcloud Photo Sync (every 1 hour) -- DEAD 04-22     |
+  |    +- polls Nextcloud /InstantUpload/Camera/           |
   |    +- downloads to /Volumes/Crucial X9/photos/         |
+  |    +- bug: plist /opt/homebrew/bin/uv (use ~/.local)   |
+  |    +- bug: NEXTCLOUD_PASSWORD = placeholder            |
+  |                                                        |
+  |  Screenshot Parser (every 1 hour) -- DEAD same bugs    |
+  |    +- polls Nextcloud /InstantUpload/Screenshots/      |
+  |    +- MLX-VLM classifies: receipt/return/warranty/etc  |
+  |    +- files by category, appends Todoist tasks         |
+  |                                                        |
+  |  local-vlm-analysis (library)                          |
+  |    +- 3-layer Gemma pipeline: triage → universal       |
+  |       → workout                                        |
+  |    +- shared by workout_watcher and photo-memory       |
+  |    +- routes to MLX-VLM :8080                          |
+  |                                                        |
+  |  OpenClaw gateway (4 LaunchAgents, :18789 loopback)    |
+  |    +- routes to MLX/Ollama/Google providers            |
+  |    +- mac-watchdog.sh restarts :8080 (RAM-gated)       |
+  |    +- runs.sqlite at ~/.openclaw/tasks/                |
+  |                                                        |
+  |  Gemini CLI (interactive AI, secondary to Claude Code) |
+  |    +- OAuth karlmarx9193@gmail.com                     |
+  |    +- 5 MCP extensions                                 |
+  |    +- ~/.gemini/projects.json scopes per directory     |
+  |                                                        |
+  |  gemini-auto (Playwright/CDP image gen, on-demand)     |
+  |    +- Chrome :9222 primary, Edge :9224/:9225 fallback  |
+  |    +- 3-account rotation (40 imgs/day each)            |
+  |    +- moved from Windows; hardcoded paths in source    |
   |                                                        |
   |  workout_watcher (every 15 min)                        |
   |    +- watches X9 SSD for new .mp4 videos               |
@@ -122,5 +167,49 @@ nfit.93.fyi nyoga.    id.93   Serverless
   |    +- sends HTML email digest                          |
   |    +- alerts on form/safety concerns                   |
   |                                                        |
+  |  command-agent (FastAPI, always-on)                    |
+  |    +- launchd: ~/Library/LaunchAgents/                 |
+  |    +- exposes /stats, /pipelines, /voices, /memory,    |
+  |       /openclaw, /repos, /timeline as JSON             |
+  |    +- consumed by command.93.fyi via Cloudflare tunnel |
+  |    +- RAM-aware (refuses heavy actions <1GB free)      |
+  |                                                        |
   +--------------------------------------------------------+
+
+
+## Local Repos (manual / WIP)
+
+```
+  Standalone repos not yet wired into LaunchAgents or CI
+  +--------------------------------------------------------+
+  |                                                        |
+  |  photo-memory          ── X9 SSD → MLX-VLM → catalog   |
+  |    +- phase1_dedupe.py (SHA256 dedupe, RAM-aware)      |
+  |    +- → photos.93.fyi (Cloudflare Worker, planned)     |
+  |                                                        |
+  |  finflow               ── Teller API → DuckDB → Polars |
+  |    +- FastAPI on :8000 (manual run today)              |
+  |                                                        |
+  |  amex-claims-automator ── Playwright → claims-center   |
+  |    +- headed Chromium, human-in-loop for MFA           |
+  |                                                        |
+  |  tui-dashboard         ── Textual global TUI (skeleton)|
+  |    +- distinct from process-monitor-dashboard          |
+  |                                                        |
+  |  house-tracker         ── S. FL property tracker SPA   |
+  |    +- React 19 + Vite, Vercel, no custom domain yet    |
+  |                                                        |
+  +--------------------------------------------------------+
+```
+
+## Seedbox (planned)
+
+```
+  +--------------------------------------------------------+
+  |  find-hub-tracker (PLANNED — not yet deployed)         |
+  |    +- polls Google Find Hub Nova API                   |
+  |    +- Discord alerts on anomalies                      |
+  |    +- pings Healthchecks.io for liveness               |
+  +--------------------------------------------------------+
+```
 ```

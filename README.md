@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-28
+> Auto-updated daily from GitHub commits. Last update: 2026-04-29
 
 ## Overview
 
@@ -87,19 +87,26 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### mom-93fyi
+- Merge pull request #3 from karlmarx/claude/mom-bedbug-fixes (2026-04-29)
+- fix: cozy city frame, no helper, correct mobility assumptions (2026-04-29)
+- Merge pull request #2 from karlmarx/claude/mom-bedbug-pwa-W9NFB (2026-04-28)
+- refactor(bedbug): collapse to a single overview page + 3 reference cards (2026-04-28)
+- feat(bedbug): host-aware proxy so bedbug.93.fyi serves the PWA (2026-04-28)
+
+### karl-infra
+- chore: daily update 2026-04-28 (2026-04-28)
+- feat: add orthoappt for ortho.93.fyi (Dr. Almodovar follow-up companion) (2026-04-27)
+- infra: switch workout digest to MLX-VLM (reuse watcher server) (2026-04-24)
+- infra: switch workout digest to local Ollama (no API costs) (2026-04-23)
+- infra: add workout video analysis pipeline (2026-04-23)
+
 ### nwb-plan
 - docs: add PWB Phase 4 exercise list draft for PT review (#97) (2026-04-26)
 - chore: redeploy after dev DB env split (2026-04-25)
 - chore: remove personal medical info; expand to 8 weeks; drop Hevy CTA (2026-04-25)
 - chore: redeploy after Neon Postgres provisioning (2026-04-25)
 - feat(mcp): expose exercise library to Claude via MCP server (#92) (2026-04-25)
-
-### karl-infra
-- feat: add orthoappt for ortho.93.fyi (Dr. Almodovar follow-up companion) (2026-04-27)
-- infra: switch workout digest to MLX-VLM (reuse watcher server) (2026-04-24)
-- infra: switch workout digest to local Ollama (no API costs) (2026-04-23)
-- infra: add workout video analysis pipeline (2026-04-23)
-- docs: add mom.93.fyi service documentation (2026-04-23)
 
 ### tui-dashboard
 - fix: %-d strftime not supported on Windows (2026-04-02)
@@ -132,10 +139,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - fix: remove dead @site_url secret reference from vercel.json (2026-04-25)
 - feat: add /workoutgifs route and workoutgifs.93.fyi subdomain rewrite (2026-04-25)
 - revert: remove misplaced equipment-gifs directory (2026-04-22)
-
-### mom-93fyi
-- refactor: trim sentimental framing, sign as Ben, reframe ID4 as Ben's car, add Google search (2026-04-23)
-- feat: initial mom.93.fyi with handwritten letter aesthetic and 10 worry cards (2026-04-23)
 
 ### layover-93fyi
 - feat: editorial redesign with vintage travel magazine aesthetic (2026-04-23)

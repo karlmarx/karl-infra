@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-29
+> Auto-updated daily from GitHub commits. Last update: 2026-04-30
 
 ## Overview
 
@@ -88,25 +88,25 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### mom-93fyi
+- feat(bedbug): add Step 0 confirm + items pages, switch laundry to dry-wash-dry (2026-04-29)
+- Merge pull request #4 from karlmarx/claude/bedbug-actual-products (2026-04-29)
+- fix(bedbug): use actual products; no helper at all (2026-04-29)
 - Merge pull request #3 from karlmarx/claude/mom-bedbug-fixes (2026-04-29)
 - fix: cozy city frame, no helper, correct mobility assumptions (2026-04-29)
-- Merge pull request #2 from karlmarx/claude/mom-bedbug-pwa-W9NFB (2026-04-28)
-- refactor(bedbug): collapse to a single overview page + 3 reference cards (2026-04-28)
-- feat(bedbug): host-aware proxy so bedbug.93.fyi serves the PWA (2026-04-28)
+
+### nwb-plan
+- feat(watch): bump scheduler to 8 weeks / 4 phases for PWB Prep (#107) (2026-04-29)
+- refactor(progress-clock): count-up + PWB phase extension (#105) (2026-04-29)
+- Merge pull request #103 from karlmarx/refactor/condition-tags-predicate (2026-04-29)
+- fix(condition): use relative imports for condition-types in watch import path (2026-04-29)
+- feat(condition): add Exercise.movementTags + isAllowedForCondition predicate (2026-04-29)
 
 ### karl-infra
+- chore: daily update 2026-04-29 (2026-04-29)
 - chore: daily update 2026-04-28 (2026-04-28)
 - feat: add orthoappt for ortho.93.fyi (Dr. Almodovar follow-up companion) (2026-04-27)
 - infra: switch workout digest to MLX-VLM (reuse watcher server) (2026-04-24)
 - infra: switch workout digest to local Ollama (no API costs) (2026-04-23)
-- infra: add workout video analysis pipeline (2026-04-23)
-
-### nwb-plan
-- docs: add PWB Phase 4 exercise list draft for PT review (#97) (2026-04-26)
-- chore: redeploy after dev DB env split (2026-04-25)
-- chore: remove personal medical info; expand to 8 weeks; drop Hevy CTA (2026-04-25)
-- chore: redeploy after Neon Postgres provisioning (2026-04-25)
-- feat(mcp): expose exercise library to Claude via MCP server (#92) (2026-04-25)
 
 ### tui-dashboard
 - fix: %-d strftime not supported on Windows (2026-04-02)

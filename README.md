@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-04-30
+> Auto-updated daily from GitHub commits. Last update: 2026-05-01
 
 ## Overview
 
@@ -88,11 +88,25 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### mom-93fyi
-- feat(bedbug): add Step 0 confirm + items pages, switch laundry to dry-wash-dry (2026-04-29)
-- Merge pull request #4 from karlmarx/claude/bedbug-actual-products (2026-04-29)
-- fix(bedbug): use actual products; no helper at all (2026-04-29)
-- Merge pull request #3 from karlmarx/claude/mom-bedbug-fixes (2026-04-29)
-- fix: cozy city frame, no helper, correct mobility assumptions (2026-04-29)
+- feat(bedbug): address Mom's specific fears — suitcases, bags, safe-island framing (#14) (2026-05-01)
+- feat(bedbug): materials page + Twilio SMS Q&A loop + SafeRest fix (#13) (2026-05-01)
+- feat: add /privacy page for Twilio registration (2026-04-30)
+- feat: add /sms-terms page for Twilio A2P registration (2026-04-30)
+- chore: ignore .worktrees/ directory (2026-04-30)
+
+### 93-fyi
+- feat: link mom.93.fyi from apex (twilio review) (#2) (2026-05-01)
+- feat(workoutgifs): add 5 new clips and PUSH/PULL/CARDIO sections (2026-04-25)
+- fix: migrate subdomain rewrite to Next 16 proxy.ts (drop dead middleware.ts) (2026-04-25)
+- fix: remove dead @site_url secret reference from vercel.json (2026-04-25)
+- feat: add /workoutgifs route and workoutgifs.93.fyi subdomain rewrite (2026-04-25)
+
+### karl-infra
+- chore: daily update 2026-04-30 (2026-04-30)
+- chore: daily update 2026-04-29 (2026-04-29)
+- chore: daily update 2026-04-28 (2026-04-28)
+- feat: add orthoappt for ortho.93.fyi (Dr. Almodovar follow-up companion) (2026-04-27)
+- infra: switch workout digest to MLX-VLM (reuse watcher server) (2026-04-24)
 
 ### nwb-plan
 - feat(watch): bump scheduler to 8 weeks / 4 phases for PWB Prep (#107) (2026-04-29)
@@ -100,13 +114,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - Merge pull request #103 from karlmarx/refactor/condition-tags-predicate (2026-04-29)
 - fix(condition): use relative imports for condition-types in watch import path (2026-04-29)
 - feat(condition): add Exercise.movementTags + isAllowedForCondition predicate (2026-04-29)
-
-### karl-infra
-- chore: daily update 2026-04-29 (2026-04-29)
-- chore: daily update 2026-04-28 (2026-04-28)
-- feat: add orthoappt for ortho.93.fyi (Dr. Almodovar follow-up companion) (2026-04-27)
-- infra: switch workout digest to MLX-VLM (reuse watcher server) (2026-04-24)
-- infra: switch workout digest to local Ollama (no API costs) (2026-04-23)
 
 ### tui-dashboard
 - fix: %-d strftime not supported on Windows (2026-04-02)
@@ -132,20 +139,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
 - progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
 - progress: Stage 3: 42579/109058 captions | Stage 4: 42575/109058 faces (2026-04-20)
-
-### 93-fyi
-- feat(workoutgifs): add 5 new clips and PUSH/PULL/CARDIO sections (2026-04-25)
-- fix: migrate subdomain rewrite to Next 16 proxy.ts (drop dead middleware.ts) (2026-04-25)
-- fix: remove dead @site_url secret reference from vercel.json (2026-04-25)
-- feat: add /workoutgifs route and workoutgifs.93.fyi subdomain rewrite (2026-04-25)
-- revert: remove misplaced equipment-gifs directory (2026-04-22)
-
-### layover-93fyi
-- feat: editorial redesign with vintage travel magazine aesthetic (2026-04-23)
-- style: add colorful interactive diagrams (probability viz, delay chart, timeline, airport map) with richer color palette (2026-04-23)
-- style: improve visual design with colored cards, better spacing, and enhanced typography for elderly audience (2026-04-23)
-- feat: replace task checklist with reassuring what-if scenarios (2026-04-23)
-- deploy: add Vercel configuration for production deployment (2026-04-23)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

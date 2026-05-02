@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-01
+> Auto-updated daily from GitHub commits. Last update: 2026-05-02
 
 ## Overview
 
@@ -88,11 +88,25 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### mom-93fyi
+- chore: add stop-gap handoff prompt + keep-awake powershell (2026-05-01)
+- feat(bedbug): /api/bedbug/agent-bridge for the scheduled auto-answer agent (#16) (2026-05-01)
 - feat(bedbug): address Mom's specific fears — suitcases, bags, safe-island framing (#14) (2026-05-01)
 - feat(bedbug): materials page + Twilio SMS Q&A loop + SafeRest fix (#13) (2026-05-01)
 - feat: add /privacy page for Twilio registration (2026-04-30)
-- feat: add /sms-terms page for Twilio A2P registration (2026-04-30)
-- chore: ignore .worktrees/ directory (2026-04-30)
+
+### nwb-plan
+- Merge pull request #110 from karlmarx/feat/pt-leg-conditioning-inline (2026-05-01)
+- feat(pt): surface PT left-leg conditioning inline under main lifts (2026-05-01)
+- Merge pull request #109 from karlmarx/claude/chest-row-equipment-variants-DcR3e (2026-05-01)
+- Merge branch 'dev' into claude/chest-row-equipment-variants-DcR3e (2026-05-01)
+- feat(pt): add Rehab tab with PT exercise progression (#108) (2026-05-01)
+
+### karl-infra
+- chore: daily update 2026-05-01 (2026-05-01)
+- chore: daily update 2026-04-30 (2026-04-30)
+- chore: daily update 2026-04-29 (2026-04-29)
+- chore: daily update 2026-04-28 (2026-04-28)
+- feat: add orthoappt for ortho.93.fyi (Dr. Almodovar follow-up companion) (2026-04-27)
 
 ### 93-fyi
 - feat: link mom.93.fyi from apex (twilio review) (#2) (2026-05-01)
@@ -100,20 +114,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - fix: migrate subdomain rewrite to Next 16 proxy.ts (drop dead middleware.ts) (2026-04-25)
 - fix: remove dead @site_url secret reference from vercel.json (2026-04-25)
 - feat: add /workoutgifs route and workoutgifs.93.fyi subdomain rewrite (2026-04-25)
-
-### karl-infra
-- chore: daily update 2026-04-30 (2026-04-30)
-- chore: daily update 2026-04-29 (2026-04-29)
-- chore: daily update 2026-04-28 (2026-04-28)
-- feat: add orthoappt for ortho.93.fyi (Dr. Almodovar follow-up companion) (2026-04-27)
-- infra: switch workout digest to MLX-VLM (reuse watcher server) (2026-04-24)
-
-### nwb-plan
-- feat(watch): bump scheduler to 8 weeks / 4 phases for PWB Prep (#107) (2026-04-29)
-- refactor(progress-clock): count-up + PWB phase extension (#105) (2026-04-29)
-- Merge pull request #103 from karlmarx/refactor/condition-tags-predicate (2026-04-29)
-- fix(condition): use relative imports for condition-types in watch import path (2026-04-29)
-- feat(condition): add Exercise.movementTags + isAllowedForCondition predicate (2026-04-29)
 
 ### tui-dashboard
 - fix: %-d strftime not supported on Windows (2026-04-02)

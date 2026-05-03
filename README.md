@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-02
+> Auto-updated daily from GitHub commits. Last update: 2026-05-03
 
 ## Overview
 
@@ -87,12 +87,22 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### thumb-fit
+- feat: initial thumb-fit fork from nwb-plan (2026-05-02)
+
 ### mom-93fyi
+- feat(thumbyoga): add diagrams, library, practice mode, print stylesheet (#19) (2026-05-02)
+- Collapse bedbug app to plain readable guide (#18) (2026-05-02)
+- feat: add thumb-safe yoga sequence at thumbyoga.93.fyi (#17) (2026-05-02)
 - chore: add stop-gap handoff prompt + keep-awake powershell (2026-05-01)
 - feat(bedbug): /api/bedbug/agent-bridge for the scheduled auto-answer agent (#16) (2026-05-01)
-- feat(bedbug): address Mom's specific fears — suitcases, bags, safe-island framing (#14) (2026-05-01)
-- feat(bedbug): materials page + Twilio SMS Q&A loop + SafeRest fix (#13) (2026-05-01)
-- feat: add /privacy page for Twilio registration (2026-04-30)
+
+### karl-infra
+- chore: daily update 2026-05-02 (2026-05-02)
+- chore: daily update 2026-05-01 (2026-05-01)
+- chore: daily update 2026-04-30 (2026-04-30)
+- chore: daily update 2026-04-29 (2026-04-29)
+- chore: daily update 2026-04-28 (2026-04-28)
 
 ### nwb-plan
 - Merge pull request #110 from karlmarx/feat/pt-leg-conditioning-inline (2026-05-01)
@@ -100,13 +110,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - Merge pull request #109 from karlmarx/claude/chest-row-equipment-variants-DcR3e (2026-05-01)
 - Merge branch 'dev' into claude/chest-row-equipment-variants-DcR3e (2026-05-01)
 - feat(pt): add Rehab tab with PT exercise progression (#108) (2026-05-01)
-
-### karl-infra
-- chore: daily update 2026-05-01 (2026-05-01)
-- chore: daily update 2026-04-30 (2026-04-30)
-- chore: daily update 2026-04-29 (2026-04-29)
-- chore: daily update 2026-04-28 (2026-04-28)
-- feat: add orthoappt for ortho.93.fyi (Dr. Almodovar follow-up companion) (2026-04-27)
 
 ### 93-fyi
 - feat: link mom.93.fyi from apex (twilio review) (#2) (2026-05-01)

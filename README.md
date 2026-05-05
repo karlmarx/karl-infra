@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-04
+> Auto-updated daily from GitHub commits. Last update: 2026-05-05
 
 ## Overview
 
@@ -87,12 +87,26 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### blazing-paddles-react
+- Merge pull request #24 from karlmarx/Robb-Dev (2026-05-05)
+- chore: update robots.txt to disallow access to /dl/ directory (2026-05-05)
+- Merge pull request #23 from karlmarx/Robb-Dev (2026-05-05)
+- chore: remove deprecated API endpoints and configuration files (2026-05-05)
+- Merge pull request #22 from karlmarx/Robb-Dev (2026-05-05)
+
+### nwb-plan
+- Merge pull request #112 from karlmarx/feat/workout-cloud-sync (2026-05-04)
+- feat(auth): cloud-sync workout history + decouple login from AI flag (2026-05-04)
+- Merge pull request #110 from karlmarx/feat/pt-leg-conditioning-inline (2026-05-01)
+- feat(pt): surface PT left-leg conditioning inline under main lifts (2026-05-01)
+- Merge pull request #109 from karlmarx/claude/chest-row-equipment-variants-DcR3e (2026-05-01)
+
 ### karl-infra
+- chore: daily update 2026-05-04 (2026-05-04)
 - chore: daily update 2026-05-03 (2026-05-03)
 - chore: daily update 2026-05-02 (2026-05-02)
 - chore: daily update 2026-05-01 (2026-05-01)
 - chore: daily update 2026-04-30 (2026-04-30)
-- chore: daily update 2026-04-29 (2026-04-29)
 
 ### thumb-fit
 - feat: initial thumb-fit fork from nwb-plan (2026-05-02)
@@ -103,13 +117,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - feat: add thumb-safe yoga sequence at thumbyoga.93.fyi (#17) (2026-05-02)
 - chore: add stop-gap handoff prompt + keep-awake powershell (2026-05-01)
 - feat(bedbug): /api/bedbug/agent-bridge for the scheduled auto-answer agent (#16) (2026-05-01)
-
-### nwb-plan
-- Merge pull request #110 from karlmarx/feat/pt-leg-conditioning-inline (2026-05-01)
-- feat(pt): surface PT left-leg conditioning inline under main lifts (2026-05-01)
-- Merge pull request #109 from karlmarx/claude/chest-row-equipment-variants-DcR3e (2026-05-01)
-- Merge branch 'dev' into claude/chest-row-equipment-variants-DcR3e (2026-05-01)
-- feat(pt): add Rehab tab with PT exercise progression (#108) (2026-05-01)
 
 ### 93-fyi
 - feat: link mom.93.fyi from apex (twilio review) (#2) (2026-05-01)

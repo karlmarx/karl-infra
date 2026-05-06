@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-05
+> Auto-updated daily from GitHub commits. Last update: 2026-05-06
 
 ## Overview
 
@@ -94,19 +94,19 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - chore: remove deprecated API endpoints and configuration files (2026-05-05)
 - Merge pull request #22 from karlmarx/Robb-Dev (2026-05-05)
 
+### karl-infra
+- chore: daily update 2026-05-05 (2026-05-05)
+- chore: daily update 2026-05-04 (2026-05-04)
+- chore: daily update 2026-05-03 (2026-05-03)
+- chore: daily update 2026-05-02 (2026-05-02)
+- chore: daily update 2026-05-01 (2026-05-01)
+
 ### nwb-plan
 - Merge pull request #112 from karlmarx/feat/workout-cloud-sync (2026-05-04)
 - feat(auth): cloud-sync workout history + decouple login from AI flag (2026-05-04)
 - Merge pull request #110 from karlmarx/feat/pt-leg-conditioning-inline (2026-05-01)
 - feat(pt): surface PT left-leg conditioning inline under main lifts (2026-05-01)
 - Merge pull request #109 from karlmarx/claude/chest-row-equipment-variants-DcR3e (2026-05-01)
-
-### karl-infra
-- chore: daily update 2026-05-04 (2026-05-04)
-- chore: daily update 2026-05-03 (2026-05-03)
-- chore: daily update 2026-05-02 (2026-05-02)
-- chore: daily update 2026-05-01 (2026-05-01)
-- chore: daily update 2026-04-30 (2026-04-30)
 
 ### thumb-fit
 - feat: initial thumb-fit fork from nwb-plan (2026-05-02)

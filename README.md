@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-06
+> Auto-updated daily from GitHub commits. Last update: 2026-05-07
 
 ## Overview
 
@@ -87,26 +87,26 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### nwb-plan
+- Merge pull request #111 from karlmarx/main (2026-05-06)
+- Merge branch 'dev' into main (catch missed PR #112 cloud-sync) (2026-05-04)
+- Merge branch 'dev' into main (2026-05-04)
+- Merge pull request #112 from karlmarx/feat/workout-cloud-sync (2026-05-04)
+- feat(auth): cloud-sync workout history + decouple login from AI flag (2026-05-04)
+
+### karl-infra
+- chore: daily update 2026-05-06 (2026-05-06)
+- chore: daily update 2026-05-05 (2026-05-05)
+- chore: daily update 2026-05-04 (2026-05-04)
+- chore: daily update 2026-05-03 (2026-05-03)
+- chore: daily update 2026-05-02 (2026-05-02)
+
 ### blazing-paddles-react
 - Merge pull request #24 from karlmarx/Robb-Dev (2026-05-05)
 - chore: update robots.txt to disallow access to /dl/ directory (2026-05-05)
 - Merge pull request #23 from karlmarx/Robb-Dev (2026-05-05)
 - chore: remove deprecated API endpoints and configuration files (2026-05-05)
 - Merge pull request #22 from karlmarx/Robb-Dev (2026-05-05)
-
-### karl-infra
-- chore: daily update 2026-05-05 (2026-05-05)
-- chore: daily update 2026-05-04 (2026-05-04)
-- chore: daily update 2026-05-03 (2026-05-03)
-- chore: daily update 2026-05-02 (2026-05-02)
-- chore: daily update 2026-05-01 (2026-05-01)
-
-### nwb-plan
-- Merge pull request #112 from karlmarx/feat/workout-cloud-sync (2026-05-04)
-- feat(auth): cloud-sync workout history + decouple login from AI flag (2026-05-04)
-- Merge pull request #110 from karlmarx/feat/pt-leg-conditioning-inline (2026-05-01)
-- feat(pt): surface PT left-leg conditioning inline under main lifts (2026-05-01)
-- Merge pull request #109 from karlmarx/claude/chest-row-equipment-variants-DcR3e (2026-05-01)
 
 ### thumb-fit
 - feat: initial thumb-fit fork from nwb-plan (2026-05-02)

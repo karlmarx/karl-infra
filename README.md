@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-07
+> Auto-updated daily from GitHub commits. Last update: 2026-05-08
 
 ## Overview
 
@@ -89,18 +89,23 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### nwb-plan
-- Merge pull request #111 from karlmarx/main (2026-05-06)
-- Merge branch 'dev' into main (catch missed PR #112 cloud-sync) (2026-05-04)
-- Merge branch 'dev' into main (2026-05-04)
-- Merge pull request #112 from karlmarx/feat/workout-cloud-sync (2026-05-04)
-- feat(auth): cloud-sync workout history + decouple login from AI flag (2026-05-04)
+- Merge pull request #115 from karlmarx/feat/pt-hep-daily (2026-05-07)
+- fix(hep): tappable rows + bigger checkbox + checked-state dim for mobile (2026-05-07)
+- feat(hep): end-of-workout reminder strip + cross-surface completion sync (2026-05-07)
+- feat(hep): full mode at top of Rehab tab (2026-05-07)
+- fix(hep): row wrap on info expand + use app_page fixture for SW isolation (2026-05-07)
+
+### closet-bro
+- feat: add concise mode (~half the tokens, same persona) (#2) (2026-05-07)
+- Initial frat-bro plugin scaffold (#1) (2026-05-07)
+- Initial commit (2026-05-07)
 
 ### karl-infra
+- docs: register closet-bro Claude Code plugin in Tooling & Docs (#3) (2026-05-07)
+- chore: daily update 2026-05-07 (2026-05-07)
 - chore: daily update 2026-05-06 (2026-05-06)
 - chore: daily update 2026-05-05 (2026-05-05)
 - chore: daily update 2026-05-04 (2026-05-04)
-- chore: daily update 2026-05-03 (2026-05-03)
-- chore: daily update 2026-05-02 (2026-05-02)
 
 ### blazing-paddles-react
 - Merge pull request #24 from karlmarx/Robb-Dev (2026-05-05)
@@ -118,13 +123,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - feat: add thumb-safe yoga sequence at thumbyoga.93.fyi (#17) (2026-05-02)
 - chore: add stop-gap handoff prompt + keep-awake powershell (2026-05-01)
 - feat(bedbug): /api/bedbug/agent-bridge for the scheduled auto-answer agent (#16) (2026-05-01)
-
-### 93-fyi
-- feat: link mom.93.fyi from apex (twilio review) (#2) (2026-05-01)
-- feat(workoutgifs): add 5 new clips and PUSH/PULL/CARDIO sections (2026-04-25)
-- fix: migrate subdomain rewrite to Next 16 proxy.ts (drop dead middleware.ts) (2026-04-25)
-- fix: remove dead @site_url secret reference from vercel.json (2026-04-25)
-- feat: add /workoutgifs route and workoutgifs.93.fyi subdomain rewrite (2026-04-25)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

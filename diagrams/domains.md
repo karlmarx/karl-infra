@@ -16,6 +16,7 @@
 |   +-- id.93.fyi       CNAME -> cname.vercel-dns.com  (Social Identity Verification)
 |   +-- auto.93.fyi     CNAME -> cname.vercel-dns.com  (auto-dashboard)
 |   +-- ortho.93.fyi    CNAME -> cname.vercel-dns.com  (orthoappt)
+|   +-- pwbpb.93.fyi    CNAME -> cname.vercel-dns.com  (pickleball-drills)
 |
 +-- Email Routing (Cloudflare)
     |
@@ -33,6 +34,7 @@
 | (public domain) | Social ID Verification | karlmarx/identity-verification | Primary domain (WIP) |
 | `auto.93.fyi` | auto-dashboard | karlmarx/karl-infra (subdir: `auto-dashboard/`) | Interactive automation map |
 | `ortho.93.fyi` | orthoappt | karlmarx/karl-infra (subdir: `orthoappt/`) | Appointment companion (Dr. Almodovar follow-up, NWB protocol) |
+| `pwbpb.93.fyi` | pickleball-drills | karlmarx/pickleball-drills | Stationary pickleball drills for the partial-weight-bearing phase |
 
 ## Email
 

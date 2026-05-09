@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-08
+> Auto-updated daily from GitHub commits. Last update: 2026-05-09
 
 ## Overview
 
@@ -88,24 +88,31 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### 93-fyi
+- feat: add operator info to footer for Twilio TFV verification (2026-05-08)
+- feat: link mom.93.fyi from apex (twilio review) (#2) (2026-05-01)
+- feat(workoutgifs): add 5 new clips and PUSH/PULL/CARDIO sections (2026-04-25)
+- fix: migrate subdomain rewrite to Next 16 proxy.ts (drop dead middleware.ts) (2026-04-25)
+- fix: remove dead @site_url secret reference from vercel.json (2026-04-25)
+
 ### nwb-plan
+- feat: ad-hoc supersets — universal search + free-text complement (#117) (2026-05-08)
 - Merge pull request #115 from karlmarx/feat/pt-hep-daily (2026-05-07)
 - fix(hep): tappable rows + bigger checkbox + checked-state dim for mobile (2026-05-07)
 - feat(hep): end-of-workout reminder strip + cross-surface completion sync (2026-05-07)
 - feat(hep): full mode at top of Rehab tab (2026-05-07)
-- fix(hep): row wrap on info expand + use app_page fixture for SW isolation (2026-05-07)
+
+### karl-infra
+- chore: daily update 2026-05-08 (2026-05-08)
+- docs: register closet-bro Claude Code plugin in Tooling & Docs (#3) (2026-05-07)
+- chore: daily update 2026-05-07 (2026-05-07)
+- chore: daily update 2026-05-06 (2026-05-06)
+- chore: daily update 2026-05-05 (2026-05-05)
 
 ### closet-bro
 - feat: add concise mode (~half the tokens, same persona) (#2) (2026-05-07)
 - Initial frat-bro plugin scaffold (#1) (2026-05-07)
 - Initial commit (2026-05-07)
-
-### karl-infra
-- docs: register closet-bro Claude Code plugin in Tooling & Docs (#3) (2026-05-07)
-- chore: daily update 2026-05-07 (2026-05-07)
-- chore: daily update 2026-05-06 (2026-05-06)
-- chore: daily update 2026-05-05 (2026-05-05)
-- chore: daily update 2026-05-04 (2026-05-04)
 
 ### blazing-paddles-react
 - Merge pull request #24 from karlmarx/Robb-Dev (2026-05-05)

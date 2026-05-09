@@ -17,6 +17,16 @@
 |   +-- auto.93.fyi     CNAME -> cname.vercel-dns.com  (auto-dashboard)
 |   +-- ortho.93.fyi    CNAME -> cname.vercel-dns.com  (orthoappt)
 |   +-- pwbpb.93.fyi    CNAME -> cname.vercel-dns.com  (pickleball-drills)
+|   +-- contact.93.fyi  CNAME -> cname.vercel-dns.com  (Contact Form)
+|   +-- layover.93.fyi  CNAME -> cname.vercel-dns.com  (Flight Connection Confidence)
+|   +-- mom.93.fyi      CNAME -> cname.vercel-dns.com  (Mom's Reassurance Hub)
+|   +-- progress.93.fyi CNAME -> (resolves via wildcard A `*.93.fyi`) (progress-dashboard)
+|   +-- command.93.fyi  A     -> 76.76.21.21 (proxied)  (karl-command-center, CF Access gated)
+|
+| (Many more records exist in the live Cloudflare zone — bedbug, dev.*, fake,
+|  ha, house, login, me, now, seed, status, thumbfit/yoga, todo, www, plus
+|  wildcards. This file documents only the curated/load-bearing subdomains.
+|  Source of truth: Cloudflare zone 8881c2fb46004f18cbf6faf47e562731.)
 |
 +-- Email Routing (Cloudflare)
     |
@@ -35,6 +45,11 @@
 | `auto.93.fyi` | auto-dashboard | karlmarx/karl-infra (subdir: `auto-dashboard/`) | Interactive automation map |
 | `ortho.93.fyi` | orthoappt | karlmarx/karl-infra (subdir: `orthoappt/`) | Appointment companion (Dr. Almodovar follow-up, NWB protocol) |
 | `pwbpb.93.fyi` | pickleball-drills | karlmarx/pickleball-drills | Stationary pickleball drills for the partial-weight-bearing phase |
+| `contact.93.fyi` | (Contact Form) | (private repo) | Public contact form, Turnstile + Resend, rate-limited |
+| `layover.93.fyi` | (Flight Connection Confidence) | (private repo) | Connection success calculator for elderly travelers |
+| `mom.93.fyi` | (Mom's Reassurance Hub) | (private repo) | Letter-style answers to Mom's worries |
+| `progress.93.fyi` | progress-dashboard | karlmarx/progress-dashboard | Milestone tracker, NextAuth + CF Access |
+| `command.93.fyi` | karl-command-center | karlmarx/karl-command-center | Daily-driver hub, **Cloudflare Access gated**. Hosts `/status` PWA route (installable on mobile) |
 
 ## Email
 

@@ -6,6 +6,8 @@ This doc captures the design agreed 2026-04-26 for expanding the existing bento-
 
 **Status (2026-04-26):** Phase 0 live — bento home with 4 API-backed cells deployed at https://command.93.fyi behind Cloudflare Access. The `~/karl-command-center` repo has working `app/api/{ci-status,subdomains,github-prs,reminders}/route.ts` routes plus components feeding the home grid. Phases 1–6 (Status zone expansion, /control, /explore, weekly review, local FastAPI agent) per the **Build sequence** below are still pending.
 
+**Update (2026-05-09):** Added `/status` route — fullscreen mobile-first version of `<SubdomainStatus>` reusing the existing `/api/subdomains` HEAD-pinger. Now PWA-installable (`app/manifest.ts`, `public/sw.js` passthrough, `public/icon-{192,512}.png`). Karl installs from Chrome on Pixel via "Install app" → home-screen icon → standalone fullscreen. CF Access cookie inherits via Custom Tabs, so single-user gating is automatic. Bubblewrap TWA APK is the eventual sideload target — same manifest URL is the input.
+
 ## Purpose
 
 Replace ad-hoc shell incantations and scattered status checks with one URL Karl opens every morning. Three jobs:

@@ -75,6 +75,7 @@ Apple Silicon-native machine (36 GB unified memory) running compute-intensive au
 
 | Service | Schedule | Purpose |
 |---------|----------|---------|
+| finflow-sync (Teller pull) | Every 1 hour | `python -m finflow.tasks.teller_pull` — fetches every enrolled bank's transactions, upserts into `~/finflow/finflow.duckdb`. **Plist staged 2026-05-09, awaiting `launchctl load` + first real enrollment.** See [infra/finflow.md](infra/finflow.md) |
 | MLX-VLM `:8080` (analysis) | Always-on (watched) | Heavy vision/text. Watchdog config = `gemma-4-26b-a4b-it-4bit`; live process as of 2026-04-26 = `Qwen3.5-27B-4bit` (verify which is intended) |
 | MLX-VLM `:8081` (fast) | Always-on (NOT watched) | Default chat — `Qwen3.5-9B-MLX-4bit`, 32k ctx |
 | MLX-VLM `:8082` (long-ctx) | Always-on (NOT watched) | Reasoning — `Qwen3.5-9B-MLX-4bit`, 262k ctx (currently DOWN per 2026-04-26 audit) |
@@ -119,7 +120,7 @@ Standalone repos that aren't yet wired into LaunchAgents, GHA crons, or Vercel c
 | Repo | Purpose | Status | Doc |
 |------|---------|--------|-----|
 | photo-memory | Local VLM pipeline over Google Takeout (1.1 TB → searchable catalog, future `photos.93.fyi`) | Phase 1 in progress | [infra/photo-memory.md](infra/photo-memory.md) |
-| finflow | Personal finance aggregator (Teller + DuckDB + Polars + FastAPI) | Working alpha, manual run | [infra/finflow.md](infra/finflow.md) |
+| finflow | Personal finance aggregator (Teller + DuckDB + Polars + FastAPI) | Working alpha; hourly sync LaunchAgent staged 2026-05-09 | [infra/finflow.md](infra/finflow.md) |
 | amex-claims-automator | Playwright bot for Amex Return/Loss Protection claims | Phase 1 reconnaissance | [infra/amex-claims-automator.md](infra/amex-claims-automator.md) |
 | tui-dashboard | Textual TUI for global status (vs. process-monitor-dashboard which is local-only) | Skeleton — only clock works | [infra/tui-dashboard.md](infra/tui-dashboard.md) |
 | house-tracker | South Florida property comparison + Gemini renders | Active personal use, no domain | [infra/house-tracker.md](infra/house-tracker.md) |

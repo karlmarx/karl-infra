@@ -188,7 +188,9 @@ nfit.93.fyi nyoga.    id.93   Serverless
   |    +- → photos.93.fyi (Cloudflare Worker, planned)     |
   |                                                        |
   |  finflow               ── Teller API → DuckDB → Polars |
-  |    +- FastAPI on :8000 (manual run today)              |
+  |    +- FastAPI on :8000 (interactive, Teller Connect)   |
+  |    +- finflow.tasks.teller_pull (hourly LaunchAgent,   |
+  |       staged 2026-05-09, awaiting load)                |
   |                                                        |
   |  amex-claims-automator ── Playwright → claims-center   |
   |    +- headed Chromium, human-in-loop for MFA           |

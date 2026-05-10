@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-09
+> Auto-updated daily from GitHub commits. Last update: 2026-05-10
 
 ## Overview
 
@@ -88,12 +88,25 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
-### 93-fyi
-- feat: add operator info to footer for Twilio TFV verification (2026-05-08)
-- feat: link mom.93.fyi from apex (twilio review) (#2) (2026-05-01)
-- feat(workoutgifs): add 5 new clips and PUSH/PULL/CARDIO sections (2026-04-25)
-- fix: migrate subdomain rewrite to Next 16 proxy.ts (drop dead middleware.ts) (2026-04-25)
-- fix: remove dead @site_url secret reference from vercel.json (2026-04-25)
+### mom-93fyi
+- chore: gitignore .env*.local (auto-added by vercel env pull) (2026-05-09)
+- refactor(bedbug): use Twilio API key auth for outbound SMS (2026-05-09)
+- feat(thumbyoga): add diagrams, library, practice mode, print stylesheet (#19) (2026-05-02)
+- Collapse bedbug app to plain readable guide (#18) (2026-05-02)
+- feat: add thumb-safe yoga sequence at thumbyoga.93.fyi (#17) (2026-05-02)
+
+### karl-infra
+- docs: sync 93.fyi DNS state + command-center /status PWA (2026-05-09)
+- infra(finflow): document hourly Teller sync LaunchAgent (staged, not loaded) (2026-05-09)
+- feat: add pickleball-drills for pwbpb.93.fyi (2026-05-09)
+- fix(services): drop Ollama, rename workout columns to vlm_* (2026-04-28)
+- feat(auto-dashboard): map MLX servers, photo pipeline, gemini-auto, command center (2026-04-28)
+
+### karl-command-center
+- feat: PWA-installable /status route (2026-05-09)
+- Dynamic infra updates: Cloudflare/GitHub/Vercel integration (2026-04-26)
+- Implement API routes and components (2026-04-25)
+- Initial commit from Create Next App (2026-04-25)
 
 ### nwb-plan
 - feat: ad-hoc supersets — universal search + free-text complement (#117) (2026-05-08)
@@ -102,12 +115,12 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - feat(hep): end-of-workout reminder strip + cross-surface completion sync (2026-05-07)
 - feat(hep): full mode at top of Rehab tab (2026-05-07)
 
-### karl-infra
-- chore: daily update 2026-05-08 (2026-05-08)
-- docs: register closet-bro Claude Code plugin in Tooling & Docs (#3) (2026-05-07)
-- chore: daily update 2026-05-07 (2026-05-07)
-- chore: daily update 2026-05-06 (2026-05-06)
-- chore: daily update 2026-05-05 (2026-05-05)
+### 93-fyi
+- feat: add operator info to footer for Twilio TFV verification (2026-05-08)
+- feat: link mom.93.fyi from apex (twilio review) (#2) (2026-05-01)
+- feat(workoutgifs): add 5 new clips and PUSH/PULL/CARDIO sections (2026-04-25)
+- fix: migrate subdomain rewrite to Next 16 proxy.ts (drop dead middleware.ts) (2026-04-25)
+- fix: remove dead @site_url secret reference from vercel.json (2026-04-25)
 
 ### closet-bro
 - feat: add concise mode (~half the tokens, same persona) (#2) (2026-05-07)
@@ -120,16 +133,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - Merge pull request #23 from karlmarx/Robb-Dev (2026-05-05)
 - chore: remove deprecated API endpoints and configuration files (2026-05-05)
 - Merge pull request #22 from karlmarx/Robb-Dev (2026-05-05)
-
-### thumb-fit
-- feat: initial thumb-fit fork from nwb-plan (2026-05-02)
-
-### mom-93fyi
-- feat(thumbyoga): add diagrams, library, practice mode, print stylesheet (#19) (2026-05-02)
-- Collapse bedbug app to plain readable guide (#18) (2026-05-02)
-- feat: add thumb-safe yoga sequence at thumbyoga.93.fyi (#17) (2026-05-02)
-- chore: add stop-gap handoff prompt + keep-awake powershell (2026-05-01)
-- feat(bedbug): /api/bedbug/agent-bridge for the scheduled auto-answer agent (#16) (2026-05-01)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

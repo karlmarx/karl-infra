@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-10
+> Auto-updated daily from GitHub commits. Last update: 2026-05-11
 
 ## Overview
 
@@ -88,32 +88,40 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### nwb-plan
+- ci: auto-alias preview.nfit.93.fyi to latest non-main/non-dev branch deploy (#120) (2026-05-10)
+- chore: trigger preview rebuild for AUTH_TRUST_HOST + NEXTAUTH_URL fix (2026-05-10)
+- chore: trigger preview redeploy to pick up HEVY_API_KEY (2026-05-10)
+- fix(hevy): server-side api key + admin auth gate (lost in PR #118 race) (#119) (2026-05-10)
+- feat: picker copy + pwbpb link + hevy exercise audit tab (#118) (2026-05-10)
+
+### blazing-paddles-react
+- ci: add Playwright regression suite, CI gate, and auto-merge (#18) (2026-05-10)
+- Merge pull request #24 from karlmarx/Robb-Dev (2026-05-05)
+- chore: update robots.txt to disallow access to /dl/ directory (2026-05-05)
+- Merge pull request #23 from karlmarx/Robb-Dev (2026-05-05)
+- chore: remove deprecated API endpoints and configuration files (2026-05-05)
+
 ### mom-93fyi
+- chore: add Twilio opt-in proof PNG (#26) (2026-05-10)
+- feat: SMS link in bedbug shell + /consent page (#25) (2026-05-10)
+- feat(bedbug): tap-to-text "Text Ben a question" link in app shell footer (#23) (2026-05-10)
+- Add detail Mom can read on her own — morning, worried, why, timetable, bites, bigger Q&A (#22) (2026-05-10)
 - chore: gitignore .env*.local (auto-added by vercel env pull) (2026-05-09)
-- refactor(bedbug): use Twilio API key auth for outbound SMS (2026-05-09)
-- feat(thumbyoga): add diagrams, library, practice mode, print stylesheet (#19) (2026-05-02)
-- Collapse bedbug app to plain readable guide (#18) (2026-05-02)
-- feat: add thumb-safe yoga sequence at thumbyoga.93.fyi (#17) (2026-05-02)
+
+### karl-command-center
+- feat(status): VLM pipeline card with worker status + log tail (2026-05-10)
+- data: vlm-status 2026-05-10T05:12 (2026-05-10)
+- feat(status): priority-tiered grid order (2026-05-10)
+- feat(status): per-app emoji + human label (2026-05-10)
+- feat: PWA-installable /status route (2026-05-09)
 
 ### karl-infra
+- chore: daily update 2026-05-10 (2026-05-10)
 - docs: sync 93.fyi DNS state + command-center /status PWA (2026-05-09)
 - infra(finflow): document hourly Teller sync LaunchAgent (staged, not loaded) (2026-05-09)
 - feat: add pickleball-drills for pwbpb.93.fyi (2026-05-09)
 - fix(services): drop Ollama, rename workout columns to vlm_* (2026-04-28)
-- feat(auto-dashboard): map MLX servers, photo pipeline, gemini-auto, command center (2026-04-28)
-
-### karl-command-center
-- feat: PWA-installable /status route (2026-05-09)
-- Dynamic infra updates: Cloudflare/GitHub/Vercel integration (2026-04-26)
-- Implement API routes and components (2026-04-25)
-- Initial commit from Create Next App (2026-04-25)
-
-### nwb-plan
-- feat: ad-hoc supersets — universal search + free-text complement (#117) (2026-05-08)
-- Merge pull request #115 from karlmarx/feat/pt-hep-daily (2026-05-07)
-- fix(hep): tappable rows + bigger checkbox + checked-state dim for mobile (2026-05-07)
-- feat(hep): end-of-workout reminder strip + cross-surface completion sync (2026-05-07)
-- feat(hep): full mode at top of Rehab tab (2026-05-07)
 
 ### 93-fyi
 - feat: add operator info to footer for Twilio TFV verification (2026-05-08)
@@ -126,13 +134,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - feat: add concise mode (~half the tokens, same persona) (#2) (2026-05-07)
 - Initial frat-bro plugin scaffold (#1) (2026-05-07)
 - Initial commit (2026-05-07)
-
-### blazing-paddles-react
-- Merge pull request #24 from karlmarx/Robb-Dev (2026-05-05)
-- chore: update robots.txt to disallow access to /dl/ directory (2026-05-05)
-- Merge pull request #23 from karlmarx/Robb-Dev (2026-05-05)
-- chore: remove deprecated API endpoints and configuration files (2026-05-05)
-- Merge pull request #22 from karlmarx/Robb-Dev (2026-05-05)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

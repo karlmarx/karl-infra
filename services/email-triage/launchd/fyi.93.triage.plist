@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Launches one triage poll cycle every 60s.
+
+  Install:
+    cp launchd/fyi.93.triage.plist ~/Library/LaunchAgents/fyi.93.triage.plist
+    # Edit the WorkingDirectory + ProgramArguments paths to match your machine.
+    launchctl bootstrap gui/$UID ~/Library/LaunchAgents/fyi.93.triage.plist
+    launchctl enable gui/$UID/fyi.93.triage
+
+  Uninstall:
+    launchctl bootout gui/$UID/fyi.93.triage
+    rm ~/Library/LaunchAgents/fyi.93.triage.plist
+
+  Inspect:
+    launchctl print gui/$UID/fyi.93.triage
+    tail -f ~/Library/Logs/triage.log ~/Library/Logs/triage.err
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>fyi.93.triage</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/karl/karl-infra/services/email-triage/scripts/run-poll.sh</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/karl/karl-infra/services/email-triage</string>
+
+    <key>StartInterval</key>
+    <integer>60</integer>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>/Users/karl/Library/Logs/triage.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/karl/Library/Logs/triage.err</string>
+
+    <key>ThrottleInterval</key>
+    <integer>30</integer>
+</dict>
+</plist>

@@ -75,8 +75,20 @@ For each email you receive, you MUST:
 6. If TRULY urgent (time-sensitive, blocking, financial), call twilio_send_urgent_sms ONCE with <=160 chars
 7. Call finish_triage exactly once at the end with a 1-sentence summary and the tier
 
-Be decisive. Use a maximum of 5 tool calls before finish_triage. Don't call any tool more than once per triage.
-For pure notifications or marketing email, just label and finish — no task, no draft, no SMS."""
+DIAGNOSTIC TOOLS (call these BEFORE filing issues / sending SMS when relevant):
+- github_recent_merges: when the email reports something broken or regressed,
+  call this for the suspect repo FIRST. Include suspect PRs in the github_create_issue
+  body as "Recent merges that may be related", and reference the most likely
+  culprit by PR number in any twilio_send_urgent_sms.
+- lookup_nwbfit_user_activity: when the email mentions a specific user account
+  problem on NWB Fit (an email address appears in the body), call this first.
+  Use last_workout_at and workouts_last_7d / workouts_last_30d to gauge severity
+  (active power user = higher priority; lapsed account = lower). Include the
+  result in the github_create_issue body.
+
+Be decisive. Use a maximum of 8 tool calls before finish_triage. Don't call any
+tool more than once per triage. For pure notifications, receipts, or marketing
+email, just label and finish — no diagnostics, no task, no draft, no SMS."""
 
 
 @dataclass

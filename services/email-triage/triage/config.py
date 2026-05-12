@@ -28,6 +28,8 @@ class Config:
     twilio_from: str | None
     twilio_to: str | None
 
+    nwb_postgres_url: str | None
+
     sender_allowlist: list[str] = field(default_factory=list)
     daily_budget_usd: float = 1.0
     max_triages_per_day: int = 50
@@ -79,6 +81,7 @@ def load_config(env_file: Path | None = None) -> Config:
         twilio_auth_token=os.environ.get("TWILIO_AUTH_TOKEN") or None,
         twilio_from=os.environ.get("TWILIO_FROM") or None,
         twilio_to=os.environ.get("TWILIO_TO") or None,
+        nwb_postgres_url=os.environ.get("NWB_POSTGRES_URL") or None,
         sender_allowlist=allow,
         daily_budget_usd=float(os.environ.get("DAILY_BUDGET_USD", "1.0")),
         max_triages_per_day=int(os.environ.get("MAX_TRIAGES_PER_DAY", "50")),

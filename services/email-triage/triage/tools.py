@@ -7,6 +7,7 @@ from typing import Any
 from anthropic.types import ToolParam
 
 from .adapters import github as gh_adapter
+from .adapters import nwbfit as nwbfit_adapter
 from .adapters import todoist as todoist_adapter
 from .adapters import twilio as twilio_adapter
 from .config import Config
@@ -104,6 +105,47 @@ TOOL_PARAMS: list[ToolParam] = [
         },
     },
     {
+        "name": "github_recent_merges",
+        "description": (
+            "List PRs merged to main in a karlmarx/* repo within the last N "
+            "hours. Call this BEFORE github_create_issue when the email "
+            "reports something broken or regressed, so you can reference "
+            "suspect PRs in the issue body. Only karlmarx/* repos in the "
+            "allowlist are queryable."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "repo": {
+                    "type": "string",
+                    "description": "owner/repo, e.g. karlmarx/nwb-plan.",
+                },
+                "hours": {
+                    "type": "integer",
+                    "description": "Lookback window in hours. Defaults to 48.",
+                },
+            },
+            "required": ["repo"],
+        },
+    },
+    {
+        "name": "lookup_nwbfit_user_activity",
+        "description": (
+            "Look up a user's activity on NWB Fit (nfit.93.fyi) by email. "
+            "Returns total workouts logged, last workout timestamp, and "
+            "7d/30d workout counts. Returns zeros if the email has never "
+            "logged a workout. Use to gauge severity when an email "
+            "complains about a specific user account."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "email": {"type": "string"},
+            },
+            "required": ["email"],
+        },
+    },
+    {
         "name": "finish_triage",
         "description": (
             "Call this exactly ONCE when triage is complete. Provide a "
@@ -179,6 +221,57 @@ class ToolRunner:
                 )
                 return ToolOutcome(
                     True, {"number": issue.number, "url": issue.url, "repo": repo}
+                )
+
+            if name == "github_recent_merges":
+                repo = args.get("repo")
+                if not repo:
+                    return ToolOutcome(False, error="repo is required")
+                hours = int(args.get("hours") or 48)
+                try:
+                    merges = await gh_adapter.list_recent_merges(
+                        token=self.cfg.github_token,
+                        repo=repo,
+                        hours=hours,
+                    )
+                except ValueError as e:
+                    return ToolOutcome(False, error=str(e))
+                return ToolOutcome(
+                    True,
+                    {
+                        "repo": repo,
+                        "hours": hours,
+                        "count": len(merges),
+                        "merges": [
+                            {
+                                "number": m.number,
+                                "title": m.title,
+                                "author": m.author,
+                                "merged_at": m.merged_at,
+                                "url": m.url,
+                            }
+                            for m in merges
+                        ],
+                    },
+                )
+
+            if name == "lookup_nwbfit_user_activity":
+                if not self.cfg.nwb_postgres_url:
+                    return ToolOutcome(False, error="NWB_POSTGRES_URL not configured")
+                activity = await nwbfit_adapter.lookup_user_activity(
+                    database_url=self.cfg.nwb_postgres_url,
+                    email=args["email"],
+                )
+                return ToolOutcome(
+                    True,
+                    {
+                        "email": activity.email,
+                        "total_workouts": activity.total_workouts,
+                        "last_workout_at": activity.last_workout_at,
+                        "workouts_last_7d": activity.workouts_last_7d,
+                        "workouts_last_30d": activity.workouts_last_30d,
+                        "is_active_user": activity.is_active_user,
+                    },
                 )
 
             if name == "twilio_send_urgent_sms":

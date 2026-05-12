@@ -1,0 +1,34 @@
+name = "triage-worker"
+main = "src/index.ts"
+compatibility_date = "2025-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Poll Gmail every minute. Each invocation is short; agent runs only if
+# new matching messages exist. Hard caps in guardrails.ts prevent runaway.
+[triggers]
+crons = ["*/1 * * * *"]
+
+[[durable_objects.bindings]]
+name = "STATE"
+class_name = "TriageStateDO"
+
+[[migrations]]
+tag = "v1"
+new_classes = ["TriageStateDO"]
+
+# Vars (non-secret). Secrets are set via `wrangler secret put <NAME>`:
+#   ANTHROPIC_API_KEY, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET,
+#   GOOGLE_REFRESH_TOKEN, TODOIST_TOKEN, GITHUB_TOKEN, MCP_SHARED_SECRET
+[vars]
+# Comma-separated sender allowlist. Only emails FROM these addresses get triaged.
+SENDER_ALLOWLIST = "karlmarx9193@gmail.com,k@93.fyi"
+# Hard daily spend cap in USD. Worker becomes read-only when exceeded.
+DAILY_BUDGET_USD = "1.00"
+# Max triages per UTC day.
+MAX_TRIAGES_PER_DAY = "50"
+# Max tokens per single triage agent run.
+MAX_TOKENS_PER_TRIAGE = "8000"
+# Default GitHub repo for issue creation (owner/repo).
+DEFAULT_GH_REPO = "karlmarx/karl-command-center"
+# Claude model for triage. Haiku 4.5 = cheap, fast, good enough.
+TRIAGE_MODEL = "claude-haiku-4-5-20251001"

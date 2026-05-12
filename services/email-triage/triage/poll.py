@@ -4,7 +4,7 @@ import logging
 
 from .agent import triage_email
 from .config import Config
-from .gmail_mcp import GmailMcp, connect_gmail_mcp
+from .gmail import connect_gmail
 from .guardrails import preflight, sender_allowed
 from .supabase_store import ActivityEvent, Store
 
@@ -24,7 +24,7 @@ async def run_poll(cfg: Config, store: Store) -> dict[str, int]:
 
     store.log_event(ActivityEvent(kind="poll.start"))
 
-    async with connect_gmail_mcp(cfg.gmail_mcp_command, cfg.gmail_mcp_args) as gmail:
+    async with connect_gmail(cfg) as gmail:
         refs = await gmail.list_recent(cfg.sender_allowlist, max_results=10)
         stats["scanned"] = len(refs)
 

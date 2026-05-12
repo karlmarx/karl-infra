@@ -28,7 +28,7 @@ async def create_task(
         body["due_string"] = due_string
     async with httpx.AsyncClient(timeout=15.0) as client:
         res = await client.post(
-            "https://api.todoist.com/rest/v2/tasks",
+            "https://api.todoist.com/api/v1/tasks",
             headers={
                 "authorization": f"Bearer {token}",
                 "content-type": "application/json",

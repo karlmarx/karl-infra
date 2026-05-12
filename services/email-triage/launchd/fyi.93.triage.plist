@@ -24,11 +24,11 @@
 
     <key>ProgramArguments</key>
     <array>
-        <string>/Users/karl/karl-infra/services/email-triage/scripts/run-poll.sh</string>
+        <string>/Users/kmx/karl-infra/services/email-triage/scripts/run-poll.sh</string>
     </array>
 
     <key>WorkingDirectory</key>
-    <string>/Users/karl/karl-infra/services/email-triage</string>
+    <string>/Users/kmx/karl-infra/services/email-triage</string>
 
     <key>StartInterval</key>
     <integer>60</integer>
@@ -37,10 +37,10 @@
     <false/>
 
     <key>StandardOutPath</key>
-    <string>/Users/karl/Library/Logs/triage.log</string>
+    <string>/Users/kmx/Library/Logs/triage.log</string>
 
     <key>StandardErrorPath</key>
-    <string>/Users/karl/Library/Logs/triage.err</string>
+    <string>/Users/kmx/Library/Logs/triage.err</string>
 
     <key>ThrottleInterval</key>
     <integer>30</integer>

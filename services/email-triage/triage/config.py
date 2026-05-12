@@ -15,8 +15,12 @@ class Config:
     supabase_url: str
     supabase_service_role_key: str
 
-    gmail_mcp_command: str
+    # Gmail access — either IMAP (app password, simpler) or MCP (OAuth).
+    # ``connect_gmail`` picks IMAP if app_password is set, else falls back to MCP.
+    gmail_mcp_command: str | None
     gmail_mcp_args: list[str]
+    gmail_user: str | None
+    gmail_app_password: str | None
 
     github_token: str
     default_gh_repo: str
@@ -67,13 +71,28 @@ def load_config(env_file: Path | None = None) -> Config:
     if not allow:
         raise RuntimeError("SENDER_ALLOWLIST must contain at least one address")
 
+    gmail_app_password = os.environ.get("GMAIL_APP_PASSWORD") or None
+    gmail_user = os.environ.get("GMAIL_USER") or None
+    gmail_mcp_command = os.environ.get("GMAIL_MCP_COMMAND") or None
+    gmail_mcp_args = os.environ.get("GMAIL_MCP_ARGS", "").split()
+
+    if gmail_app_password and not gmail_user:
+        raise RuntimeError("GMAIL_APP_PASSWORD requires GMAIL_USER")
+    if not gmail_app_password and not gmail_mcp_command:
+        raise RuntimeError(
+            "configure either GMAIL_APP_PASSWORD+GMAIL_USER (IMAP) "
+            "or GMAIL_MCP_COMMAND+GMAIL_MCP_ARGS (MCP)"
+        )
+
     return Config(
         anthropic_api_key=_require("ANTHROPIC_API_KEY"),
         model=os.environ.get("TRIAGE_MODEL", "claude-opus-4-7"),
         supabase_url=_require("SUPABASE_URL"),
         supabase_service_role_key=_require("SUPABASE_SERVICE_ROLE_KEY"),
-        gmail_mcp_command=_require("GMAIL_MCP_COMMAND"),
-        gmail_mcp_args=os.environ.get("GMAIL_MCP_ARGS", "").split(),
+        gmail_mcp_command=gmail_mcp_command,
+        gmail_mcp_args=gmail_mcp_args,
+        gmail_user=gmail_user,
+        gmail_app_password=gmail_app_password,
         github_token=_require("GITHUB_TOKEN"),
         default_gh_repo=os.environ.get("DEFAULT_GH_REPO", "karlmarx/karl-command-center"),
         todoist_token=_require("TODOIST_TOKEN"),

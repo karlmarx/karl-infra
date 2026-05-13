@@ -1,0 +1,224 @@
+# Truvada/TDF PrEP firm registry — populated 2026-05-13 from research.
+#
+# Status flags:
+#   accepts_prep:     "yes" | "no" | "unclear" — does this firm take PrEP (vs HIV-treatment) cases?
+#   still_accepting:  "yes" | "no" | "unclear" — is intake still open as of last research date?
+#   skip:             true if we should never contact this firm
+#
+# When still_accepting=="no" or skip==true, the runner excludes the firm.
+# Re-run research and update this file periodically.
+#
+# Sources for each firm are in the notes / source_url field.
+
+firms:
+  # ---------- Florida-local matches (highest priority) ----------
+  - slug: chalik-chalik
+    name: Chalik & Chalik Injury Lawyers
+    intake_email: info@chaliklaw.com
+    web_form_url: https://www.chaliklaw.com/defective-drugs-lawyer/truvada/
+    phone: "(855) 529-0269"
+    location: Fort Lauderdale, FL (same city as client)
+    accepts_prep: unclear
+    still_accepting: unclear
+    has_captcha: false
+    channels: [email, web_form]
+    personalization_hints: >-
+      Fort Lauderdale-based firm; same city as the client. Page references
+      Truvada and warns about statute-of-limitations deadlines.
+    source_url: https://www.chaliklaw.com/defective-drugs-lawyer/truvada/
+    notes: Local FL firm; client is in Fort Lauderdale. Strong geographic fit.
+
+  - slug: parafinczuk-wolf
+    name: Parafinczuk Wolf
+    intake_email: intake@parawolf.com
+    web_form_url: https://www.parawolf.com/truvada-drug-lawsuits
+    phone: "(954) 462-6700"
+    location: Boca Raton, FL (~25 mi from client)
+    accepts_prep: unclear
+    still_accepting: unclear
+    has_captcha: true
+    channels: [email, web_form]
+    personalization_hints: >-
+      South-Florida firm; page explicitly discusses both PrEP and HIV-treatment
+      Truvada populations, which makes PrEP intake more plausible than firms
+      that only mention treatment.
+    source_url: https://www.parawolf.com/truvada-drug-lawsuits
+
+  - slug: ben-crump
+    name: Ben Crump Law
+    intake_email: null  # web form only
+    web_form_url: https://bencrump.com/truvada-lawsuit/
+    phone: "(800) 961-4664"
+    location: Tallahassee, FL (multi-state)
+    accepts_prep: unclear
+    still_accepting: unclear
+    has_captcha: false
+    channels: [web_form]
+    personalization_hints: >-
+      Florida-headquartered national mass-tort firm. Truvada landing page is
+      active with free consultation offer.
+    source_url: https://bencrump.com/truvada-lawsuit/
+
+  # ---------- National firms with active intake ----------
+  - slug: torhoerman
+    name: TorHoerman Law
+    intake_email: null  # not publicly listed; uses web form
+    web_form_url: https://www.torhoermanlaw.com/truvada-lawsuit/
+    phone: "(888) 508-6752"
+    location: Edwardsville, IL (also Chicago, St. Louis)
+    accepts_prep: unclear
+    still_accepting: "yes"
+    has_captcha: true
+    channels: [web_form]
+    personalization_hints: >-
+      Page contains the explicit statement that the firm is "currently
+      accepting new TDF lawsuit clients" — one of the few unambiguous open-
+      intake signals in the landscape.
+    source_url: https://www.torhoermanlaw.com/truvada-lawsuit/
+
+  - slug: hollis-law
+    name: Hollis Law Firm
+    intake_email: null
+    web_form_url: https://hollislawfirm.com/case/truvada-lawsuit/
+    phone: "(800) 701-3672"
+    location: Overland Park, KS
+    accepts_prep: unclear
+    still_accepting: "yes"
+    has_captcha: true
+    channels: [web_form]
+    personalization_hints: >-
+      Firm explicitly lists osteoporosis and bone fractures as covered injuries
+      under their Truvada investigation — a direct match for the client's DEXA
+      findings.
+    source_url: https://hollislawfirm.com/case/truvada-lawsuit/
+
+  - slug: showard-law
+    name: Showard Law Firm
+    intake_email: info@showardlaw.com
+    web_form_url: https://showardlaw.com/truvada-lawsuit/
+    phone: "(520) 622-3344"
+    location: Tucson, AZ
+    accepts_prep: unclear
+    still_accepting: "yes"
+    has_captcha: true
+    channels: [email, web_form]
+    personalization_hints: >-
+      Page acknowledges PrEP use of Truvada explicitly (rare among the firms
+      researched) — suggests the firm is open to PrEP fact patterns.
+    source_url: https://showardlaw.com/truvada-lawsuit/
+
+  - slug: lieff-cabraser
+    name: Lieff Cabraser Heimann & Bernstein
+    intake_email: null
+    web_form_url: https://www.lieffcabraser.com/injury/drugs/gilead-hiv-drugs/
+    phone: "(800) 541-7358"
+    location: San Francisco, CA
+    accepts_prep: unclear
+    still_accepting: unclear
+    has_captcha: true
+    channels: [web_form]
+    personalization_hints: >-
+      Partner Sarah London sits on the TDF MDL Plaintiffs' Executive Committee.
+      Landing page is treatment-focused but the firm has institutional depth
+      in this litigation worth a contact.
+    source_url: https://www.lieffcabraser.com/injury/drugs/gilead-hiv-drugs/
+
+  # ---------- Firms that explicitly closed intake (do not contact) ----------
+  - slug: levin-papantonio
+    name: Levin Papantonio Rafferty
+    intake_email: null
+    web_form_url: https://levinlaw.com/tenofovir-lawsuit/
+    location: Pensacola, FL
+    accepts_prep: "no"
+    still_accepting: "no"
+    skip: true
+    skip_reason: 'Public closure: "Our law firm is no longer accepting Tenofovir clients."'
+    source_url: https://levinlaw.com/tenofovir-lawsuit/
+
+  - slug: johnson-becker
+    name: Johnson Becker
+    intake_email: null
+    web_form_url: https://www.johnsonbecker.com/drug-injuries/truvada-lawsuit/
+    location: Minneapolis, MN
+    accepts_prep: "no"
+    still_accepting: "no"
+    skip: true
+    skip_reason: 'Public closure on Truvada and TDF pages.'
+    source_url: https://www.johnsonbecker.com/drug-injuries/truvada-lawsuit/
+
+  - slug: sokolove
+    name: Sokolove Law
+    intake_email: null
+    web_form_url: https://www.sokolovelaw.com/dangerous-drugs/hiv-medications/
+    location: Chestnut Hill, MA
+    accepts_prep: "no"
+    still_accepting: "no"
+    skip: true
+    skip_reason: '"Sokolove Law is no longer accepting Truvada cases."'
+    source_url: https://www.sokolovelaw.com/dangerous-drugs/hiv-medications/
+
+  - slug: ward-black
+    name: Ward Black Law
+    intake_email: null
+    web_form_url: https://www.wardblacklaw.com/tenofovir-truvada-lawsuits/
+    location: Greensboro, NC
+    accepts_prep: "no"
+    still_accepting: "no"
+    skip: true
+    skip_reason: '"Ward Black Law is currently not accepting Tenofovir or Truvada cases"'
+    source_url: https://www.wardblacklaw.com/tenofovir-truvada-lawsuits/
+
+  - slug: miller-zois
+    name: Miller & Zois (Lawsuit Information Center)
+    intake_email: null
+    web_form_url: https://www.lawsuit-information-center.com/truvada-lawsuit.html
+    location: Baltimore, MD
+    accepts_prep: "no"
+    still_accepting: "no"
+    skip: true
+    skip_reason: 'Statute-of-limitations cited as reason no new Truvada cases accepted.'
+    source_url: https://www.lawsuit-information-center.com/truvada-lawsuit.html
+
+  - slug: awko-law
+    name: Aylstock, Witkin, Kreis & Overholtz (AWKO Law)
+    intake_email: null
+    web_form_url: null
+    location: Pensacola, FL
+    accepts_prep: "no"
+    still_accepting: "no"
+    skip: true
+    skip_reason: 'Truvada/TDF no longer listed among practice areas.'
+    source_url: https://www.awkolaw.com/
+
+  - slug: wisner-baum
+    name: Wisner Baum (formerly Baum Hedlund)
+    intake_email: null
+    web_form_url: null
+    location: Los Angeles, CA
+    accepts_prep: "no"
+    still_accepting: "no"
+    skip: true
+    skip_reason: 'Dedicated Truvada landing page returns 404; no active intake.'
+    source_url: https://www.wisnerbaum.com/
+
+  - slug: baron-budd
+    name: Baron & Budd
+    intake_email: null
+    web_form_url: null
+    location: Dallas, TX
+    accepts_prep: unclear
+    still_accepting: "no"
+    skip: true
+    skip_reason: 'Dedicated Truvada/tenofovir page returns 404; treat as wind-down.'
+    source_url: https://baronandbudd.com/
+
+  - slug: wagstaff-cartmell
+    name: Wagstaff & Cartmell
+    intake_email: null
+    web_form_url: null
+    location: Kansas City, MO
+    accepts_prep: unclear
+    still_accepting: "no"
+    skip: true
+    skip_reason: 'No Truvada landing page found on current site.'
+    source_url: https://wagstaffcartmell.com/

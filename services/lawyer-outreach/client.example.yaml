@@ -1,0 +1,47 @@
+# Personal injury intake profile.
+#
+# Copy to client.yaml (gitignored) and fill in the bracketed values before
+# the runner can auto-send. The runner refuses to auto-send if any required
+# placeholder is still present.
+
+full_name: "Karl Marx-Levi"
+email: "karlmarx9193@gmail.com"
+phone: "954-495-7268"
+city: "Fort Lauderdale"
+state: "FL"
+age: 42
+sex: "male"
+
+# Indication: "PrEP" or "HIV treatment"
+indication: "PrEP"
+
+# Year started Truvada (integer). Replace placeholder with actual year.
+truvada_start_year: "[TRUVADA_START_YEAR]"
+truvada_still_taking: true
+
+# Plain-English summary of what happened. 2–4 sentences max.
+injury_summary: >-
+  Stress fracture of the left hip in an otherwise fit, athletic 42-year-old.
+  Subsequent DEXA scan ordered by my primary-care physician showed osteopenia
+  in the left hip. My treating physician believes Truvada contributed to the
+  bone loss and the fracture.
+
+# Approximate date of injury / fracture (YYYY-MM-DD). Replace placeholder.
+injury_date: "[INJURY_DATE]"
+
+# Diagnosing provider (optional but helpful — orthopedist, PCP, etc.).
+diagnosing_provider: "primary-care physician, Circle Medical"
+
+# Quoted findings from the DEXA report (paraphrase OK).
+dexa_findings: >-
+  Osteopenia in the left hip; T-score in the osteopenic range, which is
+  unusual for a 42-year-old male with my activity level.
+
+# What specialty is currently treating you?
+treating_specialty: "orthopedics"
+
+# Anything else relevant — no PrEP risk factors, no smoking, no steroid use,
+# etc. (these strengthen the causation argument).
+other_relevant: >-
+  No smoking, no chronic steroid use, no eating disorder, no family history
+  of early osteoporosis. Active pickleball player and resistance trainer.

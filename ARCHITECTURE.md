@@ -89,6 +89,7 @@ Apple Silicon-native machine (36 GB unified memory) running compute-intensive au
 | openclaw gateway/node | Always-on (4 LaunchAgents) | Local model gateway/router; `:18789` loopback; routes to MLX/Ollama/Google. See [infra/openclaw.md](infra/openclaw.md) |
 | gemini CLI | Interactive | Secondary AI assistant. OAuth `karlmarx9193@gmail.com`. 5 MCP extensions. See [infra/gemini-cli.md](infra/gemini-cli.md) |
 | gemini-auto | On-demand | Playwright/CDP image-gen via Gemini UI, 3-account rotation. Originally Windows; ported to Mac (hardcoded paths still in source). See [infra/gemini-auto.md](infra/gemini-auto.md) |
+| lawyer-outreach | Every 4 h (outreach) + every 30 min (reply scan) | Personalized email + Playwright web-form outreach to Truvada/TDF PrEP mass-tort firms. SQLite state, Claude per-firm composer, IMAP reply classifier, daily cap. See [infra/lawyer-outreach.md](infra/lawyer-outreach.md) |
 
 **Key characteristics:**
 - All background processes use LaunchAgents (`~/Library/LaunchAgents/*.plist`)

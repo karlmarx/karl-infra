@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  One outreach cycle every 4 hours. Each invocation processes at most ONE
+  firm — rate limiting + the daily cap (MAX_FIRMS_PER_DAY=3) live in code.
+
+  Install:
+    cp launchd/fyi.93.lawyer-outreach.plist ~/Library/LaunchAgents/fyi.93.lawyer-outreach.plist
+    # Edit the WorkingDirectory + ProgramArguments paths to match your machine.
+    launchctl bootstrap gui/$UID ~/Library/LaunchAgents/fyi.93.lawyer-outreach.plist
+    launchctl enable gui/$UID/fyi.93.lawyer-outreach
+
+  Pause (without uninstalling):
+    touch ~/karl-infra-state/lawyer-outreach/disable
+
+  Resume:
+    rm ~/karl-infra-state/lawyer-outreach/disable
+
+  Uninstall:
+    launchctl bootout gui/$UID/fyi.93.lawyer-outreach
+    rm ~/Library/LaunchAgents/fyi.93.lawyer-outreach.plist
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>fyi.93.lawyer-outreach</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/karl/karl-infra/services/lawyer-outreach/scripts/run-outreach.sh</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/karl/karl-infra/services/lawyer-outreach</string>
+
+    <key>StartInterval</key>
+    <integer>14400</integer>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>/Users/karl/Library/Logs/lawyer-outreach.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/karl/Library/Logs/lawyer-outreach.err</string>
+
+    <key>ThrottleInterval</key>
+    <integer>60</integer>
+</dict>
+</plist>

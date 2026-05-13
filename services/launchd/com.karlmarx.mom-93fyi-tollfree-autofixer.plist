@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Runs the toll-free verification autofixer once an hour. The script's
+  own cooldown (2h between Twilio writes) is the real rate-limiter; this
+  schedule just makes sure we react to state changes within an hour.
+
+  Install:
+    cp services/launchd/com.karlmarx.mom-93fyi-tollfree-autofixer.plist \
+       ~/Library/LaunchAgents/
+    launchctl bootstrap gui/$UID \
+       ~/Library/LaunchAgents/com.karlmarx.mom-93fyi-tollfree-autofixer.plist
+    launchctl enable gui/$UID/com.karlmarx.mom-93fyi-tollfree-autofixer
+
+  Uninstall:
+    launchctl bootout gui/$UID/com.karlmarx.mom-93fyi-tollfree-autofixer
+    rm ~/Library/LaunchAgents/com.karlmarx.mom-93fyi-tollfree-autofixer.plist
+
+  Inspect:
+    launchctl print gui/$UID/com.karlmarx.mom-93fyi-tollfree-autofixer
+    tail -f ~/.local/share/mom-93fyi-tollfree/autofixer.log
+    ~/karl-infra/services/mom-93fyi-tollfree-autofixer.py --status
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.karlmarx.mom-93fyi-tollfree-autofixer</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/kmx/karl-infra/services/mom-93fyi-tollfree-autofixer.py</string>
+    </array>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <!-- launchd ships agents with a bare PATH; uv lives in ~/.local/bin. -->
+        <key>PATH</key>
+        <string>/Users/kmx/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+        <key>HOME</key>
+        <string>/Users/kmx</string>
+    </dict>
+
+    <key>StartInterval</key>
+    <integer>3600</integer>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>/Users/kmx/.local/share/mom-93fyi-tollfree/autofixer.stdout.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/kmx/.local/share/mom-93fyi-tollfree/autofixer.stderr.log</string>
+
+    <key>ThrottleInterval</key>
+    <integer>60</integer>
+</dict>
+</plist>

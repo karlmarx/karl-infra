@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-12
+> Auto-updated daily from GitHub commits. Last update: 2026-05-13
 
 ## Overview
 
@@ -88,12 +88,19 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
-### mom-93fyi
-- chore: add Twilio opt-in proof PNG (#26) (2026-05-10)
-- feat: SMS link in bedbug shell + /consent page (#25) (2026-05-10)
-- feat(bedbug): tap-to-text "Text Ben a question" link in app shell footer (#23) (2026-05-10)
-- Add detail Mom can read on her own — morning, worried, why, timetable, bites, bigger Q&A (#22) (2026-05-10)
-- chore: gitignore .env*.local (auto-added by vercel env pull) (2026-05-09)
+### karl-command-center
+- feat(triage): /triage dashboard reads from Supabase (#2) (2026-05-12)
+- data: vlm-status 2026-05-12T04:31 (2026-05-12)
+- data: vlm-status 2026-05-11T03:46 (2026-05-11)
+- feat(status): VLM pipeline card with worker status + log tail (2026-05-10)
+- data: vlm-status 2026-05-10T05:12 (2026-05-10)
+
+### karl-infra
+- feat(email-triage): local Mac runner with diagnostic tools (#13) (2026-05-12)
+- chore: daily update 2026-05-12 (2026-05-12)
+- chore: daily update 2026-05-11 (2026-05-11)
+- chore: daily update 2026-05-10 (2026-05-10)
+- docs: sync 93.fyi DNS state + command-center /status PWA (2026-05-09)
 
 ### nwb-plan
 - ci: auto-alias preview.nfit.93.fyi to latest non-main/non-dev branch deploy (#120) (2026-05-10)
@@ -102,19 +109,19 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - fix(hevy): server-side api key + admin auth gate (lost in PR #118 race) (#119) (2026-05-10)
 - feat: picker copy + pwbpb link + hevy exercise audit tab (#118) (2026-05-10)
 
-### karl-command-center
-- data: vlm-status 2026-05-11T03:46 (2026-05-11)
-- feat(status): VLM pipeline card with worker status + log tail (2026-05-10)
-- data: vlm-status 2026-05-10T05:12 (2026-05-10)
-- feat(status): priority-tiered grid order (2026-05-10)
-- feat(status): per-app emoji + human label (2026-05-10)
+### mom-93fyi
+- chore(site): add 'Operated by Karl Marx-Levi' footer to home (2026-05-12)
+- chore(sms): point SmsLink at toll-free +18886016132 (2026-05-12)
+- chore: add Twilio opt-in proof PNG (#26) (2026-05-10)
+- feat: SMS link in bedbug shell + /consent page (#25) (2026-05-10)
+- feat(bedbug): tap-to-text "Text Ben a question" link in app shell footer (#23) (2026-05-10)
 
-### karl-infra
-- chore: daily update 2026-05-11 (2026-05-11)
-- chore: daily update 2026-05-10 (2026-05-10)
-- docs: sync 93.fyi DNS state + command-center /status PWA (2026-05-09)
-- infra(finflow): document hourly Teller sync LaunchAgent (staged, not loaded) (2026-05-09)
-- feat: add pickleball-drills for pwbpb.93.fyi (2026-05-09)
+### 93-fyi
+- fix(footer): un-obfuscate email + add phone for Twilio TFV verifier (2026-05-12)
+- feat: add operator info to footer for Twilio TFV verification (2026-05-08)
+- feat: link mom.93.fyi from apex (twilio review) (#2) (2026-05-01)
+- feat(workoutgifs): add 5 new clips and PUSH/PULL/CARDIO sections (2026-04-25)
+- fix: migrate subdomain rewrite to Next 16 proxy.ts (drop dead middleware.ts) (2026-04-25)
 
 ### blazing-paddles-react
 - ci: add Playwright regression suite, CI gate, and auto-merge (#18) (2026-05-10)
@@ -122,13 +129,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - chore: update robots.txt to disallow access to /dl/ directory (2026-05-05)
 - Merge pull request #23 from karlmarx/Robb-Dev (2026-05-05)
 - chore: remove deprecated API endpoints and configuration files (2026-05-05)
-
-### 93-fyi
-- feat: add operator info to footer for Twilio TFV verification (2026-05-08)
-- feat: link mom.93.fyi from apex (twilio review) (#2) (2026-05-01)
-- feat(workoutgifs): add 5 new clips and PUSH/PULL/CARDIO sections (2026-04-25)
-- fix: migrate subdomain rewrite to Next 16 proxy.ts (drop dead middleware.ts) (2026-04-25)
-- fix: remove dead @site_url secret reference from vercel.json (2026-04-25)
 
 ### closet-bro
 - feat: add concise mode (~half the tokens, same persona) (#2) (2026-05-07)

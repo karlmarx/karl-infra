@@ -104,7 +104,8 @@ workflow tools to ops/dev users).
 ## Pre-flight checklist (do these BEFORE walking in)
 
 - [ ] Mac runner is running on launchd. Confirm: `launchctl list | grep triage`
-      shows a non-zero status code.
+      shows status `0` in the second column (last run succeeded). A non-zero
+      number means the most recent run errored — check `~/Library/Logs/triage.err`.
 - [ ] `tail -f ~/Library/Logs/triage.log` open in a Terminal pane (visible to
       you, not the projector).
 - [ ] `/triage` dashboard open in browser, full-screen on the projector.
@@ -353,8 +354,26 @@ sequenceDiagram
 This is the bridge to the work POC. Switch from showing the autonomous Mac
 runner to showing **Claude Desktop using the same tool surface manually**.
 
-**Setup:** Claude Desktop is already connected to `https://karl-command-center.vercel.app/api/mcp`
-as an MCP server named `karl-triage`.
+**Setup:** Claude Desktop is already connected to the `/api/mcp` route on
+karl-command-center as an MCP server named `karl-triage`.
+
+> **Pre-demo:** the canonical production URL is gated by Cloudflare Access
+> (`https://command.93.fyi/api/mcp`), and the bare Vercel hostname is gated
+> by Vercel Deployment Protection. Neither is reachable from Claude Desktop
+> without help. Two options to make this work before the meeting:
+>
+> 1. **Protection-bypass automation** — generate a bypass token in the Vercel
+>    project settings, then put both headers in the Claude Desktop config:
+>    `Authorization: Bearer <MCP_BEARER_TOKEN>` *and*
+>    `x-vercel-protection-bypass: <BYPASS_TOKEN>`. Confirm `tools/list`
+>    works the night before; do **not** discover this at the meeting.
+> 2. **CF Access service token** — generate a service token for
+>    `command.93.fyi` and add `CF-Access-Client-Id` / `CF-Access-Client-Secret`
+>    headers alongside the bearer.
+>
+> Either way, **test `tools/list` end-to-end from Claude Desktop before the
+> demo**. The MCP route on the server is verified working; the deployment
+> walls are what trip up an unprepared client.
 
 1. Open Claude Desktop. Show the connected MCP server in the sidebar.
 2. Type the prompt:

@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-13
+> Auto-updated daily from GitHub commits. Last update: 2026-05-14
 
 ## Overview
 
@@ -96,32 +96,32 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - data: vlm-status 2026-05-10T05:12 (2026-05-10)
 
 ### karl-infra
+- chore: daily update 2026-05-13 (2026-05-13)
 - feat(email-triage): local Mac runner with diagnostic tools (#13) (2026-05-12)
 - chore: daily update 2026-05-12 (2026-05-12)
 - chore: daily update 2026-05-11 (2026-05-11)
 - chore: daily update 2026-05-10 (2026-05-10)
-- docs: sync 93.fyi DNS state + command-center /status PWA (2026-05-09)
+
+### mom-93fyi
+- chore(bedbug): drop picture-sending refs, route everything to chat (2026-05-13)
+- chore(bedbug): stop telling mom to text Ben — route to chat + email (2026-05-13)
+- chore(bedbug): remove unused sms import from AppShell (2026-05-13)
+- fix(ask): include actual content changes lost in the previous rename (2026-05-13)
+- feat(ask): move chat to bedbug.93.fyi/ask, swap AppShell CTA (2026-05-13)
 
 ### nwb-plan
+- ci: run Playwright on every push (not just main/dev) (#128) (2026-05-13)
+- fix(swap): group machine variants by own equipment, not parent's (#127) (2026-05-13)
 - ci: auto-alias preview.nfit.93.fyi to latest non-main/non-dev branch deploy (#120) (2026-05-10)
 - chore: trigger preview rebuild for AUTH_TRUST_HOST + NEXTAUTH_URL fix (2026-05-10)
 - chore: trigger preview redeploy to pick up HEVY_API_KEY (2026-05-10)
-- fix(hevy): server-side api key + admin auth gate (lost in PR #118 race) (#119) (2026-05-10)
-- feat: picker copy + pwbpb link + hevy exercise audit tab (#118) (2026-05-10)
-
-### mom-93fyi
-- chore(site): add 'Operated by Karl Marx-Levi' footer to home (2026-05-12)
-- chore(sms): point SmsLink at toll-free +18886016132 (2026-05-12)
-- chore: add Twilio opt-in proof PNG (#26) (2026-05-10)
-- feat: SMS link in bedbug shell + /consent page (#25) (2026-05-10)
-- feat(bedbug): tap-to-text "Text Ben a question" link in app shell footer (#23) (2026-05-10)
 
 ### 93-fyi
+- revert: restore mailto link and drop phone from footer (2026-05-13)
 - fix(footer): un-obfuscate email + add phone for Twilio TFV verifier (2026-05-12)
 - feat: add operator info to footer for Twilio TFV verification (2026-05-08)
 - feat: link mom.93.fyi from apex (twilio review) (#2) (2026-05-01)
 - feat(workoutgifs): add 5 new clips and PUSH/PULL/CARDIO sections (2026-04-25)
-- fix: migrate subdomain rewrite to Next 16 proxy.ts (drop dead middleware.ts) (2026-04-25)
 
 ### blazing-paddles-react
 - ci: add Playwright regression suite, CI gate, and auto-merge (#18) (2026-05-10)

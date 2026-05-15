@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-14
+> Auto-updated daily from GitHub commits. Last update: 2026-05-15
 
 ## Overview
 
@@ -88,6 +88,13 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### mom-93fyi
+- chore(bedbug): drop picture-sending refs, route everything to chat (2026-05-13)
+- chore(bedbug): stop telling mom to text Ben — route to chat + email (2026-05-13)
+- chore(bedbug): remove unused sms import from AppShell (2026-05-13)
+- fix(ask): include actual content changes lost in the previous rename (2026-05-13)
+- feat(ask): move chat to bedbug.93.fyi/ask, swap AppShell CTA (2026-05-13)
+
 ### karl-command-center
 - feat(triage): /triage dashboard reads from Supabase (#2) (2026-05-12)
 - data: vlm-status 2026-05-12T04:31 (2026-05-12)
@@ -96,18 +103,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - data: vlm-status 2026-05-10T05:12 (2026-05-10)
 
 ### karl-infra
+- chore: daily update 2026-05-14 (2026-05-14)
 - chore: daily update 2026-05-13 (2026-05-13)
 - feat(email-triage): local Mac runner with diagnostic tools (#13) (2026-05-12)
 - chore: daily update 2026-05-12 (2026-05-12)
 - chore: daily update 2026-05-11 (2026-05-11)
-- chore: daily update 2026-05-10 (2026-05-10)
-
-### mom-93fyi
-- chore(bedbug): drop picture-sending refs, route everything to chat (2026-05-13)
-- chore(bedbug): stop telling mom to text Ben — route to chat + email (2026-05-13)
-- chore(bedbug): remove unused sms import from AppShell (2026-05-13)
-- fix(ask): include actual content changes lost in the previous rename (2026-05-13)
-- feat(ask): move chat to bedbug.93.fyi/ask, swap AppShell CTA (2026-05-13)
 
 ### nwb-plan
 - ci: run Playwright on every push (not just main/dev) (#128) (2026-05-13)
@@ -129,11 +129,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - chore: update robots.txt to disallow access to /dl/ directory (2026-05-05)
 - Merge pull request #23 from karlmarx/Robb-Dev (2026-05-05)
 - chore: remove deprecated API endpoints and configuration files (2026-05-05)
-
-### closet-bro
-- feat: add concise mode (~half the tokens, same persona) (#2) (2026-05-07)
-- Initial frat-bro plugin scaffold (#1) (2026-05-07)
-- Initial commit (2026-05-07)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-15
+> Auto-updated daily from GitHub commits. Last update: 2026-05-16
 
 ## Overview
 
@@ -88,13 +88,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
-### mom-93fyi
-- chore(bedbug): drop picture-sending refs, route everything to chat (2026-05-13)
-- chore(bedbug): stop telling mom to text Ben — route to chat + email (2026-05-13)
-- chore(bedbug): remove unused sms import from AppShell (2026-05-13)
-- fix(ask): include actual content changes lost in the previous rename (2026-05-13)
-- feat(ask): move chat to bedbug.93.fyi/ask, swap AppShell CTA (2026-05-13)
-
 ### karl-command-center
 - feat(triage): /triage dashboard reads from Supabase (#2) (2026-05-12)
 - data: vlm-status 2026-05-12T04:31 (2026-05-12)
@@ -102,12 +95,26 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - feat(status): VLM pipeline card with worker status + log tail (2026-05-10)
 - data: vlm-status 2026-05-10T05:12 (2026-05-10)
 
+### mom-93fyi
+- feat(proxy): serve karlmarxindustries.com landing from Vercel (2026-05-15)
+- chore(bedbug): drop picture-sending refs, route everything to chat (2026-05-13)
+- chore(bedbug): stop telling mom to text Ben — route to chat + email (2026-05-13)
+- chore(bedbug): remove unused sms import from AppShell (2026-05-13)
+- fix(ask): include actual content changes lost in the previous rename (2026-05-13)
+
+### karlmarx.github.io
+- Add .nojekyll to skip Jekyll on static-HTML deploy (2026-05-15)
+- Replace SPA shell with Karl Marx Industries landing page (2026-05-15)
+- Create CNAME (2024-05-06)
+- Updates (2024-03-31)
+- Updates (2024-03-06)
+
 ### karl-infra
+- chore: daily update 2026-05-15 (2026-05-15)
 - chore: daily update 2026-05-14 (2026-05-14)
 - chore: daily update 2026-05-13 (2026-05-13)
 - feat(email-triage): local Mac runner with diagnostic tools (#13) (2026-05-12)
 - chore: daily update 2026-05-12 (2026-05-12)
-- chore: daily update 2026-05-11 (2026-05-11)
 
 ### nwb-plan
 - ci: run Playwright on every push (not just main/dev) (#128) (2026-05-13)

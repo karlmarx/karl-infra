@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-16
+> Auto-updated daily from GitHub commits. Last update: 2026-05-17
 
 ## Overview
 
@@ -88,12 +88,26 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### 93-fyi
+- feat(hot): top-3 model comparison gallery (2026-05-16)
+- revert: restore mailto link and drop phone from footer (2026-05-13)
+- fix(footer): un-obfuscate email + add phone for Twilio TFV verifier (2026-05-12)
+- feat: add operator info to footer for Twilio TFV verification (2026-05-08)
+- feat: link mom.93.fyi from apex (twilio review) (#2) (2026-05-01)
+
 ### karl-command-center
 - feat(triage): /triage dashboard reads from Supabase (#2) (2026-05-12)
 - data: vlm-status 2026-05-12T04:31 (2026-05-12)
 - data: vlm-status 2026-05-11T03:46 (2026-05-11)
 - feat(status): VLM pipeline card with worker status + log tail (2026-05-10)
 - data: vlm-status 2026-05-10T05:12 (2026-05-10)
+
+### karl-infra
+- chore: daily update 2026-05-16 (2026-05-16)
+- chore: daily update 2026-05-15 (2026-05-15)
+- chore: daily update 2026-05-14 (2026-05-14)
+- chore: daily update 2026-05-13 (2026-05-13)
+- feat(email-triage): local Mac runner with diagnostic tools (#13) (2026-05-12)
 
 ### mom-93fyi
 - feat(proxy): serve karlmarxindustries.com landing from Vercel (2026-05-15)
@@ -109,26 +123,12 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - Updates (2024-03-31)
 - Updates (2024-03-06)
 
-### karl-infra
-- chore: daily update 2026-05-15 (2026-05-15)
-- chore: daily update 2026-05-14 (2026-05-14)
-- chore: daily update 2026-05-13 (2026-05-13)
-- feat(email-triage): local Mac runner with diagnostic tools (#13) (2026-05-12)
-- chore: daily update 2026-05-12 (2026-05-12)
-
 ### nwb-plan
 - ci: run Playwright on every push (not just main/dev) (#128) (2026-05-13)
 - fix(swap): group machine variants by own equipment, not parent's (#127) (2026-05-13)
 - ci: auto-alias preview.nfit.93.fyi to latest non-main/non-dev branch deploy (#120) (2026-05-10)
 - chore: trigger preview rebuild for AUTH_TRUST_HOST + NEXTAUTH_URL fix (2026-05-10)
 - chore: trigger preview redeploy to pick up HEVY_API_KEY (2026-05-10)
-
-### 93-fyi
-- revert: restore mailto link and drop phone from footer (2026-05-13)
-- fix(footer): un-obfuscate email + add phone for Twilio TFV verifier (2026-05-12)
-- feat: add operator info to footer for Twilio TFV verification (2026-05-08)
-- feat: link mom.93.fyi from apex (twilio review) (#2) (2026-05-01)
-- feat(workoutgifs): add 5 new clips and PUSH/PULL/CARDIO sections (2026-04-25)
 
 ### blazing-paddles-react
 - ci: add Playwright regression suite, CI gate, and auto-merge (#18) (2026-05-10)

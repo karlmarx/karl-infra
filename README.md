@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-17
+> Auto-updated daily from GitHub commits. Last update: 2026-05-18
 
 ## Overview
 
@@ -88,6 +88,16 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### suspect-game
+- Initial commit: SUSPECT word bluffing game (2026-05-17)
+
+### karl-infra
+- chore: daily update 2026-05-17 (2026-05-17)
+- chore: daily update 2026-05-16 (2026-05-16)
+- chore: daily update 2026-05-15 (2026-05-15)
+- chore: daily update 2026-05-14 (2026-05-14)
+- chore: daily update 2026-05-13 (2026-05-13)
+
 ### 93-fyi
 - feat(hot): top-3 model comparison gallery (2026-05-16)
 - revert: restore mailto link and drop phone from footer (2026-05-13)
@@ -101,13 +111,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - data: vlm-status 2026-05-11T03:46 (2026-05-11)
 - feat(status): VLM pipeline card with worker status + log tail (2026-05-10)
 - data: vlm-status 2026-05-10T05:12 (2026-05-10)
-
-### karl-infra
-- chore: daily update 2026-05-16 (2026-05-16)
-- chore: daily update 2026-05-15 (2026-05-15)
-- chore: daily update 2026-05-14 (2026-05-14)
-- chore: daily update 2026-05-13 (2026-05-13)
-- feat(email-triage): local Mac runner with diagnostic tools (#13) (2026-05-12)
 
 ### mom-93fyi
 - feat(proxy): serve karlmarxindustries.com landing from Vercel (2026-05-15)
@@ -129,13 +132,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - ci: auto-alias preview.nfit.93.fyi to latest non-main/non-dev branch deploy (#120) (2026-05-10)
 - chore: trigger preview rebuild for AUTH_TRUST_HOST + NEXTAUTH_URL fix (2026-05-10)
 - chore: trigger preview redeploy to pick up HEVY_API_KEY (2026-05-10)
-
-### blazing-paddles-react
-- ci: add Playwright regression suite, CI gate, and auto-merge (#18) (2026-05-10)
-- Merge pull request #24 from karlmarx/Robb-Dev (2026-05-05)
-- chore: update robots.txt to disallow access to /dl/ directory (2026-05-05)
-- Merge pull request #23 from karlmarx/Robb-Dev (2026-05-05)
-- chore: remove deprecated API endpoints and configuration files (2026-05-05)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-18
+> Auto-updated daily from GitHub commits. Last update: 2026-05-19
 
 ## Overview
 
@@ -88,15 +88,15 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
-### suspect-game
-- Initial commit: SUSPECT word bluffing game (2026-05-17)
-
 ### karl-infra
+- chore: daily update 2026-05-18 (2026-05-18)
 - chore: daily update 2026-05-17 (2026-05-17)
 - chore: daily update 2026-05-16 (2026-05-16)
 - chore: daily update 2026-05-15 (2026-05-15)
 - chore: daily update 2026-05-14 (2026-05-14)
-- chore: daily update 2026-05-13 (2026-05-13)
+
+### suspect-game
+- Initial commit: SUSPECT word bluffing game (2026-05-17)
 
 ### 93-fyi
 - feat(hot): top-3 model comparison gallery (2026-05-16)

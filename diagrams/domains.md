@@ -20,6 +20,7 @@
 |   +-- contact.93.fyi  CNAME -> cname.vercel-dns.com  (Contact Form)
 |   +-- layover.93.fyi  CNAME -> cname.vercel-dns.com  (Flight Connection Confidence)
 |   +-- mom.93.fyi      CNAME -> cname.vercel-dns.com  (Mom's Reassurance Hub)
+|   +-- suspect.93.fyi  CNAME -> cname.vercel-dns.com  (suspect-game)
 |   +-- progress.93.fyi CNAME -> (resolves via wildcard A `*.93.fyi`) (progress-dashboard)
 |   +-- command.93.fyi  A     -> 76.76.21.21 (proxied)  (karl-command-center, CF Access gated)
 |
@@ -48,6 +49,7 @@
 | `contact.93.fyi` | (Contact Form) | (private repo) | Public contact form, Turnstile + Resend, rate-limited |
 | `layover.93.fyi` | (Flight Connection Confidence) | (private repo) | Connection success calculator for elderly travelers |
 | `mom.93.fyi` | (Mom's Reassurance Hub) | (private repo) | Letter-style answers to Mom's worries |
+| `suspect.93.fyi` | suspect-game | karlmarx/suspect-game | Multiplayer word bluffing game for happy hours. Realtime via PartyKit (`suspect-game.karlmarx.partykit.dev`). |
 | `progress.93.fyi` | progress-dashboard | karlmarx/progress-dashboard | Milestone tracker, NextAuth + CF Access |
 | `command.93.fyi` | karl-command-center | karlmarx/karl-command-center | Daily-driver hub, **Cloudflare Access gated**. Hosts `/status` PWA route (installable on mobile) |
 

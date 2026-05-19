@@ -27,6 +27,7 @@ All web applications deploy to Vercel with custom domains via Cloudflare DNS.
 | karl-command-center | Next.js 16 + React 19 + Tailwind 4 + framer-motion + better-sqlite3 | SQLite (local) + Mac Studio FastAPI agent | command.93.fyi (Cloudflare Access gated) |
 | house-tracker | React 19 + Vite 8 + react-router 7 + Tailwind 4 | None (static JS export) | (no custom domain — `*.vercel.app`) |
 | pickleball-drills | Single-file static HTML + animated SVG (no build) | None | pwbpb.93.fyi |
+| suspect-game | Vite 8 + React 19 + TypeScript + Tailwind 4 + react-router 7 | PartyKit Durable Object (one per room, ephemeral state) | suspect.93.fyi |
 
 **Vercel configuration:**
 - All projects on free tier
@@ -174,6 +175,7 @@ Dynadot (registrar)
                ├── mom.93.fyi      CNAME ──> cname.vercel-dns.com (Mom's Reassurance Hub)
                ├── auto.93.fyi     CNAME ──> cname.vercel-dns.com (auto-dashboard)
                ├── ortho.93.fyi    CNAME ──> cname.vercel-dns.com (orthoappt)
+               ├── suspect.93.fyi  CNAME ──> cname.vercel-dns.com (suspect-game; backend on partykit.dev)
                ├── command.93.fyi  CNAME ──> cname.vercel-dns.com (command-center, gated by Cloudflare Access)
                ├── progress.93.fyi CNAME ──> cname.vercel-dns.com (progress-dashboard)
                ├── 93.fyi          CNAME ──> cname.vercel-dns.com (nwb-plan, temp)

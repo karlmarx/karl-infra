@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-19
+> Auto-updated daily from GitHub commits. Last update: 2026-05-20
 
 ## Overview
 
@@ -89,11 +89,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- chore: daily update 2026-05-19 (2026-05-19)
 - chore: daily update 2026-05-18 (2026-05-18)
 - chore: daily update 2026-05-17 (2026-05-17)
 - chore: daily update 2026-05-16 (2026-05-16)
 - chore: daily update 2026-05-15 (2026-05-15)
-- chore: daily update 2026-05-14 (2026-05-14)
 
 ### suspect-game
 - Initial commit: SUSPECT word bluffing game (2026-05-17)
@@ -104,13 +104,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - fix(footer): un-obfuscate email + add phone for Twilio TFV verifier (2026-05-12)
 - feat: add operator info to footer for Twilio TFV verification (2026-05-08)
 - feat: link mom.93.fyi from apex (twilio review) (#2) (2026-05-01)
-
-### karl-command-center
-- feat(triage): /triage dashboard reads from Supabase (#2) (2026-05-12)
-- data: vlm-status 2026-05-12T04:31 (2026-05-12)
-- data: vlm-status 2026-05-11T03:46 (2026-05-11)
-- feat(status): VLM pipeline card with worker status + log tail (2026-05-10)
-- data: vlm-status 2026-05-10T05:12 (2026-05-10)
 
 ### mom-93fyi
 - feat(proxy): serve karlmarxindustries.com landing from Vercel (2026-05-15)

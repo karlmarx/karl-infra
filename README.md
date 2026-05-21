@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-20
+> Auto-updated daily from GitHub commits. Last update: 2026-05-21
 
 ## Overview
 
@@ -88,12 +88,19 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### nwb-plan
+- Sync dev with main (#131) (2026-05-20)
+- ci: run Playwright on every push (not just main/dev) (#128) (2026-05-13)
+- fix(swap): group machine variants by own equipment, not parent's (#127) (2026-05-13)
+- ci: auto-alias preview.nfit.93.fyi to latest non-main/non-dev branch deploy (#120) (2026-05-10)
+- chore: trigger preview rebuild for AUTH_TRUST_HOST + NEXTAUTH_URL fix (2026-05-10)
+
 ### karl-infra
+- chore: daily update 2026-05-20 (2026-05-20)
 - chore: daily update 2026-05-19 (2026-05-19)
 - chore: daily update 2026-05-18 (2026-05-18)
 - chore: daily update 2026-05-17 (2026-05-17)
 - chore: daily update 2026-05-16 (2026-05-16)
-- chore: daily update 2026-05-15 (2026-05-15)
 
 ### suspect-game
 - Initial commit: SUSPECT word bluffing game (2026-05-17)
@@ -118,13 +125,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - Create CNAME (2024-05-06)
 - Updates (2024-03-31)
 - Updates (2024-03-06)
-
-### nwb-plan
-- ci: run Playwright on every push (not just main/dev) (#128) (2026-05-13)
-- fix(swap): group machine variants by own equipment, not parent's (#127) (2026-05-13)
-- ci: auto-alias preview.nfit.93.fyi to latest non-main/non-dev branch deploy (#120) (2026-05-10)
-- chore: trigger preview rebuild for AUTH_TRUST_HOST + NEXTAUTH_URL fix (2026-05-10)
-- chore: trigger preview redeploy to pick up HEVY_API_KEY (2026-05-10)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

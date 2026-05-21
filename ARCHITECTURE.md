@@ -21,13 +21,12 @@ All web applications deploy to Vercel with custom domains via Cloudflare DNS.
 | Flight Connection Confidence | Next.js 16 + React 19 + TypeScript | None (client-side analysis) | layover.93.fyi |
 | Mom's Reassurance Hub | Next.js 16 + React 19 + TypeScript + framer-motion | None (static content) | mom.93.fyi |
 | blazing-paddles-react | React (Vite) | None | blazingpaddles.org |
-| auto-dashboard | React 19 + Vite + TypeScript + @xyflow/react | None (static) | auto.93.fyi |
+| auto-dashboard | React 19 + Vite + TypeScript + @xyflow/react | None (static) | auto.93.fyi (also serves `/roadmachine` static gear-picks page) |
 | orthoappt | Next.js 16 + React 19 + TypeScript + Tailwind 4 + PWA | None (localStorage; build-time MD parse) | ortho.93.fyi |
 | progress-dashboard | Next.js 16 + React 19 + TypeScript + NextAuth | SQLite (milestone tracking) | progress.93.fyi |
 | karl-command-center | Next.js 16 + React 19 + Tailwind 4 + framer-motion + better-sqlite3 | SQLite (local) + Mac Studio FastAPI agent | command.93.fyi (Cloudflare Access gated) |
 | house-tracker | React 19 + Vite 8 + react-router 7 + Tailwind 4 | None (static JS export) | (no custom domain — `*.vercel.app`) |
 | pickleball-drills | Single-file static HTML + animated SVG (no build) | None | pwbpb.93.fyi |
-| roadmachine (gear picks) | Single-file static HTML (no build) | None | roadmachine.93.fyi |
 
 **Vercel configuration:**
 - All projects on free tier
@@ -177,7 +176,6 @@ Dynadot (registrar)
                ├── ortho.93.fyi    CNAME ──> cname.vercel-dns.com (orthoappt)
                ├── command.93.fyi  CNAME ──> cname.vercel-dns.com (command-center, gated by Cloudflare Access)
                ├── progress.93.fyi CNAME ──> cname.vercel-dns.com (progress-dashboard)
-               ├── roadmachine.93.fyi CNAME ──> cname.vercel-dns.com (roadmachine gear picks)
                ├── 93.fyi          CNAME ──> cname.vercel-dns.com (nwb-plan, temp)
                └── Email routing: k@93.fyi ──> karlmarx9193@gmail.com
 ```

@@ -16,7 +16,6 @@
 | `93.fyi` | CNAME | `cname.vercel-dns.com` | Yes | Points to nwb-plan (temporary) |
 | `nfit.93.fyi` | CNAME | `cname.vercel-dns.com` | Yes | NWB Fitness PWA |
 | `nyoga.93.fyi` | CNAME | `cname.vercel-dns.com` | Yes | NWB Yoga PWA |
-| `roadmachine.93.fyi` | CNAME | `cname.vercel-dns.com` | Yes | Roadmachine gear picks (karl-infra `/roadmachine`) |
 | `ta.93.fyi` | CNAME | `cname.vercel-dns.com` | No | **Stale** — TrickAdvisor migrated to `api.trickadvisor.cc` (custom domain). DNS record still exists but points at a Vercel project no longer load-bearing. Safe to remove when convenient. |
 
 ## Email Routing

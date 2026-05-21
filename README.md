@@ -50,7 +50,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the full deep-dive.
 | Identity Verification | [id.93.fyi](https://id.93.fyi) | React 19 + Supabase | [karlmarx/identity-verification](https://github.com/karlmarx/TrickAdvisor) |
 | ID Verification API | (serverless) | Node/Express + Vercel Functions | [karlmarx/id-api](https://github.com/karlmarx/TrickAdvisor-API) |
 | Blazing Paddles | [blazingpaddles.org](https://blazingpaddles.org) | React (Vite) | [karlmarx/blazing-paddles-react](https://github.com/karlmarx/blazing-paddles-react) |
-| Roadmachine Gear Picks | [roadmachine.93.fyi](https://roadmachine.93.fyi) | Static HTML (no build) | [karlmarx/karl-infra](https://github.com/karlmarx/karl-infra) (`/roadmachine`) |
+| Roadmachine Gear Picks | [auto.93.fyi/roadmachine](https://auto.93.fyi/roadmachine) | Static HTML (served from auto-dashboard) | [karlmarx/karl-infra](https://github.com/karlmarx/karl-infra) (`/auto-dashboard/public/roadmachine/`) |
 
 ## Automation
 
@@ -82,7 +82,6 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the full deep-dive.
 | `nfit.93.fyi` | CNAME | nwb-plan (Vercel) |
 | `nyoga.93.fyi` | CNAME | nwb-yoga (Vercel) |
 | `id.93.fyi` | CNAME | Identity Verification API (primary) |
-| `roadmachine.93.fyi` | CNAME | karl-infra `/roadmachine` (Vercel) |
 | `k@93.fyi` | Email routing | karlmarx9193@gmail.com (Cloudflare) |
 
 See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.

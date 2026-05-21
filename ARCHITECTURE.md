@@ -27,6 +27,7 @@ All web applications deploy to Vercel with custom domains via Cloudflare DNS.
 | karl-command-center | Next.js 16 + React 19 + Tailwind 4 + framer-motion + better-sqlite3 | SQLite (local) + Mac Studio FastAPI agent | command.93.fyi (Cloudflare Access gated) |
 | house-tracker | React 19 + Vite 8 + react-router 7 + Tailwind 4 | None (static JS export) | (no custom domain — `*.vercel.app`) |
 | pickleball-drills | Single-file static HTML + animated SVG (no build) | None | pwbpb.93.fyi |
+| roadmachine (gear picks) | Single-file static HTML (no build) | None | roadmachine.93.fyi |
 
 **Vercel configuration:**
 - All projects on free tier
@@ -176,6 +177,7 @@ Dynadot (registrar)
                ├── ortho.93.fyi    CNAME ──> cname.vercel-dns.com (orthoappt)
                ├── command.93.fyi  CNAME ──> cname.vercel-dns.com (command-center, gated by Cloudflare Access)
                ├── progress.93.fyi CNAME ──> cname.vercel-dns.com (progress-dashboard)
+               ├── roadmachine.93.fyi CNAME ──> cname.vercel-dns.com (roadmachine gear picks)
                ├── 93.fyi          CNAME ──> cname.vercel-dns.com (nwb-plan, temp)
                └── Email routing: k@93.fyi ──> karlmarx9193@gmail.com
 ```

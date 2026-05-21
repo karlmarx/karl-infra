@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gear Picks — BMC Roadmachine X TWO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lime:#C8F000;
+    --lime-dim:#a4c400;
+    --ink:#0c0c0c;
+    --ink-2:#171717;
+    --paper:#f4f3ee;
+    --line:#2a2a2a;
+    --muted:#8a8a8a;
+    --white:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Manrope',sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+  /* HEADER */
+  header{
+    position:relative;
+    padding:60px 0 40px;
+    border-bottom:3px solid var(--lime);
+    overflow:hidden;
+  }
+  header::before{
+    content:"";
+    position:absolute;inset:0;
+    background:
+      repeating-linear-gradient(115deg, transparent 0 38px, rgba(200,240,0,.04) 38px 39px);
+    pointer-events:none;
+  }
+  .kicker{
+    font-family:'Space Mono',monospace;
+    font-size:12px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--lime);
+    display:flex;align-items:center;gap:10px;
+  }
+  .kicker::after{content:"";flex:1;height:1px;background:var(--line)}
+  h1{
+    font-family:'Anton',sans-serif;
+    font-weight:400;
+    font-size:clamp(44px,9vw,104px);
+    line-height:.92;
+    text-transform:uppercase;
+    letter-spacing:-.01em;
+    margin:14px 0 6px;
+  }
+  h1 .y{color:var(--lime)}
+  .sub{
+    font-size:15px;color:var(--muted);max-width:560px;
+    font-family:'Space Mono',monospace;
+  }
+  .bikebar{
+    margin-top:26px;
+    display:flex;flex-wrap:wrap;gap:8px;
+  }
+  .chip{
+    font-family:'Space Mono',monospace;
+    font-size:12px;letter-spacing:.04em;
+    border:1px solid var(--line);
+    padding:7px 12px;border-radius:2px;
+    color:var(--paper);
+  }
+  .chip b{color:var(--lime);font-weight:700}
+
+  /* SECTION */
+  section{padding:54px 0}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:6px}
+  .sec-num{font-family:'Space Mono',monospace;color:var(--lime);font-size:13px}
+  h2{
+    font-family:'Anton',sans-serif;font-weight:400;
+    font-size:clamp(28px,5vw,46px);text-transform:uppercase;letter-spacing:-.01em;
+  }
+  .sec-note{color:var(--muted);font-size:14px;margin:4px 0 30px;max-width:640px}
+
+  /* COLOR CHEAT */
+  .colors{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:8px}
+  .swatch{
+    border:1px solid var(--line);border-radius:4px;padding:18px;
+    position:relative;overflow:hidden;background:var(--ink-2);
+  }
+  .swatch .dot{width:30px;height:30px;border-radius:50%;margin-bottom:12px;border:1px solid rgba(255,255,255,.15)}
+  .swatch h4{font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
+  .swatch p{font-size:13px;color:var(--muted);line-height:1.4}
+  .swatch.best{border-color:var(--lime)}
+  .swatch.best::after{content:"TOP";position:absolute;top:10px;right:10px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.15em;color:var(--ink);background:var(--lime);padding:2px 7px;border-radius:2px;font-weight:700}
+  .swatch.avoid{opacity:.62}
+
+  /* CARDS */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+  .card{
+    background:var(--ink-2);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:22px;
+    display:flex;flex-direction:column;
+    position:relative;
+    transition:transform .18s ease,border-color .18s ease;
+  }
+  .card:hover{transform:translateY(-4px);border-color:var(--lime)}
+  .card .store{
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;
+  }
+  .tag{font-size:10px;padding:3px 7px;border-radius:2px;font-weight:700;letter-spacing:.08em}
+  .tag.deal{background:var(--lime);color:var(--ink)}
+  .tag.style{background:#fff;color:var(--ink)}
+  .tag.value{background:#3a3a3a;color:var(--paper)}
+  .card h3{font-size:19px;font-weight:800;line-height:1.15;margin-bottom:8px}
+  .price{font-family:'Anton',sans-serif;font-size:30px;color:var(--lime);line-height:1;margin-bottom:2px}
+  .price small{font-family:'Space Mono',monospace;font-size:13px;color:var(--muted);text-decoration:line-through;margin-left:8px;font-weight:400}
+  .why{font-size:14px;color:#d8d8d2;margin:10px 0 8px;flex:1}
+  .match{font-family:'Space Mono',monospace;font-size:12px;color:var(--lime-dim);border-top:1px dashed var(--line);padding-top:10px;margin-top:6px}
+  .match span{color:var(--muted)}
+  .btn{
+    margin-top:14px;display:inline-flex;align-items:center;justify-content:space-between;gap:8px;
+    background:transparent;border:1px solid var(--lime);color:var(--lime);
+    font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    padding:11px 14px;border-radius:3px;text-decoration:none;font-weight:700;
+    transition:background .15s ease,color .15s ease;
+  }
+  .btn:hover{background:var(--lime);color:var(--ink)}
+  .btn::after{content:"→"}
+
+  /* CHECKLIST */
+  .checklist{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:8px}
+  .check{
+    background:var(--ink-2);border:1px solid var(--line);border-radius:5px;padding:16px 18px;
+    display:flex;gap:13px;align-items:flex-start;
+  }
+  .check .box{flex-shrink:0;width:18px;height:18px;border:1.5px solid var(--lime);border-radius:3px;margin-top:2px}
+  .check h4{font-size:15px;font-weight:700;margin-bottom:2px}
+  .check p{font-size:13px;color:var(--muted)}
+  .check a{color:var(--lime-dim);text-decoration:underline;text-underline-offset:2px}
+
+  /* MEMORIAL DAY BANNER */
+  .md{
+    background:var(--lime);color:var(--ink);
+    border-radius:8px;padding:30px 28px;margin-top:10px;
+    display:flex;flex-wrap:wrap;align-items:center;gap:20px;justify-content:space-between;
+    position:relative;overflow:hidden;
+  }
+  .md::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent 0 18px,rgba(0,0,0,.05) 18px 19px)}
+  .md-txt{position:relative;z-index:1;max-width:620px}
+  .md h3{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(22px,4vw,34px);text-transform:uppercase;line-height:1;margin-bottom:8px}
+  .md p{font-size:14px;font-weight:600}
+  .md .deadline{font-family:'Space Mono',monospace;font-weight:700;background:var(--ink);color:var(--lime);padding:3px 8px;border-radius:2px}
+  .md a{
+    position:relative;z-index:1;flex-shrink:0;
+    background:var(--ink);color:var(--lime);text-decoration:none;
+    font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+    padding:14px 20px;border-radius:4px;
+  }
+
+  footer{border-top:1px solid var(--line);padding:30px 0 50px;color:var(--muted);font-size:12px;font-family:'Space Mono',monospace;line-height:1.7}
+  footer b{color:var(--paper)}
+
+  .stagger{opacity:0;transform:translateY(16px);animation:rise .6s forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">Gear Shortlist · Road</div>
+    <h1>Helmet. Shoes.<br><span class="y">The Kit.</span></h1>
+    <p class="sub">Cliff's-notes picks, color-matched to your bike. Prices + links, nothing extra.</p>
+    <div class="bikebar">
+      <span class="chip">Bike: <b>BMC Roadmachine X TWO</b></span>
+      <span class="chip">Frame: <b>Lime Yellow / Black</b></span>
+      <span class="chip">Pedals: <b>Shimano EH500</b> (2-bolt SPD)</span>
+      <span class="chip">Cleats: <b>SH56</b> multi-release</span>
+    </div>
+  </div>
+</header>
+
+<!-- COLOR -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Color Match</h2></div>
+    <p class="sec-note">Lime + black frame. Keep gear clean so the yellow stays the star. Quick rule:</p>
+    <div class="colors">
+      <div class="swatch best">
+        <div class="dot" style="background:#fff"></div>
+        <h4>White</h4>
+        <p>Coolest in FL heat, sharp contrast, makes the lime pop. Safest stylish pick.</p>
+      </div>
+      <div class="swatch best">
+        <div class="dot" style="background:#0c0c0c;border-color:#444"></div>
+        <h4>Black</h4>
+        <p>Stealth, matches the frame's black. Goes with everything, hides road grime.</p>
+      </div>
+      <div class="swatch">
+        <div class="dot" style="background:#C8F000"></div>
+        <h4>Hi-Viz Lime</h4>
+        <p>Bold: echoes the frame AND boosts road visibility. Best safety play.</p>
+      </div>
+      <div class="swatch avoid">
+        <div class="dot" style="background:linear-gradient(90deg,#e23,#f70,#e39)"></div>
+        <h4>Avoid</h4>
+        <p>Red / orange / pink fight with lime yellow. Skip them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HELMETS -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Helmets</h2></div>
+    <p class="sec-note">Stylish road lids. All have rotational protection (MIPS or equivalent). Sorted by vibe + value.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="store">Mack Cycle <span class="tag style">STYLE</span></div>
+        <h3>Kask Mojito 3</h3>
+        <div class="price">$170</div>
+        <div class="why">The stylish-local pick. Clean Italian design, great fit, comes in white &amp; black. Kask WG11 rotational system.</div>
+        <div class="match"><span>match:</span> White or black → clean with lime</div>
+        <a class="btn" href="https://www.mackcycle.com/collections/helmets/products/kask-mojito-3-road-bicycle-helmet" target="_blank">View</a>
+      </div>
+
+      <div class="card">
+        <div class="store">Mack Cycle <span class="tag deal">25% OFF</span></div>
+        <h3>Kask Protone Icon</h3>
+        <div class="price">$225 <small>$300</small></div>
+        <div class="why">Step-up Kask. Best-seller, premium finish, matte colorways. On sale right now.</div>
+        <div class="match"><span>match:</span> Grey/white keeps it understated</div>
+        <a class="btn" href="https://www.mackcycle.com/collections/helmets/products/kask-protone-icon-performance-road-bike-helmet" target="_blank">View</a>
+      </div>
+
+      <div class="card">
+        <div class="store">Mack Cycle <span class="tag value">BEST VALUE</span></div>
+        <h3>Cannondale Dynam MIPS</h3>
+        <div class="price">$99 <small>$180</small></div>
+        <div class="why">45% off. True MIPS, comes in white. Unbeatable price for a solid road helmet.</div>
+        <div class="match"><span>match:</span> White version = perfect with lime</div>
+        <a class="btn" href="https://www.mackcycle.com/collections/helmets/products/cannondale-dynam-mips-road-bicycle-helmet" target="_blank">View</a>
+      </div>
+
+      <div class="card">
+        <div class="store">Mack Cycle <span class="tag deal">38% OFF</span></div>
+        <h3>Fizik Kudo MIPS</h3>
+        <div class="price">$200 <small>$320</small></div>
+        <div class="why">Premium, light, airy. Best ventilation here for hot rides. True MIPS.</div>
+        <div class="match"><span>match:</span> White or bronze, both clean</div>
+        <a class="btn" href="https://www.mackcycle.com/collections/helmets/products/fizik-kudo-mips-road-cycling-helmet" target="_blank">View</a>
+      </div>
+
+      <div class="card">
+        <div class="store">REI <span class="tag style">STYLE + LIGHTS</span></div>
+        <h3>Giro Escape MIPS</h3>
+        <div class="price">REI sale</div>
+        <div class="why">Slickest urban look. Built-in rechargeable front + rear LEDs. MIPS. Great for being seen.</div>
+        <div class="match"><span>match:</span> Matte grey / mineral</div>
+        <a class="btn" href="https://www.rei.com/product/203182/giro-escape-mips-bike-helmet" target="_blank">View</a>
+      </div>
+
+      <div class="card">
+        <div class="store">REI <span class="tag style">MINIMAL</span></div>
+        <h3>Smith Express MIPS</h3>
+        <div class="price">REI sale</div>
+        <div class="why">Clean minimalist shell, rear light + reflective straps, well-vented. Subtle and sharp.</div>
+        <div class="match"><span>match:</span> White or matte black</div>
+        <a class="btn" href="https://www.rei.com/product/247073/smith-express-mips-cycling-helmet" target="_blank">View</a>
+      </div>
+
+      <div class="card">
+        <div class="store">Thousand <span class="tag style">RETRO</span></div>
+        <h3>Thousand Chapter MIPS</h3>
+        <div class="price">~$110</div>
+        <div class="why">Most "doesn't-look-like-a-cyclist" option. Retro shape, magnetic buckle, MIPS version available.</div>
+        <div class="match"><span>match:</span> Cream/white or black</div>
+        <a class="btn" href="https://explorethousand.com/products/chapter-mips" target="_blank">View</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SHOES -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">03</span><h2>SPD Shoes</h2></div>
+    <p class="sec-note">Your EH500 pedals are 2-bolt SPD, so you want recessed 2-bolt shoes (walkable, clip-in optional). These fit your "might wear them, might not" use.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="store">Mack Cycle <span class="tag value">VALUE</span></div>
+        <h3>Shimano SH-XC300</h3>
+        <div class="price">~$120</div>
+        <div class="why">Shimano's reliable entry SPD. Comfortable, stiff enough for road, easy to walk in. Safe default.</div>
+        <div class="match"><span>match:</span> White or black, both work</div>
+        <a class="btn" href="https://mackcycle.com/products/shimano-sh-xc300-mountain-bike-shoes" target="_blank">View</a>
+      </div>
+
+      <div class="card">
+        <div class="store">Mack Cycle <span class="tag style">DIAL FIT</span></div>
+        <h3>Specialized Comp</h3>
+        <div class="price">~$150</div>
+        <div class="why">Body Geometry fit, stiff sole, tool-free Boa dial, multiple widths. Great all-rounder SPD.</div>
+        <div class="match"><span>match:</span> Black keeps it clean</div>
+        <a class="btn" href="https://mackcycle.com/products/specialized-comp-mountain-bike-shoes" target="_blank">View</a>
+      </div>
+
+      <div class="card">
+        <div class="store">Mack Cycle <span class="tag deal">UP TO 25% OFF</span></div>
+        <h3>Specialized Recon 2.0</h3>
+        <div class="price">$150 <small>$180</small></div>
+        <div class="why">2-bolt SPD + BOA dial, stiff road-capable sole, walkable. On sale now in black. The buy if you want to clip in.</div>
+        <div class="match"><span>match:</span> Black = clean with lime</div>
+        <a class="btn" href="https://www.mackcycle.com/collections/sale/products/specialized-recon-2-0-gravel-and-mountain-bike-shoe" target="_blank">View</a>
+      </div>
+
+      <div class="card">
+        <div class="store">REI <span class="tag deal">ANNIV SALE</span></div>
+        <h3>Shimano / Giro road SPD</h3>
+        <div class="price">REI sale</div>
+        <div class="why">REI's cycling shoes are discounted through the Anniversary Sale. Members get an extra 20% off one item.</div>
+        <div class="match"><span>match:</span> Filter to white or black</div>
+        <a class="btn" href="https://www.rei.com/c/cycling/f/scd-deals" target="_blank">Shop sale</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ACCESSORIES -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Smart Add-Ons</h2></div>
+    <p class="sec-note">What's actually worth grabbing for road riding right now. Tip: stack small items at Mack to clear $400 and trigger your $40-off coupon.</p>
+    <div class="checklist">
+      <div class="check"><div class="box"></div><div><h4>Flat kit</h4><p>Spare tube, CO2 inflator + cartridge, tire levers, mini multi-tool, saddle bag. Non-negotiable for road.</p></div></div>
+      <div class="check"><div class="box"></div><div><h4>Bottle cages + bottles</h4><p>Two cages. FL heat = hydrate. Cheap, easy coupon-stackers at Mack.</p></div></div>
+      <div class="check"><div class="box"></div><div><h4>Front + rear lights</h4><p>Skip if you get the Giro Escape (built-in). Otherwise a rear blinker minimum for visibility.</p></div></div>
+      <div class="check"><div class="box"></div><div><h4>Padded bib short</h4><p><a href="https://www.mackcycle.com/products/the-gold-standard-mens-giordana-fr-c-bib-short" target="_blank">Giordana "Gold Standard" bib</a> — $199 (was $250). Or Mavic clothing up to 60% off.</p></div></div>
+      <div class="check"><div class="box"></div><div><h4>Cycling sunglasses</h4><p>Sun + bugs at speed. Mack has a glasses wall; many under $50.</p></div></div>
+      <div class="check"><div class="box"></div><div><h4>Socks</h4><p>$10 cycling socks at Mack. Easy filler to hit the coupon threshold.</p></div></div>
+      <div class="check"><div class="box"></div><div><h4>Floor pump</h4><p>If you don't own one. Road tires need topping before every ride.</p></div></div>
+      <div class="check"><div class="box"></div><div><h4>Grease / anti-seize</h4><p>For the pedal threads (humid FL seizes them). A dab on install. Remember: left pedal is reverse-threaded.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BONUS DEALS -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Buried Deals</h2></div>
+    <p class="sec-note">Other genuinely good markdowns I dug out of Mack's sale page that fit road riding.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="store">Mack Cycle <span class="tag deal">71% OFF</span></div>
+        <h3>HyprViz Reflective Socks</h3>
+        <div class="price">$10 <small>$35</small></div>
+        <div class="why">Reflective tall socks. Road visibility + a no-brainer to stack toward the $40 coupon. Flat-out steal.</div>
+        <div class="match"><span>match:</span> Hi-viz nods to the lime</div>
+        <a class="btn" href="https://www.mackcycle.com/collections/sale/products/specialized-hyprviz-soft-air-reflective-tall-cycling-sock" target="_blank">View</a>
+      </div>
+
+      <div class="card">
+        <div class="store">Mack Cycle <span class="tag deal">29% OFF</span></div>
+        <h3>Giordana "Gold Standard" Jersey</h3>
+        <div class="price">$100 <small>$140</small></div>
+        <div class="why">Pairs with the matching bib. Race-cut, breathable, looks sharp without shouting.</div>
+        <div class="match"><span>match:</span> Neutral kit, frame stays the star</div>
+        <a class="btn" href="https://www.mackcycle.com/products/the-gold-standard-mens-giordana-vero-forma-lyte-low-collar-cycling-jersey" target="_blank">View</a>
+      </div>
+
+      <div class="card">
+        <div class="store">Mack Cycle <span class="tag deal">54% OFF</span></div>
+        <h3>Specialized x Fjällräven Cave Pack</h3>
+        <div class="price">$60 <small>$130</small></div>
+        <div class="why">Not road gear, but a great-looking everyday backpack at half off. Grab it if you need a bag.</div>
+        <div class="match"><span>match:</span> Lifestyle — any color works</div>
+        <a class="btn" href="https://www.mackcycle.com/collections/sale/products/specialized-fjallraven-cave-pack-backpack" target="_blank">View</a>
+      </div>
+
+      <div class="card">
+        <div class="store">Mack Cycle <span class="tag value">SAFETY UPGRADE</span></div>
+        <h3>Garmin Varia RTL515 Radar</h3>
+        <div class="price">$200</div>
+        <div class="why">Rear radar + taillight that warns you of cars coming up behind. Best road-safety gadget made. Not discounted, but worth knowing about.</div>
+        <div class="match"><span>match:</span> Black, mounts out of sight</div>
+        <a class="btn" href="https://www.mackcycle.com/collections/garmin-sale/products/garmin-varia-rtl515-rearview-radar-tail-light" target="_blank">View</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MEMORIAL DAY -->
+<section style="padding-top:10px">
+  <div class="wrap">
+    <div class="md">
+      <div class="md-txt">
+        <h3>Memorial Day = REI Anniversary Sale</h3>
+        <p>REI's biggest sale of the year is live now and ends <span class="deadline">May 25</span>. Cycling gear is included; Co-op members get an extra 20% off one full-price item. Mack's helmet markdowns are standing deals, but the REI clock is ticking this weekend.</p>
+      </div>
+      <a href="https://www.rei.com/c/cycling/f/scd-deals" target="_blank">Shop REI →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>The one-line verdict:</b> White or black helmet to keep the lime frame the hero. Best value = Cannondale Dynam MIPS ($99). Most stylish local = Kask Mojito 3. Shoes = Specialized Recon 2.0 ($150, on sale, 2-bolt SPD). Throw the $10 HyprViz socks + bottles in the cart to unlock the $40 coupon.<br><br>
+    Prices marked "~" are approximate and not yet confirmed on the live page. REI sale prices vary by model; check the link. Verify size + stock before buying.
+  </div>
+</footer>
+
+<script>
+  // staggered reveal on load
+  document.querySelectorAll('.card, .swatch, .check').forEach((el,i)=>{
+    el.classList.add('stagger');
+    el.style.animationDelay = (i*0.04)+'s';
+  });
+</script>
+
+</body>
+</html>

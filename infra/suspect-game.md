@@ -3,8 +3,9 @@
 **Domain:** [suspect.93.fyi](https://suspect.93.fyi)
 **Repo:** `karlmarx/suspect-game`
 **Vercel project:** `suspect-game`
-**Realtime backend:** `suspect-game.karlmarx.partykit.dev` (PartyKit cloud, Cloudflare-operated)
-**Status:** Live (shipped 2026-05-19, built for Zoom happy hours)
+**Realtime backend:** `suspect-game.karlmarx.partykit.dev` (legacy PartyKit cloud — Cloudflare-operated; see PartyKit-deprecation note below)
+**Status:** Live (shipped 2026-05-19; how-to-play overview + GitHub link added to landing 2026-05-22; built for Zoom happy hours)
+**Auth:** None — `VITE_APP_PASSWORD` intentionally unset on Vercel and `APP_PASSWORD` unset on PartyKit. Knowingly shipped open per Karl's "ditch the auth for now" call when wrangler deploy blocked the password rollout. A random password is parked in macOS Keychain at service `suspect-game-app-password` for if/when the gate is re-enabled.
 
 ## Purpose
 
@@ -24,7 +25,9 @@ Think Codenames meets The Chameleon.
 
 | Piece | Path | Notes |
 |-------|------|-------|
-| Game state machine | `party/server.ts` | PartyKit Durable Object. One DO per room. Holds Round state, runs phase transitions via `storage.setAlarm()`, validates clues server-side, computes scoring. Filters state per-recipient (Suspect never receives target word). |
+| Game state machine | `worker/server.ts` | partyserver `Server<Env>` (Cloudflare Durable Object) — `GameServer` class. One DO per room. Holds Round state, runs phase transitions via `ctx.storage.setAlarm()`, validates clues server-side, computes scoring. Filters state per-recipient (Suspect never receives target word). |
+| Worker entry | `worker/index.ts` | Routes `/parties/main/:room` requests to the DO via partyserver's `routePartykitRequest`. Binding name `Main` (case-insensitive match for the partysocket client's default party name). |
+| Worker config | `wrangler.jsonc` | DO binding (`Main` → `GameServer`), `new_sqlite_classes` migration v1, `nodejs_compat`, observability on. Compat date 2025-09-29. |
 | Shared types | `src/shared/types.ts` | `ClientMessage` / `ServerMessage` discriminated unions imported by both client and server. Single source of truth for the wire protocol. |
 | Word bank | `src/shared/words.ts` | 6 categories × 50+ words: Food & Drink, Animals, Places, Office Life, 80s/90s, Movies. `generateGrid(category)` picks 16 + a target. |
 | Realtime hook | `src/hooks/useGameRoom.ts` | Wraps `partysocket` (auto-reconnect, exponential backoff). Persists session ID to localStorage so reload = rejoin same player. |
@@ -83,19 +86,53 @@ roughly twice). Configurable in the lobby (3–20).
 ## Deploy
 
 ```bash
-# Backend (one-time login, then per-deploy)
-cd ~/suspect-game
-npx partykit deploy   # → suspect-game.karlmarx.partykit.dev
-
-# Frontend (auto-deploys from GitHub `main` after first setup)
+# Frontend (auto-deploys from GitHub `main`)
 git push origin main
+
+# Backend — PARTLY STUCK (see PartyKit deprecation below). Current state:
+#   running runtime = legacy suspect-game.karlmarx.partykit.dev (no password check)
+#   in-repo code    = partyserver, ready to ship to Workers but not yet deployed
 ```
 
 `VITE_PARTYKIT_HOST=suspect-game.karlmarx.partykit.dev` is set in the Vercel
-project env so the SPA dials the deployed PartyKit room.
+project env (Production scope) so the SPA dials the legacy PartyKit room.
+
+### PartyKit deprecation status (as of 2026-05-22)
+
+The hosted PartyKit platform stopped issuing new-deploy entitlements on
+Karl's account — `partykit deploy` returns `entitlements.not_available`.
+The existing deployment at `suspect-game.karlmarx.partykit.dev` keeps
+serving (Cloudflare Worker behind the scenes), but the code there is the
+original pre-password-gate version and cannot be updated.
+
+A migration to [partyserver](https://github.com/cloudflare/partykit) on
+Workers + Durable Objects is **already in the repo** (`worker/`,
+`wrangler.jsonc`) but not yet deployed because that requires an interactive
+`wrangler login` Karl wasn't able to complete in the deploy session.
+
+To finish the migration later:
+
+```bash
+cd ~/suspect-game
+npx wrangler login                                  # interactive OAuth
+npm run deploy:worker                               # → suspect-game-server.<account>.workers.dev
+# Optional password gate:
+PW=$(security find-generic-password -a "$USER" -s "suspect-game-app-password" -w)
+echo "$PW" | npx wrangler secret put APP_PASSWORD
+vercel env rm VITE_PARTYKIT_HOST production -y
+echo "suspect-game-server.<account>.workers.dev" | vercel env add VITE_PARTYKIT_HOST production
+# (Optional) echo "$PW" | vercel env add VITE_APP_PASSWORD production
+vercel --prod
+```
+
+After that, traffic moves from `*.partykit.dev` to `*.workers.dev` and the
+old PartyKit deployment is orphaned. See [[partykit-deprecated]] in memory.
 
 ## Known follow-ups
 
+- **Wrangler deploy of the new partyserver worker** (see PartyKit deprecation
+  section above). Until done, the password-gate code lives in the repo but
+  isn't actually enforced anywhere.
 - **Suspect rotation:** currently pure random; spec says "everyone should be
   Suspect roughly equally." Add weighted selection that prefers players who
   have been Suspect the fewest times.
@@ -111,3 +148,4 @@ project env so the SPA dials the deployed PartyKit room.
 
 - [[domain-93fyi]] — DNS zone config
 - [[domains]] (diagrams) — CNAME assignments table
+- [[partykit-deprecated]] (memory) — note that PartyKit hosted no longer accepts new deploys; reach for Workers + DO directly on the next multiplayer project.

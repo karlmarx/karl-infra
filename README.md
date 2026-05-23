@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-22
+> Auto-updated daily from GitHub commits. Last update: 2026-05-23
 
 ## Overview
 
@@ -89,12 +89,19 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### suspect-game
+- Merge pull request #4 from karlmarx/fix-smoke-target (2026-05-22)
+- Smoke: always target suspect.93.fyi (deployment URL is 401-gated) (2026-05-22)
+- Merge pull request #3 from karlmarx/security-hardening (2026-05-22)
+- CI: use npm install instead of npm ci (2026-05-22)
+- Refresh package-lock.json (vitest + cross-Node dedup) (2026-05-22)
+
 ### karl-infra
+- chore: daily update 2026-05-22 (2026-05-22)
 - feat(roadmachine): serve gear-picks page at auto.93.fyi/roadmachine (#20) (2026-05-21)
 - chore: daily update 2026-05-21 (2026-05-21)
 - chore: daily update 2026-05-20 (2026-05-20)
 - chore: daily update 2026-05-19 (2026-05-19)
-- chore: daily update 2026-05-18 (2026-05-18)
 
 ### nwb-plan
 - feat(fwb): FWB phase + 4 PT-supervised bilateral exercises (#132) (2026-05-21)
@@ -103,29 +110,12 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - fix(swap): group machine variants by own equipment, not parent's (#127) (2026-05-13)
 - ci: auto-alias preview.nfit.93.fyi to latest non-main/non-dev branch deploy (#120) (2026-05-10)
 
-### suspect-game
-- Initial commit: SUSPECT word bluffing game (2026-05-17)
-
 ### 93-fyi
 - feat(hot): top-3 model comparison gallery (2026-05-16)
 - revert: restore mailto link and drop phone from footer (2026-05-13)
 - fix(footer): un-obfuscate email + add phone for Twilio TFV verifier (2026-05-12)
 - feat: add operator info to footer for Twilio TFV verification (2026-05-08)
 - feat: link mom.93.fyi from apex (twilio review) (#2) (2026-05-01)
-
-### mom-93fyi
-- feat(proxy): serve karlmarxindustries.com landing from Vercel (2026-05-15)
-- chore(bedbug): drop picture-sending refs, route everything to chat (2026-05-13)
-- chore(bedbug): stop telling mom to text Ben — route to chat + email (2026-05-13)
-- chore(bedbug): remove unused sms import from AppShell (2026-05-13)
-- fix(ask): include actual content changes lost in the previous rename (2026-05-13)
-
-### karlmarx.github.io
-- Add .nojekyll to skip Jekyll on static-HTML deploy (2026-05-15)
-- Replace SPA shell with Karl Marx Industries landing page (2026-05-15)
-- Create CNAME (2024-05-06)
-- Updates (2024-03-31)
-- Updates (2024-03-06)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

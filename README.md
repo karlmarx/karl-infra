@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-23
+> Auto-updated daily from GitHub commits. Last update: 2026-05-24
 
 ## Overview
 
@@ -89,6 +89,19 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### nwb-plan
+- feat(fwb): FWB phase + 4 PT-supervised bilateral exercises (#132) (2026-05-21)
+- Sync dev with main (#131) (2026-05-20)
+- ci: run Playwright on every push (not just main/dev) (#128) (2026-05-13)
+- fix(swap): group machine variants by own equipment, not parent's (#127) (2026-05-13)
+- ci: auto-alias preview.nfit.93.fyi to latest non-main/non-dev branch deploy (#120) (2026-05-10)
+
+### closet-bro
+- docs: polish README (#4) (2026-05-23)
+- feat: add concise mode (~half the tokens, same persona) (#2) (2026-05-07)
+- Initial frat-bro plugin scaffold (#1) (2026-05-07)
+- Initial commit (2026-05-07)
+
 ### suspect-game
 - Merge pull request #4 from karlmarx/fix-smoke-target (2026-05-22)
 - Smoke: always target suspect.93.fyi (deployment URL is 401-gated) (2026-05-22)
@@ -97,25 +110,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - Refresh package-lock.json (vitest + cross-Node dedup) (2026-05-22)
 
 ### karl-infra
+- chore: daily update 2026-05-23 (2026-05-23)
 - chore: daily update 2026-05-22 (2026-05-22)
 - feat(roadmachine): serve gear-picks page at auto.93.fyi/roadmachine (#20) (2026-05-21)
 - chore: daily update 2026-05-21 (2026-05-21)
 - chore: daily update 2026-05-20 (2026-05-20)
-- chore: daily update 2026-05-19 (2026-05-19)
-
-### nwb-plan
-- feat(fwb): FWB phase + 4 PT-supervised bilateral exercises (#132) (2026-05-21)
-- Sync dev with main (#131) (2026-05-20)
-- ci: run Playwright on every push (not just main/dev) (#128) (2026-05-13)
-- fix(swap): group machine variants by own equipment, not parent's (#127) (2026-05-13)
-- ci: auto-alias preview.nfit.93.fyi to latest non-main/non-dev branch deploy (#120) (2026-05-10)
-
-### 93-fyi
-- feat(hot): top-3 model comparison gallery (2026-05-16)
-- revert: restore mailto link and drop phone from footer (2026-05-13)
-- fix(footer): un-obfuscate email + add phone for Twilio TFV verifier (2026-05-12)
-- feat: add operator info to footer for Twilio TFV verification (2026-05-08)
-- feat: link mom.93.fyi from apex (twilio review) (#2) (2026-05-01)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

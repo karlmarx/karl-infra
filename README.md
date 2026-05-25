@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-05-24
+> Auto-updated daily from GitHub commits. Last update: 2026-05-25
 
 ## Overview
 
@@ -89,6 +89,13 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### karl-infra
+- chore: daily update 2026-05-24 (2026-05-24)
+- chore: daily update 2026-05-23 (2026-05-23)
+- chore: daily update 2026-05-22 (2026-05-22)
+- feat(roadmachine): serve gear-picks page at auto.93.fyi/roadmachine (#20) (2026-05-21)
+- chore: daily update 2026-05-21 (2026-05-21)
+
 ### nwb-plan
 - feat(fwb): FWB phase + 4 PT-supervised bilateral exercises (#132) (2026-05-21)
 - Sync dev with main (#131) (2026-05-20)
@@ -108,13 +115,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - Merge pull request #3 from karlmarx/security-hardening (2026-05-22)
 - CI: use npm install instead of npm ci (2026-05-22)
 - Refresh package-lock.json (vitest + cross-Node dedup) (2026-05-22)
-
-### karl-infra
-- chore: daily update 2026-05-23 (2026-05-23)
-- chore: daily update 2026-05-22 (2026-05-22)
-- feat(roadmachine): serve gear-picks page at auto.93.fyi/roadmachine (#20) (2026-05-21)
-- chore: daily update 2026-05-21 (2026-05-21)
-- chore: daily update 2026-05-20 (2026-05-20)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

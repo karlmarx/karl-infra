@@ -23,6 +23,7 @@
 |   +-- suspect.93.fyi  CNAME -> cname.vercel-dns.com  (suspect-game)
 |   +-- progress.93.fyi CNAME -> (resolves via wildcard A `*.93.fyi`) (progress-dashboard)
 |   +-- command.93.fyi  A     -> 76.76.21.21 (proxied)  (karl-command-center, CF Access gated)
+|   +-- workoutgifs.93.fyi CNAME -> cname.vercel-dns.com  (93-fyi, public/DNS-only)
 |
 | (Many more records exist in the live Cloudflare zone — bedbug, dev.*, fake,
 |  ha, house, login, me, now, seed, status, thumbfit/yoga, todo, www, plus
@@ -52,6 +53,7 @@
 | `suspect.93.fyi` | suspect-game | karlmarx/suspect-game | Multiplayer word bluffing game for happy hours. Realtime via PartyKit (`suspect-game.karlmarx.partykit.dev`). |
 | `progress.93.fyi` | progress-dashboard | karlmarx/progress-dashboard | Milestone tracker, NextAuth + CF Access |
 | `command.93.fyi` | karl-command-center | karlmarx/karl-command-center | Daily-driver hub, **Cloudflare Access gated**. Hosts `/status` PWA route (installable on mobile) |
+| `workoutgifs.93.fyi` | 93-fyi | karlmarx/93-fyi | Workout GIFs gallery. **Public (DNS-only)** as of 2026-05-24 — was unrouted (fell through to parking wildcard); CF Access app for it is now inert. |
 
 ## Email
 

@@ -8,8 +8,20 @@
 ## Status — 2026-05-30 (DESIGN, not yet built)
 
 - ✅ Design approved (brainstorm w/ Karl, 2026-05-30)
-- ⏳ Spec → implementation plan (writing-plans next)
-- ⏳ Nothing built yet
+- ✅ Implementation plan written → `nwb-plan/docs/superpowers/plans/2026-05-30-twilio-dtmf-backdoor.md`
+- ✅ Design rev-2: non-whitelist callers get a **visitor helpline** (audio companion
+  to [go.93.fyi](go-93fyi.md)), not a decoy. Backdoor PIN hidden behind digit 9.
+- ⏳ Nothing built yet (execution: subagent-driven, strict order, starts at Phase 0)
+
+## Two faces, one number
+
+The TFN now serves **three** audiences off a single signature-checked entry, branched by caller-ID:
+
+1. **Karl's phone (whitelist)** → the Jarvis backdoor (Mac/cloud control).
+2. **Anyone else (non-whitelist)** → the **visitor helpline** — a multilingual audio
+   companion to go.93.fyi for guests who can't find the apartment/gate/code.
+3. **Karl on a borrowed phone** → presses the hidden digit `9` inside the helpline
+   language menu → PIN `9193` → backdoor SAFE (read-only) menu.
 
 ## Why
 
@@ -93,11 +105,18 @@ read-only subset.**
 
 ```
 voice → ① Twilio signature verify (HMAC-SHA1, constant-time) → ② whitelist?
-   ├─ From= ∈ TFN_WHITELIST → FULL menu (all digits)
-   └─ else → <Gather> "Enter access code" → PIN == 9193?
-              ├─ yes → SAFE menu (read-only digits only) + alert
-              └─ no  → retry (max 3/call) → decoy hangup + alert
+   ├─ From= ∈ TFN_WHITELIST → backdoor FULL menu (all digits)
+   └─ else → VISITOR HELPLINE
+              ├─ language select 1-6 → helpline menu (see helpline section)
+              └─ hidden digit 9 → <Gather> "Enter access code" → PIN == 9193?
+                      ├─ yes → backdoor SAFE menu (read-only) + alert
+                      └─ no  → retry (max 3/call) → back to helpline + alert
 ```
+
+The decoy "not in service" is **retired** — non-whitelist callers are almost always
+lost visitors, so they land on the helpline. The PIN path is now a hidden door
+*inside* the helpline (digit 9, never announced), reached only by someone who knows
+to press it. Rate-limit/lockout (5 fails/hr) and per-PIN-entry alerts unchanged.
 
 1. **Twilio signature** is the real security boundary — proves the request
    came from Twilio, not someone curling the Vercel endpoint. Without it the
@@ -127,6 +146,70 @@ unlocks**, not by strength:
 
 Override: if Karl later wants PIN = full access (himself on a hotel phone
 needing to deploy), flip the tier mapping. Default stays tiered.
+
+## Visitor helpline (go.93.fyi audio companion)
+
+The phone face of [go.93.fyi](go-93fyi.md) — for guests trying to reach
+**3000 NE 6th Ave, Apt 501, Oakland Park, FL 33334**. Reached by any non-whitelist
+caller. All audio is **pre-recorded MP3 in Vercel Blob** and served via `<Play>`,
+so it is independent of `VOICE_PROVIDER` and **survives the ElevenLabs cancellation**
+(static assets, like the go.93.fyi photos).
+
+### Flow
+
+```
+non-whitelist → brief greeting + language Gather (numDigits=1):
+   "For English press 1 · para español 2 · für Deutsch 3 · [Hebrew] 4 ·
+    Türkçe 5 · čeština 6"        (digit 9 = hidden PIN door, NOT announced)
+      │
+      ▼ (language chosen → all subsequent prompts in that language)
+   helpline menu:
+     1 = directions  → "driving press 1 · on foot press 2" → mode-specific overview
+     2 = can't find the gate   → gate-help recording
+     3 = the code isn't working→ code-help recording
+     0 = leave a message       → <Record> → transcribe → notify Karl
+   (* or invalid → repeat menu;  9 at language menu → PIN gate)
+```
+
+### Why "ask car vs walking first"
+
+The #1 confusion (per go.93.fyi): the correct entrance differs by mode.
+**Car** = the entrance **inside the gate** (driving/gate ButterflyMX box).
+**Walking** = the **high-numbers** entrance **outside the gate** (NOT the one behind
+Sprouts; clubhouse walk-up box). Every directions path ends with the no-fail
+fallback: *"If anything goes wrong, dial 501, or Marx, on the intercom directory —
+that always works."*
+
+### Languages
+
+English, Spanish, German, Hebrew, Turkish, Czech (digits 1-6).
+- EN/ES/DE/TR/CZ → ElevenLabs **Multilingual v2** (one multilingual helpline voice,
+  `ELEVENLABS_HELPLINE_VOICE_ID`, separate from the Jarvis backdoor voice).
+- HE → ElevenLabs **v3** (Multilingual v2 lacks Hebrew). "Try anyway" — verify
+  quality on a real call; fall back to Twilio Polly only if genuinely broken.
+- Twilio Polly per-language is the emergency fallback if an MP3 is missing
+  (note: Polly has no Czech and weak Hebrew — hence pre-generating to Blob is the
+  real plan, not a runtime fallback).
+
+### Voicemail (option 0)
+
+`<Record maxLength=120 transcribe=true>` → Twilio posts the recording URL +
+transcription to `/api/tfn-backdoor/voicemail` → `notify()` pushes caller-ID +
+transcript + audio link to Discord/Telegram. No exposure of Karl's cell.
+
+### Budget note
+
+Generating the 6-language set is a **one-time** credit cost (~6 langs × ~5 prompts ×
+~250 chars ≈ 7.5k credits, roughly one month's free tier). Generate while ElevenLabs
+credit lasts; the resulting Blob MP3s are permanent. This is the "pre-record if budget
+remains" Karl asked for — framed correctly, it's "generate once before the credits
+expire," after which it's free forever.
+
+### Scripts
+
+Drafted from go.93.fyi content in `lib/tfn/helpline-scripts.ts` (EN authored;
+ES/DE/TR/CZ/HE translated, **flagged for Karl's review** — landmark names + the
+address must be verified, especially Hebrew RTL).
 
 ## Call lifecycle & async confirmation
 
@@ -257,6 +340,8 @@ All via Keychain on Mac + Vercel env on cloud (never plaintext):
 - `TFN_WHITELIST` — Vercel env (comma E.164)
 - `TFN_PIN` = 9193 — Vercel env (so it's rotatable without redeploy of logic)
 - `ELEVENLABS_API_KEY` — Vercel env; pin `nwb-elevenlabs-api-key` in Keychain on Mac
+- `ELEVENLABS_VOICE_ID` (Jarvis backdoor voice) + `ELEVENLABS_HELPLINE_VOICE_ID` (multilingual helpline voice) — Vercel env
+- `AGENT_SHARED_SECRET` — Vercel env; auth for the ElevenLabs agent-tool webhook
 - `UPSTASH_REDIS_*` — Vercel env (Marketplace auto-provisions) + Keychain on Mac
 - Vercel deploy hook URL for action 6 — Vercel env / Keychain
 

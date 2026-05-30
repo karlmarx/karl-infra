@@ -71,6 +71,25 @@ No location history is stored — last-write-wins on one KV key, by design.
 - **App**: token auto-saves (doAfterTextChanged), map URL is a tappable link,
   background-location ("Allow all the time") requested after fine grant.
 
+## Wear OS companion (Pixel Watch 4)
+
+`:wear` Gradle module (same applicationId `fyi.karl.where93` so the Data Layer
+pairs). Watch → phone via `MessageClient` (`/where/toggle`); phone → watch via
+`DataClient` (`/where/state`) so the watch face mirrors real state. Phone-side
+`WhereWearService` (WearableListenerService) handles taps; stop is always allowed,
+**start from background is FGS-restricted on Android 12+** → falls back to a
+"tap to start" notification (`MainActivity` honors `EXTRA_START_NOW`).
+Install needs the watch on Wi-Fi adb (`adb pair`/`connect`; charging puck is
+charge-only, no USB data). Watch APK: `wear/build/outputs/apk/debug/wear-debug.apk`.
+
+## Seeded places (2026-05-30)
+
+Home 🏠 · Amped (gym) 💪 · LA Fitness (gym) · Holiday Park Pickleball 🏓 (url→park
+cam) · Hagen Park 🏓 · [solidcore] (pilates, icon 🔥) · ortho dr (orthopedist 🦴).
+Derived via `tools/cluster_places.py` (photo EXIF) + `tools/parse_timeline.py`
+(Pixel Timeline export). Live location for cross-session context:
+`GET /api/location` (see memory `reference_karl_live_location`).
+
 ## Cloudflare Access exception
 
 The account has a single Access app **`93.fyi Subdomains`** gating `*.93.fyi`

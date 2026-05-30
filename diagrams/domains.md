@@ -24,6 +24,7 @@
 |   +-- progress.93.fyi CNAME -> (resolves via wildcard A `*.93.fyi`) (progress-dashboard)
 |   +-- command.93.fyi  A     -> 76.76.21.21 (proxied)  (karl-command-center, CF Access gated)
 |   +-- workoutgifs.93.fyi CNAME -> cname.vercel-dns.com  (93-fyi, public/DNS-only)
+|   +-- go.93.fyi         CNAME -> cname.vercel-dns.com  (go-93fyi, public/DNS-only)
 |
 | (Many more records exist in the live Cloudflare zone — bedbug, dev.*, fake,
 |  ha, house, login, me, now, seed, status, thumbfit/yoga, todo, www, plus
@@ -54,6 +55,7 @@
 | `progress.93.fyi` | progress-dashboard | karlmarx/progress-dashboard | Milestone tracker, NextAuth + CF Access |
 | `command.93.fyi` | karl-command-center | karlmarx/karl-command-center | Daily-driver hub, **Cloudflare Access gated**. Hosts `/status` PWA route (installable on mobile) |
 | `workoutgifs.93.fyi` | 93-fyi | karlmarx/93-fyi | Workout GIFs gallery. **Public (DNS-only)** as of 2026-05-24 — was unrouted (fell through to parking wildcard); CF Access app for it is now inert. |
+| `go.93.fyi` | go-93fyi | karlmarx/go-93fyi | Foolproof step-by-step directions to home (3000 NE 6th Ave Apt 501). **Public (DNS-only)**, shipped 2026-05-30 (v0: direction A annotated stills). See `infra/go-93fyi.md`. |
 
 ## Email
 

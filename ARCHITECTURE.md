@@ -29,6 +29,7 @@ All web applications deploy to Vercel with custom domains via Cloudflare DNS.
 | pickleball-drills | Single-file static HTML + animated SVG (no build) | None | pwbpb.93.fyi |
 | suspect-game | Vite 8 + React 19 + TypeScript + Tailwind 4 + react-router 7 | PartyKit Durable Object (one per room, ephemeral state) | suspect.93.fyi |
 | Twilio DTMF backdoor (API routes) | Next.js routes under `/api/tfn-backdoor/*` on the nwb-plan project | Upstash Redis (queue + status + audit) | nfit.93.fyi (**DESIGN 2026-05-30** — [infra/twilio-dtmf-backdoor.md](infra/twilio-dtmf-backdoor.md)) |
+| go-93fyi | Single-file static HTML + SVG-annotated stills + swipe carousel (no build) | Cloudflare KV (ButterflyMX door-pass ingest, planned) | go.93.fyi (public/DNS-only — **v0 2026-05-30**, [infra/go-93fyi.md](infra/go-93fyi.md)) |
 
 **Vercel configuration:**
 - All projects on free tier

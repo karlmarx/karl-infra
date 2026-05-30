@@ -79,16 +79,22 @@ One Cloudflare Worker project (mirrors the proven `where.93.fyi` shape):
    repo. HEVC drive clip → H.264 for universal playback. Script:
    `scripts/transcode.sh` (ffmpeg), source-of-truth list in repo.
 
-4. **Door-pass backend (in the Worker)**
-   - **KV schema** `current`: `{ link, validThrough?, label?, receivedAt }`.
-   - **`GET /api/pass`** → returns current pass if present and not past
-     `validThrough`; else `{ active:false }`. SPA polls/loads it.
-   - **`email()` handler** → on mail to `go@93.fyi`: verify sender is a
-     ButterflyMX domain, parse the Visitor Pass **link** (and validity if
-     present) from the MIME body (`postal-mime`), `KV.put('current', …)`,
-     optionally `message.forward('karlmarx9193@gmail.com')` to keep a copy.
-   - **Expiry:** page hides the pass once `validThrough` passes; if unknown,
-     default a conservative TTL (e.g. 12h) and lean on the intercom fallback.
+4. **Door-pass backend (in the Worker)** — *email format reverse-engineered from
+   a real pass on 2026-05-30 (see "ButterflyMX email format" below).*
+   - **KV schema** `current`:
+     `{ qrImageUrl, walletPassUrl?, startsAt, endsAt, receivedAt }`.
+   - **`GET /api/pass`** → returns current pass if present and now is within
+     `startsAt`…`endsAt`; else `{ active:false }`. SPA loads it on mount.
+   - **`email()` handler** → on mail to `go@93.fyi`:
+     1. Verify `from` is `access@butterflymx.com` (else ignore).
+     2. Parse the MIME (`postal-mime`); extract:
+        - QR image: `https://s3…/qr_keys/qr_code_images/…\.png`
+        - Wallet pass: `https://s3…/wallet_pass/…pass\.pkpass…`
+        - Validity: text `Starts: <date>` / `Ends: <date>`
+          (e.g. `May 30, 2026 6:24pm`) → parse to timestamps.
+     3. `KV.put('current', …)`; optionally `message.forward(Gmail)` for a copy.
+   - **Expiry:** page hides the pass once `endsAt` passes. No standing pass is
+     left up indefinitely (Karl sends short passes per guest).
 
 5. **`go@93.fyi` email routing** — Cloudflare Email Routing rule binds the
    address to this Worker's email handler. Karl saves `go@93.fyi` as a contact
@@ -113,9 +119,11 @@ One Cloudflare Worker project (mirrors the proven `where.93.fyi` shape):
    a video call and opens the door. Zero maintenance, never expires. Show a
    photo/clip of the intercom + exact taps.
 2. **Live door pass (optional).** When Karl emails a Visitor Pass to `go@93.fyi`,
-   the page surfaces **🔓 "Open your door pass"** (opens the ButterflyMX pass page
-   with the real intercom QR + Apple Wallet) + a "valid through ___" note.
-   Auto-hides when none/expired.
+   the page renders the **real intercom QR image directly** ("Show this at the
+   3000 intercom") + an **Add to Apple Wallet** button + a "valid through ___"
+   note. Auto-hides when none set or `endsAt` has passed. Karl is encouraged to
+   send **short** passes (hours, not a year) since the QR is the live credential
+   on a public page.
 3. **Fallback — Call/Text Karl** (sticky). For codes: *"Codes rotate — if the one
    you were given doesn't work, use the intercom to call 501 or text Karl."*
 
@@ -176,10 +184,22 @@ One Cloudflare Worker project (mirrors the proven `where.93.fyi` shape):
 - Twilio "text Karl the gate code" automation (phase 2).
 - Garage-route steps (pending clip).
 
+## ButterflyMX email format (reverse-engineered 2026-05-30)
+
+From a real Visitor Pass Karl sent to `karlmarx9193@gmail.com`:
+
+- **From:** `access@butterflymx.com`
+- **Subject:** `New Visitor Pass from Karl Marx`
+- **Body contains** (direct S3 URLs, *not* behind the tracking redirect):
+  - QR PNG: `https://s3.dualstack.us-east-1.amazonaws.com/bmx-rails-production/system/qr_keys/qr_code_images/041/670/820/medium/qr_code_20260530-1-g2tkwl.png`
+  - Wallet: `https://s3…/bmx-rails-production/uploads/wallet_pass/41670820/…/pass.pkpass…`
+  - Validity text: `Starts: May 30, 2026 6:24pm` / `Ends: May 30, 2027 7:21pm`
+  - (Plus `tracking.butterflymx.com/ls/click?…` wrapped CTA links — ignored.)
+- The QR PNG is the credential the intercom scans → render it directly.
+
 ## Open items for Karl
 
-1. **Email parser:** pull a sample ButterflyMX email from Gmail now, or set up
-   `go@93.fyi` and send a test? (Need exact sender + link pattern.)
+1. ✅ **Email parser** — format known (above).
 2. **Extra clips** from the wishlist — whenever easy (esp. right-building +
    wrong-entrance).
 3. **Spanish** review once drafted.

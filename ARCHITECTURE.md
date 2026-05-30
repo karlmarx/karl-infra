@@ -51,6 +51,13 @@ All web applications deploy to Vercel with custom domains via Cloudflare DNS.
 - **Audience**: Mom specifically; written in son's voice, expandable cards, tel: links to call him
 - **Docs**: [services/mom.md](services/mom.md)
 
+### Location Broadcast (where.93.fyi)
+- **Purpose**: Broadcast Karl's phone location to a fully public live map, controlled by an on/off toggle in a native Android app
+- **Tech**: Cloudflare Worker + KV (backend + Leaflet map page); native Kotlin Android app (foreground location service, Quick Settings tile)
+- **Auth**: Bearer `INGEST_TOKEN` on POST; reads are public. No location history stored (single KV key, last-write-wins)
+- **Deploy**: `setup.sh` (one-shot) + GitHub Action on push to `worker/`. NOT on Vercel — Cloudflare-native
+- **Docs**: [infra/where-93fyi.md](infra/where-93fyi.md)
+
 ## Deployment Targets (continued)
 
 ### Windows 11 Workstation

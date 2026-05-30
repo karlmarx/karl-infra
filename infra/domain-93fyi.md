@@ -17,6 +17,7 @@
 | `nfit.93.fyi` | CNAME | `cname.vercel-dns.com` | Yes | NWB Fitness PWA |
 | `nyoga.93.fyi` | CNAME | `cname.vercel-dns.com` | Yes | NWB Yoga PWA |
 | `ta.93.fyi` | CNAME | `cname.vercel-dns.com` | No | **Stale** — TrickAdvisor migrated to `api.trickadvisor.cc` (custom domain). DNS record still exists but points at a Vercel project no longer load-bearing. Safe to remove when convenient. |
+| `where.93.fyi` | — | Cloudflare Worker `where-93fyi` | Yes | Location broadcast map. Record auto-provisioned by `wrangler deploy` (custom_domain), **not Vercel**. See `infra/where-93fyi.md`. |
 
 ## Email Routing
 

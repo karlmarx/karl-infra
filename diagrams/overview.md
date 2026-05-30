@@ -52,6 +52,10 @@
 |  +- Automation Map      |                                         |
 |     (xyflow graph)      |                                         |
 |                         |                                         |
+|  where.93.fyi (Cloudflare Worker, NOT Vercel)                     |
+|  +- Location broadcast map (KV + Leaflet)                         |
+|     + native Android app (FGS toggle + QS tile)                   |
+|                         |                                         |
 |  (no subdomain yet)     |                                         |
 |  +- house-tracker (S. FL property tracker, *.vercel.app)          |
 |                            | Nextcloud (Takeout, TODO, logs)     |

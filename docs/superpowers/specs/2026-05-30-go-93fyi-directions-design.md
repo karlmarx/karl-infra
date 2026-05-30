@@ -81,20 +81,27 @@ One Cloudflare Worker project (mirrors the proven `where.93.fyi` shape):
 
 4. **Door-pass backend (in the Worker)** — *email format reverse-engineered from
    a real pass on 2026-05-30 (see "ButterflyMX email format" below).*
-   - **KV schema** `current`:
-     `{ qrImageUrl, walletPassUrl?, startsAt, endsAt, receivedAt }`.
-   - **`GET /api/pass`** → returns current pass if present and now is within
-     `startsAt`…`endsAt`; else `{ active:false }`. SPA loads it on mount.
+   - **KV** — `current` (the pass): `{ qrImageUrl, walletPassUrl?, code?,
+     startsAt, endsAt, receivedAt }`; `access-log` — append one entry per
+     request (`req:<ts>:<rand>` → `{ ip, country, ua, ts }`).
+   - **`GET /api/pass/status`** → `{ active, endsAt }` only (no code/QR). Lets
+     the page decide whether to show the **Request entry pass** button.
+   - **`POST /api/request-pass`** → logs requester IP (`CF-Connecting-IP` +
+     `request.cf.country`, UA, ts) to `access-log`, then returns the **code, QR,
+     Wallet, entry steps** for the active pass. This is the only endpoint that
+     exposes the credential, and only after the visitor accepts terms.
    - **`email()` handler** → on mail to `go@93.fyi`:
      1. Verify `from` is `access@butterflymx.com` (else ignore).
      2. Parse the MIME (`postal-mime`); extract:
         - QR image: `https://s3…/qr_keys/qr_code_images/…\.png`
         - Wallet pass: `https://s3…/wallet_pass/…pass\.pkpass…`
+        - Numeric **code** *if the email includes one* (some passes do, some
+          don't — page falls back to QR/directory when absent).
         - Validity: text `Starts: <date>` / `Ends: <date>`
           (e.g. `May 30, 2026 6:24pm`) → parse to timestamps.
      3. `KV.put('current', …)`; optionally `message.forward(Gmail)` for a copy.
-   - **Expiry:** page hides the pass once `endsAt` passes. No standing pass is
-     left up indefinitely (Karl sends short passes per guest).
+   - **Validity:** Karl keeps a ~1-year pass; page shows it until `endsAt`. The
+     directory-call path is the fallback when the pass is flaky or revoked.
 
 5. **`go@93.fyi` email routing** — Cloudflare Email Routing rule binds the
    address to this Worker's email handler. Karl saves `go@93.fyi` as a contact
@@ -112,35 +119,67 @@ One Cloudflare Worker project (mirrors the proven `where.93.fyi` shape):
   kept to **short, concrete sentences** (street names + numbers + arrows) to
   minimize mistranslation risk.
 
-## Entry method design (defeats the "expired code" problem)
+## The two ButterflyMX boxes
 
-1. **Hero — call the unit on the ButterflyMX intercom.** At the **3000** door,
-   on the screen tap the directory, search **501 / Marx**, press call → Karl gets
-   a video call and opens the door. Zero maintenance, never expires. Show a
-   photo/clip of the intercom + exact taps.
-2. **Live door pass (optional).** When Karl emails a Visitor Pass to `go@93.fyi`,
-   the page renders the **real intercom QR image directly** ("Show this at the
-   3000 intercom") + an **Add to Apple Wallet** button + a "valid through ___"
-   note. Auto-hides when none set or `endsAt` has passed. Karl is encouraged to
-   send **short** passes (hours, not a year) since the QR is the live credential
-   on a public page.
-3. **Fallback — Call/Text Karl** (sticky). For codes: *"Codes rotate — if the one
-   you were given doesn't work, use the intercom to call 501 or text Karl."*
+There are **two** ButterflyMX intercom boxes; the two routes use different ones:
+
+- **🚗 Driving box** — at the vehicle entrance/gate, reached by car. Used in the
+  driving route to open the gate.
+- **🚶 Clubhouse box** — the pedestrian intercom at the clubhouse entrance. Used
+  on foot.
+
+The page makes crystal-clear **which box you're at** before giving entry steps,
+because the steps differ. How to physically reach each box is shown per route.
+
+## Entry method design
+
+At whichever box, three tiers in order:
+
+1. **Enter the pass code — exact steps.** If the guest's Visitor Pass includes a
+   numeric **code**, the page shows it and **exactly how to key it in on that
+   box** (captured from a clip/photo), in the visitor's language.
+2. **Scan / show the QR** + **Add to Apple Wallet**.
+3. **Find Karl in the directory (never fails).** If no code was provided, or the
+   code doesn't work: on the box, open the directory, search **501 / Marx**,
+   press call → Karl gets a video call and opens it. This is the universal
+   no-fail path and is emphasized as such.
+
+Plus the sticky **Call/Text Karl** bar for anything else.
+
+### The shared pass + the Request gate
+
+Karl keeps **one long-lived (≈1-year) Visitor Pass** emailed to `go@93.fyi`. The
+page does **not** display the code/QR openly. Instead:
+
+- A **"Request entry pass"** button. Tapping it shows **terms** (you're an invited
+  guest; access is logged; don't share) that the visitor must accept.
+- On accept, the SPA calls `POST /api/request-pass`, which **logs the visitor's
+  IP** (+ timestamp, country, user-agent) to a KV access log, then returns the
+  pass. Only then are the **code + QR + Wallet + exact entry steps** revealed.
+- This gives Karl an accountability trail and a deterrent/friction layer while
+  keeping the pass self-serve. It's a deterrent, **not** a hard lock — see
+  Privacy. The directory-call path always works if the pass is revoked or flaky.
 
 ## Route content (draft — fill exact clips during build)
 
 **🚗 Driving**
 1. Turn in from **NE 6th Ave** (landmark TBD from clip).
-2. **THIS building** — East Park Square, the one at **3000** — *not* the
+2. At the **vehicle gate**, use the **🚗 driving box** — key in the pass code, or
+   find **501 / Marx** in the directory and call → gate opens.
+3. **THIS building** — East Park Square, the one at **3000** — *not* the
    identical neighbors. *(needs "right building" clip)*
-3. **Park anywhere.**
-4. Walk to the **3000 front entrance** — ⚠️ **NOT the door behind Sprouts.**
+4. **Park anywhere.**
+5. ⚠️ Go to the **clubhouse / 3000 entrance** — **NOT the door behind Sprouts.**
 
-**🚶 On foot (from your car)**
-1. To the **3000** front doors *(connector clip TBD)*.
-2. ButterflyMX intercom → call **501 / Marx** (or open your door pass).
-3. Through the lobby → **elevators**.
-4. Elevator to **floor 5** → **Apt 501**. *(elevator→door clip TBD)*
+**🚶 On foot (from your car to the door)**
+1. To the **clubhouse entrance** *(connector clip TBD)*.
+2. At the **🚶 clubhouse box**: key in the pass code, or find **501 / Marx** in
+   the directory and call → Karl buzzes you in.
+3. Inside: **walk forward past the big communal table, then take a right** to a
+   **door with a (green) push-to-exit button** — press it.
+   *(clip: Karl shooting 2026-05-31)*
+4. Through that door → the **elevator** → **floor 5** → **Apt 501**.
+   *(elevator→501 clip TBD)*
 
 ## Assets
 
@@ -150,16 +189,26 @@ One Cloudflare Worker project (mirrors the proven `where.93.fyi` shape):
 | `~/Documents/PXL_20240909_115102034.mp4` | Entrance→lobby→elevator (51s, 200MB) | trim + → H.264 720p, likely split per step |
 | `~/Documents/Screenshot_20241004-183427.png` | Annotated map reference | crop/clean, used as map overlay or reference |
 | Garage walk | not found (no GPS on interior clips) | slot reserved; Karl supplies later |
-| Wishlist clips | turn-in, right-building, wrong-entrance, buzzer, elevator→501, guest parking | optional, slot into existing structure |
+| **Clubhouse interior** (in → past big table → right → push-to-exit door → elevator) | **Karl shooting 2026-05-31** | high-value foot-route clip |
+| Both intercom **boxes** (driving gate box; clubhouse box) + code-entry keypad | needed for exact entry steps | clip/photo each |
+| Wishlist clips | turn-in, right-building, wrong-entrance, elevator→501 | optional, slot into existing structure |
 
 ## Privacy / security
 
-- **Public page + live pass:** anyone loading the page *while a pass is live*
-  could open it. Mitigation: send the pass at arrival time, short validity,
-  auto-clear; passes are revocable + photo-logged by ButterflyMX. Accepted.
-- **No standing gate code** is ever published.
-- **Email handler** verifies the sender is a ButterflyMX domain before storing.
+- **Long-lived pass on a public page** is Karl's explicit choice. Mitigations:
+  the credential is **never shown openly** — it's behind a **Request entry pass**
+  button that displays **terms** and **logs the requester's IP** (+ country, UA,
+  timestamp) before revealing the code/QR. This is a deterrent + accountability
+  trail, **not** a hard lock: anyone who accepts terms can get the pass. Karl
+  accepts this; the pass is revocable in ButterflyMX and entries are
+  photo-logged, and the directory-call path stands behind it.
+- **Email handler** verifies the sender is `access@butterflymx.com` before
+  storing — so a spoofed email can't plant a bogus pass (note: sender spoofing is
+  still possible without DMARC checks; Worker should also honor SPF/DMARC pass
+  flags from the inbound message if available).
 - Showing **Apt 501** publicly is intentional (it's the whole point).
+- Access-log retention: keep it small (recent requests only); it's for Karl's
+  visibility, not long-term storage.
 
 ## Deployment
 

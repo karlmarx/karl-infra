@@ -21,8 +21,18 @@ single self-contained `index.html` + `assets/`, with a swipeable **carousel**
 (Next/Back + swipe + arrow keys) and a 🚗 Driving / 🚶 On-foot mode toggle.
 
 Placeholder frames are pulled from existing (soft, motion-blurred) video. **Karl is
-shooting proper photos/videos 2026-05-31** (Todoist `karl-todo`, hourly email
-nag via in-session cron until done).
+shooting proper photos/videos 2026-05-31** — reminded via Todoist `karl-todo`
+(due 6am) **and** a durable launchd nag `com.kmx.go-photos-reminder`
+(`bin/go-photos-reminder.py`, Gmail SMTP like `_emaillib`): pinned to May 31,
+hourly 6:07am–8:07pm, fires even with Claude closed, **auto-stops** when ≥2 media
+files land in `~/Documents`. Plist (holds the Gmail app password) lives in
+`~/Library/LaunchAgents/`, not the repo.
+
+> **UI note (2026-05-30 v0.2):** the first build looked rough; rebuilt as a
+> light "transit wayfinding" system — clean editorial hero, single Start→Next
+> flow, graceful "preview photo" handling on the soft frames, fixed step
+> counter, entry copy anchored to unit **501** (intercom name TBC: Marx vs
+> Marx-Levi). Direction confirmed by Karl.
 
 ## Roadmap (next passes)
 

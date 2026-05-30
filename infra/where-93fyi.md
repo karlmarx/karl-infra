@@ -53,6 +53,24 @@ No location history is stored — last-write-wins on one KV key, by design.
   `Workers KV Storage:Edit`, `Zone:Edit` + `DNS:Edit` on 93.fyi. Used by
   `setup.sh` locally and as a GitHub Actions secret for CI.
 
+## Features (v2, 2026-05-30)
+
+- **Web map redesign**: CartoDB dark tiles, pulsing live dot, glassy status card,
+  recenter + 12h-trail toggle.
+- **12h history trail**: `/api/history`; downsampled (8m / 60s gate), active-only,
+  pruned to 12h, capped 2000 pts. Map splits the polyline across >3min gaps.
+- **Place/activity engine**: KV key `places` = `[{name,type,lat,lng,radius_m,url?}]`.
+  `/api/location` returns matched `place` + `activity` (speed-derived: still/walking/
+  running/cycling/driving). Map renders emoji markers (home/gym/yoga/pickleball/…)
+  and a "📹 Watch live" chip when the matched place has a `url`.
+  - Authenticated `POST /places` (Bearer INGEST_TOKEN) replaces the list;
+    `GET /api/places` returns names+types only (no coords).
+  - Seeded places (2026-05-30): Home, Amped (gym), LA Fitness (gym), Holiday Park
+    Pickleball (url → parkviewlive.com live cam). Derived by clustering geotagged
+    photo EXIF — see `tools/cluster_places.py` in the repo.
+- **App**: token auto-saves (doAfterTextChanged), map URL is a tappable link,
+  background-location ("Allow all the time") requested after fine grant.
+
 ## Cloudflare Access exception
 
 The account has a single Access app **`93.fyi Subdomains`** gating `*.93.fyi`

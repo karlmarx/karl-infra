@@ -1,0 +1,18 @@
+{
+  "_comment": "v4 patch — pivots back from the nfit 2FA framing to the simpler 'personal Q&A line to one consented family member' use case. Karl's directive 2026-05-15 was 'simplest path to get 888 verified'. This iteration already has a real signed paper-consent PNG (mom.93.fyi/sms-consent/mom.png, Susie Nay, 2026-05-10) which directly satisfies reason 30510 (Opt-In Example Must Be Complete, Branded, and Legible). For reason 30489 (Website Must Be Established and Active), business_website is repointed to karlmarxindustries.com, a domain Karl has owned since 2019-07-13. The landing page at that URL identifies Karl Marx Industries as the parent sole proprietorship operating mom.93.fyi, with the full contact line (name, address, email, phone) visible. NOTE: this supersedes the v3 nfit patch — re-apply v3 manually if the other agent wants to put nfit back in the lead.",
+  "_target": {
+    "verification_sid": "HH26844a254ed93af0c8732fc48591a535",
+    "url": "https://messaging.twilio.com/v1/Tollfree/Verifications/HH26844a254ed93af0c8732fc48591a535"
+  },
+  "_max_auto_resubmits": 1,
+  "patch": {
+    "BusinessName": "Karl Marx Industries",
+    "BusinessWebsite": "https://www.karlmarxindustries.com",
+    "UseCaseCategories": ["CUSTOMER_CARE"],
+    "OptInType": "PAPER_FORM",
+    "OptInImageUrls": "https://mom.93.fyi/sms-consent/mom.png",
+    "ProductionMessageSample": "Hi Mom, run a full hot cycle and dry on high for 45 minutes. Reply STOP to opt out, HELP for help.",
+    "UseCaseSummary": "Single-recipient personal SMS Q&A line. The account holder's mother texts in questions about her household situation; the operator (or an automated assistant grounded in a written household-care plan) replies. One consented recipient, signed paper consent on file at OptInImageUrls. No marketing, no broadcasts, no bulk.",
+    "AdditionalInformation": "Operated by Karl Marx Industries (https://www.karlmarxindustries.com), a sole proprietorship at 3000 NE 6th Ave, Oakland Park, FL 33334, domain registered 2019-07-13. The toll-free number serves one verified recipient (the operator's mother, Susie Nay) under a written, signed consent form at https://mom.93.fyi/sms-consent/mom.png — name, phone, date, and signature all visible on the same image. Every outbound message is a direct reply to an inbound question; no scheduled or marketing traffic. Privacy policy: https://mom.93.fyi/privacy . SMS terms: https://mom.93.fyi/sms-terms . STOP/HELP keywords are honored by the existing /api/bedbug/sms-inbound webhook (HMAC-SHA1 signature verified via X-Twilio-Signature) with TwiML responses. The signed consent PNG covers reason 30510 (Opt-In Example Must Be Complete, Branded, and Legible); the karlmarxindustries.com landing page (showing operator name, address, email k@93.fyi, phone +1 954 495 7268) covers reason 30489 (Website Must Be Established and Active)."
+  }
+}

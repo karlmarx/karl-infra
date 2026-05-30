@@ -74,10 +74,15 @@ One Cloudflare Worker project (mirrors the proven `where.93.fyi` shape):
    step once creates a slot in all 9 languages. Proper nouns ("3000", "Apt 501",
    "NE 6th Ave", "Sprouts", "ButterflyMX") are **not** translated.
 
-3. **Media pipeline** — transcode source clips to web-optimized **muted,
-   autoplay, loop, playsinline H.264 720p** (~2–6 MB) + poster JPGs, committed in
-   repo. HEVC drive clip → H.264 for universal playback. Script:
-   `scripts/transcode.sh` (ffmpeg), source-of-truth list in repo.
+3. **Media pipeline** — each step uses either a **short clip** (the relevant
+   ~3–6s, trimmed from a longer source — e.g. the 51s walk is split per step) or
+   a **still photo** where one frame suffices. Clips are
+   **`<video autoplay loop muted playsinline>` H.264 720p** (~0.4–1.5 MB each) +
+   poster JPGs — the "GIF look" (silent, looping, inline) **without GIF's** size
+   or blockiness. **No animated GIFs.** HEVC drive clip → H.264 for universal
+   playback. Script: `scripts/transcode.sh` (ffmpeg), source-of-truth list in
+   repo. Mobile-first: one-handed vertical scroll, large tap targets, phone-width
+   column centered on desktop.
 
 4. **Door-pass backend (in the Worker)** — *email format reverse-engineered from
    a real pass on 2026-05-30 (see "ButterflyMX email format" below).*

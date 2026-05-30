@@ -131,6 +131,11 @@ There are **two** ButterflyMX intercom boxes; the two routes use different ones:
 The page makes crystal-clear **which box you're at** before giving entry steps,
 because the steps differ. How to physically reach each box is shown per route.
 
+> **Confirmed (2026-05-30):** the **clubhouse *is* the 3000 building lobby** (the
+> one with the big communal table that leads to the elevator). The entrance
+> everyone wrongly uses is the **separate door behind Sprouts**. The two boxes
+> are physically separate hardware (vehicle gate vs. clubhouse walk-up).
+
 ## Entry method design
 
 At whichever box, three tiers in order:

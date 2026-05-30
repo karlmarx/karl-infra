@@ -159,16 +159,18 @@ so it is independent of `VOICE_PROVIDER` and **survives the ElevenLabs cancellat
 
 ```
 non-whitelist → brief greeting + language Gather (numDigits=1):
-   "For English press 1 · para español 2 · für Deutsch 3 · [Hebrew] 4 ·
-    Türkçe 5 · čeština 6"        (digit 9 = hidden PIN door, NOT announced)
+   "(each option in its own language) English 1 · español 2 · Deutsch 3 ·
+    français 4 · Türkçe 5 · čeština 6"   (digit 9 = hidden PIN door, NOT announced)
       │
-      ▼ (language chosen → all subsequent prompts in that language)
-   helpline menu:
-     1 = directions  → "driving press 1 · on foot press 2" → mode-specific overview
+      ▼ (language chosen → prompts in that language)
+   ENGLISH → full menu:
+     1 = directions  → "driving 1 · on foot 2" → mode-specific overview
      2 = can't find the gate   → gate-help recording
      3 = the code isn't working→ code-help recording
      0 = leave a message       → <Record> → transcribe → notify Karl
-   (* or invalid → repeat menu;  9 at language menu → PIN gate)
+   NON-ENGLISH (es/de/fr/tr/cz) → directions overview ONLY:
+     → "driving 1 · on foot 2" → mode-specific overview → repeat / end
+   (* or invalid → repeat;  9 at language menu → PIN gate)
 ```
 
 ### Why "ask car vs walking first"
@@ -182,14 +184,18 @@ that always works."*
 
 ### Languages
 
-English, Spanish, German, Hebrew, Turkish, Czech (digits 1-6).
-- EN/ES/DE/TR/CZ → ElevenLabs **Multilingual v2** (one multilingual helpline voice,
-  `ELEVENLABS_HELPLINE_VOICE_ID`, separate from the Jarvis backdoor voice).
-- HE → ElevenLabs **v3** (Multilingual v2 lacks Hebrew). "Try anyway" — verify
-  quality on a real call; fall back to Twilio Polly only if genuinely broken.
-- Twilio Polly per-language is the emergency fallback if an MP3 is missing
-  (note: Polly has no Czech and weak Hebrew — hence pre-generating to Blob is the
-  real plan, not a runtime fallback).
+English, Spanish, German, French, Turkish, Czech (digits 1-6). Hebrew was
+considered and dropped (it needed ElevenLabs v3 + RTL handling, and Twilio Polly
+has no Hebrew); **French replaces it** and is cleanly covered by both engines.
+- All six → ElevenLabs **Multilingual v2** (one multilingual helpline voice,
+  `ELEVENLABS_HELPLINE_VOICE_ID`, separate from the Jarvis backdoor voice). No v3.
+- The **language menu** is one pre-recorded multilingual MP3 — each option spoken
+  in its own language ("para español 2", "pour le français 4", …), which a single
+  Multilingual v2 utterance handles.
+- **Only English gets the full menu** (gate/code/voicemail). Non-English callers
+  hear the **directions overview only** (car/walk), keeping translation light.
+- Twilio Polly per-language is the emergency fallback if an MP3 is missing (Polly's
+  Czech is weak — so pre-generating to Blob is the real plan, not a runtime fallback).
 
 ### Voicemail (option 0)
 

@@ -90,6 +90,30 @@ Derived via `tools/cluster_places.py` (photo EXIF) + `tools/parse_timeline.py`
 (Pixel Timeline export). Live location for cross-session context:
 `GET /api/location` (see memory `reference_karl_live_location`).
 
+## Storage: Durable Object (NOT KV) — 2026-05-31
+
+**Critical lesson:** the original design wrote `current` + `history` to **KV on every
+15s broadcast** = ~11.5k writes/day, but KV's free tier caps at **1000 writes/day**.
+It silently exhausted the quota ~2h into the first night; every `/ingest` then threw
+`KV put() limit exceeded` → **HTTP 500 / CF error 1101**. Symptoms looked like a phone
+bug (stale location, no health) but were entirely server-side.
+
+Fixed by migrating live state to a single global **Durable Object** (`LiveLocation`,
+binding `LIVE`, SQLite-backed via `new_sqlite_classes`). DO storage has no per-day write
+cap. Implementation reuses the existing handlers verbatim — the DO swaps `env.LOCATION`
+for a tiny KV-shaped adapter over `state.storage`. `pageHtml` reads the DO's
+`/api/location`. KV binding left declared but unused.
+
+Gotchas hit:
+- DOs require the account to have a **workers.dev subdomain**; created `karlmarx9193`
+  via `PUT /accounts/:id/workers/subdomain` (cosmetic — map is on the custom domain).
+- **CI deploy is broken for DOs:** the GitHub Action's `wrangler-action` installs
+  wrangler 3.90 (too old for SQLite DOs) and the scoped `CLOUDFLARE_API_TOKEN` may lack
+  DO perms. Deploys now done **directly**: global key (KeePass `cloudflare.com` →
+  Global API Key) + `npx wrangler@4 deploy`. TODO: pin `wranglerVersion: "4"` in the
+  action + broaden the token, or keep deploying manually.
+- DO storage starts empty → **re-seed places** after first deploy (`POST /places`).
+
 ## Cloudflare Access exception
 
 The account has a single Access app **`93.fyi Subdomains`** gating `*.93.fyi`

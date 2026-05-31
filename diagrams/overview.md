@@ -171,12 +171,13 @@ nfit.93.fyi nyoga.    id.93   Serverless
   |    +- sends HTML email digest                          |
   |    +- alerts on form/safety concerns                   |
   |                                                        |
-  |  tfn-backdoor-agent (BLPOP executor) -- DESIGN 05-30   |
-  |    +- ☎ any phone -> Twilio TFN -> Vercel -> KV queue  |
-  |    +- BLPOP intents off Upstash, dispatch actions      |
+  |  tfn-backdoor-agent (BLPOP executor) -- LIVE front 05-31|
+  |    +- ☎ +1 888 601-6132 -> Twilio -> tfn.93.fyi (Vercel)|
+  |    +- ...-> Upstash KV queue -> BLPOP -> dispatch       |
   |    +- publishes tfn:status:current every 60s           |
   |    +- whitelist=full / PIN 9193=read-only subset       |
   |    +- ElevenLabs Jarvis voice -> Twilio <Say> fallback |
+  |    +- Vercel front LIVE; this Mac executor NOT loaded   |
   |                                                        |
   |  command-agent (FastAPI, always-on)                    |
   |    +- launchd: ~/Library/LaunchAgents/                 |

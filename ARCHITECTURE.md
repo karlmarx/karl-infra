@@ -28,7 +28,7 @@ All web applications deploy to Vercel with custom domains via Cloudflare DNS.
 | house-tracker | React 19 + Vite 8 + react-router 7 + Tailwind 4 | None (static JS export) | (no custom domain — `*.vercel.app`) |
 | pickleball-drills | Single-file static HTML + animated SVG (no build) | None | pwbpb.93.fyi |
 | suspect-game | Vite 8 + React 19 + TypeScript + Tailwind 4 + react-router 7 | PartyKit Durable Object (one per room, ephemeral state) | suspect.93.fyi |
-| Twilio DTMF backdoor (API routes) | Next.js routes under `/api/tfn-backdoor/*` on the nwb-plan project | Upstash Redis (queue + status + audit) | nfit.93.fyi (**DESIGN 2026-05-30** — [infra/twilio-dtmf-backdoor.md](infra/twilio-dtmf-backdoor.md)) |
+| tfn-93fyi | Next.js App Router (`/api/tfn-backdoor/*`), standalone project | Upstash Redis (queue + status + audit) | tfn.93.fyi (**LIVE 2026-05-31** — DTMF backdoor + visitor helpline; CNAME proxied:false; Twilio voice_url wired — [infra/tfn-93fyi.md](infra/tfn-93fyi.md)) |
 | go-93fyi | Single-file static HTML + SVG-annotated stills + swipe carousel (no build) | Cloudflare KV (ButterflyMX door-pass ingest, planned) | go.93.fyi (public/DNS-only — **v0 2026-05-30**, [infra/go-93fyi.md](infra/go-93fyi.md)) |
 
 **Vercel configuration:**
@@ -99,7 +99,7 @@ Apple Silicon-native machine (36 GB unified memory) running compute-intensive au
 | openclaw gateway/node | Always-on (4 LaunchAgents) | Local model gateway/router; `:18789` loopback; routes to MLX/Ollama/Google. See [infra/openclaw.md](infra/openclaw.md) |
 | gemini CLI | Interactive | Secondary AI assistant. OAuth `karlmarx9193@gmail.com`. 5 MCP extensions. See [infra/gemini-cli.md](infra/gemini-cli.md) |
 | gemini-auto | On-demand | Playwright/CDP image-gen via Gemini UI, 3-account rotation. Originally Windows; ported to Mac (hardcoded paths still in source). See [infra/gemini-auto.md](infra/gemini-auto.md) |
-| tfn-backdoor-agent | Always-on (planned) | **DESIGN (2026-05-30)** — BLPOP executor for the Twilio DTMF phone-as-API control plane. Pulls intents off an Upstash KV queue (written by Vercel routes on nfit.93.fyi), dispatches Mac/cloud actions, publishes status every 60s. Whitelist=full, PIN `9193`=read-only. See [infra/twilio-dtmf-backdoor.md](infra/twilio-dtmf-backdoor.md) |
+| tfn-backdoor-agent | launchd (committed, **not loaded**) | BLPOP executor for the Twilio DTMF phone-as-API control plane (**LIVE front 2026-05-31**). Pulls intents off an Upstash KV queue (written by Vercel routes on tfn.93.fyi), dispatches Mac/cloud actions, publishes status every 60s. Whitelist=full, PIN `9193`=read-only. See [infra/tfn-93fyi.md](infra/tfn-93fyi.md) |
 
 **Key characteristics:**
 - All background processes use LaunchAgents (`~/Library/LaunchAgents/*.plist`)
@@ -188,6 +188,7 @@ Dynadot (registrar)
                ├── suspect.93.fyi  CNAME ──> cname.vercel-dns.com (suspect-game; backend on partykit.dev)
                ├── command.93.fyi  CNAME ──> cname.vercel-dns.com (command-center, gated by Cloudflare Access)
                ├── progress.93.fyi CNAME ──> cname.vercel-dns.com (progress-dashboard)
+               ├── tfn.93.fyi      CNAME ──> cname.vercel-dns.com (tfn-93fyi; proxied:false — Twilio voice webhook, bypass CF Access)
                ├── 93.fyi          CNAME ──> cname.vercel-dns.com (nwb-plan, temp)
                └── Email routing: k@93.fyi ──> karlmarx9193@gmail.com
 ```

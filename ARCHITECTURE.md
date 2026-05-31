@@ -54,10 +54,10 @@ All web applications deploy to Vercel with custom domains via Cloudflare DNS.
 - **Docs**: [services/mom.md](services/mom.md)
 
 ### Location Broadcast (where.93.fyi)
-- **Purpose**: Broadcast Karl's phone location to a fully public live map, controlled by an on/off toggle in a native Android app
-- **Tech**: Cloudflare Worker + KV (backend + Leaflet map page); native Kotlin Android app (foreground location service, Quick Settings tile)
-- **Auth**: Bearer `INGEST_TOKEN` on POST; reads are public. No location history stored (single KV key, last-write-wins)
-- **Deploy**: `setup.sh` (one-shot) + GitHub Action on push to `worker/`. NOT on Vercel — Cloudflare-native
+- **Purpose**: Broadcast Karl's phone location to a fully public live map; on/off toggle from a native Android app + Pixel Watch companion
+- **Tech**: Cloudflare Worker + **Durable Object** for live state (migrated off KV 2026-05-31 after its 1000-writes/day cap 500'd `/ingest`) + Leaflet map; native Kotlin Android app (FGS toggle, QS tile) + Wear OS app
+- **Features**: venue/activity detection (emoji markers), 12h trail, battery/weather/UV, Health Connect (HR/steps/sleep), dwell timer, path chips, opt-in cycling+drive ETA, three-tier status card, dynamic OG link preview
+- **Auth**: Bearer `INGEST_TOKEN` on POST; reads public. **Deploy DOs directly** (global key + `wrangler@4`) — CI's wrangler-action is too old for SQLite DOs
 - **Docs**: [infra/where-93fyi.md](infra/where-93fyi.md)
 
 ## Deployment Targets (continued)

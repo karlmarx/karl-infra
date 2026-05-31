@@ -131,6 +131,36 @@ Mac side reads the `rediss://` URL from Keychain `nwb-tfn-redis-url`; Vercel sid
 
 ---
 
+## Multilingual helpline (2026-05-31) — LIVE
+
+Visitor helpline now serves **9 languages** off digits 1-9, each in a native
+**ElevenLabs** voice, **pre-rendered to static MP3** (generate-once, reuse
+forever — no API key or cost at call time, survives EL cancellation):
+
+| Digit | Lang | Voice |
+|-------|------|-------|
+| 1 | English | George (British butler) |
+| 2 | Spanish (Colombian) | Luna |
+| 3 | German | Bettina |
+| 4 | French | Nelly |
+| 5 | Turkish | Yağmur |
+| 6 | Danish | Søren |
+| 7 | Korean | Totoring |
+| 8 | Flemish (Vlaams) | Hans Claesen |
+| 9 | Taiwanese Mandarin | Chen (speed 0.85) |
+
+- Pipeline: `scripts/gen-voice.mjs` reads `lib/tfn/helpline-content.json` → renders
+  50 files to `public/voice/<lang>/<key>.mp3` + stitched `lang_menu.mp3`. All
+  loudness-normalized to -16 LUFS. Re-run with `ELEVENLABS_API_KEY=$(keychain-get
+  nwb-tfn-elevenlabs-api-key) node scripts/gen-voice.mjs`.
+- EL key pinned in Keychain `nwb-tfn-elevenlabs-api-key` (frictionless read).
+- **Hidden backdoor moved digit 9 → `*`** (freed 9 for Mandarin). PIN gate unchanged.
+- **No voicemail.** English = directions + gate + code; other 8 = directions only.
+- Directions CONFIRMED by Karl 2026-05-31 (see go-93fyi.md routes). Cantonese was
+  tried + dropped (no official EL support). Translations machine-assisted — flag for
+  native review.
+- Live-verified: static MP3s 200, signed flow plays correct per-lang audio, `*`→PIN.
+
 ## Phase status
 
 - **Phase 0** (wire number): **live** (2026-05-31)

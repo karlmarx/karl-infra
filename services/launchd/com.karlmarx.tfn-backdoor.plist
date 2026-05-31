@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.karlmarx.tfn-backdoor</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/kmx/.local/bin/uv</string>
+    <string>run</string>
+    <string>--script</string>
+    <string>/Users/kmx/karl-infra/services/tfn-backdoor/agent.py</string>
+  </array>
+  <key>WorkingDirectory</key><string>/Users/kmx/karl-infra/services/tfn-backdoor</string>
+  <key>KeepAlive</key><true/>
+  <key>RunAtLoad</key><true/>
+  <key>StandardOutPath</key><string>/Users/kmx/.local/share/tfn-backdoor/agent.log</string>
+  <key>StandardErrorPath</key><string>/Users/kmx/.local/share/tfn-backdoor/agent.err</string>
+</dict>
+</plist>

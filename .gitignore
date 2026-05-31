@@ -20,3 +20,6 @@ repos.txt
 __pycache__/
 *.pyc
 .vercel
+.pytest_cache/
+__pycache__/
+*.pyc

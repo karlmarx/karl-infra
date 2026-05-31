@@ -31,12 +31,22 @@ files land in `~/Documents`. Plist (holds the Gmail app password) lives in
 > **UI note (2026-05-30 v0.2):** the first build looked rough; rebuilt as a
 > light "transit wayfinding" system — clean editorial hero, single Start→Next
 > flow, graceful "preview photo" handling on the soft frames, fixed step
-> counter, entry copy anchored to unit **501** (intercom name TBC: Marx vs
-> Marx-Levi). Direction confirmed by Karl.
+> counter, entry copy anchored to unit **501** (intercom name confirmed
+> **Marx** — ButterflyMX directory shows *Unit 3000-501 · K. Marx*).
+
+> **Update (2026-05-31 v1):** real photos shipped & live. Shoot recovered off
+> the Pixel via `adb` after the Nextcloud sync corrupted half the batch (saved
+> login-page HTML as `.jpg`, then deleted the originals — sync since hardened in
+> `services/nextcloud-android-sync.py`); 32 originals at `~/go-93fyi-photos/raw`.
+> Walking route fully real; driving steps 3–5 real (steps 1–2 = avenue turn-in +
+> vehicle gate still need a from-the-car shoot, plus a "wrong Sprouts door" shot).
+> Walk-up step autoplays a Motion-Photo loop (`ped_entrance_loop.mp4`). Foot-route
+> copy corrected (table→LEFT; mailboxes are the driving entrance, not foot). Nag
+> sentinel at `~/Library/Application Support/go-93fyi/photos-done`.
 
 ## Roadmap (next passes)
 
-1. **Real photos** + re-placed overlays (replaces the soft v0 frames).
+1. ~~**Real photos** + re-placed overlays~~ — **DONE 2026-05-31** (walking + driving 3–5 live; driving 1–2 avenue/gate + a "wrong Sprouts door" shot still pending).
 2. **"Am I at the right entrance?" confirmation** — the #1 confusion. Entrances
    differ by mode: **car** = the entrance **inside the gate**; **walking** = the
    **high-numbers** entrance **outside the gate** (NOT the one behind Sprouts).
@@ -52,11 +62,21 @@ files land in `~/Documents`. Plist (holds the Gmail app password) lives in
    *(This is why the long-term home may migrate from Vercel-static to a Cloudflare
    Worker, à la `where.93.fyi`.)*
 
-## Indoor foot route (as known)
+## Routes (CORRECTED 2026-05-31 by Karl — supersedes earlier notes)
 
-Clubhouse = the **3000 building lobby** (big communal table → elevator). Path:
-enter → past the big table → **right** → through the **green push-to-exit door** →
-**past the mailboxes → right → left** → elevator → **floor 5 → Apt 501**.
+Two entrances; they converge at the elevator → **floor 5 → Apt 501**.
+
+**🚶 On foot:** Use the **main entrance to the leasing office, off 6th Ave**
+(outside the gate). A **"Blys" sign is in front of the entrance** (landmark).
+Walk-up call box. Inside: past the **big table → LEFT** → through the **green
+push-to-exit door** → elevator is **ahead on the right**.
+(Earlier "high-numbers entrance / behind Sprouts / mailboxes → right → left"
+notes were WRONG for the foot route — removed.)
+
+**🚗 Driving:** Use the **vehicle gate off 6th Ave** (NOT the entrance by
+Sprouts). Driving call box at the gate. Once through, the **building is the
+first one on the right** — park anywhere. The entrance is **inside the gate,
+no door**: you'll see the **mailboxes → walk past → right → left** → elevator.
 
 ## Two ButterflyMX boxes
 

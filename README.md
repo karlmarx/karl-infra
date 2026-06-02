@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-06-01
+> Auto-updated daily from GitHub commits. Last update: 2026-06-02
 
 ## Overview
 
@@ -89,12 +89,19 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### nwb-plan
+- feat(hep): add calf raise, bilateral leg press, KB RDL, TRX squat (#125) (2026-06-01)
+- feat(fwb): FWB phase + 4 PT-supervised bilateral exercises (#132) (2026-05-21)
+- Sync dev with main (#131) (2026-05-20)
+- ci: run Playwright on every push (not just main/dev) (#128) (2026-05-13)
+- fix(swap): group machine variants by own equipment, not parent's (#127) (2026-05-13)
+
 ### karl-infra
+- chore: daily update 2026-06-01 (2026-06-01)
 - chore: daily update 2026-05-31 (2026-05-31)
 - chore: daily update 2026-05-30 (2026-05-30)
 - chore: daily update 2026-05-29 (2026-05-29)
 - chore: daily update 2026-05-28 (2026-05-28)
-- chore: daily update 2026-05-27 (2026-05-27)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

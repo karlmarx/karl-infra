@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-06-02
+> Auto-updated daily from GitHub commits. Last update: 2026-06-03
 
 ## Overview
 
@@ -96,12 +96,26 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - ci: run Playwright on every push (not just main/dev) (#128) (2026-05-13)
 - fix(swap): group machine variants by own equipment, not parent's (#127) (2026-05-13)
 
+### suspect-game
+- Merge pull request #5 from karlmarx/fix-suspect-rotation (2026-06-03)
+- fix: rotate Suspect fairly across rounds (2026-05-23)
+- Merge pull request #4 from karlmarx/fix-smoke-target (2026-05-22)
+- Smoke: always target suspect.93.fyi (deployment URL is 401-gated) (2026-05-22)
+- Merge pull request #3 from karlmarx/security-hardening (2026-05-22)
+
 ### karl-infra
+- chore: daily update 2026-06-02 (2026-06-02)
 - chore: daily update 2026-06-01 (2026-06-01)
 - chore: daily update 2026-05-31 (2026-05-31)
 - chore: daily update 2026-05-30 (2026-05-30)
 - chore: daily update 2026-05-29 (2026-05-29)
-- chore: daily update 2026-05-28 (2026-05-28)
+
+### find-hub-tracker
+- feat: add all GoogleFindMyTools runtime deps and fix auth flow (2026-04-13)
+- Add selenium, undetected-chromedriver, setuptools deps for auth flow (2026-04-02)
+- Merge pull request #6 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-04-02)
+- fix: handle empty DEVICES_TO_TRACK in .env without JSON parse error (2026-03-31)
+- Merge pull request #5 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-03-31)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

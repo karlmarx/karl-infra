@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-06-03
+> Auto-updated daily from GitHub commits. Last update: 2026-06-04
 
 ## Overview
 
@@ -89,6 +89,13 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### karl-infra
+- chore: daily update 2026-06-03 (2026-06-03)
+- chore: daily update 2026-06-02 (2026-06-02)
+- chore: daily update 2026-06-01 (2026-06-01)
+- chore: daily update 2026-05-31 (2026-05-31)
+- chore: daily update 2026-05-30 (2026-05-30)
+
 ### nwb-plan
 - feat(hep): add calf raise, bilateral leg press, KB RDL, TRX squat (#125) (2026-06-01)
 - feat(fwb): FWB phase + 4 PT-supervised bilateral exercises (#132) (2026-05-21)
@@ -102,13 +109,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - Merge pull request #4 from karlmarx/fix-smoke-target (2026-05-22)
 - Smoke: always target suspect.93.fyi (deployment URL is 401-gated) (2026-05-22)
 - Merge pull request #3 from karlmarx/security-hardening (2026-05-22)
-
-### karl-infra
-- chore: daily update 2026-06-02 (2026-06-02)
-- chore: daily update 2026-06-01 (2026-06-01)
-- chore: daily update 2026-05-31 (2026-05-31)
-- chore: daily update 2026-05-30 (2026-05-30)
-- chore: daily update 2026-05-29 (2026-05-29)
 
 ### find-hub-tracker
 - feat: add all GoogleFindMyTools runtime deps and fix auth flow (2026-04-13)

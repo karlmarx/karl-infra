@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-06-04
+> Auto-updated daily from GitHub commits. Last update: 2026-06-05
 
 ## Overview
 
@@ -90,11 +90,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- chore: daily update 2026-06-04 (2026-06-04)
 - chore: daily update 2026-06-03 (2026-06-03)
 - chore: daily update 2026-06-02 (2026-06-02)
 - chore: daily update 2026-06-01 (2026-06-01)
 - chore: daily update 2026-05-31 (2026-05-31)
-- chore: daily update 2026-05-30 (2026-05-30)
 
 ### nwb-plan
 - feat(hep): add calf raise, bilateral leg press, KB RDL, TRX squat (#125) (2026-06-01)

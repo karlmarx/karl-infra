@@ -6,6 +6,7 @@ read from the macOS Keychain service `nwb-tfn-redis-url` (prompts on every read)
 """
 from __future__ import annotations
 
+import getpass
 import json
 import os
 import subprocess
@@ -20,8 +21,19 @@ AUDIT = "tfn:audit"
 
 
 def _redis_url() -> str:
+    """Read the rediss:// URL from Keychain.
+
+    Env override (TFN_REDIS_URL) wins if set. The Keychain entry is pinned with
+    `-T /usr/bin/security` so this read never prompts — required under launchd,
+    which has no GUI to answer a Keychain dialog. USER may be unset under
+    launchd, so resolve the account name via getpass, not os.environ["USER"].
+    """
+    env = os.environ.get("TFN_REDIS_URL")
+    if env:
+        return env.strip()
+    acct = os.environ.get("USER") or getpass.getuser()
     out = subprocess.run(
-        ["security", "find-generic-password", "-a", os.environ["USER"], "-s", "nwb-tfn-redis-url", "-w"],
+        ["security", "find-generic-password", "-a", acct, "-s", "nwb-tfn-redis-url", "-w"],
         capture_output=True,
         text=True,
         check=True,
@@ -30,7 +42,16 @@ def _redis_url() -> str:
 
 
 def client() -> "redis.Redis":
-    return redis.from_url(_redis_url(), decode_responses=True)
+    # socket_timeout must exceed the BLPOP block time (5s) or the read times out
+    # mid-block; keep TCP alive so Upstash doesn't drop the idle connection.
+    return redis.from_url(
+        _redis_url(),
+        decode_responses=True,
+        socket_timeout=30,
+        socket_keepalive=True,
+        health_check_interval=30,
+        retry_on_timeout=True,
+    )
 
 
 @dataclass

@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-06-05
+> Auto-updated daily from GitHub commits. Last update: 2026-06-06
 
 ## Overview
 
@@ -89,19 +89,19 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
-### karl-infra
-- chore: daily update 2026-06-04 (2026-06-04)
-- chore: daily update 2026-06-03 (2026-06-03)
-- chore: daily update 2026-06-02 (2026-06-02)
-- chore: daily update 2026-06-01 (2026-06-01)
-- chore: daily update 2026-05-31 (2026-05-31)
-
 ### nwb-plan
+- feat(fwb): advance program clock to FWB + deselect Today phase selector in FWB era (#134) (2026-06-05)
 - feat(hep): add calf raise, bilateral leg press, KB RDL, TRX squat (#125) (2026-06-01)
 - feat(fwb): FWB phase + 4 PT-supervised bilateral exercises (#132) (2026-05-21)
 - Sync dev with main (#131) (2026-05-20)
 - ci: run Playwright on every push (not just main/dev) (#128) (2026-05-13)
-- fix(swap): group machine variants by own equipment, not parent's (#127) (2026-05-13)
+
+### karl-infra
+- chore: daily update 2026-06-05 (2026-06-05)
+- chore: daily update 2026-06-04 (2026-06-04)
+- chore: daily update 2026-06-03 (2026-06-03)
+- chore: daily update 2026-06-02 (2026-06-02)
+- chore: daily update 2026-06-01 (2026-06-01)
 
 ### suspect-game
 - Merge pull request #5 from karlmarx/fix-suspect-rotation (2026-06-03)

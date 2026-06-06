@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:apps='http://schemas.google.com/apps/2006'>
+  <title>Mail Filters — noise cleanup (generated 2026-06-06)</title>
+  <!-- 1. Auto-forwarded SMS: self-sent with subject "SMS from ..." -->
+  <entry>
+    <category term='filter'></category>
+    <title>Mail Filter</title>
+    <content></content>
+    <apps:property name='from' value='karlmarx9193@gmail.com'/>
+    <apps:property name='subject' value='&quot;SMS from&quot;'/>
+    <apps:property name='label' value='SMS'/>
+    <apps:property name='shouldArchive' value='true'/>
+    <apps:property name='shouldMarkAsRead' value='true'/>
+    <apps:property name='shouldNeverSpam' value='true'/>
+  </entry>
+  <!-- 2a. Promo senders (batch 1) -->
+  <entry>
+    <category term='filter'></category>
+    <title>Mail Filter</title>
+    <content></content>
+    <apps:property name='from' value='hello@e.lululemon.com OR jcrew@mail.jcrew.com OR bombas@hello.bombas.com OR reply@goodr.com OR uber@uber.com OR no-reply@messages.doordash.com OR marketing@email.irobot.com OR worldofhyatt@loyalty.hyatt.com OR no-reply@email.point.me OR fandango@movies.fandango.com'/>
+    <apps:property name='label' value='Noise/Promos'/>
+    <apps:property name='shouldArchive' value='true'/>
+    <apps:property name='shouldMarkAsRead' value='true'/>
+  </entry>
+  <!-- 2b. Promo senders (batch 2) -->
+  <entry>
+    <category term='filter'></category>
+    <title>Mail Filter</title>
+    <content></content>
+    <apps:property name='from' value='support@peachymen.com OR no-reply@ohsnap.com OR support@magneticbagcompany.com OR vivobarefoot@newsletter.vivobarefoot.com OR support@kumorico.com OR contact@unit1gear.com OR no-reply@exact.publix.com OR announcements@email.broadwayacrossamerica.com'/>
+    <apps:property name='label' value='Noise/Promos'/>
+    <apps:property name='shouldArchive' value='true'/>
+    <apps:property name='shouldMarkAsRead' value='true'/>
+  </entry>
+  <!-- 2c. Promo senders (batch 3) -->
+  <entry>
+    <category term='filter'></category>
+    <title>Mail Filter</title>
+    <content></content>
+    <apps:property name='from' value='newsletters@e.trekbikes.com OR info@spinwavepickleball.com OR postmaster@email.mr-s-leather.com OR blast@mail.fresha.com OR info@pb.dupr.com OR noreply@tapmango.com OR noreply@email.browardcenter.org OR teachers@liforme.com OR squaremktg.com'/>
+    <apps:property name='label' value='Noise/Promos'/>
+    <apps:property name='shouldArchive' value='true'/>
+    <apps:property name='shouldMarkAsRead' value='true'/>
+  </entry>
+  <!-- 3. Newsletters -->
+  <entry>
+    <category term='filter'></category>
+    <title>Mail Filter</title>
+    <content></content>
+    <apps:property name='from' value='noreply@md.getsentry.com OR hello@news.railway.app OR ship@info.vercel.com OR hello@ollama.com OR enewsletters@moody.senate.gov OR jeremy@builtwithscience.com'/>
+    <apps:property name='label' value='Noise/Newsletters'/>
+    <apps:property name='shouldArchive' value='true'/>
+    <apps:property name='shouldMarkAsRead' value='true'/>
+  </entry>
+</feed>

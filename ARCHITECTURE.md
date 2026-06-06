@@ -100,6 +100,7 @@ Apple Silicon-native machine (36 GB unified memory) running compute-intensive au
 | gemini CLI | Interactive | Secondary AI assistant. OAuth `karlmarx9193@gmail.com`. 5 MCP extensions. See [infra/gemini-cli.md](infra/gemini-cli.md) |
 | gemini-auto | On-demand | Playwright/CDP image-gen via Gemini UI, 3-account rotation. Originally Windows; ported to Mac (hardcoded paths still in source). See [infra/gemini-auto.md](infra/gemini-auto.md) |
 | tfn-backdoor-agent | launchd (committed, **not loaded**) | BLPOP executor for the Twilio DTMF phone-as-API control plane (**LIVE front 2026-05-31**). Pulls intents off an Upstash KV queue (written by Vercel routes on tfn.93.fyi), dispatches Mac/cloud actions, publishes status every 60s. Whitelist=full, PIN `9193`=read-only. See [infra/tfn-93fyi.md](infra/tfn-93fyi.md) |
+| gmail-noise-sweep | Every 1 hour | IMAP sweep of karlmarx9193 Gmail inbox: labels + archives auto-forwarded SMS (`SMS`), promo senders (`Noise/Promos`), newsletters (`Noise/Newsletters`). **Loaded 2026-06-06.** See [infra/gmail-noise-sweep.md](infra/gmail-noise-sweep.md) |
 
 **Key characteristics:**
 - All background processes use LaunchAgents (`~/Library/LaunchAgents/*.plist`)

@@ -43,6 +43,14 @@
     <apps:property name='shouldArchive' value='true'/>
     <apps:property name='shouldMarkAsRead' value='true'/>
   </entry>
+  <!-- 2d. Fired realtor -> Trash (Aaron Burke + his OneHome/Matrix alert system) -->
+  <entry>
+    <category term='filter'></category>
+    <title>Mail Filter</title>
+    <content></content>
+    <apps:property name='from' value='aaronburkesells.com OR southeastmatrixmail.com'/>
+    <apps:property name='shouldTrash' value='true'/>
+  </entry>
   <!-- 3. Newsletters -->
   <entry>
     <category term='filter'></category>

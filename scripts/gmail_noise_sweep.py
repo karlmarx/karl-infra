@@ -50,6 +50,12 @@ PROMO_SENDERS = [
     "squaremktg.com",  # domain match — rotating + addresses
 ]
 
+# Straight to trash — fired realtor (2026-06-06) incl. his OneHome/Matrix alerts
+TRASH_SENDERS = [
+    "aaronburkesells.com",
+    "southeastmatrixmail.com",
+]
+
 NEWS_LABEL = "Noise/Newsletters"
 NEWS_SENDERS = [
     "noreply@md.getsentry.com",
@@ -133,6 +139,22 @@ def main() -> None:
         if n:
             print(f"Newsletter {s}: {n}")
         total += n
+
+    # 4. Trash senders (INBOX -> Trash)
+    for s in TRASH_SENDERS:
+        typ, data = m.uid("SEARCH", None, f'(FROM "{s}")')
+        uids = data[0].split() if data and data[0] else []
+        if not uids:
+            continue
+        uidset = b",".join(uids).decode()
+        if dry:
+            print(f"Trash {s}: would trash {len(uids)}")
+        else:
+            m.uid("COPY", uidset, '"[Gmail]/Trash"')
+            m.uid("STORE", uidset, "+FLAGS", r"(\Deleted)")
+            m.expunge()
+            print(f"Trash {s}: {len(uids)}")
+        total += len(uids)
 
     print(f"TOTAL {'would be ' if dry else ''}cleaned: {total}")
     m.close()

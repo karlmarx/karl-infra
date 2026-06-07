@@ -11,6 +11,53 @@ Designed around two invariants:
 - **Image bytes never leave the local worker.** Cloud subagents (Sonnet/Opus) only ever receive structured JSON. Privacy-by-construction; also avoids cloud content-policy edge cases for naturist photos in Karl's library.
 - **Idempotent and restartable.** SQLite (workout) / DuckDB (bulk) state. `process()` rerun on the same input produces the same `data/videos/<sha>.json`.
 
+## Aesthetic catalog — hybrid 9B triage + 27B deep (added 2026-06-07)
+
+`catalog_aesthetic.py` is the always-on subsystem that scores Karl's media for the **hot.93.fyi** gallery. It is **separate** from the workout/`process_video.py` path above and uses its own state DB (`~/.local/share/aesthetic-pipeline/state.db`, table `items`) — not `data/index.duckdb`.
+
+Two stages, two models, two LaunchAgents — split so the GPU is productive whether Karl is present or away:
+
+| Stage | Model / server | When it runs | Runner | LaunchAgent |
+|-------|----------------|--------------|--------|-------------|
+| **Triage** (cheap: `explicit`, `has_person`, `kind`) | Qwen3.5-**9B** on `:8081` (always-on) | Continuously, **while `:8080` is down** (Karl present) | `~/.openclaw/watchdog/triage-runner.sh` | `com.kmx.aesthetic-triage` |
+| **Deep** (composition / subject / physique / attractiveness → `weighted_score`) | Qwen3.5-**27B** on `:8080` (idle-gated) | Opportunistically, **whenever `:8080` is up** (watchdog brought it up: idle/night + RAM≥50%) | `~/.openclaw/watchdog/deep-runner.sh` | `com.kmx.aesthetic-deep` |
+
+**Mutual exclusion by design.** Triage polls `:8080` and yields the moment the 27B is up; deep only runs when `:8080` answers. `catalog_aesthetic.py` holds a single-instance `flock` (`catalog.lock`) that guards the hand-off window, so the two models never infer at once (no 22 GB RAM contention). The mac-watchdog owns the 27B lifecycle — the deep runner has no idle/RAM logic of its own.
+
+**Runner shape.** Both runners loop **internally** (`while true; do <batch>; sleep; done`); launchd `KeepAlive` is only a crash-restart net, NOT the cadence driver. (A one-shot-per-launch script relying on KeepAlive to re-fire stalls — launchd froze it at `runs=1`/`state=not running`. The in-process loop mirrors `continuous_process.py`.) Tunables via plist env: `MAX_PER_RUN_TRIAGE=100`, `MAX_PER_RUN_DEEP=40`. Triage re-runs `discover()` at most every 6h (marker `.last-discover`).
+
+```
+SOURCES (~/Pictures, X9/photos/incoming, ~/Nextcloud/Photos, X9 Takeout, …)
+   │  discover()  (skips *.photoslibrary bundle internals — volatile derivative paths)
+   ▼
+items (state.db)
+   │  triage-runner.sh → catalog_aesthetic.py --triage-only   → Qwen 9B  :8081   [continuous]
+   ▼  (has_person items)
+   │  deep-runner.sh   → catalog_aesthetic.py --deep-only      → Qwen 27B :8080   [idle windows]
+   ▼  weighted_score + _safe.json/_explicit.json (publish writes JSON only; no git push)
+hot.93.fyi gallery
+```
+
+**Backlog (2026-06-07):** 55,134 items (47.7k img + 7.4k video); was 9% triaged / **0% deep** (deep had never run). Now grinding continuously on the 9B (~2.2 s/item). Deep starts clearing the ~2.6k `has_person` candidates once the 27B next comes up.
+
+**Bug fixes shipped with this (catalog_aesthetic.py):**
+- `run_deep` filtered `has_person` *after* `LIMIT` → batches starved to zero. Pushed the predicate into SQL.
+- `video_keyframes` used `format=duration`; phone/Takeout videos carry a data track inflating it, so seeks landed past the real footage → silent empty frames → `decode_failed`. Now uses the **video-stream** duration (fallback to format), clamps off the last frame, and logs empty grabs.
+- `iter_media` now skips `*.photoslibrary` bundle internals (1,244 volatile entries were polluting the catalog).
+
+**Ops:**
+```bash
+# state / progress
+sqlite3 ~/.local/share/aesthetic-pipeline/state.db \
+  "SELECT COUNT(*) total, SUM(triage_done_at IS NOT NULL) triaged, SUM(deep_done_at IS NOT NULL) deep FROM items;"
+tail -f ~/.local/share/aesthetic-pipeline/triage-runner.log   # or deep-runner.log
+launchctl print gui/$(id -u)/com.kmx.aesthetic-triage | grep -E 'state|runs'
+# if an agent shows 'not running', revive it:
+launchctl kickstart -k gui/$(id -u)/com.kmx.aesthetic-triage   # or aesthetic-deep
+```
+
+> Superseded `com.kmx.aesthetic-catalog` (single idle full-run on the 9B), archived as `…plist.bak.superseded-by-hybrid-20260607`. `disable-27b` flag removed 2026-06-07. `com.kmx.aesthetic-weekly` (Sun 08:00, `aesthetic_weekly.py`) is an independent report job. The `:8080`/`:8081` model names in **Inference backend** below are stale — see [local-ai.md](local-ai.md) for the current Qwen3.5 9B/27B servers.
+
 ## Location
 
 | Piece | Path |

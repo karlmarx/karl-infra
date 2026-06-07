@@ -91,6 +91,8 @@ Apple Silicon-native machine (36 GB unified memory) running compute-intensive au
 | MLX-VLM `:8082` (long-ctx) | Always-on (NOT watched) | Reasoning — `Qwen3.5-9B-MLX-4bit`, 262k ctx (currently DOWN per 2026-04-26 audit) |
 | workout_watcher | Every 15 min | Watch Nextcloud for new workout videos, process via MLX-VLM, extract frames & analysis |
 | workout_digest | Daily 07:00 | Synthesize workout form feedback via MLX-VLM, email digest (migrated off Claude API) |
+| aesthetic-triage | Always-on (internal loop) | Continuous cheap triage of media for hot.93.fyi on the 9B `:8081`; yields while the 27B is up. See [infra/local-vlm-analysis.md](infra/local-vlm-analysis.md) |
+| aesthetic-deep | Always-on (polls; works only when 27B up) | Heavy aesthetic scoring on the 27B `:8080` during idle/night windows. Hybrid partner to aesthetic-triage; replaced `aesthetic-catalog` 2026-06-07, `disable-27b` removed |
 | Nextcloud photo sync | Every 1 hour | Poll Nextcloud `/InstantUpload/Camera/`, download to external SSD. **Currently dead — see [infra/nextcloud-android-sync.md](infra/nextcloud-android-sync.md)** |
 | Nextcloud screenshot parser | Every 1 hour | Poll `/InstantUpload/Screenshots/`, MLX-VLM classify, file by category, append Todoist tasks. **Currently dead — same plist bugs** |
 | Nextcloud video ingest | Every 30 min | Move phone videos from Nextcloud to X9 SSD via rclone |

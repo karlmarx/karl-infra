@@ -143,6 +143,9 @@ nfit.93.fyi nyoga.    id.93   Serverless
   |       → workout                                        |
   |    +- shared by workout_watcher and photo-memory       |
   |    +- routes to MLX-VLM :8080                          |
+  |    +- aesthetic catalog (hot.93.fyi):                  |
+  |        triage  → 9B :8081 (always, aesthetic-triage)   |
+  |        deep    → 27B :8080 (idle, aesthetic-deep)      |
   |                                                        |
   |  OpenClaw gateway (4 LaunchAgents, :18789 loopback)    |
   |    +- routes to MLX/Ollama/Google providers            |

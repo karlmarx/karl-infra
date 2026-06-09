@@ -38,7 +38,9 @@ items (state.db)
 hot.93.fyi gallery
 ```
 
-**Backlog (2026-06-07):** 55,134 items (47.7k img + 7.4k video); was 9% triaged / **0% deep** (deep had never run). Now grinding continuously on the 9B (~2.2 s/item). Deep starts clearing the ~2.6k `has_person` candidates once the 27B next comes up.
+**Backlog (2026-06-07):** 55,134 items (47.7k img + 7.4k video); was 9% triaged / **0% deep** (deep had never run). Now grinding continuously on the 9B (~2.2 s/item).
+
+**UPDATE 2026-06-09 — deep moved to the 9B.** The idle-gated 27B never got a start window across two nights: the machine idles at ~41% free RAM and the 27B needs ≥50% (18 GB) to load its 16 GB on top of the always-on 9B's resident weights. The watchdog policy is correct; the box just can't open an 18 GB hole at idle. Meanwhile triage finished the whole backlog (~55k). So the **now-idle 9B does the deep pass too**: `triage-runner.sh` runs `--triage-only` then `--deep-only` each cycle (tunable `MAX_PER_RUN_9B_DEEP`, default 40). It still **yields to the 27B** if `:8080` ever comes up, so the `aesthetic-deep` runner remains the "27B later" path. Deep backlog is **~31k `has_person` items** (triage flagged far more people than expected) → days of continuous 9B work. **TODO (27B later):** to get the higher-quality 27B path live needs (a) the watchdog to evict/pause the 9B during deep windows to free 16 GB, and (b) a re-score mechanism (the 27B runner selects `deep_done_at IS NULL`, so it won't touch items the 9B already scored — clear `deep_done_at` for the top-ranked set to re-score).
 
 **Bug fixes shipped with this (catalog_aesthetic.py):**
 - `run_deep` filtered `has_person` *after* `LIMIT` → batches starved to zero. Pushed the predicate into SQL.

@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-06-08
+> Auto-updated daily from GitHub commits. Last update: 2026-06-09
 
 ## Overview
 
@@ -90,11 +90,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- chore: daily update 2026-06-08 (2026-06-08)
 - chore: daily update 2026-06-07 (2026-06-07)
 - chore: daily update 2026-06-06 (2026-06-06)
 - chore: daily update 2026-06-05 (2026-06-05)
 - chore: daily update 2026-06-04 (2026-06-04)
-- chore: daily update 2026-06-03 (2026-06-03)
 
 ### nwb-plan
 - feat(fwb): full-clearance FWB — drop cautious framing, surface lifts (#135) (2026-06-07)

@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-06-09
+> Auto-updated daily from GitHub commits. Last update: 2026-06-10
 
 ## Overview
 
@@ -90,11 +90,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- chore: daily update 2026-06-09 (2026-06-09)
 - chore: daily update 2026-06-08 (2026-06-08)
 - chore: daily update 2026-06-07 (2026-06-07)
 - chore: daily update 2026-06-06 (2026-06-06)
 - chore: daily update 2026-06-05 (2026-06-05)
-- chore: daily update 2026-06-04 (2026-06-04)
 
 ### nwb-plan
 - feat(fwb): full-clearance FWB — drop cautious framing, surface lifts (#135) (2026-06-07)
@@ -102,20 +102,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - feat(hep): add calf raise, bilateral leg press, KB RDL, TRX squat (#125) (2026-06-01)
 - feat(fwb): FWB phase + 4 PT-supervised bilateral exercises (#132) (2026-05-21)
 - Sync dev with main (#131) (2026-05-20)
-
-### suspect-game
-- Merge pull request #5 from karlmarx/fix-suspect-rotation (2026-06-03)
-- fix: rotate Suspect fairly across rounds (2026-05-23)
-- Merge pull request #4 from karlmarx/fix-smoke-target (2026-05-22)
-- Smoke: always target suspect.93.fyi (deployment URL is 401-gated) (2026-05-22)
-- Merge pull request #3 from karlmarx/security-hardening (2026-05-22)
-
-### find-hub-tracker
-- feat: add all GoogleFindMyTools runtime deps and fix auth flow (2026-04-13)
-- Add selenium, undetected-chromedriver, setuptools deps for auth flow (2026-04-02)
-- Merge pull request #6 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-04-02)
-- fix: handle empty DEVICES_TO_TRACK in .env without JSON parse error (2026-03-31)
-- Merge pull request #5 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-03-31)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-06-12
+> Auto-updated daily from GitHub commits. Last update: 2026-06-13
 
 ## Overview
 
@@ -89,12 +89,19 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### mom-93fyi
+- feat(hotphone): add /hotphone reassurance + Pixel callback walkthrough (2026-06-13)
+- feat(proxy): serve karlmarxindustries.com landing from Vercel (2026-05-15)
+- chore(bedbug): drop picture-sending refs, route everything to chat (2026-05-13)
+- chore(bedbug): stop telling mom to text Ben — route to chat + email (2026-05-13)
+- chore(bedbug): remove unused sms import from AppShell (2026-05-13)
+
 ### karl-infra
+- chore: daily update 2026-06-12 (2026-06-12)
 - chore: daily update 2026-06-11 (2026-06-11)
 - chore: daily update 2026-06-10 (2026-06-10)
 - chore: daily update 2026-06-09 (2026-06-09)
 - chore: daily update 2026-06-08 (2026-06-08)
-- chore: daily update 2026-06-07 (2026-06-07)
 
 ### nwb-plan
 - feat(fwb): full-clearance FWB — drop cautious framing, surface lifts (#135) (2026-06-07)

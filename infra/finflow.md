@@ -105,9 +105,23 @@ DuckDB schema (two tables): `enrollments` (one per linked institution, holds acc
 | GET | `/api/transactions` | List transactions (`?start_date=&end_date=&limit=`) |
 | GET | `/api/transactions/summary` | Spending by category (Polars) |
 
+## Manual CSV import (non-Teller institutions)
+
+Teller does not cover every institution (e.g. **SoFi**). For those, FinFlow ingests the bank's own CSV export into the same `transactions` table so manual and API-sourced data live side by side.
+
+`finflow/tasks/import_csv.py` — `uv run --directory ~/finflow python -m finflow.tasks.import_csv <files...>` (no args → globs `~/Downloads/SOFI-*.csv`).
+
+- Each CSV file becomes one **synthetic enrollment** keyed by account last-4 (`sofi-<last4>`), with the sentinel `access_token = "MANUAL"`.
+- Both Teller sync paths (`teller_pull.run()` and `POST /api/teller/sync`) **skip** any enrollment whose `access_token == "MANUAL"`, so manual data is never sent to api.teller.io.
+- **Idempotent:** `transaction_id` is a stable SHA1 of (account, date, description, amount, balance); re-importing an overlapping export upserts rather than duplicates.
+- Understands the SoFi Checking/Savings export schema (`Date,Description,Type,Amount,Current balance,Status`). SoFi's sign convention (− out / + in) already matches Teller depository, so amounts pass through unchanged; `Type` maps to a lowercase `category`.
+- **DuckDB is single-writer** — stop the uvicorn server before running the importer, or it fails with a lock conflict.
+
 ## Status
 
-**Working alpha, hourly sync staged but not yet activated.** Last meaningful change: `2026-04-04` — migrated off Plaid to Teller (`def1a2f`). 2026-05-09: added `finflow.tasks.teller_pull` one-shot and staged the hourly LaunchAgent (Karl to `launchctl load` after inspection). No tests yet, no CI.
+**Live as of 2026-06-13.** Teller `development` env configured with real mTLS certs + App ID (`app_pqlvi8tp…`); 3 institutions enrolled (Capital One, Citi, Amex), ~219 transactions synced into DuckDB. SoFi — which Teller does not support — ingested via the new manual CSV path (495 txns across Joint Checking + Savings); see [Manual CSV import](#manual-csv-import-non-teller-institutions). Hourly `teller_pull` LaunchAgent re-enabled after the credential gate cleared. No tests yet, no CI.
+
+Earlier history: migrated off Plaid to Teller `2026-04-04` (`def1a2f`); `teller_pull` one-shot + staged LaunchAgent `2026-05-09`.
 
 ## Open questions / known issues
 

@@ -25,6 +25,7 @@
 |   +-- command.93.fyi  A     -> 76.76.21.21 (proxied)  (karl-command-center, CF Access gated)
 |   +-- workoutgifs.93.fyi CNAME -> cname.vercel-dns.com  (93-fyi, public/DNS-only)
 |   +-- go.93.fyi         CNAME -> cname.vercel-dns.com  (go-93fyi, public/DNS-only)
+|   +-- scout.93.fyi      CNAME -> cname.vercel-dns.com  (relayhub-scout, demo/preview)
 |
 | (Many more records exist in the live Cloudflare zone — bedbug, dev.*, fake,
 |  ha, house, login, me, now, seed, status, thumbfit/yoga, todo, www, plus

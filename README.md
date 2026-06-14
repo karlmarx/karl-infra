@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-06-13
+> Auto-updated daily from GitHub commits. Last update: 2026-06-14
 
 ## Overview
 
@@ -90,25 +90,18 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### mom-93fyi
+- feat(hotphone): annotated 8-step walkthrough, hotspot section, embedded video (2026-06-13)
+- style(hotphone): plainer copy, drop motivational/saccharine phrasing (2026-06-13)
+- feat(hotphone): sign-in note, relax section, drop name, sign as 'your son's AI' (2026-06-13)
 - feat(hotphone): add /hotphone reassurance + Pixel callback walkthrough (2026-06-13)
 - feat(proxy): serve karlmarxindustries.com landing from Vercel (2026-05-15)
-- chore(bedbug): drop picture-sending refs, route everything to chat (2026-05-13)
-- chore(bedbug): stop telling mom to text Ben — route to chat + email (2026-05-13)
-- chore(bedbug): remove unused sms import from AppShell (2026-05-13)
 
 ### karl-infra
+- chore: daily update 2026-06-13 (2026-06-13)
 - chore: daily update 2026-06-12 (2026-06-12)
 - chore: daily update 2026-06-11 (2026-06-11)
 - chore: daily update 2026-06-10 (2026-06-10)
 - chore: daily update 2026-06-09 (2026-06-09)
-- chore: daily update 2026-06-08 (2026-06-08)
-
-### nwb-plan
-- feat(fwb): full-clearance FWB — drop cautious framing, surface lifts (#135) (2026-06-07)
-- feat(fwb): advance program clock to FWB + deselect Today phase selector in FWB era (#134) (2026-06-05)
-- feat(hep): add calf raise, bilateral leg press, KB RDL, TRX squat (#125) (2026-06-01)
-- feat(fwb): FWB phase + 4 PT-supervised bilateral exercises (#132) (2026-05-21)
-- Sync dev with main (#131) (2026-05-20)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

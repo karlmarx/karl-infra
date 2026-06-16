@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mac → Work Mac · Config Migration Review</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --border:#2a3340;
+    --txt:#e6edf3; --muted:#8b949e; --accent:#58a6ff; --accent2:#7ee787;
+    --inc:#3fb950; --adapt:#d29922; --excl:#6e7681; --sens:#f85149; --export:#bc8cff;
+    --chip:#21262d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  code,kbd,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  a{color:var(--accent)}
+  header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,#0d1117,#0d1117f2);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);padding:14px 22px}
+  h1{font-size:19px;margin:0 0 2px}
+  .sub{color:var(--muted);font-size:13px}
+  .wrap{max-width:1180px;margin:0 auto;padding:22px}
+  .banner{background:#1d2430;border:1px solid var(--border);border-left:4px solid var(--export);border-radius:10px;padding:14px 16px;margin:0 0 20px}
+  .banner b{color:var(--export)}
+  .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 0}
+  .chip{background:var(--chip);border:1px solid var(--border);color:var(--txt);padding:6px 11px;border-radius:999px;font-size:12.5px;cursor:pointer;user-select:none;display:inline-flex;gap:6px;align-items:center}
+  .chip.active{border-color:var(--accent);background:#1f6feb22;color:#cfe3ff}
+  .chip .dot{width:9px;height:9px;border-radius:50%}
+  .chip[data-v="include"] .dot{background:var(--inc)} .chip[data-v="adapt"] .dot{background:var(--adapt)}
+  .chip[data-v="exclude"] .dot{background:var(--excl)} .chip[data-v="sensitive"] .dot{background:var(--sens)}
+  .chip[data-v="export"] .dot{background:var(--export)}
+  input[type=search]{flex:1;min-width:180px;background:var(--panel);border:1px solid var(--border);color:var(--txt);border-radius:8px;padding:8px 12px;font-size:13.5px}
+  .count{color:var(--muted);font-size:12.5px;margin-left:auto}
+  section.cat{margin:26px 0 0}
+  section.cat>h2{font-size:15px;letter-spacing:.3px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);padding-bottom:7px;margin:0 0 14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 15px;display:flex;flex-direction:column;gap:8px;position:relative;transition:.15s}
+  .card.off{opacity:.5}
+  .card .top{display:flex;gap:10px;align-items:flex-start}
+  .card h3{font-size:15px;margin:0;flex:1}
+  .v{font-size:10.5px;font-weight:700;letter-spacing:.5px;padding:3px 7px;border-radius:6px;text-transform:uppercase;white-space:nowrap}
+  .v.include{background:#13311c;color:var(--inc)} .v.adapt{background:#33280a;color:var(--adapt)}
+  .v.exclude{background:#23272d;color:#adbac7} .v.sensitive{background:#3a1416;color:var(--sens)}
+  .v.export{background:#2a1f3d;color:var(--export)}
+  .what{font-size:13px;color:#c9d4e0;margin:0}
+  .meta{font-size:11.5px;color:var(--muted)}
+  .details{font-size:11.5px;color:#9fb0c0;background:var(--panel2);border:1px solid var(--border);border-radius:7px;padding:7px 9px;white-space:pre-wrap;word-break:break-word;max-height:120px;overflow:auto}
+  .runs{display:inline-block;font-size:10px;padding:2px 6px;border-radius:5px;background:#1b2a1b;color:#8ddc8d;border:1px solid #244a24;margin-right:4px}
+  .runs.win{background:#2a1b2a;color:#dca0dc;border-color:#4a244a}
+  .runs.cloud{background:#1b232a;color:#8db8dc;border-color:#244a4a}
+  .runs.box{background:#2a261b;color:#dccf8d;border-color:#4a4424}
+  .worknote{font-size:12px;color:#b9c4d0;border-left:3px solid var(--border);padding-left:9px}
+  .worknote.warn{border-color:var(--sens)}
+  .pickrow{display:flex;align-items:center;gap:8px;margin-top:2px}
+  .pickrow label{font-size:12px;color:var(--muted);cursor:pointer;user-select:none}
+  input[type=checkbox]{width:17px;height:17px;accent-color:var(--inc);cursor:pointer}
+  textarea.note{width:100%;background:var(--panel2);border:1px solid var(--border);color:var(--txt);border-radius:7px;padding:6px 8px;font-size:12px;resize:vertical;min-height:0;height:32px;font-family:inherit}
+  textarea.note:focus{height:62px;outline:1px solid var(--accent)}
+  pre.cmd{background:#0a0e14;border:1px solid var(--border);border-radius:9px;padding:12px 14px;overflow:auto;font-size:12px;position:relative}
+  pre.cmd .cp{position:absolute;top:7px;right:7px;background:var(--chip);border:1px solid var(--border);color:var(--muted);border-radius:6px;font-size:10.5px;padding:3px 7px;cursor:pointer}
+  .exportblock{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+  .exportblock h3{margin:0 0 4px;font-size:15px}
+  .exportblock p{margin:0 0 10px;font-size:12.5px;color:var(--muted)}
+  .bar{position:sticky;bottom:0;z-index:40;background:#0d1117f2;backdrop-filter:blur(6px);border-top:1px solid var(--border);padding:11px 22px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  button.act{background:var(--accent);color:#04101f;border:0;border-radius:8px;padding:9px 16px;font-weight:700;font-size:13.5px;cursor:pointer}
+  button.ghost{background:transparent;border:1px solid var(--border);color:var(--txt);border-radius:8px;padding:9px 14px;font-size:13px;cursor:pointer}
+  .tally{color:var(--muted);font-size:12.5px}
+  .tally b{color:var(--inc)}
+  dialog{background:var(--panel);color:var(--txt);border:1px solid var(--border);border-radius:14px;max-width:840px;width:92%;padding:0}
+  dialog::backdrop{background:#000a}
+  .dlg-h{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--border)}
+  .dlg-h h2{margin:0;font-size:16px}
+  .dlg-b{padding:16px 18px;max-height:65vh;overflow:auto}
+  textarea#manifest{width:100%;height:46vh;background:#0a0e14;color:#c9d4e0;border:1px solid var(--border);border-radius:9px;padding:12px;font:12px/1.5 ui-monospace,monospace}
+  .legend{font-size:12px;color:var(--muted);margin-top:10px}
+  .fbwrap{margin:18px 0 0}
+  .fbwrap textarea{width:100%;min-height:70px;background:var(--panel);border:1px solid var(--border);color:var(--txt);border-radius:9px;padding:10px;font-size:13px;font-family:inherit}
+  details.help{margin:8px 0 0;font-size:12.5px;color:var(--muted)}
+  details.help summary{cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+  <h1>Mac&nbsp;→&nbsp;Work Mac · Configuration Migration Review</h1>
+  <div class="sub">Interactive triage of Karl's home-Mac config for a new <b>strictly work/dev</b> Mac · generated from <code>karl-infra</code> · 2026-06-16</div>
+</header>
+
+<div class="wrap">
+
+  <div class="banner">
+    <b>⚠ Read me first — how this was made.</b> This report was generated by Claude Code running in a
+    <b>remote Linux cloud container</b>, which only had your <code>karl-infra</code> repo — <b>not</b> your actual Mac.
+    So the items below come from what your repo <i>documents</i> about the home Mac. The look-and-feel settings that
+    only live on the physical machine (iTerm2 profile, macOS <code>defaults</code>, shell dotfiles) <b>could not be read
+    from here</b> — instead, <b>Section&nbsp;A</b> gives you the exact commands to dump them <b>on your old Mac</b>.
+    Run those, and the output + your selections below become the handoff doc for Mac&nbsp;Claude.
+  </div>
+
+  <div class="controls" id="filters">
+    <span class="chip active" data-f="all">All</span>
+    <span class="chip" data-f="export" data-v="export"><span class="dot"></span>Live-export</span>
+    <span class="chip" data-f="include" data-v="include"><span class="dot"></span>Include</span>
+    <span class="chip" data-f="adapt" data-v="adapt"><span class="dot"></span>Adapt</span>
+    <span class="chip" data-f="exclude" data-v="exclude"><span class="dot"></span>Exclude</span>
+    <span class="chip" data-f="sensitive" data-v="sensitive"><span class="dot"></span>Sensitive</span>
+    <input type="search" id="search" placeholder="Search items, paths, tools…" />
+    <span class="count" id="count"></span>
+  </div>
+
+  <!-- SECTION A: live export -->
+  <section class="cat" id="sectionA">
+    <h2>Section A · Live settings to export from your OLD Mac <span style="color:var(--export);text-transform:none;letter-spacing:0">(run these in your old Mac's Terminal)</span></h2>
+    <p style="font-size:13px;color:var(--muted);margin:0 0 14px">
+      These are the things you actually asked about — iTerm2 + macOS-specific settings — that I can't read from a cloud box.
+      Run the blocks below on the old Mac (or paste them to local Mac Claude). They drop files on your Desktop; review, then
+      replay on the new Mac. <b>Review every dump before copying — they can contain personal data.</b>
+    </p>
+    <div id="exportBlocks"></div>
+  </section>
+
+  <!-- SECTION B: documented items -->
+  <div id="catalog"></div>
+
+  <div class="fbwrap">
+    <h2 style="font-size:15px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;border-bottom:1px solid var(--border);padding-bottom:7px">Your feedback to shape the handoff</h2>
+    <p style="font-size:12.5px;color:var(--muted);margin:6px 0 8px">Anything you want Mac Claude to know — priorities, things to skip, work policies, questions. This gets embedded at the top of the exported manifest.</p>
+    <textarea id="feedback" placeholder="e.g. 'Work laptop is MDM-managed — no LaunchAgents allowed.' · 'Keep my iTerm2 colors + zsh aliases, drop everything AI-infra.' · 'I want the RAM-coordination pattern but adapted to a 64GB machine.'"></textarea>
+  </div>
+
+  <details class="help">
+    <summary>How the verdicts are defined</summary>
+    <div class="legend">
+      <b style="color:var(--export)">Live-export</b> — only exists on the physical Mac; dump it with Section A commands.<br>
+      <b style="color:var(--inc)">Include</b> — portable, general dev-environment value; carry over.<br>
+      <b style="color:var(--adapt)">Adapt</b> — useful but needs rework / re-keying / a policy check on a work machine.<br>
+      <b style="color:var(--excl)">Exclude</b> — personal, home-specific, or cloud-hosted; doesn't belong on a strictly-work Mac.<br>
+      <b style="color:var(--sens)">Sensitive</b> — involves secrets/credentials; never copy verbatim — rotate &amp; store in Keychain.
+    </div>
+  </details>
+
+</div>
+
+<div class="bar">
+  <button class="act" id="buildBtn">Build handoff manifest →</button>
+  <button class="ghost" id="selInc">Select Include+Adapt</button>
+  <button class="ghost" id="selNone">Clear all</button>
+  <span class="tally" id="tally"></span>
+</div>
+
+<dialog id="dlg">
+  <div class="dlg-h">
+    <h2>Migration handoff manifest</h2>
+    <div style="display:flex;gap:8px">
+      <button class="ghost" id="copyM">Copy</button>
+      <button class="act" id="dlM">Download .md</button>
+      <button class="ghost" id="closeM">Close</button>
+    </div>
+  </div>
+  <div class="dlg-b">
+    <p style="font-size:12.5px;color:var(--muted);margin:0 0 10px">Hand this to Mac Claude on the new machine, alongside your Windows/WSL notes from the work-machine Claude.</p>
+    <textarea id="manifest" readonly></textarea>
+  </div>
+</dialog>
+
+<script>
+//// ---- Section A: live-export command blocks ----
+const EXPORTS = [
+  {t:"iTerm2 — profiles, colors, keymaps", d:"Your entire iTerm2 config lives in one plist. This dumps a human-readable copy + a restorable binary copy. (You can also point iTerm2 → Settings → General → Settings at a synced folder to keep it portable.)",
+   c:`# Quit iTerm2 first so it flushes settings to disk, then:\ndefaults export com.googlecode.iterm2 ~/Desktop/iterm2.plist\nplutil -convert xml1 -o ~/Desktop/iterm2.readable.xml ~/Library/Preferences/com.googlecode.iterm2.plist\n# On the NEW Mac (iTerm2 not running):\n#   defaults import com.googlecode.iterm2 ~/Desktop/iterm2.plist`},
+  {t:"macOS system defaults — Dock, Finder, trackpad, keyboard, hot corners", d:"The 'macOS-specific configurations' you like. A full dump is huge, so this also pulls the handful of domains people actually customize.",
+   c:`defaults read > ~/Desktop/macos-defaults-FULL.txt          # everything (huge; for reference)\nfor d in NSGlobalDomain com.apple.dock com.apple.finder \\\n         com.apple.universalaccess com.apple.symbolichotkeys \\\n         com.apple.AppleMultitouchTrackpad \\\n         com.apple.driver.AppleBluetoothMultitouch.trackpad \\\n         com.apple.screencapture com.apple.menuextra.clock; do\n  echo "===== $d ====="; defaults read "$d" 2>/dev/null; echo\ndone > ~/Desktop/macos-defaults-curated.txt\ndefaults read -g com.apple.swipescrolldirection   # natural scroll on/off`},
+  {t:"Shell — zsh dotfiles, aliases, functions, prompt", d:"Copy your shell config. Review for anything machine-specific or personal before replaying.",
+   c:`mkdir -p ~/Desktop/dotfiles\nfor f in .zshrc .zprofile .zshenv .zlogin .aliases .functions .p10k.zsh .inputrc .editorconfig; do\n  [ -f ~/$f ] && cp ~/$f ~/Desktop/dotfiles/\ndone\ncp -R ~/.config ~/Desktop/dotfiles/config 2>/dev/null\nls -la ~/Desktop/dotfiles`},
+  {t:"Homebrew — full app + CLI inventory", d:"Captures every formula, cask, tap, and Mac App Store app into a Brewfile. On the new Mac, `brew bundle` reinstalls them all in one shot.",
+   c:`brew bundle dump --describe --file=~/Desktop/Brewfile\nwc -l ~/Desktop/Brewfile\n# On the NEW Mac, after installing Homebrew:\n#   brew bundle --file=~/Desktop/Brewfile`},
+  {t:"Git + SSH config (config only — NEVER keys)", d:"Your git identity/aliases and SSH host aliases. Do NOT copy private keys; generate fresh keys on the work Mac and add them to GitHub/hosts.",
+   c:`cp ~/.gitconfig ~/Desktop/gitconfig.txt\n[ -f ~/.gitignore_global ] && cp ~/.gitignore_global ~/Desktop/\ncp ~/.ssh/config ~/Desktop/ssh-config.txt 2>/dev/null   # config only\n# Reminder: review gitconfig for personal email / signing keys before reusing on a work machine.`},
+  {t:"VS Code / Cursor — settings, keybindings, extensions", d:"Editor settings and the extension list. Settings Sync also covers this if you sign in.",
+   c:`code --list-extensions > ~/Desktop/vscode-extensions.txt\nAS="$HOME/Library/Application Support/Code/User"\ncp "$AS/settings.json" "$AS/keybindings.json" ~/Desktop/ 2>/dev/null\ncp -R "$AS/snippets" ~/Desktop/vscode-snippets 2>/dev/null`},
+  {t:"Claude Code — global config (REVIEW for personal content)", d:"Your ~/.claude setup. The big caveat: your CLAUDE.md and coordination.md are tuned for the home machine and reference personal projects — review and strip before reusing on a work Mac.",
+   c:`ls -la ~/.claude\ncp ~/.claude/CLAUDE.md ~/Desktop/claude-CLAUDE.md 2>/dev/null\ncp ~/.claude/settings.json ~/Desktop/claude-settings.json 2>/dev/null\n# Review claude-CLAUDE.md: it documents MLX/Nextcloud/finflow etc. — keep only the generic dev practices.`},
+];
+
+//// ---- Section B: documented config items ----
+// verdict: export|include|adapt|exclude|sensitive ; runs: mac|win|cloud|box
+const ITEMS = [
+ // --- Dev environment & AI tooling (the keep-able core) ---
+ {cat:"Dev environment & AI tooling", n:"Claude Code multi-session RAM coordination", v:"include", runs:"mac",
+  what:"A discipline file every Claude session reads before heavy work, so concurrent sessions don't OOM the machine.",
+  det:"~/.claude/coordination.md — thresholds by free RAM: <200MB stop / 200–500MB light / 500MB–1GB ask / >1GB go. Probe: top -l1 | grep PhysMem.",
+  note:"Great portable pattern if you'll run several Claude sessions. Adapt thresholds to the work Mac's RAM; drop the home-specific project references."},
+ {cat:"Dev environment & AI tooling", n:"Global CLAUDE.md conventions", v:"adapt", runs:"mac",
+  what:"~/.claude/CLAUDE.md — source-of-truth instructions for Claude Code on the machine.",
+  det:"Referenced by openclaw/local-ai/process-monitor docs. Encodes MLX-preference, memory rules, multi-session etiquette.",
+  note:"Keep the generic engineering conventions; strip everything that names MLX/Nextcloud/finflow/personal paths before it touches a work machine."},
+ {cat:"Dev environment & AI tooling", n:"process-monitor TUI (pure-stdlib)", v:"include", runs:"mac",
+  what:"Zero-dependency Python terminal dashboard: background processes, local-LLM status, recent Claude sessions + token estimate.",
+  det:"services/process-monitor-dashboard.py · stdlib only · 5s refresh · 140×40 terminal · token≈size_mb*400.",
+  note:"Genuinely reusable monitoring scaffold. Swap the home process list for whatever you run at work."},
+ {cat:"Dev environment & AI tooling", n:"uv + Python 3.14 toolchain", v:"include", runs:"mac",
+  what:"uv is the package/runtime manager every Python service uses (uv sync, uv run).",
+  det:"pyproject.toml/uv.lock in repo. Used by finflow, photo-memory, amex, workout pipeline, email-triage.",
+  note:"Install on the work Mac (Homebrew or installer) — it's a clean, fast default for any Python work."},
+ {cat:"Dev environment & AI tooling", n:"Playwright + Chromium / ffmpeg", v:"include", runs:"mac",
+  what:"Headed browser automation and video frame extraction used across pipelines.",
+  det:"uv run playwright install chromium · ffmpeg via Homebrew.",
+  note:"Install only if your work involves browser automation or media — otherwise skip."},
+ {cat:"Dev environment & AI tooling", n:"Gemini CLI (as a tool)", v:"adapt", runs:"mac",
+  what:"Google's CLI as a second-opinion assistant with its own rate-limit pool.",
+  det:"~/.gemini/ · settings.json security.auth.selectedType='oauth-personal' · OAuth karlmarx9193@gmail.com.",
+  note:"Tool is fine for work; the auth is a PERSONAL Google account — re-auth with your work account (or skip). Don't copy oauth_creds.json."},
+ {cat:"Dev environment & AI tooling", n:"Gemini CLI MCP extensions", v:"adapt", runs:"mac",
+  what:"Five MCP extensions wired into Gemini CLI.",
+  det:"chrome-devtools-mcp, github, google-workspace, uv-mcp, youtube-to-docs (scoped to /Users/kmx/*).",
+  note:"chrome-devtools / github / uv-mcp are work-useful; google-workspace + youtube-to-docs are personal — leave those."},
+ {cat:"Dev environment & AI tooling", n:"RAM-awareness + pressure monitoring pattern", v:"include", runs:"mac",
+  what:"Every long-running local job checks available RAM / kernel pressure and pauses instead of dying.",
+  det:"sysctl kern.memorystatus_vm_pressure_level (1–4); 4GB OS reserve; defer at <10% free or pressure≥4.",
+  note:"Excellent reliability pattern, worth keeping even without the AI stack. macOS-portable as-is."},
+
+ // --- Local AI stack (mostly adapt/exclude for work) ---
+ {cat:"Local AI stack (MLX / OpenClaw)", n:"OpenClaw 4× LaunchAgents (gateway/node/watchdog/health)", v:"adapt", runs:"mac",
+  what:"launchd jobs that keep a local model gateway + worker alive, with a 60s self-healing watchdog and weekly health check.",
+  det:"ai.openclaw.{gateway,node,watchdog} + com.karlmarx.openclaw-health-check in ~/Library/LaunchAgents/. Loopback :18789, KeepAlive, RAM-gated restart.",
+  note:"The watchdog/self-heal PATTERN is strong. But: (1) work laptops under MDM often forbid custom LaunchAgents — check policy; (2) only worth it if you'll run local inference at work."},
+ {cat:"Local AI stack (MLX / OpenClaw)", n:"MLX-VLM inference servers :8080/:8081/:8082", v:"adapt", runs:"mac",
+  what:"Three always-on Apple-Silicon-native VLM servers (heavy / fast / long-context).",
+  det:"127.0.0.1:8080 gemma-4-26b-4bit · :8081 fast · :8082 Qwen 262k. OpenAI-compatible /v1. Watchdog only guards :8080.",
+  note:"Only relevant if local on-device inference is part of your job AND the work Mac is Apple Silicon. Otherwise prefer a sanctioned API. Re-download models fresh; don't copy the ~17GB cache."},
+ {cat:"Local AI stack (MLX / OpenClaw)", n:"Ollama fallback", v:"exclude", runs:"mac",
+  what:"Local Ollama models as a disabled fallback path.",
+  det:"127.0.0.1:11434 · gemma4:26b/llama3.2:1b · plugins.ollama.enabled=false.",
+  note:"Home-only fallback; skip on a work machine."},
+ {cat:"Local AI stack (MLX / OpenClaw)", n:"HuggingFace model cache", v:"exclude", runs:"mac",
+  what:"~40GB+ of downloaded MLX model weights.",
+  det:"~/.cache/huggingface/hub/ — Qwen3.5-27B-4bit, gemma-4-26b 4/8bit, paligemma2, etc.",
+  note:"Never copy; re-pull only what a work task actually needs."},
+
+ // --- Secrets posture (lessons, not data) ---
+ {cat:"Secrets & security posture", n:"openclaw.json plaintext secrets", v:"sensitive", runs:"mac", warn:true,
+  what:"Central config that stores live secrets in cleartext — including, notably, your KeePass master password.",
+  det:"~/.openclaw/openclaw.json env: GITHUB_TOKEN, GEMINI_API_KEY, GOOGLE_API_KEY, KEEPASS_MASTER_PASSWORD (plaintext) + Discord/Telegram bot tokens, duplicated into the gateway plist.",
+  note:"DO NOT carry this to a work Mac. Rotate all of these. On the new machine use macOS Keychain or a 0600 .env. A KeePass master password in plaintext is the single worst item here."},
+ {cat:"Secrets & security posture", n:"Committed GitLab PAT in tui-dashboard", v:"sensitive", runs:"mac", warn:true,
+  what:"A GitLab personal access token was committed into a repo's IDEAS.md.",
+  det:"glpat-… in tui-dashboard/IDEAS.md — treat as compromised.",
+  note:"Rotate/revoke now regardless of migration. Don't replicate the dashboard until cleaned."},
+ {cat:"Secrets & security posture", n:"Gemini personal OAuth credentials", v:"sensitive", runs:"mac",
+  what:"Refresh token for your personal Google account.",
+  det:"~/.gemini/oauth_creds.json (0600).",
+  note:"Personal-account creds; never transfer to a work machine — re-auth fresh."},
+ {cat:"Secrets & security posture", n:"Teller mTLS certs / Gmail app password", v:"sensitive", runs:"mac",
+  what:"Banking client certs and a Gmail SMTP app password used by personal automations.",
+  det:"~/finflow/certs/*.pem · GMAIL_APP_PASSWORD (KeePass 'Gmail SMTP') in workout-digest plist.",
+  note:"Personal + financial; leave entirely off the work machine."},
+
+ // --- Personal automation (exclude on a work machine) ---
+ {cat:"Personal automation (leave on home Mac)", n:"finflow — personal finance aggregator", v:"exclude", runs:"mac",
+  what:"Teller→DuckDB personal banking pipeline with an hourly LaunchAgent (staged, not yet active).",
+  det:"com.karlmarx.finflow-sync (3600s) · ~/finflow/finflow.duckdb · mTLS certs.",
+  note:"Personal finances — must not live on an employer's machine."},
+ {cat:"Personal automation (leave on home Mac)", n:"workout-watcher / workout-digest", v:"exclude", runs:"mac",
+  what:"Processes personal workout videos via local VLM and emails a daily form digest.",
+  det:"com.kmx.workout-ingest (900s) + com.kmx.workout-digest (07:00). Needs X9 SSD + MLX :8080 + Gmail app pw.",
+  note:"Personal health data; leave behind."},
+ {cat:"Personal automation (leave on home Mac)", n:"photo-memory — Google Takeout VLM catalog", v:"exclude", runs:"mac",
+  what:"1.1TB personal photo dedupe + VLM classification pipeline.",
+  det:"/Volumes/Crucial X9/google-takeout-… → catalog.db. Phase 1 ready, not yet run.",
+  note:"Personal photo library; leave behind."},
+ {cat:"Personal automation (leave on home Mac)", n:"local-vlm-analysis engine", v:"exclude", runs:"mac",
+  what:"3-layer photo/video understanding (triage→universal→workout), incl. sensitive personal tagging.",
+  det:"~/projects/local-vlm-analysis/ · schemas include people attributes/nudity flags · data/index.duckdb.",
+  note:"Personal media + sensitive schema; do not bring to work. (Schema-design ideas are transferable, the data is not.)"},
+ {cat:"Personal automation (leave on home Mac)", n:"gemini-auto — image-gen via UI automation", v:"exclude", runs:"mac",
+  what:"Playwright/CDP bot driving Gemini's web UI across 3 personal Google accounts to dodge image caps.",
+  det:"~/gemini-auto/gemini_auto.py · still has hardcoded Windows paths · 3 personal accounts.",
+  note:"Personal accounts + ToS-grey automation; leave off a work machine."},
+ {cat:"Personal automation (leave on home Mac)", n:"command-center + FastAPI local agent", v:"exclude", runs:"mac",
+  what:"Personal status dashboard (command.93.fyi) fed by an always-on launchd FastAPI agent exposing local stats.",
+  det:"~/karl-command-center (Next.js) + launchd FastAPI via Cloudflare tunnel; pulls Calendar/Todoist/Gmail/seedbox/voice-clones.",
+  note:"Personal dashboard wired to personal accounts; leave behind. The 'local agent exposes JSON over a tunnel' pattern is reusable if work ever needs it."},
+ {cat:"Personal automation (leave on home Mac)", n:"Nextcloud desktop sync + KeePass vault", v:"exclude", runs:"mac", warn:true,
+  what:"Personal Nextcloud sync root and the KeePass database synced through it.",
+  det:"~/Nextcloud/ (Ultra.cc-hosted) · ~/Nextcloud/Documents/Passwords_clean.kdbx · TODO.md bus.",
+  note:"Personal cloud + personal password vault — never sync a personal KeePass onto a work machine. Use the company's sanctioned secret manager."},
+ {cat:"Personal automation (leave on home Mac)", n:"amex-claims-automator", v:"exclude", runs:"mac",
+  what:"Playwright bot for filing Amex Return/Loss Protection claims (Phase-1 recon).",
+  det:"uv + playwright chromium · drives claims-center.americanexpress.com · human-in-loop MFA.",
+  note:"Personal financial automation; leave behind."},
+ {cat:"Personal automation (leave on home Mac)", n:"Crucial X9 external-SSD pipelines", v:"exclude", runs:"mac",
+  what:"All bulk media staging/derivatives on a physical external SSD.",
+  det:"/Volumes/Crucial X9/photos/incoming/, photo-memory/, google-takeout-…",
+  note:"Physical personal drive; not part of a work setup."},
+
+ // --- Cross-machine / Windows-WSL (hand to work-machine Claude) ---
+ {cat:"Cross-machine (Windows / WSL — handled by work-machine Claude)", n:"Windows OpenClaw stack", v:"exclude", runs:"win",
+  what:"OpenClaw + watchdog + claude-pipeline + property-scout on the Windows 11 workstation.",
+  det:"Documented in infra/local-windows.md; peer to the Mac OpenClaw instance.",
+  note:"Out of scope for this Mac — your Windows/WSL Claude owns these. Listed so the final handoff can cross-reference."},
+ {cat:"Cross-machine (Windows / WSL — handled by work-machine Claude)", n:"Shared sync/TODO bus (Nextcloud, karl-todo, Todoist)", v:"adapt", runs:"box",
+  what:"The glue that ties machines together: Nextcloud file sync, karl-todo CI (Todoist↔todo.md), shared TODO.md.",
+  det:"GitHub Actions karl-todo (*/15) · Nextcloud at Ultra.cc · TODO.md mirrored everywhere.",
+  note:"Decision for the final report: does the WORK Mac join this personal bus at all? Default for strictly-work = NO. Flagged so you and work-machine Claude can align."},
+
+ // --- Cloud apps (info only, no local setup) ---
+ {cat:"Cloud apps & infra (info only — no Mac setup)", n:"Vercel web apps (×14)", v:"exclude", runs:"cloud",
+  what:"All the *.93.fyi / vercel.app sites — nwb-plan, nwb-yoga, foodr, layover, mom, contact, trickadvisor, progress, auto, ortho, pickleball, house, command, blazing.",
+  det:"Vercel free tier, auto-deploy from main. No local dependency — just `git clone` when you need to work on one.",
+  note:"Nothing to migrate; reachable from any machine via browser/git."},
+ {cat:"Cloud apps & infra (info only — no Mac setup)", n:"93.fyi DNS / Cloudflare / Supabase", v:"exclude", runs:"cloud",
+  what:"Domain, DNS, and the Supabase backend for identity/contact apps.",
+  det:"Dynadot registrar · Cloudflare zone 8881c2fb… · Supabase Postgres/Auth/Storage.",
+  note:"Account-level infra; no Mac-local setup. Info-only for the handoff."},
+ {cat:"Cloud apps & infra (info only — no Mac setup)", n:"find-hub-tracker (ultra.cc seedbox)", v:"exclude", runs:"box",
+  what:"Device-location tracker planned for the always-on Linux seedbox.",
+  det:"systemd on ultra.cc · Google Find Hub → Discord · Healthchecks.io.",
+  note:"Runs on the seedbox, not any Mac. Info-only."},
+];
+
+//// ---- render ----
+const catalog = document.getElementById('catalog');
+const byCat = {};
+ITEMS.forEach((it,i)=>{ it._id='i'+i; (byCat[it.cat]=byCat[it.cat]||[]).push(it); });
+const runLabel={mac:'Mac',win:'Windows',cloud:'Cloud',box:'Seedbox'};
+const runCls={mac:'',win:'win',cloud:'cloud',box:'box'};
+const defaultOn=v=>(v==='include'||v==='adapt');
+
+for(const cat in byCat){
+  const sec=document.createElement('section'); sec.className='cat';
+  sec.innerHTML=`<h2>${cat}</h2>`;
+  const grid=document.createElement('div'); grid.className='grid';
+  byCat[cat].forEach(it=>{
+    const card=document.createElement('div'); card.className='card'; card.dataset.v=it.v; card.dataset.id=it._id;
+    card.dataset.text=(it.n+' '+it.what+' '+it.det+' '+it.note).toLowerCase();
+    card.innerHTML=`
+      <div class="top"><h3>${it.n}</h3><span class="v ${it.v}">${it.v}</span></div>
+      <p class="what">${it.what}</p>
+      <div class="meta"><span class="runs ${runCls[it.runs]}">${runLabel[it.runs]}</span></div>
+      <div class="details">${it.det}</div>
+      <div class="worknote ${it.warn?'warn':''}">${it.note}</div>
+      <div class="pickrow">
+        <input type="checkbox" class="pick" id="${it._id}" ${defaultOn(it.v)?'checked':''}>
+        <label for="${it._id}">Include in handoff manifest</label>
+      </div>
+      <textarea class="note" data-for="${it._id}" placeholder="note for Mac Claude (optional)…"></textarea>`;
+    grid.appendChild(card);
+  });
+  sec.appendChild(grid); catalog.appendChild(sec);
+}
+
+// export blocks
+const eb=document.getElementById('exportBlocks');
+EXPORTS.forEach(x=>{
+  const d=document.createElement('div'); d.className='exportblock';
+  d.innerHTML=`<h3>${x.t}</h3><p>${x.d}</p><pre class="cmd"><button class="cp">copy</button>${x.c.replace(/</g,'&lt;')}</pre>`;
+  eb.appendChild(d);
+});
+
+// copy buttons on command blocks
+document.querySelectorAll('pre.cmd .cp').forEach(b=>{
+  b.onclick=()=>{const pre=b.parentElement;const t=pre.innerText.replace(/^copy\n?/,'');navigator.clipboard.writeText(t);b.textContent='copied!';setTimeout(()=>b.textContent='copy',1200);};
+});
+
+//// ---- filtering ----
+let filter='all', q='';
+function apply(){
+  let shown=0,total=ITEMS.length;
+  document.querySelectorAll('.card').forEach(c=>{
+    const okF = filter==='all' || c.dataset.v===filter;
+    const okQ = !q || c.dataset.text.includes(q);
+    const vis = okF&&okQ; c.style.display=vis?'':'none'; if(vis)shown++;
+  });
+  // section A only when filter is all/export
+  document.getElementById('sectionA').style.display=(filter==='all'||filter==='export')?'':'none';
+  document.querySelectorAll('section.cat').forEach(s=>{
+    if(s.id==='sectionA')return;
+    const any=[...s.querySelectorAll('.card')].some(c=>c.style.display!=='none');
+    s.style.display=any?'':'none';
+  });
+  document.getElementById('count').textContent=`${shown} / ${total} items`;
+  tally();
+}
+document.querySelectorAll('#filters .chip').forEach(ch=>{
+  ch.onclick=()=>{document.querySelectorAll('#filters .chip').forEach(c=>c.classList.remove('active'));ch.classList.add('active');filter=ch.dataset.f;apply();};
+});
+document.getElementById('search').oninput=e=>{q=e.target.value.trim().toLowerCase();apply();};
+
+//// ---- tally + selection helpers ----
+function tally(){
+  const n=document.querySelectorAll('.pick:checked').length;
+  document.getElementById('tally').innerHTML=`<b>${n}</b> item(s) selected for handoff`;
+}
+document.addEventListener('change',e=>{if(e.target.classList.contains('pick'))tally();});
+document.getElementById('selInc').onclick=()=>{document.querySelectorAll('.card').forEach(c=>{const p=c.querySelector('.pick');p.checked=(c.dataset.v==='include'||c.dataset.v==='adapt');});tally();};
+document.getElementById('selNone').onclick=()=>{document.querySelectorAll('.pick').forEach(p=>p.checked=false);tally();};
+
+//// ---- build manifest ----
+function buildManifest(){
+  const fb=document.getElementById('feedback').value.trim();
+  let m=`# Mac → Work Mac · Migration Handoff Manifest\n\n`;
+  m+=`> Generated ${new Date().toISOString().slice(0,10)} from karl-infra. For Mac Claude on the NEW work machine.\n`;
+  m+=`> Scope chosen: STRICTLY WORK/DEV. Combine with the Windows/WSL notes from the work-machine Claude.\n\n`;
+  if(fb){m+=`## Karl's feedback / priorities\n\n${fb}\n\n`;}
+  m+=`## Section A — live settings to export from the OLD Mac\nRun these on the physical old Mac (this report was generated in a cloud container and could not read them):\n\n`;
+  EXPORTS.forEach(x=>{m+=`### ${x.t}\n${x.d}\n\n\`\`\`bash\n${x.c}\n\`\`\`\n\n`;});
+  m+=`## Section B — documented config decisions\n\n`;
+  const groups={};
+  document.querySelectorAll('.card').forEach(c=>{
+    const id=c.dataset.id; const it=ITEMS.find(x=>x._id===id);
+    if(!c.querySelector('.pick').checked) return;
+    const note=c.querySelector('.note').value.trim();
+    (groups[it.cat]=groups[it.cat]||[]).push({it,note});
+  });
+  if(Object.keys(groups).length===0){m+=`_(no documented items selected)_\n\n`;}
+  for(const cat in groups){
+    m+=`### ${cat}\n\n`;
+    groups[cat].forEach(({it,note})=>{
+      m+=`- **${it.n}** \`[${it.v.toUpperCase()}]\` _(runs: ${runLabel[it.runs]})_\n`;
+      m+=`  - ${it.what}\n`;
+      m+=`  - Details: ${it.det}\n`;
+      m+=`  - Guidance: ${it.note}\n`;
+      if(note) m+=`  - 📝 Karl's note: ${note}\n`;
+      m+=`\n`;
+    });
+  }
+  m+=`## Items intentionally LEFT OFF\n\n`;
+  let left=[];
+  document.querySelectorAll('.card').forEach(c=>{if(!c.querySelector('.pick').checked){const it=ITEMS.find(x=>x._id===c.dataset.id);left.push(`- ${it.n} \`[${it.v}]\``);}});
+  m+=(left.length?left.join('\n'):'_(none — everything selected)_')+'\n';
+  return m;
+}
+const dlg=document.getElementById('dlg');
+document.getElementById('buildBtn').onclick=()=>{document.getElementById('manifest').value=buildManifest();dlg.showModal();};
+document.getElementById('closeM').onclick=()=>dlg.close();
+document.getElementById('copyM').onclick=()=>{const t=document.getElementById('manifest');navigator.clipboard.writeText(t.value);document.getElementById('copyM').textContent='copied!';setTimeout(()=>document.getElementById('copyM').textContent='Copy',1200);};
+document.getElementById('dlM').onclick=()=>{const b=new Blob([document.getElementById('manifest').value],{type:'text/markdown'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='mac-migration-handoff.md';a.click();};
+
+apply();
+</script>
+</body>
+</html>

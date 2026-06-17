@@ -28,7 +28,7 @@ All web applications deploy to Vercel with custom domains via Cloudflare DNS.
 | house-tracker | React 19 + Vite 8 + react-router 7 + Tailwind 4 | None (static JS export) | (no custom domain — `*.vercel.app`) |
 | pickleball-drills | Single-file static HTML + animated SVG (no build) | None | pwbpb.93.fyi |
 | suspect-game | Vite 8 + React 19 + TypeScript + Tailwind 4 + react-router 7 | PartyKit Durable Object (one per room, ephemeral state) | suspect.93.fyi |
-| relayhub-scout | Vite 5 + React 18 + TS + Tailwind 3 (frontend only) | Backend is local Docker stack (FastAPI + MongoDB + Anthropic) — NOT deployed; hosted FE is a preview needing VITE_AGENT_URL | scout.93.fyi |
+| relayhub-scout | Vite 5 + React 18 + TS + Tailwind 3 (FE) · FastAPI + MongoDB backend | Backend LIVE on a free Hugging Face Space (karlmarxxx/relayhub-scout-api: mongod + 4 services in one container, re-seeds on boot). FE→backend via VITE_AGENT_URL | scout.93.fyi |
 | tfn-93fyi | Next.js App Router (`/api/tfn-backdoor/*`), standalone project | Upstash Redis (queue + status + audit) | tfn.93.fyi (**LIVE 2026-05-31** — DTMF backdoor + visitor helpline; CNAME proxied:false; Twilio voice_url wired — [infra/tfn-93fyi.md](infra/tfn-93fyi.md)) |
 | go-93fyi | Single-file static HTML + SVG-annotated stills + swipe carousel (no build) | Cloudflare KV (ButterflyMX door-pass ingest, planned) | go.93.fyi (public/DNS-only — **v0 2026-05-30**, [infra/go-93fyi.md](infra/go-93fyi.md)) |
 

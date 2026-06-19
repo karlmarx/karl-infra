@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-06-18
+> Auto-updated daily from GitHub commits. Last update: 2026-06-19
 
 ## Overview
 
@@ -90,11 +90,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- chore: daily update 2026-06-18 (2026-06-18)
 - chore: daily update 2026-06-17 (2026-06-17)
 - chore: daily update 2026-06-16 (2026-06-16)
 - chore: daily update 2026-06-15 (2026-06-15)
 - chore: daily update 2026-06-14 (2026-06-14)
-- chore: daily update 2026-06-13 (2026-06-13)
 
 ### mom-93fyi
 - feat(hotphone): annotated 8-step walkthrough, hotspot section, embedded video (2026-06-13)

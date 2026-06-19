@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Polls Gmail IMAP for replies from any firm in the registry. Classifies each
+  reply (accepted / declined / wants_info / unclear) and updates firm state
+  so the runner won't re-contact a firm that already responded.
+
+  Runs every 30 min.
+
+  Install:
+    cp launchd/fyi.93.lawyer-outreach-replies.plist ~/Library/LaunchAgents/
+    launchctl bootstrap gui/$UID ~/Library/LaunchAgents/fyi.93.lawyer-outreach-replies.plist
+    launchctl enable gui/$UID/fyi.93.lawyer-outreach-replies
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>fyi.93.lawyer-outreach-replies</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/karl/karl-infra/services/lawyer-outreach/scripts/run-reply-scan.sh</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/karl/karl-infra/services/lawyer-outreach</string>
+
+    <key>StartInterval</key>
+    <integer>1800</integer>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>/Users/karl/Library/Logs/lawyer-outreach-replies.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/karl/Library/Logs/lawyer-outreach-replies.err</string>
+
+    <key>ThrottleInterval</key>
+    <integer>60</integer>
+</dict>
+</plist>

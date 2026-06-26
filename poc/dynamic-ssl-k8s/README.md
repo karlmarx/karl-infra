@@ -12,6 +12,12 @@ microservice using **Apache HttpClient 4 + Spring `RestTemplate`**, with
 `withSwappableTrustMaterial()`, hot-swaps its trust material when a ConfigMap-mounted CA
 bundle changes — **with zero pod restarts.**
 
+> 📊 **Diagrams:** [DIAGRAMS.md](DIAGRAMS.md) (architecture, the 3-phase sequence, the
+> hot-swap object graph, the trust state machine).
+> 🎤 **Demoing it at work?** [DEMO.md](DEMO.md) is a laptop+kind runbook with talking points.
+
+![Architecture](docs/img/01-architecture.png)
+
 ## What it demonstrates
 
 | Phase | Action | Result |

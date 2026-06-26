@@ -1,7 +1,30 @@
 # Diagrams — Dynamic SSL Trust PoC
 
-These render inline on GitHub. Source diagrams are Mermaid; PNG exports (if present) are in
-[`docs/img/`](docs/img/).
+Two sets:
+- **Explainer visuals** (below) — polished, for a mixed technical / semi-technical audience.
+  Each element carries a plain-language line *and* the real technical term, with a running
+  bouncer/guest-list analogy. Source: [`docs/visual/diagrams.html`](docs/visual/) →
+  regenerate with `node docs/visual/render.mjs`.
+- **Reference diagrams** (further down) — Mermaid, render inline on GitHub.
+
+PNG exports live in [`docs/img/`](docs/img/).
+
+---
+
+## Explainer visuals (for presenting)
+
+### 1 · The problem
+![The problem](docs/img/visual-1-problem.png)
+
+### 2 · The fix
+![The fix](docs/img/visual-2-fix.png)
+
+### 3 · Under the hood
+![Under the hood](docs/img/visual-3-under-hood.png)
+
+---
+
+## Reference diagrams (Mermaid)
 
 ---
 

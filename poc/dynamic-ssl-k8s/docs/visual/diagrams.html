@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  :root{
+    --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
+    --indigo:#4f46e5; --indigo-soft:#eef2ff;
+    --teal:#0d9488; --teal-soft:#ecfdf5;
+    --amber:#b45309; --amber-soft:#fffbeb; --amber-line:#fcd34d;
+    --red:#dc2626; --red-soft:#fef2f2; --red-line:#fecaca;
+    --green:#16a34a; --green-soft:#f0fdf4; --green-line:#bbf7d0;
+    --pink:#be185d; --pink-soft:#fdf2f8; --pink-line:#fbcfe8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,'Segoe UI','DejaVu Sans',sans-serif;color:var(--ink);background:#fff}
+  .panel{width:1280px;padding:48px 52px;background:
+      radial-gradient(1200px 400px at 90% -10%, #f5f3ff 0%, rgba(255,255,255,0) 60%),
+      radial-gradient(1000px 400px at -10% 110%, #ecfeff 0%, rgba(255,255,255,0) 55%),
+      #ffffff;}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--indigo);background:var(--indigo-soft);
+      padding:7px 14px;border-radius:999px;margin-bottom:18px}
+  h1{font-size:38px;line-height:1.12;letter-spacing:-.02em;margin-bottom:10px}
+  .sub{font-size:19px;color:var(--muted);line-height:1.5;max-width:1000px;margin-bottom:30px}
+  .row{display:flex;align-items:stretch;gap:18px}
+  .card{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 22px;
+      box-shadow:0 1px 2px rgba(15,23,42,.04),0 12px 28px -16px rgba(15,23,42,.18)}
+  .card .ico{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+  .card h3{font-size:21px;letter-spacing:-.01em;margin-bottom:6px}
+  .card p{font-size:16px;color:var(--muted);line-height:1.45}
+  .chip{display:inline-block;font-family:'DejaVu Sans Mono',ui-monospace,monospace;font-size:13px;line-height:1.5;
+      color:#334155;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;padding:5px 9px;margin-top:12px;
+      white-space:normal;overflow-wrap:anywhere}
+  .arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;color:#94a3b8;min-width:84px}
+  .arrow .lbl{font-size:12.5px;font-weight:600;color:#64748b;margin-bottom:6px;text-align:center}
+  .band{display:flex;gap:14px;align-items:flex-start;margin-top:24px;padding:18px 20px;border-radius:14px;font-size:17px;line-height:1.5}
+  .band b{font-weight:700}
+  .band.cost{background:var(--amber-soft);border:1px solid var(--amber-line);color:#7c2d12}
+  .band.analogy{background:#f8fafc;border:1px dashed #cbd5e1;color:#475569}
+  .band .tag{flex:none;font-size:13px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
+      padding:4px 10px;border-radius:8px;margin-top:1px}
+  .cost .tag{background:#fde68a;color:#7c2d12}
+  .analogy .tag{background:#e2e8f0;color:#475569}
+  .status{border-radius:18px;padding:22px;border:1px solid;min-width:0;display:flex;flex-direction:column;justify-content:center}
+  .status.bad{background:var(--red-soft);border-color:var(--red-line)}
+  .status.good{background:var(--green-soft);border-color:var(--green-line)}
+  .status .big{font-size:22px;font-weight:800;display:flex;align-items:center;gap:10px;letter-spacing:-.01em}
+  .status.bad .big{color:var(--red)} .status.good .big{color:#15803d}
+  .status p{font-size:15.5px;color:#475569;margin-top:6px;line-height:1.4}
+  .badge0{margin-left:auto;background:#15803d;color:#fff;font-weight:800;font-size:15px;border-radius:999px;padding:8px 16px;white-space:nowrap}
+  .steps{display:flex;gap:16px;counter-reset:s}
+  .step{flex:1;position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 18px 18px;
+      box-shadow:0 10px 24px -18px rgba(15,23,42,.2)}
+  .step .n{position:absolute;top:-14px;left:18px;width:30px;height:30px;border-radius:50%;background:var(--indigo);color:#fff;
+      font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px -3px rgba(79,70,229,.6)}
+  .step h4{font-size:17px;margin:8px 0 6px}
+  .step p{font-size:14.5px;color:var(--muted);line-height:1.4}
+  .twocol{display:flex;gap:20px}
+  .colcard{flex:1;border-radius:18px;padding:22px;border:1px solid}
+  .colcard.keep{background:var(--teal-soft);border-color:var(--green-line)}
+  .colcard.swap{background:var(--pink-soft);border-color:var(--pink-line)}
+  .colcard .h{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:800;margin-bottom:4px}
+  .colcard.keep .h{color:#0f766e} .colcard.swap .h{color:var(--pink)}
+  .colcard .note{font-size:15px;color:#475569;margin:6px 0 16px;line-height:1.45}
+  .stack{display:flex;flex-direction:column;gap:8px}
+  .layer{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:11px 14px;font-size:15px;font-weight:600;
+      display:flex;align-items:center;justify-content:space-between}
+  .layer small{font-family:'DejaVu Sans Mono',monospace;font-weight:500;color:#94a3b8;font-size:12px}
+  .layer.hl{border-color:#5eead4;background:#f0fdfa}
+  .swapbox{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:8px}
+  .pill{background:#fff;border:1px solid var(--pink-line);border-radius:12px;padding:14px 18px;font-size:16px;font-weight:700;text-align:center;width:100%}
+  .pill small{display:block;font-weight:500;color:#94a3b8;font-family:monospace;font-size:12px;margin-top:3px}
+  .legend{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:24px;padding:18px 20px;background:#f8fafc;border:1px solid var(--line);border-radius:14px}
+  .legend .li{font-size:15px;color:#475569}
+  .legend .li b{color:var(--ink)}
+  .legend .li .t{font-family:monospace;font-size:13px;color:var(--indigo);background:#eef2ff;padding:2px 7px;border-radius:6px}
+  svg{display:block}
+  .footer{margin-top:26px;font-size:13px;color:#94a3b8;display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+
+<!-- ============ PANEL 1 : THE PROBLEM ============ -->
+<section class="panel" id="d1">
+  <span class="kicker">● The problem</span>
+  <h1>When a partner rotates its certificate, our calls start failing</h1>
+  <p class="sub">Our services call 50+ outside APIs over HTTPS. Each partner proves who it is with a
+     digital <b>certificate</b>, signed by a trusted <b>authority</b>. We only accept partners whose
+     authority is on our trust list.</p>
+
+  <div class="row">
+    <div class="card">
+      <div class="ico" style="background:var(--indigo-soft);color:var(--indigo)">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><circle cx="7" cy="7" r="0.6" fill="currentColor"/><circle cx="7" cy="17" r="0.6" fill="currentColor"/></svg>
+      </div>
+      <h3>Our service</h3>
+      <p>Makes outbound HTTPS calls to partners.</p>
+      <span class="chip">Java · Spring RestTemplate · HttpClient 4</span>
+    </div>
+
+    <div class="arrow">
+      <span class="lbl">HTTPS<br>request</span>
+      <svg width="62" height="22" viewBox="0 0 62 22" fill="none" stroke="#cbd5e1" stroke-width="2"><path d="M2 11 H54" stroke-linecap="round"/><path d="M48 5 L56 11 L48 17" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+
+    <div class="card">
+      <div class="ico" style="background:#f0f9ff;color:#0284c7">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.3A4 4 0 0 1 18 16Z"/></svg>
+      </div>
+      <h3>Partner API</h3>
+      <p>Presents a TLS certificate to prove its identity.</p>
+      <span class="chip">rotates → new Certificate Authority</span>
+    </div>
+
+    <div class="arrow">
+      <span class="lbl">we don't<br>recognize it</span>
+      <svg width="62" height="22" viewBox="0 0 62 22" fill="none" stroke="#fca5a5" stroke-width="2"><path d="M2 11 H54" stroke-linecap="round" stroke-dasharray="4 4"/><path d="M48 5 L56 11 L48 17" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+
+    <div class="status bad" style="flex:1.15">
+      <div class="big"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg> Connection refused</div>
+      <p>The partner's new authority isn't on our trust list, so the handshake fails.</p>
+      <span class="chip" style="background:#fff;border-color:var(--red-line);color:#b91c1c">PKIX path building failed · SSLHandshakeException</span>
+    </div>
+  </div>
+
+  <div class="band cost">
+    <span class="tag">Cost today</span>
+    <div>The <b>only</b> fix is to rebuild &amp; redeploy every affected service — manual, slow, and disruptive.
+       Multiply by ~10 services, on every partner rotation.</div>
+  </div>
+  <div class="band analogy">
+    <span class="tag">In plain terms</span>
+    <div>Think of a <b>bouncer with a guest list</b>. The partner showed up with an ID from an issuer
+       the bouncer doesn't recognize — so they're turned away at the door.</div>
+  </div>
+  <div class="footer"><span>Dynamic SSL Trust · the problem</span><span>1 / 3</span></div>
+</section>
+
+<!-- ============ PANEL 2 : THE FIX ============ -->
+<section class="panel" id="d2">
+  <span class="kicker" style="color:var(--teal);background:var(--teal-soft)">● The fix</span>
+  <h1>Update what we trust — live, with zero restarts</h1>
+  <p class="sub">Instead of rebuilding containers, we change one config file. The running service picks it
+     up and swaps its trust list in memory — open connections and the process keep running.</p>
+
+  <div class="steps">
+    <div class="step"><span class="n">1</span>
+      <h4>Add the new authority</h4>
+      <p>Append the partner's new CA to a shared config file.</p>
+      <span class="chip">ConfigMap · ca-bundle.pem</span>
+    </div>
+    <div class="step"><span class="n">2</span>
+      <h4>The service notices</h4>
+      <p>A watcher sees the mounted file change inside the pod.</p>
+      <span class="chip">file-watcher on ..data symlink</span>
+    </div>
+    <div class="step"><span class="n">3</span>
+      <h4>It swaps trust in memory</h4>
+      <p>The trust list is replaced atomically, under a lock.</p>
+      <span class="chip">hot TrustManager swap</span>
+    </div>
+    <div class="status good" style="flex:1">
+      <div class="big"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9"/></svg> Calls work again</div>
+      <p>Same process, no redeploy, no downtime.</p>
+      <span class="badge0">0 restarts</span>
+    </div>
+  </div>
+
+  <div class="band analogy" style="margin-top:30px">
+    <span class="tag">In plain terms</span>
+    <div>We just handed the bouncer an <b>updated guest list through the door</b> — the club never closed,
+       and the new guests now get in.</div>
+  </div>
+  <div class="band cost" style="background:var(--green-soft);border-color:var(--green-line);color:#14532d">
+    <span class="tag" style="background:#bbf7d0;color:#14532d">Proven</span>
+    <div>Measured end-to-end on Kubernetes: call works → partner rotates → call fails → config updated →
+       <b>call recovers in ~60s, same pod, RESTARTS = 0</b>.</div>
+  </div>
+  <div class="footer"><span>Dynamic SSL Trust · the fix</span><span>2 / 3</span></div>
+</section>
+
+<!-- ============ PANEL 3 : UNDER THE HOOD ============ -->
+<section class="panel" id="d3">
+  <span class="kicker" style="color:var(--pink);background:var(--pink-soft)">● Under the hood</span>
+  <h1>Why no restart is needed</h1>
+  <p class="sub">The whole networking stack is built <b>once</b> and never rebuilt. Only the innermost
+     “trust list” is swapped — so the connection pool, sockets, and TLS engine stay exactly where they are.</p>
+
+  <div class="twocol">
+    <div class="colcard keep">
+      <div class="h"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"/></svg> Built once · never rebuilt</div>
+      <div class="note">Stable references mean in-flight requests and pooled connections are untouched.</div>
+      <div class="stack">
+        <div class="layer">Spring RestTemplate <small>RestTemplate</small></div>
+        <div class="layer">HTTP client + pool <small>PoolingHttpClientConnectionManager</small></div>
+        <div class="layer">TLS engine <small>SSLContext</small></div>
+        <div class="layer">SSL factory <small>Ayza SSLFactory</small></div>
+        <div class="layer hl">Trust manager (swappable) <small>HotSwappableX509ExtendedTrustManager</small></div>
+      </div>
+    </div>
+
+    <div class="colcard swap">
+      <div class="h"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 4v5h-5"/></svg> The only thing that changes</div>
+      <div class="note">The inner trust list is replaced under a write lock, then SSL sessions are
+         invalidated so new handshakes use the new authorities.</div>
+      <div class="swapbox">
+        <div class="pill">Trusts &nbsp;{ CA&#8209;A }<small>before rotation</small></div>
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#be185d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M6 13l6 6 6-6"/></svg>
+        <div class="pill" style="border-color:#16a34a;background:#f0fdf4">Trusts &nbsp;{ CA&#8209;A, CA&#8209;B }<small>after hot reload — no restart</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="li"><b>Trust list</b> = <span class="t">truststore / CA bundle</span></div>
+    <div class="li"><b>Authority</b> = <span class="t">Certificate Authority (CA)</span></div>
+    <div class="li"><b>ID card</b> = <span class="t">TLS certificate</span></div>
+    <div class="li"><b>Update the list live</b> = <span class="t">hot reload (atomic swap)</span></div>
+    <div class="li"><b>We keep the public web's authorities too</b> = <span class="t">merge JDK defaults · never trust-all</span></div>
+  </div>
+  <div class="footer"><span>Dynamic SSL Trust · under the hood</span><span>3 / 3</span></div>
+</section>
+
+</body>
+</html>

@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-06-27
+> Auto-updated daily from GitHub commits. Last update: 2026-06-28
 
 ## Overview
 
@@ -89,17 +89,17 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
-### eva-carrier-risk-report
-- Add .env support, --mongo-uri flag, improved setup docs (2026-06-26)
-- Add pyproject.toml for uv, update README with usage instructions (2026-06-26)
-- EVA Carrier Risk Report - cert expiry + image age analysis (2026-06-26)
-
 ### karl-infra
+- chore: daily update 2026-06-27 (2026-06-27)
 - chore: daily update 2026-06-26 (2026-06-26)
 - chore: daily update 2026-06-25 (2026-06-25)
 - chore: daily update 2026-06-24 (2026-06-24)
 - chore: daily update 2026-06-23 (2026-06-23)
-- chore: daily update 2026-06-22 (2026-06-22)
+
+### eva-carrier-risk-report
+- Add .env support, --mongo-uri flag, improved setup docs (2026-06-26)
+- Add pyproject.toml for uv, update README with usage instructions (2026-06-26)
+- EVA Carrier Risk Report - cert expiry + image age analysis (2026-06-26)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

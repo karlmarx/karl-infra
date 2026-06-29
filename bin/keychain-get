@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Read a single secret pinned in macOS Keychain (option 3 — individual secrets,
+# tightly bounded blast radius, no master password needed).
+#
+#   keychain-get <service-name>
+#
+# To stash a secret first:
+#   security add-generic-password -a "$USER" -s <service-name> -w -T "" -U
+# Then click ALLOW (not Always Allow) on the macOS dialog when read.
+
+set -euo pipefail
+
+SERVICE="${1:?Usage: keychain-get <service-name>}"
+
+security find-generic-password -s "$SERVICE" -w 2>/dev/null || {
+  echo "keychain-get: '$SERVICE' not in Keychain. Add with:" >&2
+  echo "  security add-generic-password -a \"\$USER\" -s $SERVICE -T \"\" -U -w" >&2
+  exit 2
+}

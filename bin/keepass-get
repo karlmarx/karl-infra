@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Read a password from Karl's KeePass vault.
+#
+#   keepass-get "Entry Title"           → prints the Password field
+#   keepass-get "Entry Title" Username  → prints the Username field
+#   keepass-get "Entry Title" URL       → prints the URL field
+#
+# Master password lives in macOS Keychain under service "openclaw-keepass-master".
+# It is pre-trusted for /usr/bin/security (-T) with an apple-tool: partition
+# list, so reads by this CLI do NOT prompt. Tradeoff Karl accepted 2026-05-31:
+# the per-read dialog that used to act as a prompt-injection tripwire is gone —
+# anything running as this user can now read the master / whole vault silently.
+#
+# Usage in scripts: pipe the output through. Don't store in env vars.
+
+set -euo pipefail
+
+ENTRY="${1:?Usage: keepass-get <entry title> [field=Password]}"
+FIELD="${2:-Password}"
+DB="$HOME/Nextcloud/Documents/Passwords.kdbx"
+
+if [[ ! -f "$DB" ]]; then
+  echo "keepass-get: vault not found at $DB" >&2
+  exit 1
+fi
+
+# Read master from Keychain. macOS will prompt unless the calling process is
+# ACL-trusted. Output goes to stderr noise → /dev/null; the password itself
+# goes to stdout, which we pipe straight into keepassxc-cli.
+MASTER=$(security find-generic-password -s openclaw-keepass-master -w 2>/dev/null) || {
+  echo "keepass-get: master not in Keychain. Run:" >&2
+  echo '  security add-generic-password -a "$USER" -s openclaw-keepass-master -T /usr/bin/security -U -w' >&2
+  exit 2
+}
+
+# keepassxc-cli reads master from stdin when not on a TTY.
+# -s reveals protected fields (Password, otp), -q suppresses the banner.
+echo "$MASTER" | keepassxc-cli show -s -q -a "$FIELD" "$DB" "$ENTRY"
+
+# Scrub the local copy of the master.
+unset MASTER

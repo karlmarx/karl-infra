@@ -23,3 +23,13 @@ __pycache__/
 .pytest_cache/
 __pycache__/
 *.pyc
+
+# Tooling / IDE metadata
+.claude/
+.playwright-mcp/
+
+# Temporary files (not repo content)
+*.jpeg
+*.pdf
+labels_b64.txt
+logs/

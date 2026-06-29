@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-06-28
+> Auto-updated daily from GitHub commits. Last update: 2026-06-29
 
 ## Overview
 
@@ -90,11 +90,18 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
-- chore: daily update 2026-06-27 (2026-06-27)
-- chore: daily update 2026-06-26 (2026-06-26)
-- chore: daily update 2026-06-25 (2026-06-25)
-- chore: daily update 2026-06-24 (2026-06-24)
-- chore: daily update 2026-06-23 (2026-06-23)
+- fix(services): email-triage Todoist adapter + config, nextcloud sync rewrite, workout improvements (2026-06-29)
+- docs(infra): add cld@93.fyi email and safari-messages-tap documentation (2026-06-29)
+- feat(services): digest + monitoring services (2026-06-29)
+- feat(services): gym VLM pipelines — 2-month analysis, attraction rescore, model comparison (2026-06-29)
+- feat(services): unified email sender + profiles (cld@93.fyi via Resend, Gmail stubs) (2026-06-29)
+
+### finflow
+- feat: CSV import for non-Teller banks + harden sync path (2026-06-29)
+- feat(tasks): add finflow.tasks.teller_pull one-shot for hourly sync (2026-05-09)
+- feat: migrate from Plaid to Teller for zero-cost bank data access (2026-04-04)
+- chore: remove uv-generated main.py (2026-04-04)
+- init: finflow — Plaid-powered personal finance aggregator (2026-04-04)
 
 ### eva-carrier-risk-report
 - Add .env support, --mongo-uri flag, improved setup docs (2026-06-26)

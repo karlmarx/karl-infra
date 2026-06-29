@@ -1,0 +1,28 @@
+{
+  "cld": {
+    "backend": "resend",
+    "from": "Claude <cld@93.fyi>",
+    "reply_to": "cld@93.fyi"
+  },
+  "9193": {
+    "backend": "gmail",
+    "email": "karlmarx9193@gmail.com",
+    "from": "Karl Marx <karlmarx9193@gmail.com>",
+    "oauth_token_path": "~/karl-infra/services/email/oauth/9193.json",
+    "scope": "https://www.googleapis.com/auth/gmail.send"
+  },
+  "50420": {
+    "backend": "gmail",
+    "email": "5042021062karlmarx@gmail.com",
+    "from": "Karl Marx <5042021062karlmarx@gmail.com>",
+    "oauth_token_path": "~/karl-infra/services/email/oauth/50420.json",
+    "scope": "https://www.googleapis.com/auth/gmail.send"
+  },
+  "ben": {
+    "backend": "gmail",
+    "email": "benjaminwages@gmail.com",
+    "from": "Benjamin Wages <benjaminwages@gmail.com>",
+    "oauth_token_path": "~/karl-infra/services/email/oauth/ben.json",
+    "scope": "https://www.googleapis.com/auth/gmail.send"
+  }
+}

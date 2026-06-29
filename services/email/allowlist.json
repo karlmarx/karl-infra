@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "policy": "allowlist-auto-reply",
+  "auto_reply_addresses": [
+    "karlmarx9193@gmail.com",
+    "5042021062karlmarx@gmail.com",
+    "benjaminwages@gmail.com"
+  ],
+  "auto_reply_domains": [],
+  "notes": "Senders here get autonomous Claude replies via /cld-triage (option 3c). All others trigger notify-only entries in ~/karl-infra/inbox/cld/ and a Discord ping (when wired). Add your husband's address here when you want Claude to handle his messages without your review."
+}

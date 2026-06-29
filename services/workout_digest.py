@@ -23,6 +23,12 @@ import psutil
 from openai import OpenAI
 
 
+# Read from env so the digest follows whatever vlm.py points at — matches
+# continuous_process.py / vlm_progress_digest.py convention. Default = :8081
+# (9B chat server, always-on per ~/.openclaw/watchdog policy).
+MLX_VLM_BASE = os.environ.get("MLX_VLM_BASE", "http://localhost:8081/v1").rstrip("/")
+
+
 def setup_logging(log_path: Path) -> logging.Logger:
     """Configure logger with file rotation."""
     log_path.parent.mkdir(parents=True, exist_ok=True)
@@ -53,12 +59,12 @@ def ram_state() -> str:
 def mlx_vlm_is_up(logger: logging.Logger) -> bool:
     """Check if MLX-VLM server is running."""
     try:
-        client = OpenAI(base_url="http://localhost:8080/v1", api_key="mlx-vlm")
+        client = OpenAI(base_url=MLX_VLM_BASE, api_key="mlx-vlm")
         client.models.list()
         logger.info("✓ MLX-VLM is up")
         return True
     except Exception as e:
-        logger.error(f"MLX-VLM not available at http://localhost:8080/v1: {e}")
+        logger.error(f"MLX-VLM not available at {MLX_VLM_BASE}: {e}")
         return False
 
 
@@ -155,7 +161,7 @@ Provide actionable feedback in a supportive tone."""
 def call_mlx_vlm(prompt: str, logger: logging.Logger) -> str | None:
     """Call local MLX-VLM Gemma model for the digest synthesis."""
     try:
-        client = OpenAI(base_url="http://localhost:8080/v1", api_key="mlx-vlm")
+        client = OpenAI(base_url=MLX_VLM_BASE, api_key="mlx-vlm")
         response = client.chat.completions.create(
             model="mlx-community/gemma-4-26b-a4b-it-8bit",
             max_tokens=2048,
@@ -275,11 +281,31 @@ def main():
         return 0
 
     if not mlx_vlm_is_up(logger):
-        logger.error("MLX-VLM not running at http://localhost:8080. Start with: mlx_vlm.server --model mlx-community/gemma-4-26b-a4b-it-8bit --host 127.0.0.1 --port 8080")
+        logger.error(f"MLX-VLM not running at {MLX_VLM_BASE}.")
         return 1
 
-    if not gmail_user or not gmail_app_pwd or not digest_to:
-        logger.error("Missing env vars: GMAIL_USER, GMAIL_APP_PASSWORD, DIGEST_TO")
+    # Upstream ingest pipeline writes the `videos` table. Without it, nothing
+    # to digest — exit cleanly (was emitting daily exit=1 alarms otherwise).
+    if db_path.exists():
+        try:
+            test_con = sqlite3.connect(db_path)
+            test_con.execute("SELECT 1 FROM videos LIMIT 1")
+            test_con.close()
+            has_videos_table = True
+        except sqlite3.OperationalError:
+            has_videos_table = False
+    else:
+        has_videos_table = False
+    if not has_videos_table:
+        logger.info(f"workout_ingest pipeline has not populated {db_path} yet — nothing to digest. Exiting cleanly.")
+        return 0
+
+    if not gmail_user or not gmail_app_pwd or not digest_to or "KEEPASS" in gmail_app_pwd:
+        logger.error("Missing or placeholder env vars: GMAIL_USER, GMAIL_APP_PASSWORD, DIGEST_TO")
+        try:
+            subprocess.run(["python3", os.path.expanduser("~/bin/status_report.py"), "workout-digest", "1", "Missing credentials"], check=False)
+        except Exception:
+            pass
         return 1
 
     db = db_connect(db_path)

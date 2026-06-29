@@ -54,10 +54,13 @@ def _require(name: str) -> str:
 
 
 def load_config(env_file: Path | None = None) -> Config:
+    # override=True so `.env` wins over an empty/leaky parent-shell export
+    # (e.g. `export GITHUB_TOKEN=""` in a sourced rc file). Under launchd the
+    # parent env is minimal so the override is a no-op in production.
     if env_file and env_file.exists():
-        load_dotenv(env_file)
+        load_dotenv(env_file, override=True)
     else:
-        load_dotenv()
+        load_dotenv(override=True)
 
     allow = [
         s.strip().lower()

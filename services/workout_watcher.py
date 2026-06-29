@@ -20,6 +20,9 @@ import logging
 import psutil
 
 
+MLX_VLM_BASE = os.environ.get("MLX_VLM_BASE", "http://localhost:8081/v1").rstrip("/")
+
+
 def setup_logging(log_path: Path) -> logging.Logger:
     """Configure logger with file rotation."""
     log_path.parent.mkdir(parents=True, exist_ok=True)
@@ -54,11 +57,12 @@ def ram_state() -> str:
 
 def mlx_is_up(logger: logging.Logger) -> bool:
     """Check if MLX-VLM server is responding."""
+    url = f"{MLX_VLM_BASE}/models"
     try:
-        urllib.request.urlopen("http://localhost:8080/v1/models", timeout=3)
+        urllib.request.urlopen(url, timeout=3)
         return True
     except Exception as e:
-        logger.warning(f"MLX-VLM health check failed: {e}")
+        logger.warning(f"MLX-VLM health check failed at {url}: {e}")
         return False
 
 
@@ -200,7 +204,7 @@ def process_one(
         else:
             logger.error(f"process() succeeded but JSON not found: {json_path}")
             db.execute(
-                "INSERT OR REPLACE INTO videos (sha, source_path, file_name, size_bytes, gemma_error, retry_count) "
+                "INSERT OR REPLACE INTO videos (sha, source_path, file_name, size_bytes, vlm_error, retry_count) "
                 "VALUES (?, ?, ?, ?, ?, ?)",
                 (sha, str(video_path), video_path.name, video_path.stat().st_size, "JSON not written", 0)
             )
@@ -210,7 +214,7 @@ def process_one(
     except Exception as e:
         logger.error(f"✗ Failed to process {video_path.name}: {e}")
         db.execute(
-            "INSERT OR IGNORE INTO videos (sha, source_path, file_name, size_bytes, gemma_error, retry_count) "
+            "INSERT OR IGNORE INTO videos (sha, source_path, file_name, size_bytes, vlm_error, retry_count) "
             "VALUES (?, ?, ?, ?, ?, ?)",
             (sha, str(video_path), video_path.name, video_path.stat().st_size, str(e)[:200], 0)
         )
@@ -246,53 +250,57 @@ def main():
         db.close()
         return 0
 
-    # Main loop
-    while True:
-        if not acquire_lock(lock_path):
-            logger.debug("Watcher already running, exiting")
+    # One-shot run (LaunchAgent handles interval)
+    if not acquire_lock(lock_path):
+        logger.debug("Watcher already running, exiting")
+        return 0
+
+    try:
+        state = ram_state()
+        available_gb = ram_available_gb()
+        logger.info(f"RAM state: {state} ({available_gb:.1f} GB available)")
+
+        if state == "critical":
+            logger.warning("RAM critical, exiting watcher")
             return 0
 
+        if state == "tight":
+            logger.warning("RAM tight, exiting (will retry on next launchd cycle)")
+            return 0
+
+        db = db_connect(db_path)
+        candidates = discover_videos(scan_root, db, logger, max_age_days=args.max_age_days)
+
+        processed = 0
+        for video_path in candidates[:max_per_run]:
+            if process_one(video_path, db, logger, data_root):
+                processed += 1
+
+            # Check RAM between videos
+            if ram_state() == "critical":
+                logger.warning("RAM critical mid-run, stopping")
+                break
+
+        db.close()
+        logger.info(f"Cycle complete: {processed}/{len(candidates[:max_per_run])} processed")
+
+        # Report status
         try:
-            state = ram_state()
-            available_gb = ram_available_gb()
-            logger.info(f"RAM state: {state} ({available_gb:.1f} GB available)")
+            subprocess.run(["python3", os.path.expanduser("~/bin/status_report.py"), "workout-watcher", "0", f"processed={processed}"], check=False)
+        except Exception:
+            pass
 
-            if state == "critical":
-                logger.warning("RAM critical, exiting watcher")
-                return 0
+    except Exception as e:
+        logger.exception(f"Unhandled error: {e}")
+        try:
+            subprocess.run(["python3", os.path.expanduser("~/bin/status_report.py"), "workout-watcher", "1", str(e)], check=False)
+        except Exception:
+            pass
 
-            if state == "tight":
-                logger.warning("RAM tight, will retry after sleep")
-                time.sleep(300)
-                state = ram_state()
-                if state != "ok" and state != "caution":
-                    logger.warning("RAM still tight after retry, exiting")
-                    return 0
+    finally:
+        release_lock(lock_path)
 
-            db = db_connect(db_path)
-            candidates = discover_videos(scan_root, db, logger, max_age_days=args.max_age_days)
-
-            processed = 0
-            for video_path in candidates[:max_per_run]:
-                if process_one(video_path, db, logger, data_root):
-                    processed += 1
-
-                # Check RAM between videos
-                if ram_state() == "critical":
-                    logger.warning("RAM critical mid-run, stopping")
-                    break
-
-            db.close()
-            logger.info(f"Cycle complete: {processed}/{len(candidates[:max_per_run])} processed")
-
-        except Exception as e:
-            logger.exception(f"Unhandled error: {e}")
-
-        finally:
-            release_lock(lock_path)
-
-        logger.debug(f"Sleeping {args.interval}s until next cycle")
-        time.sleep(args.interval)
+    return 0
 
 
 if __name__ == "__main__":

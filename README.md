@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-06-30
+> Auto-updated daily from GitHub commits. Last update: 2026-07-01
 
 ## Overview
 
@@ -90,11 +90,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- chore: daily update 2026-06-30 (2026-06-30)
 - chore: daily update 2026-06-29 (2026-06-29)
 - fix(services): email-triage Todoist adapter + config, nextcloud sync rewrite, workout improvements (2026-06-29)
 - docs(infra): add cld@93.fyi email and safari-messages-tap documentation (2026-06-29)
 - feat(services): digest + monitoring services (2026-06-29)
-- feat(services): gym VLM pipelines — 2-month analysis, attraction rescore, model comparison (2026-06-29)
 
 ### finflow
 - feat: CSV import for non-Teller banks + harden sync path (2026-06-29)

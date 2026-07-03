@@ -31,13 +31,23 @@ So "the migration" = a subdomain was reserved and the idea was written down. Eve
 - [ ] Name the bulbs sensibly in the WiZ app.
 - [ ] Migrate WiZ account to `karlmarx9193@gmail.com`.
 
-### Phase 2 — Pick the host and install
+### Phase 2 — Pick the host and install ($0 constraint — no new hardware)
 
-**Recommendation: HA Green (~$99), Ethernet into the Deco.** Reasons:
-- The Mac Studio is the obvious "free" host but it's the wrong one: its RAM is a managed, contended resource ([local-ai.md](local-ai.md) RAM-awareness rules, always-on MLX models), and Docker-on-macOS bridge networking breaks the UDP broadcast discovery the WiZ integration relies on. HA Core in a venv works but is the least-supported install method and adds another launchd pet.
-- HA Green runs HAOS: supervised updates, add-on store (needed for the cloudflared add-on in Phase 4), zero babysitting. A Pi 5 (4 GB+, SSD not SD) is the equivalent DIY option if a Pi is already on hand.
+Karl wants this free, so the host is repurposed from machines already running. The trick in every case is the same: HA needs to sit on the home LAN with a **bridged** (not NAT'd) network interface so WiZ UDP discovery works, and running **HAOS in a VM** (a supported install type) keeps the add-on store — which Phase 4's cloudflared add-on depends on.
 
-Install → onboard at `http://homeassistant.local:8123` → create the owner account.
+**Recommendation: HAOS aarch64 VM in UTM/QEMU on the Mac Studio.**
+- Zero cost, zero new hardware, and the Studio is already the always-on box.
+- UTM runs the official HAOS aarch64 image; bridged networking over the Studio's Ethernet puts the VM directly on the Deco subnet (bridging is flaky over Wi-Fi — use the wired NIC).
+- Reserve **2 GB RAM / 32 GB disk** for the VM and register that 2 GB as a permanent line item in the [local-ai.md](local-ai.md) RAM-awareness accounting — this is the real price. HAOS idles well under that; it will not balloon.
+- Auto-start: UTM's "start VM on login" or a small LaunchAgent invoking `utmctl start`.
+
+Fallbacks, in order:
+1. **2018 MacBook as dedicated host** — already earmarked as the "home server" candidate in PROMPT.md. Wipe to Debian, run HAOS in KVM (or HA Supervised). More setup work (Linux install, lid-closed/no-sleep config) but frees the Studio's RAM entirely and the battery is a free UPS. Good "phase 2.5" migration target if the Studio VM ever gets in the way — HA backups restore across hosts in minutes.
+2. **Windows 11 workstation** — HAOS x86 VM in Hyper-V (external/bridged switch) or VirtualBox. Works, but the Windows box's role is being wound down (WSL-migration backlog), so don't build on it.
+
+Not viable, for the record: Docker on macOS (Docker Desktop's bridge/NAT — and even its newer host-networking mode is TCP-only — breaks WiZ UDP discovery) and HA Core in a venv (least-supported install, no add-on store, another launchd pet).
+
+Install → onboard at `http://homeassistant.local:8123` → create the owner account → set up the built-in backup schedule immediately (nightly, keep 7) so the instance can hop hosts later.
 
 ### Phase 3 — Integrations
 1. **WiZ** — auto-discovered once host and bulbs share a subnet; adopt all 7, name to match Phase 1.
@@ -64,7 +74,7 @@ Install → onboard at `http://homeassistant.local:8123` → create the owner ac
 ## Open questions
 
 - **Subnet naming**: is "asdfjkl6" a distinct SSID from the Deco's "asdfjkl", or the same network? Phase 1 blocks on this.
-- **Hardware**: buy HA Green vs. repurpose a Pi already on hand (the 2018 MacBook from PROMPT.md's "home server" idea is a poor HAOS target — x86 HAOS on a MacBook is fiddly; don't).
+- **RAM budget**: is a standing 2 GB reservation on the Mac Studio acceptable alongside the always-on MLX models? If not, the 2018-MacBook fallback becomes the primary path.
 - What does the `ha` record currently point at (Phase 0)?
 
 ## Cross-references

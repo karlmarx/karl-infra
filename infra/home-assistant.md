@@ -37,9 +37,13 @@ Karl wants this free, so the host is repurposed from machines already running. T
 
 (No Mac Studio is available for this — per Karl 2026-07-03. The always-on-Mac references elsewhere in this repo can't host it.)
 
-**Recommendation: Raspberry Pi 4 or 5 (4 GB+), HAOS flashed directly.**
-- The Pi is HAOS's first-class, most-supported target: flash the HAOS preset from Raspberry Pi Imager onto an SD card (or better, a USB SSD — SD cards wear out under HA's database writes), Ethernet into the Deco, boot, done. ~30 minutes, ~3 W of power.
-- A Pi 3 technically works but is sluggish; 4 GB+ RAM is the comfortable floor.
+**Decided 2026-07-03: host = Karl's Raspberry Pi 400** — the keyboard-integrated Pi 4 (4 GB RAM, the comfortable floor for HAOS). It takes the standard **Raspberry Pi 4** HAOS image; the built-in keyboard simply goes unused (HA runs headless).
+
+Build sheet:
+1. **Parts check** — Pi 400 + its official USB-C PSU (5V/3A); a microSD card 32 GB+ (A2-rated) *or, better,* a USB-3 SSD (SD cards wear out under HA's database writes — Pi 400 USB-boots out of the box, blue USB-3 port); Ethernet cable to a free Deco port.
+2. **Flash** — Raspberry Pi Imager on any computer → Choose OS → *Other specific-purpose OS* → *Home assistants and home automation* → *Home Assistant OS* → **Raspberry Pi 4/400 (64-bit)** → write to the card/SSD.
+3. **Boot** — insert media, plug Ethernet into the Deco, power on. First boot takes ~5–10 min (park it near the router; ~3 W draw).
+4. **Onboard** — browse `http://homeassistant.local:8123`, create the owner account, enable nightly backups (keep 7) immediately.
 
 **Fallback: the old 2018 MacBook — keep macOS, run HAOS in a free UTM VM.**
 - Do **not** wipe a 2018 MacBook to bare-metal Linux: T2-chip Macs make Linux installs (SSD/keyboard drivers, Secure Boot) genuinely painful. A UTM VM on macOS sidesteps all of it.
@@ -78,7 +82,7 @@ Install → onboard at `http://homeassistant.local:8123` → create the owner ac
 ## Open questions
 
 - **Subnet naming**: is "asdfjkl6" a distinct SSID from the Deco's "asdfjkl", or the same network? Phase 1 blocks on this.
-- **Hardware on hand**: which Pi is it (3 vs 4/5, RAM size)? Pi 4/5 with 4 GB+ → flash HAOS directly. Only a Pi 3 or no Pi → MacBook UTM path.
+- ~~Hardware on hand~~ **Resolved 2026-07-03**: it's a Pi 400 (keyboard-integrated Pi 4, 4 GB) — decided host, standard Pi 4 HAOS image. Remaining sub-question: microSD vs USB SSD (SSD preferred; buy nothing if a spare SSD/card ≥32 GB is lying around).
 - What does the `ha` record currently point at (Phase 0)?
 
 ## Cross-references

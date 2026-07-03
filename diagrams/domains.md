@@ -28,7 +28,8 @@
 |   +-- scout.93.fyi      CNAME -> cname.vercel-dns.com  (relayhub-scout, demo/preview)
 |
 | (Many more records exist in the live Cloudflare zone — bedbug, dev.*, fake,
-|  ha, house, login, me, now, seed, status, thumbfit/yoga, todo, www, plus
+|  ha (reserved for Home Assistant, no origin yet — see infra/home-assistant.md),
+|  house, login, me, now, seed, status, thumbfit/yoga, todo, www, plus
 |  wildcards. This file documents only the curated/load-bearing subdomains.
 |  Source of truth: Cloudflare zone 8881c2fb46004f18cbf6faf47e562731.)
 |

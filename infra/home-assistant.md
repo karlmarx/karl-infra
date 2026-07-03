@@ -35,17 +35,21 @@ So "the migration" = a subdomain was reserved and the idea was written down. Eve
 
 Karl wants this free, so the host is repurposed from machines already running. The trick in every case is the same: HA needs to sit on the home LAN with a **bridged** (not NAT'd) network interface so WiZ UDP discovery works, and running **HAOS in a VM** (a supported install type) keeps the add-on store — which Phase 4's cloudflared add-on depends on.
 
-**Recommendation: HAOS aarch64 VM in UTM/QEMU on the Mac Studio.**
-- Zero cost, zero new hardware, and the Studio is already the always-on box.
-- UTM runs the official HAOS aarch64 image; bridged networking over the Studio's Ethernet puts the VM directly on the Deco subnet (bridging is flaky over Wi-Fi — use the wired NIC).
-- Reserve **2 GB RAM / 32 GB disk** for the VM and register that 2 GB as a permanent line item in the [local-ai.md](local-ai.md) RAM-awareness accounting — this is the real price. HAOS idles well under that; it will not balloon.
-- Auto-start: UTM's "start VM on login" or a small LaunchAgent invoking `utmctl start`.
+(No Mac Studio is available for this — per Karl 2026-07-03. The always-on-Mac references elsewhere in this repo can't host it.)
 
-Fallbacks, in order:
-1. **2018 MacBook as dedicated host** — already earmarked as the "home server" candidate in PROMPT.md. Wipe to Debian, run HAOS in KVM (or HA Supervised). More setup work (Linux install, lid-closed/no-sleep config) but frees the Studio's RAM entirely and the battery is a free UPS. Good "phase 2.5" migration target if the Studio VM ever gets in the way — HA backups restore across hosts in minutes.
-2. **Windows 11 workstation** — HAOS x86 VM in Hyper-V (external/bridged switch) or VirtualBox. Works, but the Windows box's role is being wound down (WSL-migration backlog), so don't build on it.
+**Recommendation: Raspberry Pi 4 or 5 (4 GB+), HAOS flashed directly.**
+- The Pi is HAOS's first-class, most-supported target: flash the HAOS preset from Raspberry Pi Imager onto an SD card (or better, a USB SSD — SD cards wear out under HA's database writes), Ethernet into the Deco, boot, done. ~30 minutes, ~3 W of power.
+- A Pi 3 technically works but is sluggish; 4 GB+ RAM is the comfortable floor.
 
-Not viable, for the record: Docker on macOS (Docker Desktop's bridge/NAT — and even its newer host-networking mode is TCP-only — breaks WiZ UDP discovery) and HA Core in a venv (least-supported install, no add-on store, another launchd pet).
+**Fallback: the old 2018 MacBook — keep macOS, run HAOS in a free UTM VM.**
+- Do **not** wipe a 2018 MacBook to bare-metal Linux: T2-chip Macs make Linux installs (SSD/keyboard drivers, Secure Boot) genuinely painful. A UTM VM on macOS sidesteps all of it.
+- UTM (free) runs the official HAOS x86-64 image virtualized; use "Bridged (Advanced)" networking so the VM sits directly on the Deco subnet (UTM's vmnet bridging generally works over Wi-Fi; Ethernet dongle if it doesn't). 2 GB RAM / 32 GB disk.
+- Housekeeping: lid-closed operation on AC power, disable sleep (`caffeinate` LaunchAgent or Amphetamine), auto-start the VM on login. Battery doubles as a free UPS.
+- HA backups restore across hosts in minutes, so starting on the MacBook and hopping to a Pi later (or vice versa) is cheap.
+
+Third choice only if neither is on hand: **Windows 11 workstation**, HAOS x86 VM in Hyper-V (external/bridged switch) or VirtualBox — works, but that box's role is being wound down (WSL-migration backlog), so don't build on it.
+
+Not viable, for the record: Docker on macOS (bridge/NAT — and even its newer host-networking mode is TCP-only — breaks WiZ UDP discovery) and HA Core in a venv (least-supported install, no add-on store, another pet process).
 
 Install → onboard at `http://homeassistant.local:8123` → create the owner account → set up the built-in backup schedule immediately (nightly, keep 7) so the instance can hop hosts later.
 
@@ -74,7 +78,7 @@ Install → onboard at `http://homeassistant.local:8123` → create the owner ac
 ## Open questions
 
 - **Subnet naming**: is "asdfjkl6" a distinct SSID from the Deco's "asdfjkl", or the same network? Phase 1 blocks on this.
-- **RAM budget**: is a standing 2 GB reservation on the Mac Studio acceptable alongside the always-on MLX models? If not, the 2018-MacBook fallback becomes the primary path.
+- **Hardware on hand**: which Pi is it (3 vs 4/5, RAM size)? Pi 4/5 with 4 GB+ → flash HAOS directly. Only a Pi 3 or no Pi → MacBook UTM path.
 - What does the `ha` record currently point at (Phase 0)?
 
 ## Cross-references

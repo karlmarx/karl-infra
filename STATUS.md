@@ -105,7 +105,7 @@ uv pip install mlx-vlm
 - [ ] Move WiZ bulbs from Deco to asdfjkl6 WiFi subnet (7 bulbs: .100, .102-.106, .123)
 - [ ] Name the bulbs + update TOOLS.md
 - [ ] Move WiZ account from old email → karlmarx9193@gmail.com
-- [ ] Evaluate Home Assistant (Pi 4/5 or HA Green $99) for unified control
+- [ ] Evaluate Home Assistant (Pi 4/5 or HA Green $99) for unified control — **plan written**, see [infra/home-assistant.md](infra/home-assistant.md) (`ha.93.fyi` is reserved but nothing runs behind it yet)
 
 ---
 

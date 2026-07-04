@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-07-03
+> Auto-updated daily from GitHub commits. Last update: 2026-07-04
 
 ## Overview
 
@@ -90,11 +90,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- docs(infra): Home Assistant migration — state + revival plan (ha.93.fyi) (#23) (2026-07-03)
+- chore: daily update 2026-07-03 (2026-07-03)
 - chore: daily update 2026-07-02 (2026-07-02)
 - chore: daily update 2026-07-01 (2026-07-01)
 - chore: daily update 2026-06-30 (2026-06-30)
-- chore: daily update 2026-06-29 (2026-06-29)
-- fix(services): email-triage Todoist adapter + config, nextcloud sync rewrite, workout improvements (2026-06-29)
 
 ### finflow
 - feat: CSV import for non-Teller banks + harden sync path (2026-06-29)
@@ -102,11 +102,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - feat: migrate from Plaid to Teller for zero-cost bank data access (2026-04-04)
 - chore: remove uv-generated main.py (2026-04-04)
 - init: finflow — Plaid-powered personal finance aggregator (2026-04-04)
-
-### eva-carrier-risk-report
-- Add .env support, --mongo-uri flag, improved setup docs (2026-06-26)
-- Add pyproject.toml for uv, update README with usage instructions (2026-06-26)
-- EVA Carrier Risk Report - cert expiry + image age analysis (2026-06-26)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

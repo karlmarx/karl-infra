@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-07-05
+> Auto-updated daily from GitHub commits. Last update: 2026-07-06
 
 ## Overview
 
@@ -90,18 +90,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- chore: daily update 2026-07-05 (2026-07-05)
 - chore: daily update 2026-07-04 (2026-07-04)
 - docs(infra): Home Assistant migration — state + revival plan (ha.93.fyi) (#23) (2026-07-03)
 - chore: daily update 2026-07-03 (2026-07-03)
 - chore: daily update 2026-07-02 (2026-07-02)
-- chore: daily update 2026-07-01 (2026-07-01)
-
-### finflow
-- feat: CSV import for non-Teller banks + harden sync path (2026-06-29)
-- feat(tasks): add finflow.tasks.teller_pull one-shot for hourly sync (2026-05-09)
-- feat: migrate from Plaid to Teller for zero-cost bank data access (2026-04-04)
-- chore: remove uv-generated main.py (2026-04-04)
-- init: finflow — Plaid-powered personal finance aggregator (2026-04-04)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

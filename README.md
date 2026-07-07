@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-07-06
+> Auto-updated daily from GitHub commits. Last update: 2026-07-07
 
 ## Overview
 
@@ -90,11 +90,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- chore: daily update 2026-07-06 (2026-07-06)
 - chore: daily update 2026-07-05 (2026-07-05)
 - chore: daily update 2026-07-04 (2026-07-04)
 - docs(infra): Home Assistant migration — state + revival plan (ha.93.fyi) (#23) (2026-07-03)
 - chore: daily update 2026-07-03 (2026-07-03)
-- chore: daily update 2026-07-02 (2026-07-02)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

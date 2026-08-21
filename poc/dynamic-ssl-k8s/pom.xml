@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.karl</groupId>
+    <artifactId>dynamic-ssl-poc</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.release>21</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Ayza == sslcontext-kickstart, renamed Sep 2025. Same nl.altindag.ssl.* packages. -->
+        <ayza.version>10.0.5</ayza.version>
+        <!-- The user's stack: Apache HttpClient 4.x -->
+        <httpclient4.version>4.5.14</httpclient4.version>
+        <!-- spring-web only (RestTemplate), NOT full Spring Boot — keeps the build light
+             and keeps us on the HttpClient-4-compatible HttpComponentsClientHttpRequestFactory. -->
+        <spring.version>5.3.39</spring.version>
+        <slf4j.version>2.0.16</slf4j.version>
+    </properties>
+
+    <dependencies>
+        <!-- Dynamic / swappable trust material -->
+        <dependency>
+            <groupId>io.github.hakky54</groupId>
+            <artifactId>ayza</artifactId>
+            <version>${ayza.version}</version>
+        </dependency>
+        <!-- Apache HttpClient 4 mapper for Ayza -->
+        <dependency>
+            <groupId>io.github.hakky54</groupId>
+            <artifactId>ayza-for-apache4</artifactId>
+            <version>${ayza.version}</version>
+        </dependency>
+
+        <!-- Apache HttpClient 4.x — the user's outbound client -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpclient4.version}</version>
+        </dependency>
+
+        <!-- Spring RestTemplate (faithful to the user's "Spring RestTemplate" usage) -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>dynamic-ssl-poc</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals><goal>shade</goal></goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.karl.dynssl.App</mainClass>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                            </transformers>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

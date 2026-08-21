@@ -1,0 +1,6 @@
+# Generated demo PKI (private keys never committed)
+certs/
+# Maven build output
+target/
+# maven-shade artifact
+dependency-reduced-pom.xml

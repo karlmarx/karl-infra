@@ -1,0 +1,56 @@
+Sample run of scripts/run-demo.sh on a real single-node Kubernetes cluster (k3s v1.30.6).
+Captured 2026-06-26T09:48:57Z. Build/image-pull noise trimmed for readability.
+
+──────────────────────────────────────────────────────────────────────
+namespace/dynssl-poc created
+secret/origin-keystore created
+configmap/ca-bundle created
+deployment.apps/origin created
+service/origin created
+deployment.apps/caller created
+service/caller created
+Waiting for deployment "origin" rollout to finish: 0 of 1 updated replicas are available...
+deployment "origin" successfully rolled out
+Waiting for deployment "caller" rollout to finish: 0 of 1 updated replicas are available...
+deployment "caller" successfully rolled out
+caller pod: caller-84d547b9b5-87nq7  (started 2026-06-26T09:47:20Z, restarts=0)
+trust/info: {"acceptedIssuerCount":145,"bundleSha256":"4883783eb199b314","bundlePath":"/etc/ssl/ca-bundle/ca-bundle.pem","pocIssuers":["O=DynSSL-PoC,CN=DynSSL Root CA A"]}
+──────────────────────────────────────────────────────────────────────
+PHASE 1  Baseline call (expect SUCCESS)
+──────────────────────────────────────────────────────────────────────
+  {"ok":true,"url":"https://origin:8443/","body":"{\"service\":\"third-party-origin\",\"servingCert\":\"CA-A\",\"message\":\"hello over TLS\"}"}
+✓ Phase 1: call succeeded (CA-A trusted)
+──────────────────────────────────────────────────────────────────────
+PHASE 2  Third party rotates to CA-B (origin restarts; caller does NOT)
+──────────────────────────────────────────────────────────────────────
+secret/origin-keystore configured
+deployment.apps/origin env updated
+deployment.apps/origin restarted
+Waiting for deployment "origin" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "origin" rollout to finish: 1 old replicas are pending termination...
+deployment "origin" successfully rolled out
+  {"ok":false,"url":"https://origin:8443/","error":"ResourceAccessException: I/O error on GET request for \"https://origin:8443/\": (certificate_unknown) The certificate chain is not trusted; nested exception is javax.net.ssl.SSLHandshakeException: (certificate_unknown) The certificate chain is not trusted | root=CertificateException: The certificate chain is not trusted"}
+✓ Phase 2: call now FAILS — reproduced the PKIX bug
+──────────────────────────────────────────────────────────────────────
+PHASE 3  Add CA-B to the caller's ConfigMap — hot reload, no restart
+──────────────────────────────────────────────────────────────────────
+configmap/ca-bundle configured
+Waiting for kubelet to propagate the ConfigMap + the file-watcher to hot-swap trust...
+✓ Phase 3: call SUCCEEDED again after 62 s — trust hot-reloaded with NO restart
+  {"ok":true,"url":"https://origin:8443/","body":"{\"service\":\"third-party-origin\",\"servingCert\":\"CA-B\",\"message\":\"hello over TLS\"}"}
+──────────────────────────────────────────────────────────────────────
+PROOF  Caller never restarted
+──────────────────────────────────────────────────────────────────────
+  pod before : caller-84d547b9b5-87nq7  (started 2026-06-26T09:47:20Z)
+  pod after  : caller-84d547b9b5-87nq7  (started 2026-06-26T09:47:20Z)
+  restarts   : 0
+  trust/info : {"acceptedIssuerCount":146,"bundleSha256":"84db1f53e9152c1c","bundlePath":"/etc/ssl/ca-bundle/ca-bundle.pem","pocIssuers":["O=DynSSL-PoC,CN=DynSSL Root CA A","O=DynSSL-PoC,CN=DynSSL Root CA B"]}
+──────────────────────────────────────────────────────────────────────
+✅ SUCCESS: same pod, same start time, 0 restarts — CA rotation handled live.
+──────────────────────────────────────────────────────────────────────
+Caller watcher/reload log lines:
+[main] INFO com.karl.dynssl.DynamicTrustHttpClient - DynamicTrustHttpClient ready. Trusting 145 issuers from bundle /etc/ssl/ca-bundle/ca-bundle.pem (sha256=4883783eb199b314)
+[ca-bundle-watcher] INFO com.karl.dynssl.CaBundleWatcher - Watching CA bundle directory /etc/ssl/ca-bundle for ..data symlink swaps
+[main] INFO com.karl.dynssl.CallerApp - Caller control API listening on :8080  (bundle=/etc/ssl/ca-bundle/ca-bundle.pem)
+[ca-bundle-watcher] INFO com.karl.dynssl.CaBundleWatcher - Detected ConfigMap update (..data symlink swap) — reloading trust
+[ca-bundle-watcher] INFO com.karl.dynssl.DynamicTrustHttpClient - Trust reloaded. Now trusting 146 issuers (bundle sha256=84db1f53e9152c1c)

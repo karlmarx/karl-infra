@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-09-11
+> Auto-updated daily from GitHub commits. Last update: 2026-09-12
 
 ## Overview
 
@@ -90,11 +90,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- chore: daily update 2026-09-11 (2026-09-11)
 - chore: daily update 2026-09-10 (2026-09-10)
 - chore: daily update 2026-09-09 (2026-09-09)
 - chore: daily update 2026-09-08 (2026-09-08)
 - chore: daily update 2026-09-07 (2026-09-07)
-- chore: daily update 2026-09-06 (2026-09-06)
 
 ### find-hub-tracker
 - feat: add all GoogleFindMyTools runtime deps and fix auth flow (2026-04-13)

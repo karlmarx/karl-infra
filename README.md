@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-09-17
+> Auto-updated daily from GitHub commits. Last update: 2026-09-18
 
 ## Overview
 
@@ -90,18 +90,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- chore: daily update 2026-09-17 (2026-09-17)
 - chore: daily update 2026-09-16 (2026-09-16)
 - chore: daily update 2026-09-15 (2026-09-15)
 - chore: daily update 2026-09-14 (2026-09-14)
 - chore: daily update 2026-09-12 (2026-09-12)
-- chore: daily update 2026-09-11 (2026-09-11)
-
-### find-hub-tracker
-- feat: add all GoogleFindMyTools runtime deps and fix auth flow (2026-04-13)
-- Add selenium, undetected-chromedriver, setuptools deps for auth flow (2026-04-02)
-- Merge pull request #6 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-04-02)
-- fix: handle empty DEVICES_TO_TRACK in .env without JSON parse error (2026-03-31)
-- Merge pull request #5 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-03-31)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

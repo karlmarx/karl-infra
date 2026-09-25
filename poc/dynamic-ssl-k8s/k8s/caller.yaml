@@ -1,0 +1,60 @@
+# The microservice under test. It mounts the `ca-bundle` ConfigMap as a DIRECTORY (never
+# subPath — subPath mounts do NOT receive ConfigMap updates) and hot-reloads its trust
+# material when the bundle changes. This pod must survive a CA rotation with RESTARTS=0.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: caller
+  namespace: dynssl-poc
+  labels: { app: caller }
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: caller }
+  template:
+    metadata:
+      labels: { app: caller }
+    spec:
+      containers:
+        - name: caller
+          image: dynamic-ssl-poc:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: APP_MODE
+              value: "caller"
+            - name: PORT
+              value: "8080"
+            - name: CA_BUNDLE_DIR
+              value: "/etc/ssl/ca-bundle"
+            - name: CA_BUNDLE_FILE
+              value: "ca-bundle.pem"
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet: { path: /healthz, port: 8080 }
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: { path: /healthz, port: 8080 }
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          volumeMounts:
+            # Directory mount (NOT subPath) so kubelet repoints the ..data symlink on update.
+            - name: ca-bundle
+              mountPath: /etc/ssl/ca-bundle
+              readOnly: true
+      volumes:
+        - name: ca-bundle
+          configMap:
+            name: ca-bundle
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: caller
+  namespace: dynssl-poc
+spec:
+  selector: { app: caller }
+  ports:
+    - port: 8080
+      targetPort: 8080

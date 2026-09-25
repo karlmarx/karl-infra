@@ -1,0 +1,56 @@
+# The "third-party API" stand-in. It presents a server cert from the mounted
+# `origin-keystore` Secret. Rotating the third party's CA == replacing that Secret with a
+# keystore signed by a different CA and restarting THIS deployment. That restart is fine —
+# the third party owns its certs. The caller must NOT restart, and that is what we prove.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: origin
+  namespace: dynssl-poc
+  labels: { app: origin }
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: origin }
+  template:
+    metadata:
+      labels: { app: origin }
+    spec:
+      containers:
+        - name: origin
+          image: dynamic-ssl-poc:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: APP_MODE
+              value: "origin"
+            - name: PORT
+              value: "8443"
+            - name: KEYSTORE_PATH
+              value: "/etc/ssl/origin/keystore.p12"
+            - name: KEYSTORE_PASSWORD
+              value: "changeit"
+            # Which CA signed the cert currently being served — patched on rotation so the
+            # caller's response body visibly flips from CA-A to CA-B.
+            - name: CERT_LABEL
+              value: "CA-A"
+          ports:
+            - containerPort: 8443
+          volumeMounts:
+            - name: keystore
+              mountPath: /etc/ssl/origin
+              readOnly: true
+      volumes:
+        - name: keystore
+          secret:
+            secretName: origin-keystore
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: origin
+  namespace: dynssl-poc
+spec:
+  selector: { app: origin }
+  ports:
+    - port: 8443
+      targetPort: 8443

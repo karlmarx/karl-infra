@@ -1,0 +1,110 @@
+{
+  "_comment": "Strategy registry consumed by mom-93fyi-tollfree-autofixer.py. Each rejection code maps to an ordered list of partial patches to try; the autofixer picks the next un-tried one each cycle. base_patch is the always-applied floor; per-strategy 'patch' fields override it. Edit this file to tune behavior — autofixer reads it fresh each run.",
+  "verification_sid": "HH26844a254ed93af0c8732fc48591a535",
+
+  "base_patch": {
+    "BusinessName": "nfit",
+    "BusinessWebsite": "https://nfit.93.fyi",
+    "UseCaseCategories": ["TWO_FACTOR_AUTHENTICATION"],
+    "OptInType": "WEB_FORM",
+    "OptInImageUrls": "https://nfit.93.fyi/sms-consent.png",
+    "ProductionMessageSample": "Your nfit verification code: 482931. Reply STOP to opt out, HELP for help.",
+    "UseCaseSummary": "Phone-number verification (2FA) plus opt-in workout reminders for members of nfit.93.fyi, a fitness training-plan PWA. Members sign in with Google, then optionally verify their phone via a 6-digit SMS code at nfit.93.fyi/onboard/phone. Outbound: verification codes and consented reminders. STOP/HELP/START honored by /api/sms/inbound webhook. No bulk, no marketing.",
+    "AdditionalInformation": "Opt-in flow: web form at https://nfit.93.fyi/onboard/phone (rendered screenshot at https://nfit.93.fyi/sms-consent.png in OptInImageUrls). A member signs in with Google, enters their phone, ticks an explicit consent checkbox referencing the Privacy Policy (https://nfit.93.fyi/privacy) and SMS Terms (https://nfit.93.fyi/sms-terms), and submits. The server (POST /api/sms/send-verification) generates a 6-digit code, stores a SHA-256 hash with a 10-minute TTL and a 5-attempt cap, and sends the code via this toll-free number through Twilio Programmable Messaging. The member enters the code on the same page (POST /api/sms/verify); on success the server marks phone_verified_at + sms_consent_at and sends a single welcome confirmation SMS. Inbound STOP/HELP/START keywords are handled at https://nfit.93.fyi/api/sms/inbound (webhook signature verified via HMAC-SHA1 of the X-Twilio-Signature header), with TwiML responses sent back. Volume profile: one verification code per new member sign-up, one welcome message, up to six (6) reminder messages per week per active member."
+  },
+
+  "rejection_strategies": {
+    "30445": [
+      {
+        "name": "switch BusinessContactEmail to karlmarx9193@gmail.com",
+        "rationale": "Gmail is universally deliverable; if Twilio verifier mailed k@93.fyi and got a bounce, this fixes it.",
+        "patch": {
+          "BusinessContactEmail": "karlmarx9193@gmail.com"
+        }
+      },
+      {
+        "name": "BusinessWebsite to /onboard/phone deep link",
+        "rationale": "Send the verifier straight to the product surface where the SMS consent UX lives, instead of the marketing homepage.",
+        "patch": {
+          "BusinessWebsite": "https://nfit.93.fyi/onboard/phone"
+        }
+      },
+      {
+        "name": "BusinessName to 'NFIT Training Plan'",
+        "rationale": "Lowercase one-word brand 'nfit' may read as a handle rather than a business; a more conventional product name passes the sniff test.",
+        "patch": {
+          "BusinessName": "NFIT Training Plan"
+        }
+      },
+      {
+        "name": "BusinessWebsite to /privacy + BusinessContactEmail Gmail",
+        "rationale": "Combined fallback — point at the legal page (richest text), use Gmail email.",
+        "patch": {
+          "BusinessWebsite": "https://nfit.93.fyi/privacy",
+          "BusinessContactEmail": "karlmarx9193@gmail.com"
+        }
+      }
+    ],
+
+    "30446": [
+      {
+        "name": "category to ACCOUNT_NOTIFICATIONS",
+        "rationale": "Broader category, often easier to fit a verification+reminders mix than strict 2FA.",
+        "patch": {
+          "UseCaseCategories": ["ACCOUNT_NOTIFICATIONS"]
+        }
+      },
+      {
+        "name": "tighter security-focused UseCaseSummary",
+        "rationale": "If the reviewer found the summary loose, narrow it to a pure verification story.",
+        "patch": {
+          "UseCaseSummary": "Account phone-number verification (2FA) for nfit.93.fyi members. After Google OAuth sign-in, the member enters their phone at https://nfit.93.fyi/onboard/phone and receives a one-time 6-digit code from the toll-free number. Inbound STOP/HELP/START keywords are handled by the /api/sms/inbound webhook. No marketing, no bulk, no broadcasts.",
+          "ProductionMessageSample": "Your nfit security code: 482931. This expires in 10 minutes. Reply STOP to opt out."
+        }
+      },
+      {
+        "name": "category to CUSTOMER_CARE with help-style sample",
+        "rationale": "Fallback — frame as customer-service Q&A; broadest accepted toll-free category.",
+        "patch": {
+          "UseCaseCategories": ["CUSTOMER_CARE"],
+          "ProductionMessageSample": "Hi! Your nfit support code is 482931. Reply HELP for help, STOP to opt out.",
+          "UseCaseSummary": "Customer-care SMS for nfit.93.fyi members. After Google sign-in, members request a 6-digit support/verification code on https://nfit.93.fyi/onboard/phone and receive it via SMS. Inbound STOP/HELP/START handled at /api/sms/inbound webhook. No marketing, no broadcasts."
+        }
+      }
+    ],
+
+    "30447": [
+      {
+        "name": "OptInImageUrls to live /onboard/phone (URL, not screenshot)",
+        "rationale": "Some reviewers prefer a live form URL over a static PNG of it.",
+        "patch": {
+          "OptInImageUrls": "https://nfit.93.fyi/onboard/phone"
+        }
+      },
+      {
+        "name": "OptInImageUrls to /sms-terms (full disclosure text)",
+        "rationale": "If the screenshot didn't show enough consent text, point at the full SMS-terms page.",
+        "patch": {
+          "OptInImageUrls": "https://nfit.93.fyi/sms-terms"
+        }
+      }
+    ],
+
+    "30448": [
+      {
+        "name": "manual review needed (industry-restricted)",
+        "rationale": "Code 30448 means the use case is in a restricted industry. No automated fix can change that — escalate.",
+        "manual_only": true,
+        "patch": {}
+      }
+    ]
+  },
+
+  "fallback_strategies": [
+    {
+      "name": "no-op re-fire (sometimes the review queue just retries)",
+      "rationale": "If the rejection code is unknown / un-mapped, a no-op POST is harmless and sometimes nudges the queue.",
+      "patch": {}
+    }
+  ]
+}

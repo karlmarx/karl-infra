@@ -18,6 +18,7 @@
 | `nyoga.93.fyi` | CNAME | `cname.vercel-dns.com` | Yes | NWB Yoga PWA |
 | `ta.93.fyi` | CNAME | `cname.vercel-dns.com` | No | **Stale** — TrickAdvisor migrated to `api.trickadvisor.cc` (custom domain). DNS record still exists but points at a Vercel project no longer load-bearing. Safe to remove when convenient. |
 | `where.93.fyi` | — | Cloudflare Worker `where-93fyi` | Yes | Location broadcast map. Record auto-provisioned by `wrangler deploy` (custom_domain), **not Vercel**. See `infra/where-93fyi.md`. |
+| `balls.93.fyi` | — | Cloudflare Worker `balls-93fyi` | Yes | LT Pro 48 ball proposal (static assets). Record auto-provisioned by `wrangler deploy` (custom_domain). Public via its own Access app (bypass), exempt from the `*.93.fyi` Access wall. Repo: karlmarx/lt-pickleball. |
 
 ## Email Routing
 

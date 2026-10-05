@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-10-04
+> Auto-updated daily from GitHub commits. Last update: 2026-10-05
 
 ## Overview
 
@@ -90,12 +90,33 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### drill-93fyi
+- Add initial HTML structure and styles for Drill app (2026-10-05)
+- Create index.html (2026-10-05)
+- Add files via upload (2026-10-05)
+- Add rewrites configuration to vercel.json (2026-10-05)
+- Initial commit (2026-10-05)
+
 ### karl-infra
+- Add CLAUDE.md: new 93.fyi sites default to Vercel (#27) (2026-10-05)
+- README: add balls.93.fyi to live services (#26) (2026-10-05)
+- chore: daily update 2026-10-04 (2026-10-04)
 - chore: daily update 2026-10-03 (2026-10-03)
 - chore: daily update 2026-10-02 (2026-10-02)
-- chore: daily update 2026-10-01 (2026-10-01)
-- chore: daily update 2026-09-30 (2026-09-30)
-- chore: daily update 2026-09-29 (2026-09-29)
+
+### lt-pickleball
+- Pin wrangler 4 in deploy action (#7) (2026-10-05)
+- Auto-deploy to Cloudflare; send all purchase traffic to Pickleball Central (#6) (2026-10-05)
+- Buy section: link only to Pickleball Central (#5) (2026-10-05)
+- Remove Franklin X-40 buy link; buy section is LT Pro 48 only (#4) (2026-10-05)
+- Merge pull request #1 from karlmarx/ccr-160bd685-0j1r7v (2026-10-05)
+
+### 93-fyi
+- Add public subdomains to homepage links (#4) (2026-10-05)
+- feat(hot): top-3 model comparison gallery (2026-05-16)
+- revert: restore mailto link and drop phone from footer (2026-05-13)
+- fix(footer): un-obfuscate email + add phone for Twilio TFV verifier (2026-05-12)
+- feat: add operator info to footer for Twilio TFV verification (2026-05-08)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

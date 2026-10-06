@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-10-05
+> Auto-updated daily from GitHub commits. Last update: 2026-10-06
 
 ## Overview
 
@@ -91,19 +91,26 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### karl-infra
+- Add drill.93.fyi to Live Services and 93.fyi DNS records (#28) (2026-10-06)
+- chore: daily update 2026-10-05 (2026-10-05)
+- Add CLAUDE.md: new 93.fyi sites default to Vercel (#27) (2026-10-05)
+- README: add balls.93.fyi to live services (#26) (2026-10-05)
+- chore: daily update 2026-10-04 (2026-10-04)
+
 ### drill-93fyi
+- Port drill prototype to Vite + React + TS PWA (#1) (2026-10-05)
 - Add initial HTML structure and styles for Drill app (2026-10-05)
 - Create index.html (2026-10-05)
 - Add files via upload (2026-10-05)
 - Add rewrites configuration to vercel.json (2026-10-05)
-- Initial commit (2026-10-05)
 
-### karl-infra
-- Add CLAUDE.md: new 93.fyi sites default to Vercel (#27) (2026-10-05)
-- README: add balls.93.fyi to live services (#26) (2026-10-05)
-- chore: daily update 2026-10-04 (2026-10-04)
-- chore: daily update 2026-10-03 (2026-10-03)
-- chore: daily update 2026-10-02 (2026-10-02)
+### 93-fyi
+- Add public subdomains to homepage links (#4) (2026-10-05)
+- feat(hot): top-3 model comparison gallery (2026-05-16)
+- revert: restore mailto link and drop phone from footer (2026-05-13)
+- fix(footer): un-obfuscate email + add phone for Twilio TFV verifier (2026-05-12)
+- feat: add operator info to footer for Twilio TFV verification (2026-05-08)
 
 ### lt-pickleball
 - Pin wrangler 4 in deploy action (#7) (2026-10-05)
@@ -112,12 +119,12 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - Remove Franklin X-40 buy link; buy section is LT Pro 48 only (#4) (2026-10-05)
 - Merge pull request #1 from karlmarx/ccr-160bd685-0j1r7v (2026-10-05)
 
-### 93-fyi
-- Add public subdomains to homepage links (#4) (2026-10-05)
-- feat(hot): top-3 model comparison gallery (2026-05-16)
-- revert: restore mailto link and drop phone from footer (2026-05-13)
-- fix(footer): un-obfuscate email + add phone for Twilio TFV verifier (2026-05-12)
-- feat: add operator info to footer for Twilio TFV verification (2026-05-08)
+### find-hub-tracker
+- feat: add all GoogleFindMyTools runtime deps and fix auth flow (2026-04-13)
+- Add selenium, undetected-chromedriver, setuptools deps for auth flow (2026-04-02)
+- Merge pull request #6 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-04-02)
+- fix: handle empty DEVICES_TO_TRACK in .env without JSON parse error (2026-03-31)
+- Merge pull request #5 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-03-31)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

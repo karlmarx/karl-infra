@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-10-06
+> Auto-updated daily from GitHub commits. Last update: 2026-10-07
 
 ## Overview
 
@@ -92,11 +92,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- chore: daily update 2026-10-06 (2026-10-06)
 - Add drill.93.fyi to Live Services and 93.fyi DNS records (#28) (2026-10-06)
 - chore: daily update 2026-10-05 (2026-10-05)
 - Add CLAUDE.md: new 93.fyi sites default to Vercel (#27) (2026-10-05)
 - README: add balls.93.fyi to live services (#26) (2026-10-05)
-- chore: daily update 2026-10-04 (2026-10-04)
 
 ### drill-93fyi
 - Port drill prototype to Vite + React + TS PWA (#1) (2026-10-05)

@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-10-09
+> Auto-updated daily from GitHub commits. Last update: 2026-10-10
 
 ## Overview
 
@@ -92,11 +92,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- chore: daily update 2026-10-09 (2026-10-09)
 - chore: daily update 2026-10-08 (2026-10-08)
 - chore: daily update 2026-10-07 (2026-10-07)
 - chore: daily update 2026-10-06 (2026-10-06)
 - Add drill.93.fyi to Live Services and 93.fyi DNS records (#28) (2026-10-06)
-- chore: daily update 2026-10-05 (2026-10-05)
 
 ### drill-93fyi
 - Port drill prototype to Vite + React + TS PWA (#1) (2026-10-05)

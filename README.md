@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-10-12
+> Auto-updated daily from GitHub commits. Last update: 2026-10-13
 
 ## Overview
 
@@ -92,18 +92,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- chore: daily update 2026-10-12 (2026-10-12)
 - chore: daily update 2026-10-11 (2026-10-11)
 - chore: daily update 2026-10-10 (2026-10-10)
 - chore: daily update 2026-10-09 (2026-10-09)
 - chore: daily update 2026-10-08 (2026-10-08)
-- chore: daily update 2026-10-07 (2026-10-07)
-
-### drill-93fyi
-- Port drill prototype to Vite + React + TS PWA (#1) (2026-10-05)
-- Add initial HTML structure and styles for Drill app (2026-10-05)
-- Create index.html (2026-10-05)
-- Add files via upload (2026-10-05)
-- Add rewrites configuration to vercel.json (2026-10-05)
 
 ### find-hub-tracker
 - feat: add all GoogleFindMyTools runtime deps and fix auth flow (2026-04-13)

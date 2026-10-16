@@ -53,6 +53,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the full deep-dive.
 | Roadmachine Gear Picks | [auto.93.fyi/roadmachine](https://auto.93.fyi/roadmachine) | Static HTML (served from auto-dashboard) | [karlmarx/karl-infra](https://github.com/karlmarx/karl-infra) (`/auto-dashboard/public/roadmachine/`) |
 | LT Pro 48 Ball Proposal | [balls.93.fyi](https://balls.93.fyi) | Static HTML (Cloudflare Worker static assets, public via Access bypass) | [karlmarx/lt-pickleball](https://github.com/karlmarx/lt-pickleball) |
 | Drill (pickleball drill picker) | [drill.93.fyi](https://drill.93.fyi) | React 19 + Vite PWA, Vercel (public, DNS only) | [karlmarx/drill-93fyi](https://github.com/karlmarx/drill-93fyi) |
+| Score (pickleball score parity explainer) | [score.93.fyi](https://score.93.fyi) | Static single-file HTML, Vercel (public, DNS only) | [karlmarx/score-93fyi](https://github.com/karlmarx/score-93fyi) |
 
 ## Automation
 

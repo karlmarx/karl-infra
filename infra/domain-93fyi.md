@@ -20,6 +20,7 @@
 | `where.93.fyi` | — | Cloudflare Worker `where-93fyi` | Yes | Location broadcast map. Record auto-provisioned by `wrangler deploy` (custom_domain), **not Vercel**. See `infra/where-93fyi.md`. |
 | `balls.93.fyi` | — | Cloudflare Worker `balls-93fyi` | Yes | LT Pro 48 ball proposal (static assets). Record auto-provisioned by `wrangler deploy` (custom_domain). Public via its own Access app (bypass), exempt from the `*.93.fyi` Access wall. Repo: karlmarx/lt-pickleball. |
 | `drill.93.fyi` | CNAME | `cname.vercel-dns.com` | No | Pickleball drill picker PWA (Vercel project `drill-93fyi`, repo karlmarx/drill-93fyi). Unproxied, so public (outside the `*.93.fyi` Access wall). |
+| `score.93.fyi` | CNAME | `cname.vercel-dns.com` | No | Pickleball doubles score parity explainer (Vercel project `score-93fyi`, repo karlmarx/score-93fyi). Unproxied, so public (outside the `*.93.fyi` Access wall). |
 
 ## Email Routing
 

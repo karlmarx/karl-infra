@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-10-17
+> Auto-updated daily from GitHub commits. Last update: 2026-10-18
 
 ## Overview
 
@@ -92,6 +92,13 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### karl-infra
+- chore: daily update 2026-10-17 (2026-10-17)
+- Add score.93.fyi to live services and DNS docs (#29) (2026-10-16)
+- chore: daily update 2026-10-16 (2026-10-16)
+- chore: daily update 2026-10-15 (2026-10-15)
+- chore: daily update 2026-10-14 (2026-10-14)
+
 ### score-93fyi
 - Add files via upload (2026-10-16)
 - Add files via upload (2026-10-16)
@@ -104,20 +111,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - feat(hot): top-3 model comparison gallery (2026-05-16)
 - revert: restore mailto link and drop phone from footer (2026-05-13)
 - fix(footer): un-obfuscate email + add phone for Twilio TFV verifier (2026-05-12)
-
-### karl-infra
-- Add score.93.fyi to live services and DNS docs (#29) (2026-10-16)
-- chore: daily update 2026-10-16 (2026-10-16)
-- chore: daily update 2026-10-15 (2026-10-15)
-- chore: daily update 2026-10-14 (2026-10-14)
-- chore: daily update 2026-10-13 (2026-10-13)
-
-### find-hub-tracker
-- feat: add all GoogleFindMyTools runtime deps and fix auth flow (2026-04-13)
-- Add selenium, undetected-chromedriver, setuptools deps for auth flow (2026-04-02)
-- Merge pull request #6 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-04-02)
-- fix: handle empty DEVICES_TO_TRACK in .env without JSON parse error (2026-03-31)
-- Merge pull request #5 from karlmarx/claude/add-healthchecks-ping-DlWgs (2026-03-31)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

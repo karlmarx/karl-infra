@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-10-23
+> Auto-updated daily from GitHub commits. Last update: 2026-10-24
 
 ## Overview
 
@@ -93,24 +93,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- chore: daily update 2026-10-23 (2026-10-23)
 - chore: daily update 2026-10-22 (2026-10-22)
 - chore: daily update 2026-10-21 (2026-10-21)
 - chore: daily update 2026-10-20 (2026-10-20)
 - chore: daily update 2026-10-19 (2026-10-19)
-- chore: daily update 2026-10-18 (2026-10-18)
-
-### score-93fyi
-- Add files via upload (2026-10-16)
-- Add files via upload (2026-10-16)
-- Add files via upload (2026-10-16)
-- Initial commit (2026-10-16)
-
-### 93-fyi
-- Add score.93.fyi to public links (#6) (2026-10-16)
-- Add public subdomains to homepage links (#4) (2026-10-05)
-- feat(hot): top-3 model comparison gallery (2026-05-16)
-- revert: restore mailto link and drop phone from footer (2026-05-13)
-- fix(footer): un-obfuscate email + add phone for Twilio TFV verifier (2026-05-12)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

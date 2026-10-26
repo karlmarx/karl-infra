@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-10-25
+> Auto-updated daily from GitHub commits. Last update: 2026-10-26
 
 ## Overview
 
@@ -92,12 +92,26 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### volleyparton
+- Fix nested Facebook link and add "watch with music" hint (#2) (2026-10-26)
+- make video link to fb post (2026-10-25)
+- Add looping full-screen video page (#1) (2026-10-25)
+- add vid (2026-10-25)
+- Initial commit (2026-10-25)
+
+### 93-fyi
+- Turn 93.fyi into an app launcher (#7) (2026-10-25)
+- Add score.93.fyi to public links (#6) (2026-10-16)
+- Add public subdomains to homepage links (#4) (2026-10-05)
+- feat(hot): top-3 model comparison gallery (2026-05-16)
+- revert: restore mailto link and drop phone from footer (2026-05-13)
+
 ### karl-infra
+- chore: daily update 2026-10-25 (2026-10-25)
 - chore: daily update 2026-10-24 (2026-10-24)
 - chore: daily update 2026-10-23 (2026-10-23)
 - chore: daily update 2026-10-22 (2026-10-22)
 - chore: daily update 2026-10-21 (2026-10-21)
-- chore: daily update 2026-10-20 (2026-10-20)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

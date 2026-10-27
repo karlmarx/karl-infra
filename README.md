@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-10-26
+> Auto-updated daily from GitHub commits. Last update: 2026-10-27
 
 ## Overview
 
@@ -92,6 +92,13 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### karl-infra
+- chore: daily update 2026-10-26 (2026-10-26)
+- chore: daily update 2026-10-25 (2026-10-25)
+- chore: daily update 2026-10-24 (2026-10-24)
+- chore: daily update 2026-10-23 (2026-10-23)
+- chore: daily update 2026-10-22 (2026-10-22)
+
 ### volleyparton
 - Fix nested Facebook link and add "watch with music" hint (#2) (2026-10-26)
 - make video link to fb post (2026-10-25)
@@ -105,13 +112,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - Add public subdomains to homepage links (#4) (2026-10-05)
 - feat(hot): top-3 model comparison gallery (2026-05-16)
 - revert: restore mailto link and drop phone from footer (2026-05-13)
-
-### karl-infra
-- chore: daily update 2026-10-25 (2026-10-25)
-- chore: daily update 2026-10-24 (2026-10-24)
-- chore: daily update 2026-10-23 (2026-10-23)
-- chore: daily update 2026-10-22 (2026-10-22)
-- chore: daily update 2026-10-21 (2026-10-21)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

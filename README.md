@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-10-27
+> Auto-updated daily from GitHub commits. Last update: 2026-10-28
 
 ## Overview
 
@@ -93,11 +93,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- chore: daily update 2026-10-27 (2026-10-27)
 - chore: daily update 2026-10-26 (2026-10-26)
 - chore: daily update 2026-10-25 (2026-10-25)
 - chore: daily update 2026-10-24 (2026-10-24)
 - chore: daily update 2026-10-23 (2026-10-23)
-- chore: daily update 2026-10-22 (2026-10-22)
 
 ### volleyparton
 - Fix nested Facebook link and add "watch with music" hint (#2) (2026-10-26)

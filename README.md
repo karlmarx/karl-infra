@@ -66,6 +66,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the full deep-dive.
 | Gemini Auto | Windows workstation | Running | [karlmarx/gemini-auto](https://github.com/karlmarx/gemini-auto) |
 | Amex Claims Automator | TBD | Scaffolded | [karlmarx/amex-claims-automator](https://github.com/karlmarx/amex-claims-automator) |
 | karl-todo sync | GitHub Actions (on push to main) | Running | [karlmarx/karl-todo](https://github.com/karlmarx/karl-todo) |
+| Hermes: site-health + inbox-digest | Hermes Agent cloud instance (Telegram) | Ready to install | [hermes/](hermes/README.md) |
 
 ## Tooling & Docs
 

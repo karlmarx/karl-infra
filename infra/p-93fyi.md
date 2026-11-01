@@ -30,10 +30,13 @@ never printed). Twilio's own logs still hold numbers.
 | `COURTS_OWNER_TOKEN` | GitHub secret → Worker `OWNER_TOKEN` | `/admin` and where-app reports |
 | `ID_HASH_KEY` | Worker only (auto-created) | reporter id HMAC key |
 | `ELEVENLABS_API_KEY` | GitHub secret | voice render workflow only |
+| `GOOGLE_CLIENT_ID` | GitHub secret → Worker | Sign in with Google (Web client, JS origin `https://p.93.fyi`, no secret) |
+| `RESEND_API_KEY` | GitHub secret → Worker | email sign-in links from p@93.fyi (added 2026-11-01) |
+| `TURNSTILE_SITE_KEY` / `TURNSTILE_SECRET` | GitHub secret → Worker (optional) | bot check on anonymous web reports |
 
 ## Setup checklist
 
-- [ ] GitHub secrets `TWILIO_AUTH_TOKEN`, `COURTS_OWNER_TOKEN`, `ELEVENLABS_API_KEY`
+- [ ] GitHub secrets `TWILIO_AUTH_TOKEN`, `COURTS_OWNER_TOKEN` (= where app token), `ELEVENLABS_API_KEY`, `GOOGLE_CLIENT_ID`; `RESEND_API_KEY` ✅
 - [ ] Merge where-93fyi PR → deploy
 - [ ] Cloudflare Access app `p.93.fyi` with Bypass / Everyone
 - [ ] Email Routing `p@93.fyi` → Worker `p-93fyi`
@@ -42,10 +45,19 @@ never printed). Twilio's own logs still hold numbers.
 - [ ] Twilio number: messaging webhook → `https://p.93.fyi/twilio/sms`
 - [ ] Resubmit toll-free verification (website p.93.fyi, terms p.93.fyi/terms); texts out blocked until approved
 - [ ] Verify: `curl -sS -o /dev/null -w "%{http_code}" https://p.93.fyi/` → 200
+- [ ] Sign in on p.93.fyi with Google, then `/admin` → "Make my signed-in account the owner"
+- [ ] Print `/sign/hagen` and `/sign/wimberly` (ask the park before posting)
 - [ ] Merge 93-fyi PR (launcher tile) once live
+
+## Web features (2026-11-01)
+
+Map board with face pins, QR quick report `/r/<park>`, printable signs, Google +
+email-link sign-in, owner tier (wins 45 min), check-ins with per-player
+visibility, owner-approved avatars and court photos (stored in the DO, EXIF
+stripped in the browser). where apps: "Courts" launcher entry on phone + watch.
 
 ## Open
 
-- where phone + watch apps: reporting UI (API ready: `POST /api/report`).
+- Phase B ideas: web push alerts ("Hagen under 8 waiting", "Karl started playing"), busiest-hours history, owner announcements, "need a 4th".
 - Translations (es, pt-BR) are machine-assisted; get a native read.
 - The tfn WhatsApp face still gives directions, if its sender was ever registered.

@@ -89,3 +89,9 @@ walk-up box** (pedestrians). Passes/codes work at the box; the directory call to
 - Design spec: `docs/superpowers/specs/2026-05-30-go-93fyi-directions-design.md`
 - Domain map: `diagrams/domains.md` · Architecture: `ARCHITECTURE.md` (Vercel table)
 - Pattern sibling: `infra/where-93fyi.md` (Worker + KV write-from-trigger model)
+
+## 2026-11: toll-free number removed
+
+The call buttons, "no code? call the help line" links and the help section were
+removed (all 11 languages): (888) 601-6132 is now the pickleball court-report
+line for [p.93.fyi](p-93fyi.md).

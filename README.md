@@ -54,6 +54,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the full deep-dive.
 | LT Pro 48 Ball Proposal | [balls.93.fyi](https://balls.93.fyi) | Static HTML (Cloudflare Worker static assets, public via Access bypass) | [karlmarx/lt-pickleball](https://github.com/karlmarx/lt-pickleball) |
 | Drill (pickleball drill picker) | [drill.93.fyi](https://drill.93.fyi) | React 19 + Vite PWA, Vercel (public, DNS only) | [karlmarx/drill-93fyi](https://github.com/karlmarx/drill-93fyi) |
 | Score (pickleball score parity explainer) | [score.93.fyi](https://score.93.fyi) | Static single-file HTML, Vercel (public, DNS only) | [karlmarx/score-93fyi](https://github.com/karlmarx/score-93fyi) |
+| Court Counts (self-reported pickleball attendance, by text/call/email/app) | [p.93.fyi](https://p.93.fyi) | Cloudflare Worker + SQLite Durable Object; Twilio SMS/voice on (888) 601-6132, Email Routing `p@93.fyi` (public via Access bypass) | [karlmarx/where-93fyi](https://github.com/karlmarx/where-93fyi) (`courts/`) |
 
 ## Automation
 

@@ -33,5 +33,8 @@ itself. No repo secrets and no GitHub Actions workflow are needed.
   `.github/workflows/deploy.yml`, repo secret `CLOUDFLARE_API_TOKEN`, and
   `wranglerVersion: "4"`. It's public through its own Access bypass app.
 - `where-93fyi`: see `infra/where-93fyi.md`.
+- `p-93fyi` (karlmarx/where-93fyi `courts/`): pickleball court counts. Cloudflare because it
+  needs Email Routing → Worker and a Durable Object. GitHub Action
+  `.github/workflows/deploy-courts.yml`. See `infra/p-93fyi.md`.
 - The Cloudflare GitHub app ("Workers Builds") can't be installed on this account
   (GitHub 404), so Cloudflare sites can't auto-deploy the way Vercel does.

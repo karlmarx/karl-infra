@@ -1,6 +1,8 @@
 # tfn-93fyi — Twilio DTMF Backdoor + Visitor Helpline
 
-**Status:** **LIVE** (2026-05-31). Number wired → `tfn.93.fyi`; routes verified in prod (signed request → 200 valid single-`<Response>` TwiML, unsigned → 403). Standalone repo + Vercel project shipped. Not yet *distributed* (Karl isn't handing the number out until the go.93.fyi directions reshoot is confirmed). Mac executor committed but launchd not loaded.
+**Status (2026-11):** the number is being dedicated to **pickleball court reports** for [p.93.fyi](p-93fyi.md). Setting `PICKLEBALL_VOICE_URL=https://p.93.fyi/twilio/voice` on Vercel hands every non-whitelisted caller to the court line and turns the directions helpline off (unset to undo). go.93.fyi no longer links the number. **The Mac Studio is gone**, so the Mac executor / Mac actions are dead; ElevenLabs keys no longer live in a Keychain.
+
+**Earlier status:** **LIVE** (2026-05-31). Number wired → `tfn.93.fyi`; routes verified in prod (signed request → 200 valid single-`<Response>` TwiML, unsigned → 403). Standalone repo + Vercel project shipped. Not yet *distributed* (Karl isn't handing the number out until the go.93.fyi directions reshoot is confirmed). Mac executor committed but launchd not loaded.
 
 **Purpose:** Turn Karl's unused toll-free number (+1 888 601-6132) into a dual-purpose voice line:
 1. **DTMF backdoor** — Karl (whitelisted) calls and triggers actions on his Mac Studio + cloud via touch-tone or a voice agent.

@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-10-31
+> Auto-updated daily from GitHub commits. Last update: 2026-11-01
 
 ## Overview
 
@@ -93,25 +93,18 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- chore: daily update 2026-10-31 (2026-10-31)
 - chore: daily update 2026-10-30 (2026-10-30)
 - chore: daily update 2026-10-29 (2026-10-29)
 - chore: daily update 2026-10-28 (2026-10-28)
 - chore: daily update 2026-10-27 (2026-10-27)
-- chore: daily update 2026-10-26 (2026-10-26)
 
 ### volleyparton
+- Update season results from league site (2026-10-31)
 - Pull scores from the league site automatically every Saturday (#6) (2026-10-30)
 - Add contact email to about page (#5) (2026-10-29)
 - Add season schedule and episode guide (#4) (2026-10-29)
 - Add next-game countdown and Real World parody about page (#3) (2026-10-29)
-- Fix nested Facebook link and add "watch with music" hint (#2) (2026-10-26)
-
-### 93-fyi
-- Turn 93.fyi into an app launcher (#7) (2026-10-25)
-- Add score.93.fyi to public links (#6) (2026-10-16)
-- Add public subdomains to homepage links (#4) (2026-10-05)
-- feat(hot): top-3 model comparison gallery (2026-05-16)
-- revert: restore mailto link and drop phone from footer (2026-05-13)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

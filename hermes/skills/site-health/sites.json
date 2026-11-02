@@ -1,0 +1,27 @@
+{
+  "_comment": "Expected state per host. public = must return 200. access = must 302 to Cloudflare Access (private). login = app-level redirect to its own login page. Baseline probed 2026-10-29.",
+  "sites": {
+    "93.fyi": "public",
+    "nfit.93.fyi": "public",
+    "nyoga.93.fyi": "public",
+    "drill.93.fyi": "public",
+    "score.93.fyi": "public",
+    "balls.93.fyi": "public",
+    "where.93.fyi": "public",
+    "go.93.fyi": "public",
+    "tfn.93.fyi": "public",
+    "auto.93.fyi": "public",
+    "layover.93.fyi": "public",
+    "suspect.93.fyi": "public",
+    "scout.93.fyi": "public",
+    "pwbpb.93.fyi": "public",
+    "ortho.93.fyi": "public",
+    "mom.93.fyi": "public",
+    "contact.93.fyi": "public",
+    "me.93.fyi": "login",
+    "id.93.fyi": "access",
+    "command.93.fyi": "access",
+    "progress.93.fyi": "access",
+    "ha.93.fyi": "access"
+  }
+}

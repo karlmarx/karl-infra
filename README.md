@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-11-01
+> Auto-updated daily from GitHub commits. Last update: 2026-11-02
 
 ## Overview
 
@@ -95,11 +95,18 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
-- chore: daily update 2026-10-31 (2026-10-31)
-- chore: daily update 2026-10-30 (2026-10-30)
-- chore: daily update 2026-10-29 (2026-10-29)
-- chore: daily update 2026-10-28 (2026-10-28)
-- chore: daily update 2026-10-27 (2026-10-27)
+- Merge pull request #30 from karlmarx/ccr-8b474ba9-tu35nk (2026-11-02)
+- Merge pull request #25 from karlmarx/ccr-160bd685-0j1r7v (2026-11-02)
+- Merge pull request #31 from karlmarx/ccr-8fea127d-30gw8j (2026-11-01)
+- chore: daily update 2026-11-01 (2026-11-01)
+- p-93fyi: sign-in, check-ins, photos, map board, app Courts screens (2026-11-01)
+
+### 93-fyi
+- Add p.93.fyi (pickleball court counts) to the launcher (#8) (2026-11-01)
+- Turn 93.fyi into an app launcher (#7) (2026-10-25)
+- Add score.93.fyi to public links (#6) (2026-10-16)
+- Add public subdomains to homepage links (#4) (2026-10-05)
+- feat(hot): top-3 model comparison gallery (2026-05-16)
 
 ### volleyparton
 - Update season results from league site (2026-10-31)

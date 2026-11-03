@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-11-02
+> Auto-updated daily from GitHub commits. Last update: 2026-11-03
 
 ## Overview
 
@@ -95,11 +95,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- chore: daily update 2026-11-02 (2026-11-02)
 - Merge pull request #30 from karlmarx/ccr-8b474ba9-tu35nk (2026-11-02)
 - Merge pull request #25 from karlmarx/ccr-160bd685-0j1r7v (2026-11-02)
 - Merge pull request #31 from karlmarx/ccr-8fea127d-30gw8j (2026-11-01)
 - chore: daily update 2026-11-01 (2026-11-01)
-- p-93fyi: sign-in, check-ins, photos, map board, app Courts screens (2026-11-01)
 
 ### 93-fyi
 - Add p.93.fyi (pickleball court counts) to the launcher (#8) (2026-11-01)

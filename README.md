@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-11-05
+> Auto-updated daily from GitHub commits. Last update: 2026-11-06
 
 ## Overview
 
@@ -95,15 +95,15 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
-### pb-video-analysis
-- Initial commit (2026-11-04)
-
 ### karl-infra
+- chore: daily update 2026-11-05 (2026-11-05)
 - Merge pull request #24 from karlmarx/claude/pickleball-voice-scoring-app-seozf3 (2026-11-04)
 - chore: daily update 2026-11-04 (2026-11-04)
 - chore: daily update 2026-11-03 (2026-11-03)
 - chore: daily update 2026-11-02 (2026-11-02)
-- Merge pull request #30 from karlmarx/ccr-8b474ba9-tu35nk (2026-11-02)
+
+### pb-video-analysis
+- Initial commit (2026-11-04)
 
 ### 93-fyi
 - Add p.93.fyi (pickleball court counts) to the launcher (#8) (2026-11-01)

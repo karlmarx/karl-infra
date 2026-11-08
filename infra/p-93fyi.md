@@ -61,3 +61,8 @@ stripped in the browser). where apps: "Courts" launcher entry on phone + watch.
 - Phase B ideas: web push alerts ("Hagen under 8 waiting", "Karl started playing"), busiest-hours history, owner announcements, "need a 4th".
 - Translations (es, pt-BR) are machine-assisted; get a native read.
 - The tfn WhatsApp face still gives directions, if its sender was ever registered.
+
+## PicklePeek rebrand (2026-11-07)
+
+`/` = PicklePeek board with an Old/New/Side-by-side switch (`?ui=`) and demo scenarios; old board at `/classic`.
+Footer links `karl@picklepeek.com` (feedback) and Instagram `@picklepeek`: both still to be set up.

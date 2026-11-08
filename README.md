@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-11-07
+> Auto-updated daily from GitHub commits. Last update: 2026-11-08
 
 ## Overview
 
@@ -96,11 +96,18 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- Merge pull request #33 from karlmarx/ccr-4ba396e4-m6b23z (2026-11-08)
+- p-93fyi: note the PicklePeek rebrand (2026-11-07)
+- chore: daily update 2026-11-07 (2026-11-07)
 - chore: daily update 2026-11-06 (2026-11-06)
 - chore: daily update 2026-11-05 (2026-11-05)
-- Merge pull request #24 from karlmarx/claude/pickleball-voice-scoring-app-seozf3 (2026-11-04)
-- chore: daily update 2026-11-04 (2026-11-04)
-- chore: daily update 2026-11-03 (2026-11-03)
+
+### volleyparton
+- Update season results from league site (2026-11-07)
+- Merge pull request #7 from karlmarx/claude/player-permutation-lineup-wcns14 (2026-11-07)
+- Add /lineup: player permutation planner with drag-and-drop and score tracking (2026-11-07)
+- Update season results from league site (2026-10-31)
+- Pull scores from the league site automatically every Saturday (#6) (2026-10-30)
 
 ### pb-video-analysis
 - Initial commit (2026-11-04)
@@ -111,13 +118,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - Add score.93.fyi to public links (#6) (2026-10-16)
 - Add public subdomains to homepage links (#4) (2026-10-05)
 - feat(hot): top-3 model comparison gallery (2026-05-16)
-
-### volleyparton
-- Update season results from league site (2026-10-31)
-- Pull scores from the league site automatically every Saturday (#6) (2026-10-30)
-- Add contact email to about page (#5) (2026-10-29)
-- Add season schedule and episode guide (#4) (2026-10-29)
-- Add next-game countdown and Real World parody about page (#3) (2026-10-29)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

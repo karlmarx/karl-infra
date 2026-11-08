@@ -66,3 +66,5 @@ stripped in the browser). where apps: "Courts" launcher entry on phone + watch.
 
 `/` = PicklePeek board with an Old/New/Side-by-side switch (`?ui=`) and demo scenarios; old board at `/classic`.
 Footer links `karl@picklepeek.com` (feedback) and Instagram `@picklepeek`: both still to be set up.
+p.93.fyi pages 301 to picklepeek.com (same path). Not redirected: `/twilio/*` (Twilio webhooks, signed URLs), `/api/*` (where apps), static files (voice MP3s), email to p@93.fyi.
+Sign-in cookies are per domain, so people signed in on p.93.fyi sign in once more on picklepeek.com.

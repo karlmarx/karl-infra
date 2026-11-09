@@ -1,4 +1,4 @@
-# p.93.fyi — pickleball court counts
+# p.93.fyi / picklepeek.com — pickleball court counts
 
 Self-reported counts (playing, waiting, Hagen challenge vs 4-on-4-off,
 wet/damp/dry) for **Hagen Park** and **Wimberly Fields**, reported by text,
@@ -7,7 +7,7 @@ phone call, email, or the where apps. Public board at https://p.93.fyi.
 | Field | Value |
 |-------|-------|
 | **Repo** | [karlmarx/where-93fyi](https://github.com/karlmarx/where-93fyi), `courts/` (full design + privacy notes in `courts/README.md`) |
-| **Worker** | `p-93fyi` (account `f1ccbe18…`), custom domain `p.93.fyi` |
+| **Worker** | `p-93fyi` (account `f1ccbe18…`), custom domains `picklepeek.com`, `www.picklepeek.com` (301 → apex), `p.93.fyi` |
 | **State** | one SQLite-backed Durable Object `CourtsStore` (reporters + reports) |
 | **Deploy** | `.github/workflows/deploy-courts.yml` on push to `main` touching `courts/` |
 | **Voice prompts** | `.github/workflows/courts-voice.yml` (manual) renders ElevenLabs MP3s, commits, redeploys |
@@ -48,6 +48,20 @@ never printed). Twilio's own logs still hold numbers.
 - [ ] Sign in on p.93.fyi with Google, then `/admin` → "Make my signed-in account the owner"
 - [ ] Print `/sign/hagen` and `/sign/wimberly` (ask the park before posting)
 - [ ] Merge 93-fyi PR (launcher tile) once live
+
+## Move to picklepeek.com (2026-11-07)
+
+Bought through Cloudflare (same account, zone `picklepeek.com`). It is **not**
+a Vercel site: the Worker needs the Durable Object, Email Routing and the Twilio
+webhooks. Phase 1 serves both hostnames; p.93.fyi keeps working.
+
+- [ ] Delete the hand-made apex/www records in the `picklepeek.com` zone (they point at Vercel). `wrangler deploy` creates its own custom-domain records and fails if records already exist.
+- [ ] `CLOUDFLARE_API_TOKEN` must cover zone `picklepeek.com` (Zone → DNS Edit, Zone → Workers Routes Edit). If it's scoped to `93.fyi` only, add the zone to the token.
+- [ ] Merge the where-93fyi PR → deploy. Verify `curl -sS -o /dev/null -w "%{http_code}" https://picklepeek.com/` → 200.
+- [ ] Google Cloud Console → Credentials → the Web client → Authorized JavaScript origins: add `https://picklepeek.com` (keep `https://p.93.fyi`).
+- [ ] Turnstile widget (if used) → Hostnames: add `picklepeek.com`.
+- [ ] Remove `picklepeek.com` from the Vercel project if it was added there.
+- Phase 2 (later): make picklepeek.com canonical (text/email copy, PWA name, Android `CourtsApi.BASE_URL`, Twilio SMS webhook, `PICKLEBALL_VOICE_URL`, toll-free verification website, printed signs), then 301 p.93.fyi browser pages.
 
 ## Web features (2026-11-01)
 

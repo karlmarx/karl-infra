@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-11-08
+> Auto-updated daily from GitHub commits. Last update: 2026-11-09
 
 ## Overview
 
@@ -96,11 +96,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- Merge pull request #32 from karlmarx/ccr-2142c972-tprs7n (2026-11-09)
+- chore: daily update 2026-11-08 (2026-11-08)
 - Merge pull request #33 from karlmarx/ccr-4ba396e4-m6b23z (2026-11-08)
 - p-93fyi: note the PicklePeek rebrand (2026-11-07)
-- chore: daily update 2026-11-07 (2026-11-07)
-- chore: daily update 2026-11-06 (2026-11-06)
-- chore: daily update 2026-11-05 (2026-11-05)
+- Add handoff prompt for the PicklePeek brand makeover (2026-11-07)
 
 ### volleyparton
 - Update season results from league site (2026-11-07)
@@ -111,13 +111,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 ### pb-video-analysis
 - Initial commit (2026-11-04)
-
-### 93-fyi
-- Add p.93.fyi (pickleball court counts) to the launcher (#8) (2026-11-01)
-- Turn 93.fyi into an app launcher (#7) (2026-10-25)
-- Add score.93.fyi to public links (#6) (2026-10-16)
-- Add public subdomains to homepage links (#4) (2026-10-05)
-- feat(hot): top-3 model comparison gallery (2026-05-16)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

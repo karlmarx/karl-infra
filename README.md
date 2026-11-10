@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-11-09
+> Auto-updated daily from GitHub commits. Last update: 2026-11-10
 
 ## Overview
 
@@ -96,11 +96,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- chore: daily update 2026-11-09 (2026-11-09)
 - Merge pull request #32 from karlmarx/ccr-2142c972-tprs7n (2026-11-09)
 - chore: daily update 2026-11-08 (2026-11-08)
 - Merge pull request #33 from karlmarx/ccr-4ba396e4-m6b23z (2026-11-08)
 - p-93fyi: note the PicklePeek rebrand (2026-11-07)
-- Add handoff prompt for the PicklePeek brand makeover (2026-11-07)
 
 ### volleyparton
 - Update season results from league site (2026-11-07)

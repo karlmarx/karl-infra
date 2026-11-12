@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-11-11
+> Auto-updated daily from GitHub commits. Last update: 2026-11-12
 
 ## Overview
 
@@ -96,11 +96,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- chore: daily update 2026-11-11 (2026-11-11)
 - chore: daily update 2026-11-10 (2026-11-10)
 - chore: daily update 2026-11-09 (2026-11-09)
 - Merge pull request #32 from karlmarx/ccr-2142c972-tprs7n (2026-11-09)
 - chore: daily update 2026-11-08 (2026-11-08)
-- Merge pull request #33 from karlmarx/ccr-4ba396e4-m6b23z (2026-11-08)
 
 ### volleyparton
 - Update season results from league site (2026-11-07)
@@ -108,9 +108,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - Add /lineup: player permutation planner with drag-and-drop and score tracking (2026-11-07)
 - Update season results from league site (2026-10-31)
 - Pull scores from the league site automatically every Saturday (#6) (2026-10-30)
-
-### pb-video-analysis
-- Initial commit (2026-11-04)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

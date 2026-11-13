@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-11-12
+> Auto-updated daily from GitHub commits. Last update: 2026-11-13
 
 ## Overview
 
@@ -96,11 +96,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### karl-infra
+- chore: daily update 2026-11-12 (2026-11-12)
 - chore: daily update 2026-11-11 (2026-11-11)
 - chore: daily update 2026-11-10 (2026-11-10)
 - chore: daily update 2026-11-09 (2026-11-09)
 - Merge pull request #32 from karlmarx/ccr-2142c972-tprs7n (2026-11-09)
-- chore: daily update 2026-11-08 (2026-11-08)
 
 ### volleyparton
 - Update season results from league site (2026-11-07)

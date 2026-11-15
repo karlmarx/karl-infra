@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-11-14
+> Auto-updated daily from GitHub commits. Last update: 2026-11-15
 
 ## Overview
 
@@ -95,19 +95,19 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### score-93fyi
+- Merge pull request #1 from karlmarx/ccr-806255fc-nzwc5j (2026-11-14)
+- Fit the rally simulator on one screen and add a scoring quiz (2026-11-14)
+- Add files via upload (2026-10-16)
+- Add files via upload (2026-10-16)
+- Add files via upload (2026-10-16)
+
 ### karl-infra
+- chore: daily update 2026-11-14 (2026-11-14)
 - chore: daily update 2026-11-13 (2026-11-13)
 - chore: daily update 2026-11-12 (2026-11-12)
 - chore: daily update 2026-11-11 (2026-11-11)
 - chore: daily update 2026-11-10 (2026-11-10)
-- chore: daily update 2026-11-09 (2026-11-09)
-
-### volleyparton
-- Update season results from league site (2026-11-07)
-- Merge pull request #7 from karlmarx/claude/player-permutation-lineup-wcns14 (2026-11-07)
-- Add /lineup: player permutation planner with drag-and-drop and score tracking (2026-11-07)
-- Update season results from league site (2026-10-31)
-- Pull scores from the league site automatically every Saturday (#6) (2026-10-30)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

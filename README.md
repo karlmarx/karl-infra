@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-11-18
+> Auto-updated daily from GitHub commits. Last update: 2026-11-19
 
 ## Overview
 
@@ -95,12 +95,17 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### pm-alt-editor
+- Merge pull request #2 from karlmarx/claude/review-fixes (2026-11-19)
+- Fix the bugs an independent review found in pmx and treemerge (2026-11-19)
+- Add pmx and treemerge (2026-11-18)
+
 ### karl-infra
+- chore: daily update 2026-11-18 (2026-11-18)
 - chore: daily update 2026-11-17 (2026-11-17)
 - Merge pull request #34 from karlmarx/ccr-806255fc-nzwc5j (2026-11-16)
 - chore: daily update 2026-11-16 (2026-11-16)
 - Update the Score row: quiz page, no longer a single file (2026-11-15)
-- chore: daily update 2026-11-15 (2026-11-15)
 
 ### score-93fyi
 - Merge pull request #1 from karlmarx/ccr-806255fc-nzwc5j (2026-11-14)

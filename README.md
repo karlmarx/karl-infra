@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-11-21
+> Auto-updated daily from GitHub commits. Last update: 2026-11-22
 
 ## Overview
 
@@ -99,13 +99,6 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 - Merge pull request #2 from karlmarx/claude/review-fixes (2026-11-19)
 - Fix the bugs an independent review found in pmx and treemerge (2026-11-19)
 - Add pmx and treemerge (2026-11-18)
-
-### score-93fyi
-- Merge pull request #1 from karlmarx/ccr-806255fc-nzwc5j (2026-11-14)
-- Fit the rally simulator on one screen and add a scoring quiz (2026-11-14)
-- Add files via upload (2026-10-16)
-- Add files via upload (2026-10-16)
-- Add files via upload (2026-10-16)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

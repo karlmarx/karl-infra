@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-11-23
+> Auto-updated daily from GitHub commits. Last update: 2026-11-24
 
 ## Overview
 
@@ -96,9 +96,11 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 
 <!-- RECENT_CHANGES_START -->
 ### pm-alt-editor
-- Merge pull request #2 from karlmarx/claude/review-fixes (2026-11-19)
-- Fix the bugs an independent review found in pmx and treemerge (2026-11-19)
-- Add pmx and treemerge (2026-11-18)
+- Merge pull request #5 from karlmarx/ccr-b6aeaff8-a0ttxg (2026-11-23)
+- Merge pull request #4 from karlmarx/claude/tree-source (2026-11-23)
+- Merge pull request #3 from karlmarx/claude/tree-spike (2026-11-23)
+- Remove the working spec before the merge (2026-11-23)
+- Merge the review fixes of the files-as-source branch into the tree new branch (2026-11-20)
 <!-- RECENT_CHANGES_END -->
 
 ## Future Plans

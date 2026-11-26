@@ -1,6 +1,6 @@
 # Karl's Infrastructure
 
-> Auto-updated daily from GitHub commits. Last update: 2026-11-25
+> Auto-updated daily from GitHub commits. Last update: 2026-11-26
 
 ## Overview
 
@@ -95,6 +95,13 @@ See [infra/domain-93fyi.md](infra/domain-93fyi.md) for full DNS details.
 ## Recent Changes
 
 <!-- RECENT_CHANGES_START -->
+### sites-93fyi
+- Shift the plan to the 9 AM Islands of Adventure opening (2026-11-26)
+- Polish the seaworld plan page design (2026-11-26)
+- Seaworld plan: skip Hulk and Spider-Man, arrive at SeaWorld around 10 AM (2026-11-26)
+- Serve the seaworld plan with no-cache so edits show right away (2026-11-26)
+- Make every deployed site public via an Access bypass app for its hostname (2026-11-26)
+
 ### pm-alt-editor
 - Merge pull request #5 from karlmarx/ccr-b6aeaff8-a0ttxg (2026-11-23)
 - Merge pull request #4 from karlmarx/claude/tree-source (2026-11-23)
